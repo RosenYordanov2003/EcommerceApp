@@ -1,5 +1,6 @@
 ﻿namespace EcommerceApp.Infrastructure.Data.Models
 {
+    using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     public class Picture
     {
@@ -10,5 +11,7 @@
         [ForeignKey(nameof(Shoes))]
         public int? ShoesId { get; set; }
         public Shoes? Shoes { get; set; }
+        [Required]
+        public string ImgUrl { get; set; } = null!;
     }
 }

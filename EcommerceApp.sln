@@ -5,7 +5,9 @@ VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EcommerceApp", "EcommerceApp\EcommerceApp.csproj", "{89DB02B3-B42B-4E37-9940-B3F89410D4AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EcommerceApp.Infrastructure", "EcommerceApp.Infrastructure\EcommerceApp.Infrastructure.csproj", "{8DE2A4EA-3AF8-4C80-BD51-935E00CAF104}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EcommerceApp.Infrastructure", "EcommerceApp.Infrastructure\EcommerceApp.Infrastructure.csproj", "{8DE2A4EA-3AF8-4C80-BD51-935E00CAF104}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EcommerceApp.Common", "EcommerceApp.GlobalConstants\EcommerceApp.Common.csproj", "{5FDDCD9B-A266-48F6-948C-69EBDA5F2638}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{8DE2A4EA-3AF8-4C80-BD51-935E00CAF104}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8DE2A4EA-3AF8-4C80-BD51-935E00CAF104}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8DE2A4EA-3AF8-4C80-BD51-935E00CAF104}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FDDCD9B-A266-48F6-948C-69EBDA5F2638}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FDDCD9B-A266-48F6-948C-69EBDA5F2638}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FDDCD9B-A266-48F6-948C-69EBDA5F2638}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FDDCD9B-A266-48F6-948C-69EBDA5F2638}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

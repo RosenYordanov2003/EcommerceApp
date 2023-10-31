@@ -1,4 +1,5 @@
 ﻿using Duende.IdentityServer.EntityFramework.Options;
+using EcommerceApp.Infrastructure.Data.Configurations;
 using EcommerceApp.Models;
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;
@@ -16,6 +17,9 @@ namespace EcommerceApp.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+            builder.ApplyConfiguration(new BrandEntityConfiguration());
+            builder.ApplyConfiguration(new MainCategoryEntityConfiguration());
+            builder.ApplyConfiguration(new SubCategoryEntityConfiguration());
         }
     }
 }

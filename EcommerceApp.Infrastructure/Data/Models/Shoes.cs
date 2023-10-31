@@ -17,6 +17,15 @@
         public decimal Price { get; set; }
         [Required]
         public string Color { get; set; } = null!;
+        public int StarRating { get; set; }
+
+        [ForeignKey(nameof(Category))]
+        public int SubCategoryId { get; set; }
+        [Required]
+        public SubCategory SubCategory { get; set; } = null!;
+        public int CategoryId { get; set; }
+        [Required]
+        public MainCategory Category { get; set; } = null!;
         public ICollection<Picture> Pictures { get; set; }
     }
 }

@@ -19,7 +19,7 @@
             builder.HasData(GenerateBrands());
         }
 
-        private IEnumerable<Brand> GenerateBrands()
+        private static IEnumerable<Brand> GenerateBrands()
         {
            return new List<Brand>()
            {

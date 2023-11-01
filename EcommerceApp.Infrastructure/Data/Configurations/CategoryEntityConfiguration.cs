@@ -23,7 +23,7 @@
             builder.HasData(GenerateCategories());
         }
 
-        private IEnumerable<MainCategory> GenerateCategories()
+        private static IEnumerable<MainCategory> GenerateCategories()
         {
            return new List<MainCategory>()
            {

@@ -3,7 +3,6 @@
     using EcommerceApp.Infrastructure.Data.Models;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
-    using System;
     using static System.Net.WebRequestMethods;
 
     public class PictureEntityConfiguration : IEntityTypeConfiguration<Picture>
@@ -13,7 +12,7 @@
             builder.HasData(GeneratePictures());
         }
 
-        private IEnumerable<Picture> GeneratePictures()
+        private static IEnumerable<Picture> GeneratePictures()
         {
            return new List<Picture>()
            {
@@ -154,6 +153,246 @@
                    Id = 23,
                    ShoesId = 6,
                    ImgUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/bv4nc2mve7pvlkhzzh9s/air-vapormax-plus-shoes-yATY9p7E.png"
+               },
+               new Picture()
+               {
+                   Id = 24,
+                   ShoesId = 7,
+                   ImgUrl = "https://www.sambabulgariashop.me/images/adidasbulgaria/Adidas%20Alphabounce%20Beyond%20Team%20-%20BG-%20675.jpg"
+               },
+               new Picture()
+               {
+                   Id = 25,
+                   ShoesId = 7,
+                   ImgUrl = "https://www.sambabulgariashop.me/images/adidasbulgaria/Adidas%20Alphabounce%20Beyond%20Team%20-%20BG-%20675_2.jpg"
+               },
+               new Picture()
+               {
+                   Id = 26,
+                   ShoesId = 7,
+                   ImgUrl = "https://www.sambabulgariashop.me/images/adidasbulgaria/Adidas%20Alphabounce%20Beyond%20Team%20-%20BG-%20675_4.jpg"
+               },
+               new Picture()
+               {
+                   Id = 27,
+                   ShoesId = 7,
+                   ImgUrl = "https://www.sambabulgariashop.me/images/adidasbulgaria/Adidas%20Alphabounce%20Beyond%20Team%20-%20BG-%20675_5.jpg"
+               },
+               new Picture()
+               {
+                   Id = 28,
+                   ShoesId = 8,
+                   ImgUrl = "https://www.sambabulgariashop.me/images/adidasbulgaria/Adidas%20Alphabounce%20Beyond%20Team%20-%20BG-%20673.jpg"
+               },
+               new Picture()
+               {
+                   Id = 29,
+                   ShoesId = 8,
+                   ImgUrl = "https://www.sambabulgariashop.me/images/adidasbulgaria/Adidas%20Alphabounce%20Beyond%20Team%20-%20BG-%20673_2.jpg"
+               },
+               new Picture()
+               {
+                   Id = 30,
+                   ShoesId = 8,
+                   ImgUrl = "https://www.sambabulgariashop.me/images/adidasbulgaria/Adidas%20Alphabounce%20Beyond%20Team%20-%20BG-%20673_4.jpg"
+               },
+               new Picture()
+               {
+                   Id = 31,
+                   ShoesId = 8,
+                   ImgUrl = "https://www.sambabulgariashop.me/images/adidasbulgaria/Adidas%20Alphabounce%20Beyond%20Team%20-%20BG-%20673_5.jpg"
+               },
+               new Picture()
+               {
+                   Id = 32,
+                   ShoesId = 9,
+                   ImgUrl = "https://www.sambabulgariashop.me/images/adidasbulgaria/Adidas%20ACE%2017%203%20Firm%20Ground%20-%20BG-O96%203371_1.jpg"
+               },
+               new Picture()
+               {
+                   Id = 33,
+                   ShoesId = 9,
+                   ImgUrl = "https://www.sambabulgariashop.me/images/adidasbulgaria/Adidas%20ACE%2017%203%20Firm%20Ground%20-%20BG-O96%203371_2.jpg"
+               },
+               new Picture()
+               {
+                   Id = 34,
+                   ShoesId = 9,
+                   ImgUrl = "https://www.sambabulgariashop.me/images/adidasbulgaria/Adidas%20ACE%2017%203%20Firm%20Ground%20-%20BG-O96%203371.jpg"
+               },
+               new Picture()
+               {
+                   Id = 35,
+                   ShoesId = 9,
+                   ImgUrl = "https://www.sambabulgariashop.me/images/adidasbulgaria/Adidas%20ACE%2017%203%20Firm%20Ground%20-%20BG-O96%203371_3.jpg"
+               },
+               new Picture()
+               {
+                   Id = 36,
+                   ShoesId = 10,
+                   ImgUrl = "https://www.sambabulgariashop.me/images/adidasbulgaria/Adidas%20Adizero%208%200%20-%20BG-L307B%20521.jpg"
+               },
+               new Picture()
+               {
+                   Id = 37,
+                   ShoesId = 10,
+                   ImgUrl = "https://www.sambabulgariashop.me/images/adidasbulgaria/Adidas%20Adizero%208%200%20-%20BG-L307B%20521_2.jpg"
+               },
+               new Picture()
+               {
+                   Id = 38,
+                   ShoesId = 10,
+                   ImgUrl = "https://www.sambabulgariashop.me/images/adidasbulgaria/Adidas%20Adizero%208%200%20-%20BG-L307B%20521_3.jpg"
+               },
+               new Picture()
+               {
+                   Id = 39,
+                   ShoesId = 10,
+                   ImgUrl = "https://www.sambabulgariashop.me/images/adidasbulgaria/Adidas%20Adizero%208%200%20-%20BG-L307B%20521_5.jpg"
+               },
+               new Picture()
+               {
+                   Id = 40,
+                   ShoesId = 11,
+                   ImgUrl = "https://www.sambabulgariashop.me/images/adidasbulgaria/Adidas%20Predator%2019%203%20Laceless%20Firm%20G%201115.jpg"
+               },
+               new Picture()
+               {
+                   Id = 41,
+                   ShoesId = 11,
+                   ImgUrl = "https://www.sambabulgariashop.me/images/adidasbulgaria/Adidas%20Predator%2019%203%20Laceless%20Firm%20G%201115_2.jpg"
+               },
+               new Picture()
+               {
+                   Id = 42,
+                   ShoesId = 11,
+                   ImgUrl = "https://www.sambabulgariashop.me/images/adidasbulgaria/Adidas%20Predator%2019%203%20Laceless%20Firm%20G%201115_3.jpg"
+               },
+               new Picture()
+               {
+                   Id = 43,
+                   ShoesId = 11,
+                   ImgUrl = "https://www.sambabulgariashop.me/images/adidasbulgaria/Adidas%20Predator%2019%203%20Laceless%20Firm%20G%201115_4.jpg"
+               },
+               new Picture()
+               {
+                   Id = 44,
+                   ShoesId = 12,
+                   ImgUrl = "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_1350,h_1350/global/392434/02/sv01/fnd/EEA/fmt/png/Slipstream-Xtreme-Sneakers"
+               },
+               new Picture()
+               {
+                   Id = 45,
+                   ShoesId = 12,
+                   ImgUrl = "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_2000,h_2000/global/392434/02/bv/fnd/EEA/fmt/png/Slipstream-Xtreme-Sneakers"
+               },
+               new Picture()
+               {
+                   Id = 46,
+                   ShoesId = 12,
+                   ImgUrl = "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_2000,h_2000/global/392434/02/sv02/fnd/EEA/fmt/png/Slipstream-Xtreme-Sneakers"
+               },
+               new Picture()
+               {
+                   Id = 47,
+                   ShoesId = 12,
+                   ImgUrl = "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_2000,h_2000/global/392434/02/sv04/fnd/EEA/fmt/png/Slipstream-Xtreme-Sneakers"
+               },
+               new Picture()
+               {
+                   Id = 48,
+                   ShoesId = 13,
+                   ImgUrl = "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_1350,h_1350/global/387544/02/sv01/fnd/EEA/fmt/png/Slipstream-Leather-Sneakers"
+               },
+               new Picture()
+               {
+                   Id = 49,
+                   ShoesId = 13,
+                   ImgUrl = "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_750,h_750/global/387544/02/fnd/EEA/fmt/png/Slipstream-Leather-Sneakers"
+               },
+               new Picture()
+               {
+                   Id = 50,
+                   ShoesId = 13,
+                   ImgUrl = "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_750,h_750/global/387544/02/bv/fnd/EEA/fmt/png/Slipstream-Leather-Sneakers"
+               },
+               new Picture()
+               {
+                   Id = 51,
+                   ShoesId = 13,
+                   ImgUrl = "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_750,h_750/global/387544/02/sv02/fnd/EEA/fmt/png/Slipstream-Leather-Sneakers"
+               },
+               new Picture()
+               {
+                   Id = 52,
+                   ShoesId = 14,
+                   ImgUrl = "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_1350,h_1350/global/387544/16/sv01/fnd/EEA/fmt/png/Slipstream-Leather-Sneakers"
+               },
+               new Picture()
+               {
+                   Id = 53,
+                   ShoesId = 14,
+                   ImgUrl = "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_2000,h_2000/global/387544/16/fnd/EEA/fmt/png/Slipstream-Leather-Sneakers"
+               },
+               new Picture()
+               {
+                   Id = 54,
+                   ShoesId = 14,
+                   ImgUrl = "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_750,h_750/global/387544/16/bv/fnd/EEA/fmt/png/Slipstream-Leather-Sneakers"
+               },
+               new Picture()
+               {
+                   Id = 55,
+                   ShoesId = 14,
+                   ImgUrl = "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_750,h_750/global/387544/16/sv04/fnd/EEA/fmt/png/Slipstream-Leather-Sneakers"
+               },
+               new Picture()
+               {
+                   Id = 56,
+                   ShoesId = 15,
+                   ImgUrl = "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_1350,h_1350/global/107214/03/sv01/fnd/EEA/fmt/png/ULTRA-ULTIMATE-MG-Football-Cleats-Men"
+               },
+               new Picture()
+               {
+                   Id = 57,
+                   ShoesId = 15,
+                   ImgUrl = "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_750,h_750/global/107214/03/bv/fnd/EEA/fmt/png/ULTRA-ULTIMATE-MG-Football-Cleats-Men"
+               },
+               new Picture()
+               {
+                   Id = 58,
+                   ShoesId = 15,
+                   ImgUrl = "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_750,h_750/global/107214/03/sv02/fnd/EEA/fmt/png/ULTRA-ULTIMATE-MG-Football-Cleats-Men"
+               },
+               new Picture()
+               {
+                   Id = 59,
+                   ShoesId = 15,
+                   ImgUrl = "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_750,h_750/global/107214/03/sv04/fnd/EEA/fmt/png/ULTRA-ULTIMATE-MG-Football-Cleats-Men"
+               },
+               new Picture()
+               {
+                   Id = 60,
+                   ShoesId = 16,
+                   ImgUrl = "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_1350,h_1350/global/107535/03/sv01/fnd/EEA/fmt/png/ULTRA-PLAY-IT-Youth-Football-Boots"
+               },
+               new Picture()
+               {
+                   Id = 61,
+                   ShoesId = 16,
+                   ImgUrl = "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_750,h_750/global/107535/03/sv02/fnd/EEA/fmt/png/ULTRA-PLAY-IT-Youth-Football-Boots"
+               },
+               new Picture()
+               {
+                   Id = 62,
+                   ShoesId = 16,
+                   ImgUrl = "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_750,h_750/global/107535/03/sv02/fnd/EEA/fmt/png/ULTRA-PLAY-IT-Youth-Football-Boots"
+               },
+               new Picture()
+               {
+                   Id = 63,
+                   ShoesId = 16,
+                   ImgUrl = "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_750,h_750/global/107535/03/sv04/fnd/EEA/fmt/png/ULTRA-PLAY-IT-Youth-Football-Boots"
                }
            };
         }

@@ -14,12 +14,19 @@ namespace EcommerceApp.Data
         {
 
         }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.EnableSensitiveDataLogging();
+            base.OnConfiguring(optionsBuilder);
+        }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
             builder.ApplyConfiguration(new BrandEntityConfiguration());
             builder.ApplyConfiguration(new MainCategoryEntityConfiguration());
             builder.ApplyConfiguration(new SubCategoryEntityConfiguration());
+            builder.ApplyConfiguration(new ShoesEntityConfiguration());
+            builder.ApplyConfiguration(new PictureEntityConfiguration());
         }
     }
 }

@@ -21,7 +21,7 @@
                 
         }
 
-        private IEnumerable<SubCategory> GenerateSubCategories()
+        private static IEnumerable<SubCategory> GenerateSubCategories()
         {
             return new List<SubCategory>()
            {
@@ -70,7 +70,8 @@
                new SubCategory()
                {
                    Id = 8,
-                   Name = "Dress Shirts"
+                   Name = "Dress Shirts",
+                   MainCategoryId = 8
                },
                new SubCategory()
                {

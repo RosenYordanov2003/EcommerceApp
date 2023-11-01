@@ -15,7 +15,7 @@
             builder.HasData(GenerateShoes());
         }
 
-        private IEnumerable<Shoes> GenerateShoes()
+        private static IEnumerable<Shoes> GenerateShoes()
         {
             return new List<Shoes>()
             {
@@ -78,6 +78,7 @@
                     Gender = "Women",
                     BrandId = 1,
                     SubCategoryId = 3,
+                    CategoryId = 9,
                     Color = "Black",
                     Price = 160,
                     Description = "We looked into the future and it's gonna be comfy. Featuring a \"point-loaded\" Air unit (cushioning that forms to your every step), the Air Max Scorpion Flyknit delivers a futuristic sensation. And because looks count, we've crafted the upper from incredibly soft chenille-like fabric."
@@ -94,6 +95,128 @@
                     BrandId = 1,
                     Price = 180,
                     Description = "The Nike Air VaporMax Plus looks to the past and propels you into the future. Nodding to the 1998 Air Max Plus with its floating cage, padded upper and heel logo, it adds revolutionary VaporMax Air technology to ramp up the comfort and create a modern look."
+                },
+                new Shoes()
+                {
+                    Id = 7,
+                    Name =  "Adidas Alphabounce Beyond Team",
+                    StarRating = 4,
+                    Gender = "Men",
+                    Color = "Dark Blue",
+                    CategoryId = 9,
+                    SubCategoryId = 1,
+                    BrandId = 2,
+                    Price = 70,
+                    Description = "Designed for athletes who run to stay fit for their sport, these running shoes support multidirectional movements with flexible cushioning and a wide, stable platform in the forefoot and heel. They have a seamless, sock-like mesh upper with targeted areas of support and stretch for an adaptive fit.\r\nRunner type\r\nNeutral shoes for the versatile runner\r\nAdaptive fit\r\nSeamless Forgedmesh upper designed with areas of support and stretch to help ensure a custom fit that adapts to every move\r\nSpringy cushioning\r\nBounce cushioning provides enhanced comfort and flexibility\r\nReliable traction\r\nContinental™ Rubber outsole for extraordinary traction in wet and dry conditions"
+                },
+                new Shoes()
+                {
+                    Id = 8,
+                    Name = "Adidas Alphabounce Beyond Team",
+                    StarRating = 4,
+                    Gender = "Men",
+                    CategoryId = 9,
+                    SubCategoryId = 1,
+                    BrandId = 2,
+                    Color = "Dark Red",
+                    Price = 70,
+                    Description = "Designed for athletes who run to stay fit for their sport, these running shoes support multidirectional movements with flexible cushioning and a wide, stable platform in the forefoot and heel. They have a seamless, sock-like mesh upper with targeted areas of support and stretch for an adaptive fit.\r\nRunner type\r\nNeutral shoes for the versatile runner\r\nAdaptive fit\r\nSeamless Forgedmesh upper designed with areas of support and stretch to help ensure a custom fit that adapts to every move\r\nSpringy cushioning\r\nBounce cushioning provides enhanced comfort and flexibility\r\nReliable traction\r\nContinental™ Rubber outsole for extraordinary traction in wet and dry conditions"
+                },
+                new Shoes()
+                {
+                    Id = 9,
+                    Name = "Adidas ACE 17.3 Firm Ground",
+                    BrandId = 2,
+                    CategoryId = 9,
+                    SubCategoryId = 4,
+                    Color = "Orange",
+                    Price = 78.41M,
+                    Gender = "Men",
+                    Description = "Dominate space. Command the play. Create goal-destined shots from impossible angles. Control the game with every touch in ACE. These juniors' soccer cleats have a 3D Control Skin upper that delivers precise control with zero wear-in time. Designed to dominate on firm ground."
+                },
+                new Shoes()
+                {
+                    Id = 10,
+                    Name = "Adidas Adizero 8.0",
+                    BrandId = 2,
+                    CategoryId = 9,
+                    SubCategoryId = 4,
+                    Color = "White",
+                    Price = 83.41M,
+                    Gender = "Men",
+                    Description = "Showcase your playmaking speed in these football cleats. Designed for easy on and off, they feature a textile upper with a sock-like construction for lightweight stability and lockdown as you create havoc at the line of scrimmage. The cleated outsole provides traction for quick cuts and pivots.. These juniors' soccer cleats have a 3D Control Skin upper that delivers precise control with zero wear-in time. Designed to dominate on firm ground."
+                },
+                new Shoes()
+                {
+                    Id = 11,
+                    Name = "Adidas Predator 19.3 Laceless Firm Ground",
+                    BrandId = 2,
+                    CategoryId = 9,
+                    SubCategoryId = 4,
+                    Color = "Red",
+                    Price = 83.41M,
+                    Gender = "Men",
+                    Description = "If your command of the field leaves your rivals' tactics in tatters, you're ready to own Predators. Built for precision on firm ground, these soccer cleats have a supportive mesh upper that wraps around your foot to lock you in. This eliminates the need for laces and leaves more room for ball control. Embossing on the surface adds confidence to every touch."
+                },
+                new Shoes()
+                {
+                    Id = 12,
+                    Name = "Slipstream Xtreme Sneakers",
+                    BrandId = 3,
+                    CategoryId = 9,
+                    SubCategoryId = 1,
+                    Color = "Black",
+                    Gender = "Men",
+                    Price = 140,
+                    Description = "We’re taking Slipstream to the extreme. This disruptive new version features an iconic Slipstream leather upper with elevated details, and a edgier sole with exaggerated proportions and rugged details. This execution features a leather base with nubuck overlays, a suede Formstrip with deep debossed lines and suede details."
+                },
+                new Shoes()
+                {
+                    Id = 13,
+                    Name = "Slipstream Leather Sneakers",
+                    BrandId = 3,
+                    CategoryId = 9,
+                    SubCategoryId = 1,
+                    Color = "White",
+                    Gender = "Women",
+                    Price = 70,
+                    Description = "Back in 1987, the PUMA Slipstream Mid entered the scene as a basketball sneaker. A high-flying, slam-dunking, statement-making basketball sneaker. Now, it’s joined by the Slipstream – a rework of the original that brings an all-new energy to the game while staying true to the OG’s sporting roots."
+                },
+                new Shoes()
+                {
+                    Id = 14,
+                    Name = "Slipstream Leather Sneakers",
+                    BrandId = 3,
+                    CategoryId = 9,
+                    SubCategoryId = 1,
+                    Color = "Red",
+                    Gender = "Women",
+                    Price = 70,
+                    Description = "Back in 1987, the PUMA Slipstream Mid entered the scene as a basketball sneaker. A high-flying, slam-dunking, statement-making basketball sneaker. Now, it’s joined by the Slipstream – a rework of the original that brings an all-new energy to the game while staying true to the OG’s sporting roots."
+                },
+                new Shoes()
+                {
+                    Id = 15,
+                    Name = "ULTRA ULTIMATE MG Football Cleats Men",
+                    BrandId = 3,
+                    CategoryId = 9,
+                    SubCategoryId = 4,
+                    Color = "Green",
+                    Gender = "Men",
+                    Price = 70,
+                    Description = "ULTRA - Not even you knew you could be this fast. Turn seconds into records with the ULTRA ULTIMATE football boot. Lighter means quicker, so the ULTRAWEAVE upper material makes every gram and every second count. Ultra-light. Ultra-fast. ULTRA ULTIMATE."
+                },
+                new Shoes()
+                {
+                    Id = 16,
+                    Name = "ULTRA PLAY IT Youth Football Boots",
+                    BrandId = 3,
+                    CategoryId = 9,
+                    SubCategoryId = 4,
+                    Color = "Blue",
+                    Gender = "Men",
+                    Price = 60,
+                    Description = "ULTRA - Not even you knew you could be this fast. Turn seconds into records with the ULTRA ULTIMATE football boot. Lighter means quicker, so the ULTRAWEAVE upper material makes every gram and every second count. Ultra-light. Ultra-fast. ULTRA ULTIMATE."
                 }
             };
         }

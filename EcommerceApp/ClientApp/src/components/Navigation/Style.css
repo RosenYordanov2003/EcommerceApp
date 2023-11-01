@@ -1,0 +1,50 @@
+﻿@keyframes delaying{
+   from{
+       opacity: 0;
+       transform: translateY(-100%);
+   }
+   to{
+       opacity: 1;
+       transform: translateY(0%)
+   }
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    padding: 2.5rem 2.2rem;
+    justify-content: space-between;
+    animation: delaying;
+    animation-fill-mode: forwards;
+    animation-duration: 3s;
+}
+nav ul{
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+nav ul li a{
+    text-decoration: none;
+    color: black;
+    display: inline-block;
+    font-size: 1.2rem;
+}
+.nav-logo{
+    position: relative;
+}
+.nav-logo::before{
+  content: "";
+  height: 38px;
+  background-color: mediumpurple;
+  width: 38px;
+  position: absolute;
+  top: -18px;
+  left: -22px;
+  border-radius: 50%;
+  opacity: 0.6;
+}
+.active-arrow{
+    transform:rotate(180deg);
+    transition: linear 0.3s;
+}

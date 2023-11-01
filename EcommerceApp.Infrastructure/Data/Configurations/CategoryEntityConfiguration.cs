@@ -31,51 +31,61 @@
                {
                    Id = 1,
                    Name = "T-Shirts",
+                   Gender = "Women Men"
                },
                new MainCategory()
                {
                    Id = 2,
                    Name = "Jeans",
+                   Gender = "Women Men"
                },
                new MainCategory()
                {
                    Id = 3,
                    Name = "Jackets",
+                   Gender = "Women Men"
                },
                new MainCategory()
                {
                    Id = 4,
                    Name = "Coats",
+                   Gender = "Women Men"
                },
                new MainCategory()
                {
                    Id = 5,
                    Name = "Trousers",
+                   Gender = "Women Men"
                },
                new MainCategory()
                {
                    Id = 6,
-                   Name = "Skirts"
+                   Name = "Skirts",
+                   Gender = "Women"
                },
                new MainCategory()
                {
                    Id = 7,
-                   Name = "Shorts"
+                   Name = "Shorts",
+                   Gender = "Women Men"
                },
                new MainCategory()
                {
                    Id = 8,
-                   Name = "Shirts"
+                   Name = "Shirts",
+                    Gender = "Women Men"
                },
                new MainCategory()
                {
                    Id = 9,
-                   Name = "Shoes"
+                   Name = "Shoes",
+                   Gender = "Women Men"
                },
                new MainCategory()
                {
                    Id = 10,
-                   Name = "Sweatshirts"
+                   Name = "Sweatshirts",
+                   Gender = "Women Men"
                },
            };
         }

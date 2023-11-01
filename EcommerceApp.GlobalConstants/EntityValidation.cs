@@ -6,6 +6,9 @@
         {
             public const int NameMinLength = 3;
             public const int NameMaxLength = 50;
+
+            public const int GenderMinLength = 3;
+            public const int GenderMaxLength = 15;
         }
         public static class BrandEntity
         {

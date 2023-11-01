@@ -15,6 +15,9 @@
         [Required]
         [MaxLength(NameMaxLength)]
         public string Name { get; set; } = null!;
+        [Required]
+        [MaxLength(GenderMaxLength)]
+        public string Gender { get; set; } = null!;
         public ICollection<Clothes> Clothes { get; set; }
         public ICollection<Shoes> Shoes { get; set; }
         public ICollection<SubCategory> SubCategories { get; set; }

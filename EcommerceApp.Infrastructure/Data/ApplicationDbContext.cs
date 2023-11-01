@@ -1,5 +1,6 @@
 ﻿using Duende.IdentityServer.EntityFramework.Options;
 using EcommerceApp.Infrastructure.Data.Configurations;
+using EcommerceApp.Infrastructure.Data.Models;
 using EcommerceApp.Models;
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +15,10 @@ namespace EcommerceApp.Data
         {
 
         }
+        public DbSet<MainCategory> Categories { get; set; }
+        public DbSet<Shoes> Shoes { get; set; }
+        public DbSet<Clothes> Clothes { get; set; }
+        public DbSet<Brand> Brands { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.EnableSensitiveDataLogging();

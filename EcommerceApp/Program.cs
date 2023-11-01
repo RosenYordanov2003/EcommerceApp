@@ -1,3 +1,5 @@
+using EcommerceApp.Core.Contracts;
+using EcommerceApp.Core.Services;
 using EcommerceApp.Data;
 using EcommerceApp.Models;
 using Microsoft.AspNetCore.Authentication;
@@ -24,6 +26,8 @@ builder.Services.AddAuthentication()
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
+
+builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 var app = builder.Build();
 

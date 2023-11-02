@@ -55,7 +55,7 @@
                {
                    Id = 5,
                    Name = "Trousers",
-                   Gender = "W"
+                   Gender = "W М"
                },
                new MainCategory()
                {

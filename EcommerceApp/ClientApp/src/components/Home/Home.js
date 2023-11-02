@@ -1,6 +1,7 @@
-export default function Home() {
+import CategoriesSection from "../Categories/CategoriesSection"
+export default function Home({ categories }) {
 
     return (
-        <p>Hello</p>
+         <CategoriesSection categories={categories}/>
     );
 }

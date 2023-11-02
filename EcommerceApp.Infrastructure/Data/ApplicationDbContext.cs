@@ -19,11 +19,7 @@ namespace EcommerceApp.Data
         public DbSet<Shoes> Shoes { get; set; }
         public DbSet<Clothes> Clothes { get; set; }
         public DbSet<Brand> Brands { get; set; }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.EnableSensitiveDataLogging();
-            base.OnConfiguring(optionsBuilder);
-        }
+       
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

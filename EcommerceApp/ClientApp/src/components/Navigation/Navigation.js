@@ -2,12 +2,17 @@
 import Style from "../Navigation/Style.css"
 
 export default function Navigation() {
-
+    const baseUrl = "https://localhost:7122/api/categories"
     function loadWomenCategories(event) {
         event.target.classList.toggle("active-arrow");
-        
-    }
 
+        const genderQyeryParam = "m";
+
+        fetch(`${baseUrl}?gender=${genderQyeryParam}`)
+       .then(res => res.json())
+       .then(res => console.log(res))
+       .catch((error) => console.error(error));
+    }
     return (
         <nav>
             <h2 className = "nav-logo">Fashion Store</h2>

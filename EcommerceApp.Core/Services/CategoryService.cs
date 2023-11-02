@@ -18,13 +18,14 @@
         {
             gender = gender.ToLower();
             return await this.applicationDbContext.Categories
-                  .Where(c => c.Gender.ToLower().IndexOf(gender) != -1)
+                .Where(c => c.Gender.ToLower().IndexOf(gender) > - 1)
                   .Select(c => new CategoryModel()
                   {
                       Id = c.Id,
                       Name = c.Name,
                   })
                   .ToArrayAsync();
+
         }
     }
 }

@@ -31,61 +31,61 @@
                {
                    Id = 1,
                    Name = "T-Shirts",
-                   Gender = "Women Men"
+                   Gender = "W M"
                },
                new MainCategory()
                {
                    Id = 2,
                    Name = "Jeans",
-                   Gender = "Women Men"
+                   Gender = "W M"
                },
                new MainCategory()
                {
                    Id = 3,
                    Name = "Jackets",
-                   Gender = "Women Men"
+                   Gender = "W M"
                },
                new MainCategory()
                {
                    Id = 4,
                    Name = "Coats",
-                   Gender = "Women Men"
+                   Gender = "W M"
                },
                new MainCategory()
                {
                    Id = 5,
                    Name = "Trousers",
-                   Gender = "Women Men"
+                   Gender = "W"
                },
                new MainCategory()
                {
                    Id = 6,
                    Name = "Skirts",
-                   Gender = "Women"
+                   Gender = "W"
                },
                new MainCategory()
                {
                    Id = 7,
                    Name = "Shorts",
-                   Gender = "Women Men"
+                   Gender = "W M"
                },
                new MainCategory()
                {
                    Id = 8,
                    Name = "Shirts",
-                    Gender = "Women Men"
+                   Gender = "W M"
                },
                new MainCategory()
                {
                    Id = 9,
                    Name = "Shoes",
-                   Gender = "Women Men"
+                   Gender = "W M"
                },
                new MainCategory()
                {
                    Id = 10,
                    Name = "Sweatshirts",
-                   Gender = "Women Men"
+                   Gender = "W M"
                },
            };
         }

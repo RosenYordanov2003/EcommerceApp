@@ -24,11 +24,20 @@ builder.Services.AddIdentityServer()
 builder.Services.AddAuthentication()
     .AddIdentityServerJwt();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("EcommercePolicy", ecommerceBuilder =>
+    {
+        ecommerceBuilder.WithOrigins("https://localhost:44440")
+        .AllowAnyHeader()
+        .AllowAnyMethod();
+    });
+});
+
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
 builder.Services.AddScoped<ICategoryService, CategoryService>();
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -49,12 +58,13 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseIdentityServer();
 app.UseAuthorization();
+app.UseCors("EcommercePolicy");
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller}/{action=Index}/{id?}");
 app.MapRazorPages();
 
-app.MapFallbackToFile("index.html"); ;
+//app.MapFallbackToFile("index.html");
 
 app.Run();

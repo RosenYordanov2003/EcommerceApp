@@ -28,6 +28,7 @@
                     Color = "Black",
                     BrandId = 1,
                     Price = 130,
+                    IsFeatured = true,
                     SubCategoryId = 3,
                     Gender = "Men",
                     Description = "The radiance lives on in the Nike Air Force 1 '07 LV8. Crossing hardwood comfort with off-court flair, these kicks put a fresh spin on a hoops classic. Soft suede overlays pair with era-echoing '80s construction and reflective-design Swoosh logos to bring you nothing-but-net style while hidden full-length Air units add the legendary comfort you know and love."
@@ -42,6 +43,7 @@
                     Price = 160,
                     Color = "White",
                     BrandId = 1,
+                    IsFeatured= true,
                     Gender = "Men",
                     Description = "The pitch is yours when you lace up in the Vapor 15 Pro AG-Pro. It's loaded with a Zoom Air unit, so you can dominate in the waning minutes of a match—when it matters most. Fast is in the Air."
                 },
@@ -94,6 +96,7 @@
                     SubCategoryId = 3,
                     BrandId = 1,
                     Price = 180,
+                    IsFeatured = true,
                     Description = "The Nike Air VaporMax Plus looks to the past and propels you into the future. Nodding to the 1998 Air Max Plus with its floating cage, padded upper and heel logo, it adds revolutionary VaporMax Air technology to ramp up the comfort and create a modern look."
                 },
                 new Shoes()
@@ -119,6 +122,7 @@
                     SubCategoryId = 1,
                     BrandId = 2,
                     Color = "Dark Red",
+                    IsFeatured = true,
                     Price = 70,
                     Description = "Designed for athletes who run to stay fit for their sport, these running shoes support multidirectional movements with flexible cushioning and a wide, stable platform in the forefoot and heel. They have a seamless, sock-like mesh upper with targeted areas of support and stretch for an adaptive fit.\r\nRunner type\r\nNeutral shoes for the versatile runner\r\nAdaptive fit\r\nSeamless Forgedmesh upper designed with areas of support and stretch to help ensure a custom fit that adapts to every move\r\nSpringy cushioning\r\nBounce cushioning provides enhanced comfort and flexibility\r\nReliable traction\r\nContinental™ Rubber outsole for extraordinary traction in wet and dry conditions"
                 },
@@ -132,6 +136,7 @@
                     Color = "Orange",
                     Price = 78.41M,
                     Gender = "Men",
+                    IsFeatured = true,
                     Description = "Dominate space. Command the play. Create goal-destined shots from impossible angles. Control the game with every touch in ACE. These juniors' soccer cleats have a 3D Control Skin upper that delivers precise control with zero wear-in time. Designed to dominate on firm ground."
                 },
                 new Shoes()

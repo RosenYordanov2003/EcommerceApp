@@ -35,5 +35,6 @@
         [MaxLength(GenderMaxLength)]
         public string Gender { get; set; } = null!;
         public string? Description { get; set; }
+        public bool IsFeatured { get; set; }
     }
 }

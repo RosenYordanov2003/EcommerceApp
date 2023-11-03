@@ -38,6 +38,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
 builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<IShoesService, ShoesService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

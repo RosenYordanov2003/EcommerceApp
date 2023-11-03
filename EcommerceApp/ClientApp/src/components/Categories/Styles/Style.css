@@ -1,0 +1,48 @@
+﻿@keyframes sliding{
+    from{
+        opacity: 0;
+        transform: translateY(-50%);
+    }
+    to{
+        opacity: 1;
+        transform:translateY(0%);
+    }
+}
+@keyframes hiding{
+    from{
+        opacity: 1;
+        transform:translateY(0%);
+    }
+    to{
+        opacity: 0;
+        transform:translateY(-50%);
+        display: none;
+    }
+}
+.category-list {
+    background-color: #f0f3f2;
+    list-style: none;
+    height: 30vh;
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+.active {
+    animation: sliding;
+    animation-duration: 1.3s;
+}
+.category-list li{
+    color: #4c4552;
+    padding: 0.8rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+.category-list li:hover{
+  color: cornflowerblue;
+}
+.not-active {
+    animation: hiding;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}

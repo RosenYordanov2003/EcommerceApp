@@ -6,7 +6,7 @@ import { useState } from "react";
 export default function App() {
 
     const [categories, setCategories] = useState([]);
-    const [isActive, setActivity] = useState()
+    const [isActive, setActivity] = useState(false)
 
 
     function loadCategories(categories) {
@@ -14,7 +14,6 @@ export default function App() {
     }
     function setIsActive(activity) {
         setActivity(activity);
-        console.log(isActive);
     }
     return (
         <>

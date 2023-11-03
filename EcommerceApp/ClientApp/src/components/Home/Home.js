@@ -1,7 +1,7 @@
 import CategoriesSection from "../Categories/CategoriesSection"
-export default function Home({ categories }) {
+export default function Home({ categories, isActive }) {
 
     return (
-         <CategoriesSection categories={categories}/>
+        <CategoriesSection categories={categories} isActive={isActive} />
     );
 }

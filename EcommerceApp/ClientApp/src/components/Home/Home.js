@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { loadFeaturedShoes } from "../../services/productService";
 import FeaturedProduct from "../Products/FeaturedProduct";
+import HomeStyle from "../Home/HomeStyle.css";
 export default function Home({ categories, isActive }) {
 
     const [featuredShoes, setFeaturedShoes] = useState([]);
@@ -16,7 +17,7 @@ export default function Home({ categories, isActive }) {
     return (
         <>
             <CategoriesSection categories={categories} isActive={isActive} />
-            <section>
+            <section className = "featured-shoes-section">
                 {result}
             </section>
          </>

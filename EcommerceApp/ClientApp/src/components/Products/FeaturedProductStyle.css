@@ -1,0 +1,35 @@
+﻿.product-card{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.product-card .img-container{
+    width: 400px;
+    position: relative;
+}
+.product-card .img-container img{
+    width: 100%;
+    height: auto;
+}
+.product-content .name {
+    color: #313438;
+    font-size: 1.5rem;
+}
+.product-content .price
+{
+    color: #d57d80;
+    font-size: 1.3rem;
+}
+.product-content .star-rating{
+    margin-top: 0.6rem;
+    font-size: 1.2rem;
+}
+.star {
+    color: #f1c216;
+}
+.favorite {
+    position: absolute;
+    right: 8px;
+    top: 10px;
+    font-size: 1.3rem;
+}

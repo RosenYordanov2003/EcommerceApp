@@ -1,0 +1,21 @@
+﻿@keyframes sliding{
+    from{
+        opacity: 0;
+        transform:translateX(-100%);
+    }
+    to{
+        opacity: 1;
+        transform: translateX(0%);
+    }
+}
+
+.featured-shoes-section {
+    padding: 1rem 2rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 4rem;
+    animation: sliding;
+    animation-duration: 4.2s;
+    animation-fill-mode: forwards;
+}

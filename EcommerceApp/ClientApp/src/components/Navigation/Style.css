@@ -24,7 +24,7 @@ nav {
     justify-content: space-between;
     animation: delaying;
     animation-fill-mode: forwards;
-    animation-duration: 3s;
+    animation-duration: 2.5s;
 }
 nav ul{
     list-style: none;

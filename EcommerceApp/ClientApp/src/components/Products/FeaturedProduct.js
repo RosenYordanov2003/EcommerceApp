@@ -10,17 +10,24 @@ export default function FeaturedProduct({ product }) {
     const [imgUrl, setImgUrl] = useState(product.pictures[0].imgUrl);
 
     function activateProductCard(event) {
-        setImgUrl(product.pictures[1].imgUrl);
-        event.currentTarget.classList.add('active-product-card');
+        setTimeout(() => {
+            setImgUrl(product.pictures[1].imgUrl);
+        },500)
+        event.currentTarget.children[0].classList.remove('favorite-removed');
+        event.currentTarget.children[0].classList.add('favorite');
     }
-    function deactivateProductCard() {
-        setImgUrl(product.pictures[0].imgUrl);
+    function deactivateProductCard(event) {
+        setTimeout(() => {
+            setImgUrl(product.pictures[0].imgUrl);
+        }, 500)
+        event.currentTarget.children[0].classList.add('favorite-removed');
+        event.currentTarget.children[0].classList.remove('favorite');
     }
 
     return (
         <div className="product-card">
-            <div onMouseOver={activateProductCard} onMouseOut={deactivateProductCard} className="img-container">
-                <i className="fa-regular fa-heart favorite"></i>
+            <div onMouseOver={activateProductCard} onMouseLeave={deactivateProductCard} className="img-container">
+                <i className="fa-regular fa-heart"></i>
                 <img src={imgUrl} />
             </div>
             <div className="product-content">

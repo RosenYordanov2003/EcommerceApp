@@ -17,6 +17,7 @@ export default function Home({ categories, isActive }) {
     return (
         <>
             <CategoriesSection categories={categories} isActive={isActive} />
+            <h2 className = "feature-title">Featured Shoes</h2>
             <section className = "featured-shoes-section">
                 {result}
             </section>

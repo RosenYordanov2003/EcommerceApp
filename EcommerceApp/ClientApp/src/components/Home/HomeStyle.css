@@ -19,3 +19,20 @@
     animation-duration: 4.2s;
     animation-fill-mode: forwards;
 }
+.feature-title {
+    margin-left: 2rem;
+    animation: sliding;
+    animation-duration: 3s;
+    animation-fill-mode: forwards;
+}
+.feature-title::before{
+   content: "";
+   height: 38px;
+   background-color: mediumpurple;
+   width: 38px;
+   position: absolute;
+   top: -18px;
+   left: -22px;
+   border-radius: 50%;
+   opacity: 0.6;
+}

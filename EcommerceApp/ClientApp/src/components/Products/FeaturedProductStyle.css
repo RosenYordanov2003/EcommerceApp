@@ -1,4 +1,26 @@
-﻿.product-card{
+﻿@keyframes sliding {
+    from {
+        opacity: 0;
+        transform: translateX(30%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0%);
+    }
+}
+@keyframes hiding{
+    from{
+        opacity: 1;
+        transform: translateX(0%);
+    }
+    to{
+        opacity: 0;
+        transform: translateX(-40%);
+    }
+}
+
+.product-card{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -28,8 +50,19 @@
     color: #f1c216;
 }
 .favorite {
+    animation: sliding;
+    animation-duration: 1.5s;
+    animation-fill-mode: forwards;
+}
+.fa-heart {
     position: absolute;
     right: 8px;
     top: 10px;
     font-size: 1.3rem;
+    opacity: 0;
+}
+.favorite-removed{
+    animation: hiding;
+    animation-duration: 1.3s;
+    animation-fill-mode: forwards;
 }

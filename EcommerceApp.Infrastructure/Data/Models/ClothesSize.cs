@@ -12,5 +12,6 @@
         public int ClothId { get; set; }
         [Required]
         public Clothes Cloth { get; set; } = null!;
+        public string Gender { get; set; } = null!;
     }
 }

@@ -17,9 +17,9 @@
         [Required]
         public MainCategory Category { get; set; } = null!;
         [ForeignKey(nameof(SubCategory))]
-        public int SubCategoryId { get; set; }
+        public int? SubCategoryId { get; set; }
         [Required]
-        public SubCategory SubCategory { get; set; } = null!;
+        public SubCategory? SubCategory { get; set; }
         public decimal Price { get; set; }
         [Required]
         [MaxLength(ColorMaxLength)]
@@ -30,5 +30,10 @@
         public int BrandId { get; set; }
         [Required]
         public Brand Brand { get; set; } = null!;
+        [Required]
+        public string Description { get; set; } = null!;
+        [Required]
+        public string Gender { get; set; } = null!;
+        public bool IsFeatured { get; set; }
     }
 }

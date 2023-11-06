@@ -27,6 +27,7 @@ namespace EcommerceApp.Data
             builder.ApplyConfiguration(new MainCategoryEntityConfiguration());
             builder.ApplyConfiguration(new SubCategoryEntityConfiguration());
             builder.ApplyConfiguration(new ShoesEntityConfiguration());
+            builder.ApplyConfiguration(new ClothesEntityConfiguration());
             builder.ApplyConfiguration(new PictureEntityConfiguration());
         }
     }

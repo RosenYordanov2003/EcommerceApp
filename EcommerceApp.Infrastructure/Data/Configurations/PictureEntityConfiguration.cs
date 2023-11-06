@@ -393,6 +393,186 @@
                    Id = 63,
                    ShoesId = 16,
                    ImgUrl = "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_750,h_750/global/107535/03/sv04/fnd/EEA/fmt/png/ULTRA-PLAY-IT-Youth-Football-Boots"
+               },
+               new Picture()
+               {
+                   Id = 64,
+                   ClothId = 1,
+                   ImgUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/7b10b532-1524-4bac-9252-44a6fb0e3848/chicago-bulls-essential-jordan-nba-long-sleeve-t-shirt-Hs7BDJ.png",
+               },
+               new Picture()
+               {
+                   Id = 65,
+                   ClothId = 1,
+                   ImgUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/655bbd70-c83b-4908-97c8-3d6a9e979ec7/chicago-bulls-essential-jordan-nba-long-sleeve-t-shirt-Hs7BDJ.png",
+               },
+               new Picture()
+               {
+                   Id = 66,
+                   ClothId = 2,
+                   ImgUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/ba184923-802b-4452-91f2-c05c1935c833/chicago-bulls-essential-jordan-nba-long-sleeve-t-shirt-Hs7BDJ.png"
+               },
+               new Picture()
+               {
+                   Id = 67,
+                   ClothId = 2,
+                   ImgUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/2e897695-5f71-49d6-96d4-4760656263bc/chicago-bulls-essential-jordan-nba-long-sleeve-t-shirt-Hs7BDJ.png",
+               },
+               new Picture()
+               {
+                   Id = 68,
+                   ClothId = 3,
+                   ImgUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/65f8431d-b201-4835-9bd7-69ad8016c2a5/air-marcus-rashford-t-shirt-PTxmGD.png"
+               },
+               new Picture()
+               {
+                   Id = 69,
+                   ClothId = 3,
+                   ImgUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/f8bf2b04-2031-4017-ac51-6f35f906f140/air-marcus-rashford-t-shirt-PTxmGD.png"
+               },
+               new Picture()
+               {
+                   Id = 70,
+                   ClothId = 4,
+                   ImgUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/4daed06a-f4c2-4eb7-b767-9083b8a059cb/air-marcus-rashford-t-shirt-PTxmGD.png"
+               },
+               new Picture()
+               {
+                   Id = 71,
+                   ClothId = 4,
+                   ImgUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/c2e5f80f-4e86-44f3-a857-5dc9e1316b5c/air-marcus-rashford-t-shirt-PTxmGD.png"
+               },
+               new Picture()
+               {
+                   Id = 72,
+                   ClothId = 4,
+                   ImgUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/265524e6-d4df-4b3f-9c2b-35d7d2034a06/air-marcus-rashford-t-shirt-PTxmGD.png"
+               },
+               new Picture()
+               {
+                   Id = 73,
+                   ClothId = 5,
+                   ImgUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/9de4a14d-9592-44a9-b979-16d6bcfb828e/sportswear-long-sleeve-top-k7q2B0.png"
+               },
+               new Picture()
+               {
+                   Id = 74,
+                   ClothId = 5,
+                   ImgUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/f201e04c-c494-404d-a9db-ec16a090e768/sportswear-long-sleeve-top-k7q2B0.png"
+               },
+               new Picture()
+               {
+                   Id = 75,
+                   ClothId = 6,
+                   ImgUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/30769c01-7e65-4701-acef-4a61c42a2e2a/sportswear-long-sleeve-top-k7q2B0.png"
+               },
+               new Picture()
+               {
+                   Id = 76,
+                   ClothId = 6,
+                   ImgUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/3e3da66a-96e6-49a4-a890-ed63f91077f0/sportswear-long-sleeve-top-k7q2B0.png"
+               },
+               new Picture()
+               {
+                   Id = 77,
+                   ClothId = 7,
+                   ImgUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/603eef38-6e20-4b67-8c2f-fefe553096ba/dri-fit-uv-one-luxe-standard-fit-short-sleeve-top-NCd1Fw.png"
+               },
+               new Picture()
+               {
+                   Id = 78,
+                   ClothId = 7,
+                   ImgUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/868da3be-97e1-4404-9c7a-eb85dfe095ff/dri-fit-uv-one-luxe-standard-fit-short-sleeve-top-NCd1Fw.png"
+               },
+               new Picture()
+               {
+                   Id = 79,
+                   ClothId = 8,
+                   ImgUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/f218ca5c-6f9d-4743-9270-f16cf6442e63/sportswear-tech-fleece-joggers-h2Bmxs.png"
+               },
+               new Picture()
+               {
+                   Id = 80,
+                   ClothId = 8,
+                   ImgUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/7ceb3c8a-1036-4c13-a9d6-6136b8789b4f/sportswear-tech-fleece-joggers-h2Bmxs.png"
+               },
+               new Picture()
+               {
+                   Id = 81,
+                   ClothId = 8,
+                   ImgUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/2ce6d4a7-fe24-4e31-9c8d-0cb0f1f00c5b/sportswear-tech-fleece-joggers-h2Bmxs.png"
+               },
+               new Picture()
+               {
+                   Id = 82,
+                   ClothId = 9,
+                   ImgUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/e2aef028-799e-4bbe-b9c0-e06057b540fa/sportswear-tech-fleece-joggers-h2Bmxs.png"
+               },
+               new Picture()
+               {
+                   Id = 83,
+                   ClothId = 9,
+                   ImgUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/708e1399-9ae0-443a-90b5-c10403810446/sportswear-tech-fleece-joggers-h2Bmxs.png"
+               },
+               new Picture()
+               {
+                   Id = 84,
+                   ClothId = 9,
+                   ImgUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/d19bd263-f3ea-4f20-99d8-2d8809c294c6/sportswear-tech-fleece-joggers-h2Bmxs.png"
+               },
+               new Picture()
+               {
+                   Id = 85,
+                   ClothId = 10,
+                   ImgUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/ea0404ed-85c6-481b-94e8-0713a2518b00/sportswear-club-fleece-joggers-27ggJk.png"
+               },
+               new Picture()
+               {
+                   Id = 86,
+                   ClothId = 10,
+                   ImgUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/fa419b99-681e-4ad8-91e5-85469861395e/sportswear-club-fleece-joggers-27ggJk.png"
+               },
+               new Picture()
+               {
+                   Id = 87,
+                   ClothId = 10,
+                   ImgUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/174d46bc-92aa-48cd-87e7-9d0febd35a4b/sportswear-club-fleece-joggers-27ggJk.png"
+               },
+               new Picture()
+               {
+                   Id = 88,
+                   ClothId = 11,
+                   ImgUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/76543fe7-5c56-4816-ae5d-4437a38d239c/sportswear-phoenix-fleece-high-waisted-oversized-tracksuit-bottoms-00TZkD.png"
+               },
+               new Picture()
+               {
+                   Id = 89,
+                   ClothId = 11,
+                   ImgUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/64997362-76c3-44ed-82f3-2344071575b3/sportswear-phoenix-fleece-high-waisted-oversized-tracksuit-bottoms-00TZkD.png"
+               },
+               new Picture()
+               {
+                   Id = 90,
+                   ClothId = 11,
+                   ImgUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/582991d4-6e81-4478-ae40-a8bd80f70780/sportswear-phoenix-fleece-high-waisted-oversized-tracksuit-bottoms-00TZkD.png"
+               },
+               new Picture()
+               {
+                   Id = 91,
+                   ClothId = 12,
+                   ImgUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/946f5abf-f660-4ac7-8c2c-62359a628b18/sportswear-phoenix-fleece-high-waisted-oversized-tracksuit-bottoms-00TZkD.png"
+               },
+               new Picture()
+               {
+                   Id = 92,
+                   ClothId = 12,
+                   ImgUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/7bf8c2bc-d083-4c3b-aae1-1e0b04c0b42e/sportswear-phoenix-fleece-high-waisted-oversized-tracksuit-bottoms-00TZkD.png"
+               },
+               new Picture()
+               {
+                   Id = 93,
+                   ClothId = 12,
+                   ImgUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/2e4586cd-2027-4ae9-9dec-af8c2a9a58bd/sportswear-phoenix-fleece-high-waisted-oversized-tracksuit-bottoms-00TZkD.png"
                }
            };
         }

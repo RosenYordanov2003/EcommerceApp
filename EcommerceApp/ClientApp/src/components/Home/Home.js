@@ -5,7 +5,6 @@ import { loadFeaturedShoes } from "../../services/productService";
 import FeaturedProduct from "../Products/FeaturedProduct";
 import HomeStyle from "../Home/HomeStyle.css";
 export default function Home({ categories, isActive }) {
-
     const [featuredShoes, setFeaturedShoes] = useState([]);
 
     useEffect(() => {
@@ -13,7 +12,9 @@ export default function Home({ categories, isActive }) {
             .then(res => setFeaturedShoes(res))
         .catch((error) => console.error(error))
     }, [])
-    const result = featuredShoes.map((shoes) => <FeaturedProduct key={shoes.id} product={shoes } />)
+
+    const result = featuredShoes.map((shoes) => <FeaturedProduct key={shoes.id} product={shoes} />)
+   
     return (
         <>
             <CategoriesSection categories={categories} isActive={isActive} />

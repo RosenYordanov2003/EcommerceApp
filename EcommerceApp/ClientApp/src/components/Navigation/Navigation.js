@@ -12,9 +12,10 @@ export default function Navigation({ loadCategories, setIsActive }) {
         setIsMenArrowActive(!isMenArrowActive);
         if (isMenArrowActive) {
             setIsActive(false);
-        } else {
-            setIsActive(true);
-            loadCategoriesByGender("m");
+        }
+        else {
+           setIsActive(true);
+           loadCategoriesByGender("m");
         }
       
         setIsWomenArrowActive(false);
@@ -24,7 +25,8 @@ export default function Navigation({ loadCategories, setIsActive }) {
         setIsWomenArrowActive(!isWomenArrowActive);
         if (isWomenArrowActive) {
             setIsActive(false);
-        } else {
+        }
+        else {
             setIsActive(true);
             loadCategoriesByGender("w");
         }
@@ -46,17 +48,17 @@ export default function Navigation({ loadCategories, setIsActive }) {
             <h2 className="nav-logo">Fashion Store</h2>
             <ul>
                 <li>
-                    <Link to="/Home">
+                    <Link to="">
                         Men{" "}
                         <i
                             onClick={toggleMenCategories}
                             className={`men-arrow down-arrow fa-solid fa-angle-down ${isMenArrowActive ? "active-arrow" : "not-active-arrow"
-                                }`}
+                            }`}
                         ></i>
                     </Link>
                 </li>
                 <li>
-                    <Link to="Home">
+                    <Link to="">
                         Women{" "}
                         <i
                             onClick={toggleWomenCategories}

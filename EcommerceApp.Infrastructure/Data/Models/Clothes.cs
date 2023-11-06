@@ -6,6 +6,10 @@
 
     public class Clothes
     {
+        public Clothes()
+        {
+            Pictures = new List<Picture>();
+        }
         [Key]
         public int Id { get; set; }
         [Required]
@@ -35,5 +39,6 @@
         [Required]
         public string Gender { get; set; } = null!;
         public bool IsFeatured { get; set; }
+        public ICollection<Picture> Pictures { get; set; }
     }
 }

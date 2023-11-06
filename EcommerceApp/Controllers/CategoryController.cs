@@ -7,7 +7,6 @@ namespace EcommerceApp.Controllers
     [ApiController]
     [Route("api/categories")]
     [Produces("application/json")]
-    [ProducesResponseType(200, Type = typeof(IEnumerable<CategoryModel>))]
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryService categoryService;

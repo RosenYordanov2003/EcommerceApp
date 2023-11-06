@@ -3,9 +3,12 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { loadFeaturedShoes } from "../../services/productService";
 import FeaturedProduct from "../Products/FeaturedProduct";
+import { loadFeaturedClothes } from "../../services/productService";
 import HomeStyle from "../Home/HomeStyle.css";
+
 export default function Home({ categories, isActive }) {
     const [featuredShoes, setFeaturedShoes] = useState([]);
+    const [featuredClothes, setFeaturedClothes] = useState([]);
 
     useEffect(() => {
         loadFeaturedShoes()
@@ -13,14 +16,25 @@ export default function Home({ categories, isActive }) {
         .catch((error) => console.error(error))
     }, [])
 
-    const result = featuredShoes.map((shoes) => <FeaturedProduct key={shoes.id} product={shoes} />)
-   
+    useEffect(() => {
+        loadFeaturedClothes()
+            .then(res => setFeaturedClothes(res))
+        .catch((error) => console.error(error))
+    }, [])
+
+    const shoesResult = featuredShoes.map((shoes) => <FeaturedProduct key={shoes.id} product={shoes} />)
+    const clothesResult = featuredClothes.map((clothes) => <FeaturedProduct key={clothes.id} product={clothes} />);
+
     return (
         <>
             <CategoriesSection categories={categories} isActive={isActive} />
             <h2 className = "feature-title">Featured Shoes</h2>
             <section className = "featured-shoes-section">
-                {result}
+                {shoesResult}
+            </section>
+            <h2 className="feature-title">Featured Clothes</h2>
+            <section className="featured-shoes-section">
+                {clothesResult}
             </section>
          </>
     );

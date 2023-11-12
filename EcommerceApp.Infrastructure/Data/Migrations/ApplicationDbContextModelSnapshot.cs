@@ -105,7 +105,7 @@ namespace EcommerceApp.Infrastructure.Migrations
 
                     b.HasIndex("Use");
 
-                    b.ToTable("Keys");
+                    b.ToTable("Keys", (string)null);
                 });
 
             modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.PersistedGrant", b =>
@@ -182,7 +182,7 @@ namespace EcommerceApp.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Brands");
+                    b.ToTable("Brands", (string)null);
 
                     b.HasData(
                         new
@@ -282,7 +282,7 @@ namespace EcommerceApp.Infrastructure.Migrations
 
                     b.HasIndex("SubCategoryId");
 
-                    b.ToTable("Clothes");
+                    b.ToTable("Clothes", (string)null);
 
                     b.HasData(
                         new
@@ -475,7 +475,7 @@ namespace EcommerceApp.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
 
                     b.HasData(
                         new
@@ -564,7 +564,7 @@ namespace EcommerceApp.Infrastructure.Migrations
 
                     b.HasIndex("ShoesId");
 
-                    b.ToTable("Picture");
+                    b.ToTable("Picture", (string)null);
 
                     b.HasData(
                         new
@@ -1177,7 +1177,7 @@ namespace EcommerceApp.Infrastructure.Migrations
 
                     b.HasIndex("SubCategoryId");
 
-                    b.ToTable("Shoes");
+                    b.ToTable("Shoes", (string)null);
 
                     b.HasData(
                         new
@@ -1425,7 +1425,7 @@ namespace EcommerceApp.Infrastructure.Migrations
 
                     b.HasIndex("MainCategoryId");
 
-                    b.ToTable("SubCategory");
+                    b.ToTable("SubCategory", (string)null);
 
                     b.HasData(
                         new

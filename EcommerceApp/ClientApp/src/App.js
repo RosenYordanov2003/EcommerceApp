@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import Home from "./components/Home/Home";
 import Navigation from "./components/Navigation/Navigation";
 import { useState } from "react";
+import Register from "./components/Register/Register";
 
 export default function App() {
 
@@ -20,8 +21,9 @@ export default function App() {
            
             <Navigation loadCategories={loadCategories} setIsActive={setIsActive }></Navigation>
             <Routes>
-                <Route path="/" element={<Home categories={categories} isActive={isActive } />} />
-                <Route path="/Home" element={<Home categories={categories} isActive={isActive } />} />
+                <Route path ="/" element={<Home categories={categories} isActive={isActive } />} />
+                <Route path ="/Home" element={<Home categories={categories} isActive={isActive} />} />
+                <Route path="/Register" element={<Register/> } />
             </Routes>
        </>
     )

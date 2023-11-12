@@ -1,11 +1,12 @@
+using EcommerceApp.Config;
 using EcommerceApp.Core.Contracts;
 using EcommerceApp.Core.Services;
 using EcommerceApp.Data;
-using EcommerceApp.Models;
-using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,22 +16,48 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
-builder.Services.AddIdentityServer()
-    .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
 
-builder.Services.AddAuthentication()
-    .AddIdentityServerJwt();
+builder.Services.Configure<JwtConfig>(builder.Configuration.GetSection("JwtConfig"));
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+    .AddJwtBearer(jwt =>
+    {
+        byte[] keyBytes = Encoding.ASCII.GetBytes(builder.Configuration["JwtConfig:Secret"]);
+        jwt.SaveToken = true;
+        jwt.TokenValidationParameters = new TokenValidationParameters()
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(keyBytes),
+            ValidateIssuer = false,
+            ValidateAudience = false,
+            ValidateLifetime = true,
+            RequireExpirationTime = false,
+        };
+    });
+    
+
 
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("EcommercePolicy", ecommerceBuilder =>
     {
-        ecommerceBuilder.WithOrigins("https://localhost:44440")
-        .AllowAnyHeader()
-        .AllowAnyMethod();
+        ecommerceBuilder.WithOrigins("https://localhost:44440");
+        ecommerceBuilder.AllowAnyHeader();
+        ecommerceBuilder.AllowAnyMethod(); 
+    });
+    options.AddPolicy("free", opt =>
+    {
+        opt.AllowAnyOrigin();
+        opt.AllowAnyHeader();
+        opt.AllowAnyMethod();
     });
 });
 
@@ -58,13 +85,16 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthentication();
-app.UseIdentityServer();
 app.UseAuthorization();
 app.UseCors("EcommercePolicy");
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller}/{action=Index}/{id?}");
+//app.MapControllerRoute(
+//    name: "default",
+//    pattern: "{controller}/{action=Index}/{id?}");
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+});
 app.MapRazorPages();
 
 //app.MapFallbackToFile("index.html");

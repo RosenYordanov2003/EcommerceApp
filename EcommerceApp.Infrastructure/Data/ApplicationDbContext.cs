@@ -1,17 +1,14 @@
-﻿using Duende.IdentityServer.EntityFramework.Options;
-using EcommerceApp.Infrastructure.Data.Configurations;
+﻿using EcommerceApp.Infrastructure.Data.Configurations;
 using EcommerceApp.Infrastructure.Data.Models;
-using EcommerceApp.Models;
-using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 
 namespace EcommerceApp.Data
 {
-    public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
+    public class ApplicationDbContext : IdentityDbContext
     {
-        public ApplicationDbContext(DbContextOptions options, IOptions<OperationalStoreOptions> operationalStoreOptions)
-            : base(options, operationalStoreOptions)
+        public ApplicationDbContext(DbContextOptions options)
+            : base(options)
         {
 
         }

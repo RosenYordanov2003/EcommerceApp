@@ -72,6 +72,11 @@ export default function Navigation({ loadCategories, setIsActive }) {
                         <i className="fa-solid fa-cart-shopping"></i>
                     </Link>
                 </li>
+                <li>
+                    <Link to="/Register">
+                       Register
+                    </Link>
+                </li>
             </ul>
         </nav>
     );

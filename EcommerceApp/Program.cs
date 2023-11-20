@@ -22,6 +22,18 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 
 builder.Services.Configure<JwtConfig>(builder.Configuration.GetSection("JwtConfig"));
 
+var keyBytes = Encoding.ASCII.GetBytes(builder.Configuration["JwtConfig:Secret"]);
+
+var tokenValidationParameters = new TokenValidationParameters()
+{
+    ValidateIssuerSigningKey = true,
+    IssuerSigningKey = new SymmetricSecurityKey(keyBytes),
+    ValidateIssuer = false,
+    ValidateAudience = false,
+    ValidateLifetime = true,
+    RequireExpirationTime = false,
+};
+
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -30,19 +42,11 @@ builder.Services.AddAuthentication(options =>
 })
     .AddJwtBearer(jwt =>
     {
-        byte[] keyBytes = Encoding.ASCII.GetBytes(builder.Configuration["JwtConfig:Secret"]);
         jwt.SaveToken = true;
-        jwt.TokenValidationParameters = new TokenValidationParameters()
-        {
-            ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(keyBytes),
-            ValidateIssuer = false,
-            ValidateAudience = false,
-            ValidateLifetime = true,
-            RequireExpirationTime = false,
-        };
+        jwt.TokenValidationParameters = tokenValidationParameters;
     });
-    
+
+builder.Services.AddSingleton(tokenValidationParameters);
 
 
 builder.Services.AddCors(options =>
@@ -67,6 +71,8 @@ builder.Services.AddRazorPages();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IShoesService, ShoesService>();
 builder.Services.AddScoped<IClothesService, ClothesService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -122,7 +122,6 @@
                     SubCategoryId = 1,
                     BrandId = 2,
                     Color = "Dark Red",
-                    IsFeatured = true,
                     Price = 70,
                     Description = "Designed for athletes who run to stay fit for their sport, these running shoes support multidirectional movements with flexible cushioning and a wide, stable platform in the forefoot and heel. They have a seamless, sock-like mesh upper with targeted areas of support and stretch for an adaptive fit.\r\nRunner type\r\nNeutral shoes for the versatile runner\r\nAdaptive fit\r\nSeamless Forgedmesh upper designed with areas of support and stretch to help ensure a custom fit that adapts to every move\r\nSpringy cushioning\r\nBounce cushioning provides enhanced comfort and flexibility\r\nReliable traction\r\nContinental™ Rubber outsole for extraordinary traction in wet and dry conditions"
                 },
@@ -136,7 +135,6 @@
                     Color = "Orange",
                     Price = 78.41M,
                     Gender = "Men",
-                    IsFeatured = true,
                     Description = "Dominate space. Command the play. Create goal-destined shots from impossible angles. Control the game with every touch in ACE. These juniors' soccer cleats have a 3D Control Skin upper that delivers precise control with zero wear-in time. Designed to dominate on firm ground."
                 },
                 new Shoes()
@@ -185,6 +183,7 @@
                     Color = "White",
                     Gender = "Women",
                     Price = 70,
+                    IsFeatured = true,
                     Description = "Back in 1987, the PUMA Slipstream Mid entered the scene as a basketball sneaker. A high-flying, slam-dunking, statement-making basketball sneaker. Now, it’s joined by the Slipstream – a rework of the original that brings an all-new energy to the game while staying true to the OG’s sporting roots."
                 },
                 new Shoes()
@@ -209,6 +208,7 @@
                     Color = "Green",
                     Gender = "Men",
                     Price = 70,
+                    IsFeatured = true,
                     Description = "ULTRA - Not even you knew you could be this fast. Turn seconds into records with the ULTRA ULTIMATE football boot. Lighter means quicker, so the ULTRAWEAVE upper material makes every gram and every second count. Ultra-light. Ultra-fast. ULTRA ULTIMATE."
                 },
                 new Shoes()

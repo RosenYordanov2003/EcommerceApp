@@ -16,6 +16,7 @@ namespace EcommerceApp.Data
         public DbSet<Shoes> Shoes { get; set; }
         public DbSet<Clothes> Clothes { get; set; }
         public DbSet<Brand> Brands { get; set; }
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
        
         protected override void OnModelCreating(ModelBuilder builder)
         {

@@ -1,6 +1,7 @@
 ﻿using EcommerceApp.Config;
+using EcommerceApp.Core.Contracts;
+using EcommerceApp.Infrastructure.Data.Models;
 using EcommerceApp.Models.Account;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -18,21 +19,27 @@ namespace EcommerceApp.Controllers
     {
         private readonly UserManager<IdentityUser> userManager;
         private readonly JwtConfig jwtConfig;
+        private readonly TokenValidationParameters tokenValidationParameters;
+        private readonly IAuthService authService;
         public AccountController(UserManager<IdentityUser> userManager, 
-            IOptionsMonitor<JwtConfig> optionsMonitor)
+            IOptionsMonitor<JwtConfig> optionsMonitor,
+            TokenValidationParameters tokenValidationParameters,
+            IAuthService authService)
         {
             this.userManager = userManager;
             this.jwtConfig = optionsMonitor.CurrentValue;
+            this.tokenValidationParameters = tokenValidationParameters;
+            this.authService = authService;
         }
         [HttpPost]
         [Route("Register")]
         public async Task<IActionResult> Register([FromBody] RegisterModel registerModel)
         {
             bool isExsit = await userManager.FindByEmailAsync(registerModel.Email) == null;
-            //if (!ModelState.IsValid || isExsit)
-            //{ 
-            //    return BadRequest();
-            //}
+            if (!ModelState.IsValid || isExsit)
+            {
+                return BadRequest();
+            }
             var newUser = new IdentityUser()
             {
                 Email = registerModel.Email,
@@ -42,17 +49,17 @@ namespace EcommerceApp.Controllers
 
             if (result.Succeeded)
             {
-                string jwtToken = GenerateJwtToken(newUser);
-                //return new StatusCodeResult(201);
-                return Ok(new {Token = jwtToken });
+                AuthResult authResult = await GenerateJwtToken(newUser);
+               
+                return Ok(authResult);
             }
             else
             {
-                var errors =result.Errors.Select(e => e.Description);
+                var errors = result.Errors.Select(e => e.Description);
                 return BadRequest(new { erors = errors });
             }
         }
-        private string GenerateJwtToken(IdentityUser user)
+        private async Task<AuthResult> GenerateJwtToken(IdentityUser user)
         {
             JwtSecurityTokenHandler jwtTokenHandler = new JwtSecurityTokenHandler();
 
@@ -66,14 +73,21 @@ namespace EcommerceApp.Controllers
                     new Claim(JwtRegisteredClaimNames.Sub, user.Email),
                     new Claim(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString())
                 }),
-                Expires = DateTime.UtcNow.AddHours(10),
+                Expires = DateTime.UtcNow.AddMinutes(10),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
 
             };
             SecurityToken token = jwtTokenHandler.CreateToken(tokenDescriptor);
             string jwtToken = jwtTokenHandler.WriteToken(token);
 
-            return jwtToken;
+            RefreshToken refreshToken = await authService.GenerateRefreshTokenAsync(user.Id, token.Id);
+
+            return new AuthResult()
+            {
+                Token = jwtToken,
+                RefreshToken = refreshToken.Token,
+                Success = true,
+            };
         }
     }
 }

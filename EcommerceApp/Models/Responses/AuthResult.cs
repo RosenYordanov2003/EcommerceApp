@@ -1,4 +1,4 @@
-﻿namespace EcommerceApp.Config
+﻿namespace EcommerceApp.Models.Responses
 {
     public class AuthResult
     {
@@ -6,9 +6,9 @@
         {
             Errors = new List<string>();
         }
-        public string Token { get; set; } = null!;
+        public string Token { get; set; }
+        public string RefreshToken { get; set; }
         public bool Success { get; set; }
         public ICollection<string> Errors { get; set; }
-        public string RefreshToken { get; set; } = null!;
     }
 }

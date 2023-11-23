@@ -4,8 +4,9 @@ import Navigation from "./components/Navigation/Navigation";
 import { useState } from "react";
 import Register from "./components/Register/Register";
 
-export default function App() {
 
+export default function App() {
+   
     const [categories, setCategories] = useState([]);
     const [isActive, setActivity] = useState(false);
 

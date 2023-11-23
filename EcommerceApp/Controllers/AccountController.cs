@@ -1,17 +1,19 @@
-﻿using EcommerceApp.Config;
-using EcommerceApp.Core.Contracts;
-using EcommerceApp.Infrastructure.Data.Models;
-using EcommerceApp.Models.Account;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
-
-namespace EcommerceApp.Controllers
+﻿namespace EcommerceApp.Controllers
 {
+    using System.Security.Claims;
+    using System.IdentityModel.Tokens.Jwt;
+    using System.Text;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Options;
+    using Microsoft.IdentityModel.Tokens;
+    using Config;
+    using Core.Contracts;
+    using Infrastructure.Data.Models;
+    using Models.Account;
+    using Models.Requests;
+    using EcommerceApp.Models.Responses;
+
     [ApiController]
     [Route("api/account")]
     [Produces("application/json")]
@@ -21,7 +23,7 @@ namespace EcommerceApp.Controllers
         private readonly JwtConfig jwtConfig;
         private readonly TokenValidationParameters tokenValidationParameters;
         private readonly IAuthService authService;
-        public AccountController(UserManager<IdentityUser> userManager, 
+        public AccountController(UserManager<IdentityUser> userManager,
             IOptionsMonitor<JwtConfig> optionsMonitor,
             TokenValidationParameters tokenValidationParameters,
             IAuthService authService)
@@ -35,8 +37,9 @@ namespace EcommerceApp.Controllers
         [Route("Register")]
         public async Task<IActionResult> Register([FromBody] RegisterModel registerModel)
         {
-            bool isExsit = await userManager.FindByEmailAsync(registerModel.Email) == null;
-            if (!ModelState.IsValid || isExsit)
+            bool isExsitsByEmail = await userManager.FindByEmailAsync(registerModel.Email) != null;
+            bool isExistsByUsername = await userManager.FindByNameAsync(registerModel.UserName) != null;
+            if (!ModelState.IsValid || isExsitsByEmail || isExistsByUsername)
             {
                 return BadRequest();
             }
@@ -47,17 +50,68 @@ namespace EcommerceApp.Controllers
             };
             var result = await userManager.CreateAsync(newUser, registerModel.Password);
 
-            if (result.Succeeded)
-            {
-                AuthResult authResult = await GenerateJwtToken(newUser);
-               
-                return Ok(authResult);
-            }
-            else
+            if (!result.Succeeded)
             {
                 var errors = result.Errors.Select(e => e.Description);
-                return BadRequest(new { erors = errors });
+                return BadRequest(new RegisterResponse() { Erros = errors.ToList() });
             }
+            return Ok();
+        }
+        [HttpPost("Login")]
+        public async Task<IActionResult> Login([FromBody] LoginModel loginModel)
+        {
+
+            var user = await userManager.FindByNameAsync(loginModel.Username);
+            if (user != null)
+            {
+                bool passwordResult = await userManager.CheckPasswordAsync(user, loginModel.Password);
+                if (!passwordResult)
+                {
+                    return BadRequest(new { Error = "Invalid Password!" });
+                }
+                else
+                {
+                    AuthResult authResult = await GenerateJwtToken(user);
+                    HttpContext.Response.Cookies.Append("token", authResult.Token, new CookieOptions()
+                    {
+                        HttpOnly = true,
+                        Expires = DateTime.Now.AddMinutes(15),
+                        IsEssential = true,
+                        SameSite = SameSiteMode.None,
+                    });
+                }
+            }
+            return BadRequest(new { Error = "Username does not exist" });
+
+        }
+
+        [HttpPost]
+        [Route("RefreshToken")]
+        public async Task<IActionResult> RefreshToken([FromBody] TokenRequest tokenRequest)
+        {
+            if (ModelState.IsValid)
+            {
+                AuthResult result = await VerifyToken(tokenRequest);
+
+                if (result == null)
+                {
+                    return BadRequest(new AuthResult()
+                    {
+                        Errors = new List<string>() {
+                             "Invalid tokens"
+                        },
+                        Success = false
+                    });
+                }
+                return Ok(result);
+            }
+            return BadRequest(new AuthResult()
+            {
+                Errors = new List<string>() {
+                "Invalid payload"
+            },
+                Success = false
+            });
         }
         private async Task<AuthResult> GenerateJwtToken(IdentityUser user)
         {
@@ -66,7 +120,7 @@ namespace EcommerceApp.Controllers
             byte[] key = Encoding.ASCII.GetBytes(jwtConfig.Secret);
             SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(new [] 
+                Subject = new ClaimsIdentity(new[]
                 {
                     new Claim("Id", user.Id),
                     new Claim(JwtRegisteredClaimNames.Email, user.Email),
@@ -88,6 +142,115 @@ namespace EcommerceApp.Controllers
                 RefreshToken = refreshToken.Token,
                 Success = true,
             };
+        }
+        private async Task<AuthResult> VerifyToken(TokenRequest tokenRequest)
+        {
+            JwtSecurityTokenHandler jwtTokenHandler = new JwtSecurityTokenHandler();
+            try
+            {
+                // This validation function will make sure that the token meets the validation parameters
+                // and its an actual jwt token not just a random string
+                ClaimsPrincipal principal = jwtTokenHandler.ValidateToken(tokenRequest.Token, tokenValidationParameters, out SecurityToken validatedToken);
+
+                // Now we need to check if the token has a valid security algorithm
+                if (validatedToken is JwtSecurityToken jwtSecurityToken)
+                {
+                    bool result = jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase);
+
+                    if (!result)
+                    {
+                        return null;
+                    }
+                }
+
+                // Will get the time stamp in unix time
+                long utcExpiryDate = long.Parse(principal.Claims.FirstOrDefault(x => x.Type == JwtRegisteredClaimNames.Exp).Value);
+
+                // we convert the expiry date from seconds to the date
+                var expDate = UnixTimeStampToDateTime(utcExpiryDate);
+
+                if (expDate > DateTime.UtcNow)
+                {
+                    return new AuthResult()
+                    {
+                        Errors = new List<string>() { "We cannot refresh this since the token has not expired" },
+                        Success = false
+                    };
+                }
+
+                // Check the token we got if its saved in the db
+                bool isRefreshTokenExists = await authService.CheckIsRefreshTokenExistAsync(tokenRequest.RefreshToken);
+
+                if (!isRefreshTokenExists)
+                {
+                    return new AuthResult()
+                    {
+                        Errors = new List<string>() { "refresh token doesnt exist" },
+                        Success = false
+                    };
+                }
+                RefreshToken refreshToken = await authService.FindRefreshTokenAsync(tokenRequest.RefreshToken);
+
+                // Check the date of the saved token if it has expired
+                if (DateTime.UtcNow > refreshToken.ExpireData)
+                {
+                    return new AuthResult()
+                    {
+                        Errors = new List<string>() { "token has expired, user needs to re-login" },
+                        Success = false
+                    };
+                }
+
+                // check if the refresh token has been used
+                if (refreshToken.IsUsed)
+                {
+                    return new AuthResult()
+                    {
+                        Errors = new List<string>() { "token has been used" },
+                        Success = false
+                    };
+                }
+
+                // Check if the token is revoked
+                if (refreshToken.IsRevoked)
+                {
+                    return new AuthResult()
+                    {
+                        Errors = new List<string>() { "token has been revoked" },
+                        Success = false
+                    };
+                }
+
+                // we are getting here the jwt token id
+                string jti = principal.Claims.SingleOrDefault(x => x.Type == JwtRegisteredClaimNames.Jti).Value;
+
+                // check the id that the recieved token has against the id saved in the db
+                if (refreshToken.JwtId != jti)
+                {
+                    return new AuthResult()
+                    {
+                        Errors = new List<string>() { "the token does not matched the saved token" },
+                        Success = false
+                    };
+                }
+
+                await authService.SetRefreshTokenIsUsed(refreshToken.Token);
+
+                IdentityUser dbUser = await userManager.FindByIdAsync(refreshToken.UserId);
+
+                return await GenerateJwtToken(dbUser);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        private DateTime UnixTimeStampToDateTime(double unixTimeStamp)
+        {
+            // Unix timestamp is seconds past epoch
+            DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+            dtDateTime = dtDateTime.AddSeconds(unixTimeStamp).ToUniversalTime();
+            return dtDateTime;
         }
     }
 }

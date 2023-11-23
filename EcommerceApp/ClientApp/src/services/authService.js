@@ -1,7 +1,6 @@
 ﻿const baseUrl = "https://localhost:7122/api/account/register";
 
 export async function register(userInfo) {
-    console.log(userInfo);
     const request = await fetch(baseUrl, {
         method: 'POST',
         headers: {

@@ -16,7 +16,15 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+builder.Services.AddDefaultIdentity<IdentityUser>(options =>
+{
+    options.Password.RequireDigit = true;
+    options.SignIn.RequireConfirmedAccount = false;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireUppercase = false;
+    options.Lockout.MaxFailedAccessAttempts = 5;
+    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+})
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 
@@ -39,11 +47,22 @@ builder.Services.AddAuthentication(options =>
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-})
+}) .AddCookie(x =>
+   {
+       x.Cookie.Name = "token";
+   })
     .AddJwtBearer(jwt =>
     {
         jwt.SaveToken = true;
         jwt.TokenValidationParameters = tokenValidationParameters;
+        jwt.Events = new JwtBearerEvents()
+        {
+            OnMessageReceived = context =>
+            {
+                context.Token = context.Request.Cookies["token"];
+                return Task.CompletedTask;
+            }
+        };
     });
 
 builder.Services.AddSingleton(tokenValidationParameters);
@@ -55,7 +74,7 @@ builder.Services.AddCors(options =>
     {
         ecommerceBuilder.WithOrigins("https://localhost:44440");
         ecommerceBuilder.AllowAnyHeader();
-        ecommerceBuilder.AllowAnyMethod(); 
+        ecommerceBuilder.AllowAnyMethod();
     });
     options.AddPolicy("free", opt =>
     {

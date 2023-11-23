@@ -55,7 +55,7 @@
                 var errors = result.Errors.Select(e => e.Description);
                 return BadRequest(new RegisterResponse() { Erros = errors.ToList() });
             }
-            return Ok();
+            return Ok(new {Message = "You have successfully created an account"});
         }
         [HttpPost("Login")]
         public async Task<IActionResult> Login([FromBody] LoginModel loginModel)
@@ -75,13 +75,18 @@
                     HttpContext.Response.Cookies.Append("token", authResult.Token, new CookieOptions()
                     {
                         HttpOnly = true,
-                        Expires = DateTime.Now.AddMinutes(15),
                         IsEssential = true,
                         SameSite = SameSiteMode.None,
+                        Secure = true,
+                        MaxAge = TimeSpan.FromSeconds(15 * 60),
                     });
+                    HttpContext.Response.Headers.Add("Access-Control-Allow-Credentials", "true");
+                    HttpContext.Response.Headers.Add("Access-Control-Allow-Origin", "https://localhost:44440");
+                    HttpContext.Response.Headers.Add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+                    return Ok(new LoginResponse() { Username = loginModel.Username });
                 }
             }
-            return BadRequest(new { Error = "Username does not exist" });
+            return BadRequest(new { Error = "Username does not exist!" });
 
         }
 
@@ -136,6 +141,8 @@
 
             RefreshToken refreshToken = await authService.GenerateRefreshTokenAsync(user.Id, token.Id);
 
+            SetRefreshToken(refreshToken);
+
             return new AuthResult()
             {
                 Token = jwtToken,
@@ -143,6 +150,19 @@
                 Success = true,
             };
         }
+
+        private void SetRefreshToken(RefreshToken refreshToken)
+        {
+            HttpContext.Response.Cookies.Append("X-Refresh-Token", refreshToken.Token,
+                new CookieOptions
+                {
+                    Expires = refreshToken.ExpireData,
+                    HttpOnly = true,
+                    IsEssential = true,
+                    SameSite = SameSiteMode.None
+                });
+        }
+
         private async Task<AuthResult> VerifyToken(TokenRequest tokenRequest)
         {
             JwtSecurityTokenHandler jwtTokenHandler = new JwtSecurityTokenHandler();

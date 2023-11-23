@@ -4,12 +4,14 @@ import Navigation from "./components/Navigation/Navigation";
 import { useState } from "react";
 import Register from "./components/Auth/Register/Register";
 import Login from "./components/Auth/Login/Login";
+import { UserContext } from "./Contexts/UserContext";
 
 
 export default function App() {
    
     const [categories, setCategories] = useState([]);
     const [isActive, setActivity] = useState(false);
+    const [user, setUser] = useState(undefined);
 
 
     function loadCategories(categories) {
@@ -20,14 +22,16 @@ export default function App() {
     }
     return (
         <>
-           
-            <Navigation loadCategories={loadCategories} setIsActive={setIsActive }></Navigation>
-            <Routes>
-                <Route path ="/" element={<Home categories={categories} isActive={isActive } />} />
-                <Route path ="/Home" element={<Home categories={categories} isActive={isActive} />} />
-                <Route path="/Register" element={<Register />} />
-                <Route path="/Login" element={<Login/> }/>
-            </Routes>
+            <UserContext.Provider value={{ user, setUser }}>
+                <Navigation loadCategories={loadCategories} setIsActive={setIsActive}></Navigation>
+                <Routes>
+                    <Route path="/" element={<Home categories={categories} isActive={isActive} />} />
+                    <Route path="/Home" element={<Home categories={categories} isActive={isActive} />} />
+                    <Route path="/Register" element={<Register />} />
+                    <Route path="/Login" element={<Login />} />
+                </Routes>
+            </UserContext.Provider>
+          
        </>
     )
 }

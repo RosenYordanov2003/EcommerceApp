@@ -1,7 +1,7 @@
-﻿const baseUrl = "https://localhost:7122/api/account/register";
+﻿const baseUrl = "https://localhost:7122/api/account/";
 
 export async function register(userInfo) {
-    const request = await fetch(baseUrl, {
+    const request = await fetch(`${baseUrl}register`, {
         method: 'POST',
         headers: {
             "Content-Type": "application/json"
@@ -18,7 +18,7 @@ export async function register(userInfo) {
     return response;
 } 
 export async function login(userInfo) {
-    const request = await fetch(baseUrl,
+    const request = await fetch(`${baseUrl}login`,
         {
             method: 'POST',
             headers: {
@@ -30,7 +30,7 @@ export async function login(userInfo) {
     if (!request.ok) {
         throw new Error(`HTTP error! Status: ${request.status}`);
     }
-    const response = await response.json();
+    const response = await request.json();
 
     return response;
 }

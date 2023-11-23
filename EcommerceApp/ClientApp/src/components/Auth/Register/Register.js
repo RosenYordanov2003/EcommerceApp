@@ -1,7 +1,10 @@
 ﻿import FormStyle from "../../Auth/FormStyle.css"
 import { register } from "../../../services/authService";
+import { useNavigate } from "react-router-dom";
 
 export default function Register() {
+
+    const navigate = useNavigate();
 
     function onInputFouc(event) {
         event.target.parentElement.children[0].classList.add("active-label");
@@ -20,7 +23,10 @@ export default function Register() {
             RepeatPassword: formData.get("confirm-password"),
         }
         register(userInfoObject)
-            .then(res => console.log(res))
+            .then(res => {
+                console.log(res);
+                navigate('/Login');
+            })
             .catch((error) => console.error(error));
     }
     return (

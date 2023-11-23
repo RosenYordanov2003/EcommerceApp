@@ -1,7 +1,13 @@
-﻿import FormStyle from "../../Auth/FormStyle.css"
+﻿import { useContext } from 'react';
+import { UserContext } from '../../../Contexts/UserContext';
+import FormStyle from "../../Auth/FormStyle.css"
 import { login } from "../../../services/authService";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
+
+    let navigate = useNavigate();
+    const { user, setUser } = useContext(UserContext);
 
     function onInputFouc(event) {
         event.target.parentElement.children[0].classList.add("active-label");
@@ -15,11 +21,13 @@ export default function Login() {
 
         const userInfoObject = {
             UserName: formData.get("username"),
-            Email: formData.get("email"),
             Password: formData.get("password"),
         }
         login(userInfoObject)
             .then(res => {
+                console.log(res);
+                setUser(res.username);
+                navigate('/Home');
 
             })
             .catch(error => console.error(error));
@@ -32,10 +40,6 @@ export default function Login() {
             <section className="input-container">
                 <label htmlFor="username">Username</label>
                 <input name="username" onBlur={onInputBlur} onFocus={onInputFouc} id="username" type="text" autoComplete="username" aria-required="true" placeholder="Enter username..." />
-            </section>
-            <section className="input-container">
-                <label htmlFor="email">Email</label>
-                <input name="email" onBlur={onInputBlur} onFocus={onInputFouc} id="email" type="text" autoComplete="email" aria-required="true" placeholder="Enter email..." />
             </section>
             <section className="input-container">
                 <label htmlFor="password">Password</label>

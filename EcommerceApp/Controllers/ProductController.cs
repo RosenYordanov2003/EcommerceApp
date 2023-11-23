@@ -4,6 +4,7 @@
     using EcommerceApp.Core.Contracts;
     using EcommerceApp.Core.Models.Shoes;
     using EcommerceApp.Core.Models.Products;
+    using Microsoft.AspNetCore.Authorization;
 
     [ApiController]
     [Produces("application/json")]

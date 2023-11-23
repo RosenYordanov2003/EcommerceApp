@@ -1,8 +1,13 @@
-﻿import { Link } from "react-router-dom";
+﻿import { useState } from "react";
+import { useContext } from 'react';
+import { UserContext } from "../../Contexts/UserContext";
+import { Link } from "react-router-dom";
 import Style from "../Navigation/Style.css"
-import { useState } from "react";
 
 export default function Navigation({ loadCategories, setIsActive }) {
+
+    const { user, setUser } = useContext(UserContext);
+
     const baseUrl = "https://localhost:7122/api/categories";
 
     const [isMenArrowActive, setIsMenArrowActive] = useState(false);
@@ -43,6 +48,34 @@ export default function Navigation({ loadCategories, setIsActive }) {
             .catch((error) => console.error(error));
     }
 
+    let listImes;
+    if (user) {
+        listImes =
+            <>
+                <li>{user}</li>
+                <li>
+                    <Link to="/Logout">
+                        Logout
+                    </Link>
+                </li>
+            </>
+    }
+    else {
+        listImes =
+            <>
+            <li>
+                <Link to="/Register">
+                    Register
+                </Link>
+            </li>
+            <li>
+                <Link to="/Login">
+                    Login
+                </Link>
+            </li>
+            </>
+    }
+
     return (
         <nav>
             <h2 className="nav-logo">Fashion Store</h2>
@@ -72,16 +105,7 @@ export default function Navigation({ loadCategories, setIsActive }) {
                         <i className="fa-solid fa-cart-shopping"></i>
                     </Link>
                 </li>
-                <li>
-                    <Link to="/Register">
-                       Register
-                    </Link>
-                </li>
-                <li>
-                    <Link to="/Login">
-                        Login
-                    </Link>
-                </li>
+                {listImes}
             </ul>
         </nav>
     );

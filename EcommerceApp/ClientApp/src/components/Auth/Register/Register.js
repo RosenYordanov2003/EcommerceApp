@@ -1,5 +1,5 @@
-﻿import FormStyle from "../Register/FormStyle.css"
-import { register } from "../../services/authService";
+﻿import FormStyle from "../../Auth/FormStyle.css"
+import { register } from "../../../services/authService";
 
 export default function Register() {
 

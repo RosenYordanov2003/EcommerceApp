@@ -77,6 +77,11 @@ export default function Navigation({ loadCategories, setIsActive }) {
                        Register
                     </Link>
                 </li>
+                <li>
+                    <Link to="/Login">
+                        Login
+                    </Link>
+                </li>
             </ul>
         </nav>
     );

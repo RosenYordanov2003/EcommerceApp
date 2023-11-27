@@ -71,6 +71,10 @@
                 }
                 else
                 {
+                    HttpContext.Response.Headers.Add("Access-Control-Allow-Credentials", "true");
+                    HttpContext.Response.Headers.Add("Access-Control-Allow-Origin", "https://localhost:44440");
+                    HttpContext.Response.Headers.Add("Access-Control-Expose-Headers", "Set-Cookie");
+
                     AuthResult authResult = await GenerateJwtToken(user);
                     HttpContext.Response.Cookies.Append("token", authResult.Token, new CookieOptions()
                     {
@@ -78,11 +82,8 @@
                         IsEssential = true,
                         SameSite = SameSiteMode.None,
                         Secure = true,
-                        MaxAge = TimeSpan.FromSeconds(15 * 60),
+                        Expires = DateTimeOffset.UtcNow.AddMinutes(15),
                     });
-                    HttpContext.Response.Headers.Add("Access-Control-Allow-Credentials", "true");
-                    HttpContext.Response.Headers.Add("Access-Control-Allow-Origin", "https://localhost:44440");
-                    HttpContext.Response.Headers.Add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
                     return Ok(new LoginResponse() { Username = loginModel.Username });
                 }
             }
@@ -148,6 +149,7 @@
                 Token = jwtToken,
                 RefreshToken = refreshToken.Token,
                 Success = true,
+
             };
         }
 
@@ -159,7 +161,8 @@
                     Expires = refreshToken.ExpireData,
                     HttpOnly = true,
                     IsEssential = true,
-                    SameSite = SameSiteMode.None
+                    Secure = true,
+                    SameSite = SameSiteMode.None,
                 });
         }
 

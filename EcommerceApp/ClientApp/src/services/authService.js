@@ -21,6 +21,7 @@ export async function login(userInfo) {
     const request = await fetch(`${baseUrl}login`,
         {
             method: 'POST',
+            credentials: 'include',
             headers: {
                 "Content-Type": "application/json"
             },

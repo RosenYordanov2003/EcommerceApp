@@ -7,6 +7,7 @@
     using Microsoft.AspNetCore.Authorization;
 
     [ApiController]
+    [Authorize]
     [Produces("application/json")]
     [Route("api/products")]
     public class ProductController : ControllerBase

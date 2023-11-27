@@ -75,6 +75,8 @@ builder.Services.AddCors(options =>
         ecommerceBuilder.WithOrigins("https://localhost:44440");
         ecommerceBuilder.AllowAnyHeader();
         ecommerceBuilder.AllowAnyMethod();
+        ecommerceBuilder.AllowCredentials();
+        ecommerceBuilder.SetIsOriginAllowed(x => true);
     });
     options.AddPolicy("free", opt =>
     {

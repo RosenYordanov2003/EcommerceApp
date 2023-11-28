@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EcommerceApp.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231101141543_addGenderColumnInMainCategoryTable")]
-    partial class addGenderColumnInMainCategoryTable
+    [Migration("20231128082321_changeRefreshTokenInUserTableToNotBeRequire")]
+    partial class changeRefreshTokenInUserTableToNotBeRequire
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,147 +23,6 @@ namespace EcommerceApp.Infrastructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.DeviceFlowCodes", b =>
-                {
-                    b.Property<string>("UserCode")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<string>("ClientId")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<DateTime>("CreationTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Data")
-                        .IsRequired()
-                        .HasMaxLength(50000)
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<string>("DeviceCode")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<DateTime?>("Expiration")
-                        .IsRequired()
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("SessionId")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("SubjectId")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.HasKey("UserCode");
-
-                    b.HasIndex("DeviceCode")
-                        .IsUnique();
-
-                    b.HasIndex("Expiration");
-
-                    b.ToTable("DeviceCodes", (string)null);
-                });
-
-            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.Key", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Algorithm")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Data")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("DataProtected")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsX509Certificate")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Use")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("Version")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Use");
-
-                    b.ToTable("Keys");
-                });
-
-            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.PersistedGrant", b =>
-                {
-                    b.Property<string>("Key")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<string>("ClientId")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<DateTime?>("ConsumedTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("CreationTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Data")
-                        .IsRequired()
-                        .HasMaxLength(50000)
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<DateTime?>("Expiration")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("SessionId")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("SubjectId")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("Key");
-
-                    b.HasIndex("ConsumedTime");
-
-                    b.HasIndex("Expiration");
-
-                    b.HasIndex("SubjectId", "ClientId", "Type");
-
-                    b.HasIndex("SubjectId", "SessionId", "Type");
-
-                    b.ToTable("PersistedGrants", (string)null);
-                });
 
             modelBuilder.Entity("EcommerceApp.Infrastructure.Data.Models.Brand", b =>
                 {
@@ -184,7 +43,7 @@ namespace EcommerceApp.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Brand");
+                    b.ToTable("Brands");
 
                     b.HasData(
                         new
@@ -250,6 +109,17 @@ namespace EcommerceApp.Infrastructure.Migrations
                         .HasMaxLength(34)
                         .HasColumnType("nvarchar(34)");
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Gender")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsFeatured")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(55)
@@ -261,7 +131,8 @@ namespace EcommerceApp.Infrastructure.Migrations
                     b.Property<int>("StarRating")
                         .HasColumnType("int");
 
-                    b.Property<int>("SubCategoryId")
+                    b.Property<int?>("SubCategoryId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -273,6 +144,176 @@ namespace EcommerceApp.Infrastructure.Migrations
                     b.HasIndex("SubCategoryId");
 
                     b.ToTable("Clothes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            BrandId = 1,
+                            CategoryId = 1,
+                            Color = "Gray",
+                            Description = "Men's Jordan NBA Long-Sleeve T-Shirt",
+                            Gender = "M",
+                            IsFeatured = false,
+                            Name = "Chicago Bulls Essential",
+                            Price = 40m,
+                            StarRating = 4,
+                            SubCategoryId = 6
+                        },
+                        new
+                        {
+                            Id = 2,
+                            BrandId = 1,
+                            CategoryId = 1,
+                            Color = "Black",
+                            Description = "Men's Jordan NBA Long-Sleeve T-Shirt",
+                            Gender = "M",
+                            IsFeatured = false,
+                            Name = "Chicago Bulls Essential",
+                            Price = 40m,
+                            StarRating = 4,
+                            SubCategoryId = 6
+                        },
+                        new
+                        {
+                            Id = 3,
+                            BrandId = 1,
+                            CategoryId = 1,
+                            Color = "Black",
+                            Description = "From the pitch to the streets, you can celebrate Marcus Rashford's passion for sport in comfort with this sweat-wicking tee. Soft fabric and a relaxed fit help keep you dry and comfortable, while retro branding and an \"MR\" logo add the perfect finishing touches.",
+                            Gender = "M",
+                            IsFeatured = false,
+                            Name = "Nike Air x Marcus Rashford",
+                            Price = 38m,
+                            StarRating = 5,
+                            SubCategoryId = 7
+                        },
+                        new
+                        {
+                            Id = 4,
+                            BrandId = 1,
+                            CategoryId = 1,
+                            Color = "White",
+                            Description = "From the pitch to the streets, you can celebrate Marcus Rashford's passion for sport in comfort with this sweat-wicking tee. Soft fabric and a relaxed fit help keep you dry and comfortable, while retro branding and an \"MR\" logo add the perfect finishing touches.",
+                            Gender = "M",
+                            IsFeatured = false,
+                            Name = "Nike Air x Marcus Rashford",
+                            Price = 38m,
+                            StarRating = 5,
+                            SubCategoryId = 7
+                        },
+                        new
+                        {
+                            Id = 5,
+                            BrandId = 1,
+                            CategoryId = 1,
+                            Color = "White",
+                            Description = "Extra-soft, stretchy ribbed fabric helps make this slim-fitting top an everyday favourite. A mock neck and long sleeves offer a tailored look while the embroidered Swoosh logo and piping details add a touch of heritage style.",
+                            Gender = "W",
+                            IsFeatured = false,
+                            Name = "Women's Long-Sleeve Top",
+                            Price = 55m,
+                            StarRating = 5,
+                            SubCategoryId = 6
+                        },
+                        new
+                        {
+                            Id = 6,
+                            BrandId = 1,
+                            CategoryId = 1,
+                            Color = "Black",
+                            Description = "Extra-soft, stretchy ribbed fabric helps make this slim-fitting top an everyday favourite. A mock neck and long sleeves offer a tailored look while the embroidered Swoosh logo and piping details add a touch of heritage style.",
+                            Gender = "W",
+                            IsFeatured = true,
+                            Name = "Women's Long-Sleeve Top",
+                            Price = 55m,
+                            StarRating = 5,
+                            SubCategoryId = 6
+                        },
+                        new
+                        {
+                            Id = 7,
+                            BrandId = 1,
+                            CategoryId = 1,
+                            Color = "Wine Red",
+                            Description = "The Nike Dri-FIT One Luxe Top is designed for all the ways you work out—from yoga to HIIT to long runs. As part of the Nike Luxe line, this top defines luxury with buttery-soft and smooth fabric that breathes to keep you dry and cool. It's made from at least 75% recycled polyester fibres.",
+                            Gender = "W",
+                            IsFeatured = false,
+                            Name = "Nike Dri-FIT UV One Luxe",
+                            Price = 40m,
+                            StarRating = 0,
+                            SubCategoryId = 7
+                        },
+                        new
+                        {
+                            Id = 8,
+                            BrandId = 1,
+                            CategoryId = 5,
+                            Color = "Midnight Black",
+                            Description = "Ready for cooler weather, the Nike Sportswear Tech Fleece Joggers feature an updated fit perfect for everyday wear. Roomy through the thigh, this tapered design narrows at the knee to give you a comfortable feel without losing the clean, tailored look you love. Tall ribbed cuffs complete the jogger look while a zipped pocket on the right leg provides secure small-item storage and elevates the look.",
+                            Gender = "M",
+                            IsFeatured = true,
+                            Name = "Nike Sportswear Tech Fleece",
+                            Price = 99m,
+                            StarRating = 5,
+                            SubCategoryId = 5
+                        },
+                        new
+                        {
+                            Id = 9,
+                            BrandId = 1,
+                            CategoryId = 5,
+                            Color = "Red",
+                            Description = "Ready for cooler weather, the Nike Sportswear Tech Fleece Joggers feature an updated fit perfect for everyday wear. Roomy through the thigh, this tapered design narrows at the knee to give you a comfortable feel without losing the clean, tailored look you love. Tall ribbed cuffs complete the jogger look while a zipped pocket on the right leg provides secure small-item storage and elevates the look.",
+                            Gender = "M",
+                            IsFeatured = false,
+                            Name = "Nike Sportswear Tech Fleece",
+                            Price = 99m,
+                            StarRating = 5,
+                            SubCategoryId = 5
+                        },
+                        new
+                        {
+                            Id = 10,
+                            BrandId = 1,
+                            CategoryId = 5,
+                            Color = "Slate White",
+                            Description = "A wardrobe staple, the Nike Sportswear Club Fleece Joggers combine a classic look with the soft comfort of fleece for an elevated, everyday look that you can wear every day.",
+                            Gender = "M",
+                            IsFeatured = false,
+                            Name = "Nike Sportswear Club Fleece",
+                            Price = 60m,
+                            StarRating = 4,
+                            SubCategoryId = 5
+                        },
+                        new
+                        {
+                            Id = 11,
+                            BrandId = 1,
+                            CategoryId = 5,
+                            Color = "Pink",
+                            Description = "Rise up and transform your fleece wardrobe with strong cosy vibes. These oversized Phoenix Fleece joggers have extra room in the legs for a fit that's comfy and relaxed. The taller ribbed waistline sits higher on your hips for a stay-put, snug feel and a bold look.",
+                            Gender = "W",
+                            IsFeatured = false,
+                            Name = "Nike Sportswear Phoenix Fleece",
+                            Price = 65m,
+                            StarRating = 4,
+                            SubCategoryId = 5
+                        },
+                        new
+                        {
+                            Id = 12,
+                            BrandId = 1,
+                            CategoryId = 5,
+                            Color = "Green",
+                            Description = "Rise up and transform your fleece wardrobe with strong cosy vibes. These oversized Phoenix Fleece joggers have extra room in the legs for a fit that's comfy and relaxed. The taller ribbed waistline sits higher on your hips for a stay-put, snug feel and a bold look.",
+                            Gender = "W",
+                            IsFeatured = true,
+                            Name = "Nike Sportswear Phoenix Fleece",
+                            Price = 65m,
+                            StarRating = 4,
+                            SubCategoryId = 5
+                        });
                 });
 
             modelBuilder.Entity("EcommerceApp.Infrastructure.Data.Models.MainCategory", b =>
@@ -295,67 +336,67 @@ namespace EcommerceApp.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("MainCategory");
+                    b.ToTable("Categories");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            Gender = "Women Men",
+                            Gender = "W M",
                             Name = "T-Shirts"
                         },
                         new
                         {
                             Id = 2,
-                            Gender = "Women Men",
+                            Gender = "W M",
                             Name = "Jeans"
                         },
                         new
                         {
                             Id = 3,
-                            Gender = "Women Men",
+                            Gender = "W M",
                             Name = "Jackets"
                         },
                         new
                         {
                             Id = 4,
-                            Gender = "Women Men",
+                            Gender = "W M",
                             Name = "Coats"
                         },
                         new
                         {
                             Id = 5,
-                            Gender = "Women Men",
+                            Gender = "W М",
                             Name = "Trousers"
                         },
                         new
                         {
                             Id = 6,
-                            Gender = "Women",
+                            Gender = "W",
                             Name = "Skirts"
                         },
                         new
                         {
                             Id = 7,
-                            Gender = "Women Men",
+                            Gender = "W M",
                             Name = "Shorts"
                         },
                         new
                         {
                             Id = 8,
-                            Gender = "Women Men",
+                            Gender = "W M",
                             Name = "Shirts"
                         },
                         new
                         {
                             Id = 9,
-                            Gender = "Women Men",
+                            Gender = "W M",
                             Name = "Shoes"
                         },
                         new
                         {
                             Id = 10,
-                            Gender = "Women Men",
+                            Gender = "W M",
                             Name = "Sweatshirts"
                         });
                 });
@@ -764,7 +805,226 @@ namespace EcommerceApp.Infrastructure.Migrations
                             Id = 63,
                             ImgUrl = "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_750,h_750/global/107535/03/sv04/fnd/EEA/fmt/png/ULTRA-PLAY-IT-Youth-Football-Boots",
                             ShoesId = 16
+                        },
+                        new
+                        {
+                            Id = 64,
+                            ClothId = 1,
+                            ImgUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/7b10b532-1524-4bac-9252-44a6fb0e3848/chicago-bulls-essential-jordan-nba-long-sleeve-t-shirt-Hs7BDJ.png"
+                        },
+                        new
+                        {
+                            Id = 65,
+                            ClothId = 1,
+                            ImgUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/655bbd70-c83b-4908-97c8-3d6a9e979ec7/chicago-bulls-essential-jordan-nba-long-sleeve-t-shirt-Hs7BDJ.png"
+                        },
+                        new
+                        {
+                            Id = 66,
+                            ClothId = 2,
+                            ImgUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/ba184923-802b-4452-91f2-c05c1935c833/chicago-bulls-essential-jordan-nba-long-sleeve-t-shirt-Hs7BDJ.png"
+                        },
+                        new
+                        {
+                            Id = 67,
+                            ClothId = 2,
+                            ImgUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/2e897695-5f71-49d6-96d4-4760656263bc/chicago-bulls-essential-jordan-nba-long-sleeve-t-shirt-Hs7BDJ.png"
+                        },
+                        new
+                        {
+                            Id = 68,
+                            ClothId = 3,
+                            ImgUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/65f8431d-b201-4835-9bd7-69ad8016c2a5/air-marcus-rashford-t-shirt-PTxmGD.png"
+                        },
+                        new
+                        {
+                            Id = 69,
+                            ClothId = 3,
+                            ImgUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/f8bf2b04-2031-4017-ac51-6f35f906f140/air-marcus-rashford-t-shirt-PTxmGD.png"
+                        },
+                        new
+                        {
+                            Id = 70,
+                            ClothId = 4,
+                            ImgUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/4daed06a-f4c2-4eb7-b767-9083b8a059cb/air-marcus-rashford-t-shirt-PTxmGD.png"
+                        },
+                        new
+                        {
+                            Id = 71,
+                            ClothId = 4,
+                            ImgUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/c2e5f80f-4e86-44f3-a857-5dc9e1316b5c/air-marcus-rashford-t-shirt-PTxmGD.png"
+                        },
+                        new
+                        {
+                            Id = 72,
+                            ClothId = 4,
+                            ImgUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/265524e6-d4df-4b3f-9c2b-35d7d2034a06/air-marcus-rashford-t-shirt-PTxmGD.png"
+                        },
+                        new
+                        {
+                            Id = 73,
+                            ClothId = 5,
+                            ImgUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/9de4a14d-9592-44a9-b979-16d6bcfb828e/sportswear-long-sleeve-top-k7q2B0.png"
+                        },
+                        new
+                        {
+                            Id = 74,
+                            ClothId = 5,
+                            ImgUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/f201e04c-c494-404d-a9db-ec16a090e768/sportswear-long-sleeve-top-k7q2B0.png"
+                        },
+                        new
+                        {
+                            Id = 75,
+                            ClothId = 6,
+                            ImgUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/30769c01-7e65-4701-acef-4a61c42a2e2a/sportswear-long-sleeve-top-k7q2B0.png"
+                        },
+                        new
+                        {
+                            Id = 76,
+                            ClothId = 6,
+                            ImgUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/3e3da66a-96e6-49a4-a890-ed63f91077f0/sportswear-long-sleeve-top-k7q2B0.png"
+                        },
+                        new
+                        {
+                            Id = 77,
+                            ClothId = 7,
+                            ImgUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/603eef38-6e20-4b67-8c2f-fefe553096ba/dri-fit-uv-one-luxe-standard-fit-short-sleeve-top-NCd1Fw.png"
+                        },
+                        new
+                        {
+                            Id = 78,
+                            ClothId = 7,
+                            ImgUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/868da3be-97e1-4404-9c7a-eb85dfe095ff/dri-fit-uv-one-luxe-standard-fit-short-sleeve-top-NCd1Fw.png"
+                        },
+                        new
+                        {
+                            Id = 79,
+                            ClothId = 8,
+                            ImgUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/f218ca5c-6f9d-4743-9270-f16cf6442e63/sportswear-tech-fleece-joggers-h2Bmxs.png"
+                        },
+                        new
+                        {
+                            Id = 80,
+                            ClothId = 8,
+                            ImgUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/7ceb3c8a-1036-4c13-a9d6-6136b8789b4f/sportswear-tech-fleece-joggers-h2Bmxs.png"
+                        },
+                        new
+                        {
+                            Id = 81,
+                            ClothId = 8,
+                            ImgUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/2ce6d4a7-fe24-4e31-9c8d-0cb0f1f00c5b/sportswear-tech-fleece-joggers-h2Bmxs.png"
+                        },
+                        new
+                        {
+                            Id = 82,
+                            ClothId = 9,
+                            ImgUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/e2aef028-799e-4bbe-b9c0-e06057b540fa/sportswear-tech-fleece-joggers-h2Bmxs.png"
+                        },
+                        new
+                        {
+                            Id = 83,
+                            ClothId = 9,
+                            ImgUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/708e1399-9ae0-443a-90b5-c10403810446/sportswear-tech-fleece-joggers-h2Bmxs.png"
+                        },
+                        new
+                        {
+                            Id = 84,
+                            ClothId = 9,
+                            ImgUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/d19bd263-f3ea-4f20-99d8-2d8809c294c6/sportswear-tech-fleece-joggers-h2Bmxs.png"
+                        },
+                        new
+                        {
+                            Id = 85,
+                            ClothId = 10,
+                            ImgUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/ea0404ed-85c6-481b-94e8-0713a2518b00/sportswear-club-fleece-joggers-27ggJk.png"
+                        },
+                        new
+                        {
+                            Id = 86,
+                            ClothId = 10,
+                            ImgUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/fa419b99-681e-4ad8-91e5-85469861395e/sportswear-club-fleece-joggers-27ggJk.png"
+                        },
+                        new
+                        {
+                            Id = 87,
+                            ClothId = 10,
+                            ImgUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/174d46bc-92aa-48cd-87e7-9d0febd35a4b/sportswear-club-fleece-joggers-27ggJk.png"
+                        },
+                        new
+                        {
+                            Id = 88,
+                            ClothId = 11,
+                            ImgUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/76543fe7-5c56-4816-ae5d-4437a38d239c/sportswear-phoenix-fleece-high-waisted-oversized-tracksuit-bottoms-00TZkD.png"
+                        },
+                        new
+                        {
+                            Id = 89,
+                            ClothId = 11,
+                            ImgUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/64997362-76c3-44ed-82f3-2344071575b3/sportswear-phoenix-fleece-high-waisted-oversized-tracksuit-bottoms-00TZkD.png"
+                        },
+                        new
+                        {
+                            Id = 90,
+                            ClothId = 11,
+                            ImgUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/582991d4-6e81-4478-ae40-a8bd80f70780/sportswear-phoenix-fleece-high-waisted-oversized-tracksuit-bottoms-00TZkD.png"
+                        },
+                        new
+                        {
+                            Id = 91,
+                            ClothId = 12,
+                            ImgUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/946f5abf-f660-4ac7-8c2c-62359a628b18/sportswear-phoenix-fleece-high-waisted-oversized-tracksuit-bottoms-00TZkD.png"
+                        },
+                        new
+                        {
+                            Id = 92,
+                            ClothId = 12,
+                            ImgUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/7bf8c2bc-d083-4c3b-aae1-1e0b04c0b42e/sportswear-phoenix-fleece-high-waisted-oversized-tracksuit-bottoms-00TZkD.png"
+                        },
+                        new
+                        {
+                            Id = 93,
+                            ClothId = 12,
+                            ImgUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/2e4586cd-2027-4ae9-9dec-af8c2a9a58bd/sportswear-phoenix-fleece-high-waisted-oversized-tracksuit-bottoms-00TZkD.png"
                         });
+                });
+
+            modelBuilder.Entity("EcommerceApp.Infrastructure.Data.Models.RefreshToken", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ExpireData")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsRevoked")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsUsed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("JwtId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Token")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("RefreshTokens");
                 });
 
             modelBuilder.Entity("EcommerceApp.Infrastructure.Data.Models.Shoes", b =>
@@ -792,6 +1052,9 @@ namespace EcommerceApp.Infrastructure.Migrations
                         .IsRequired()
                         .HasMaxLength(5)
                         .HasColumnType("nvarchar(5)");
+
+                    b.Property<bool>("IsFeatured")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -825,6 +1088,7 @@ namespace EcommerceApp.Infrastructure.Migrations
                             Color = "Black",
                             Description = "The radiance lives on in the Nike Air Force 1 '07 LV8. Crossing hardwood comfort with off-court flair, these kicks put a fresh spin on a hoops classic. Soft suede overlays pair with era-echoing '80s construction and reflective-design Swoosh logos to bring you nothing-but-net style while hidden full-length Air units add the legendary comfort you know and love.",
                             Gender = "Men",
+                            IsFeatured = true,
                             Name = "Nike Air Force 1 '07 LV8",
                             Price = 130m,
                             StarRating = 5,
@@ -838,6 +1102,7 @@ namespace EcommerceApp.Infrastructure.Migrations
                             Color = "White",
                             Description = "The pitch is yours when you lace up in the Vapor 15 Pro AG-Pro. It's loaded with a Zoom Air unit, so you can dominate in the waning minutes of a match—when it matters most. Fast is in the Air.",
                             Gender = "Men",
+                            IsFeatured = true,
                             Name = "Nike Mercurial Vapor 15 Pro",
                             Price = 160m,
                             StarRating = 5,
@@ -851,6 +1116,7 @@ namespace EcommerceApp.Infrastructure.Migrations
                             Color = "Black",
                             Description = "Instantly tilt the pitch in the bold design of the Superfly 9 Elite SG-Pro. We added a Zoom Air unit, made specifically for football, and grippy texture up top for exceptional touch, so you can dominate in the waning minutes of a match—when it matters most. Feel the explosive speed as you race around the pitch, making the critical plays with velocity and pace. Fast is in the Air. This version has Anti-Clog Traction on the soleplate, which helps prevent mud from sticking.",
                             Gender = "Men",
+                            IsFeatured = false,
                             Name = "Nike Mercurial Superfly 9 Elite",
                             Price = 250m,
                             StarRating = 5,
@@ -864,6 +1130,7 @@ namespace EcommerceApp.Infrastructure.Migrations
                             Color = "Black",
                             Description = "So you're in love with the classic look of the '90s, but you've got a thing for today's fast-paced culture. Meet the Air Max TW. Inspired by the treasured franchise that brought Nike Air cushioning to the world and laid the foundation for the track-to-street aesthetic, its eye-catching design delivers a 1–2 punch of comfort and fashion. Ready to highlight any 'fit, its lightweight upper pairs angular and organic lines to create an entrancing haptic effect. The contrasting colourways make it easy to style. And if you're ready for the next step, the 5 windows underfoot deliver a modern edge to visible Air cushioning.",
                             Gender = "Men",
+                            IsFeatured = false,
                             Name = "Nike Air Max TW",
                             Price = 0m,
                             StarRating = 5,
@@ -877,6 +1144,7 @@ namespace EcommerceApp.Infrastructure.Migrations
                             Color = "Black",
                             Description = "We looked into the future and it's gonna be comfy. Featuring a \"point-loaded\" Air unit (cushioning that forms to your every step), the Air Max Scorpion Flyknit delivers a futuristic sensation. And because looks count, we've crafted the upper from incredibly soft chenille-like fabric.",
                             Gender = "Women",
+                            IsFeatured = false,
                             Name = "Nike Air Max Scorpion Flyknit",
                             Price = 160m,
                             StarRating = 5,
@@ -890,6 +1158,7 @@ namespace EcommerceApp.Infrastructure.Migrations
                             Color = "Blue",
                             Description = "The Nike Air VaporMax Plus looks to the past and propels you into the future. Nodding to the 1998 Air Max Plus with its floating cage, padded upper and heel logo, it adds revolutionary VaporMax Air technology to ramp up the comfort and create a modern look.",
                             Gender = "Men",
+                            IsFeatured = true,
                             Name = "Nike Air VaporMax Plus",
                             Price = 180m,
                             StarRating = 5,
@@ -903,6 +1172,7 @@ namespace EcommerceApp.Infrastructure.Migrations
                             Color = "Dark Blue",
                             Description = "Designed for athletes who run to stay fit for their sport, these running shoes support multidirectional movements with flexible cushioning and a wide, stable platform in the forefoot and heel. They have a seamless, sock-like mesh upper with targeted areas of support and stretch for an adaptive fit.\r\nRunner type\r\nNeutral shoes for the versatile runner\r\nAdaptive fit\r\nSeamless Forgedmesh upper designed with areas of support and stretch to help ensure a custom fit that adapts to every move\r\nSpringy cushioning\r\nBounce cushioning provides enhanced comfort and flexibility\r\nReliable traction\r\nContinental™ Rubber outsole for extraordinary traction in wet and dry conditions",
                             Gender = "Men",
+                            IsFeatured = false,
                             Name = "Adidas Alphabounce Beyond Team",
                             Price = 70m,
                             StarRating = 4,
@@ -916,6 +1186,7 @@ namespace EcommerceApp.Infrastructure.Migrations
                             Color = "Dark Red",
                             Description = "Designed for athletes who run to stay fit for their sport, these running shoes support multidirectional movements with flexible cushioning and a wide, stable platform in the forefoot and heel. They have a seamless, sock-like mesh upper with targeted areas of support and stretch for an adaptive fit.\r\nRunner type\r\nNeutral shoes for the versatile runner\r\nAdaptive fit\r\nSeamless Forgedmesh upper designed with areas of support and stretch to help ensure a custom fit that adapts to every move\r\nSpringy cushioning\r\nBounce cushioning provides enhanced comfort and flexibility\r\nReliable traction\r\nContinental™ Rubber outsole for extraordinary traction in wet and dry conditions",
                             Gender = "Men",
+                            IsFeatured = false,
                             Name = "Adidas Alphabounce Beyond Team",
                             Price = 70m,
                             StarRating = 4,
@@ -929,6 +1200,7 @@ namespace EcommerceApp.Infrastructure.Migrations
                             Color = "Orange",
                             Description = "Dominate space. Command the play. Create goal-destined shots from impossible angles. Control the game with every touch in ACE. These juniors' soccer cleats have a 3D Control Skin upper that delivers precise control with zero wear-in time. Designed to dominate on firm ground.",
                             Gender = "Men",
+                            IsFeatured = false,
                             Name = "Adidas ACE 17.3 Firm Ground",
                             Price = 78.41m,
                             StarRating = 0,
@@ -942,6 +1214,7 @@ namespace EcommerceApp.Infrastructure.Migrations
                             Color = "White",
                             Description = "Showcase your playmaking speed in these football cleats. Designed for easy on and off, they feature a textile upper with a sock-like construction for lightweight stability and lockdown as you create havoc at the line of scrimmage. The cleated outsole provides traction for quick cuts and pivots.. These juniors' soccer cleats have a 3D Control Skin upper that delivers precise control with zero wear-in time. Designed to dominate on firm ground.",
                             Gender = "Men",
+                            IsFeatured = false,
                             Name = "Adidas Adizero 8.0",
                             Price = 83.41m,
                             StarRating = 0,
@@ -955,6 +1228,7 @@ namespace EcommerceApp.Infrastructure.Migrations
                             Color = "Red",
                             Description = "If your command of the field leaves your rivals' tactics in tatters, you're ready to own Predators. Built for precision on firm ground, these soccer cleats have a supportive mesh upper that wraps around your foot to lock you in. This eliminates the need for laces and leaves more room for ball control. Embossing on the surface adds confidence to every touch.",
                             Gender = "Men",
+                            IsFeatured = false,
                             Name = "Adidas Predator 19.3 Laceless Firm Ground",
                             Price = 83.41m,
                             StarRating = 0,
@@ -968,6 +1242,7 @@ namespace EcommerceApp.Infrastructure.Migrations
                             Color = "Black",
                             Description = "We’re taking Slipstream to the extreme. This disruptive new version features an iconic Slipstream leather upper with elevated details, and a edgier sole with exaggerated proportions and rugged details. This execution features a leather base with nubuck overlays, a suede Formstrip with deep debossed lines and suede details.",
                             Gender = "Men",
+                            IsFeatured = false,
                             Name = "Slipstream Xtreme Sneakers",
                             Price = 140m,
                             StarRating = 0,
@@ -981,6 +1256,7 @@ namespace EcommerceApp.Infrastructure.Migrations
                             Color = "White",
                             Description = "Back in 1987, the PUMA Slipstream Mid entered the scene as a basketball sneaker. A high-flying, slam-dunking, statement-making basketball sneaker. Now, it’s joined by the Slipstream – a rework of the original that brings an all-new energy to the game while staying true to the OG’s sporting roots.",
                             Gender = "Women",
+                            IsFeatured = true,
                             Name = "Slipstream Leather Sneakers",
                             Price = 70m,
                             StarRating = 0,
@@ -994,6 +1270,7 @@ namespace EcommerceApp.Infrastructure.Migrations
                             Color = "Red",
                             Description = "Back in 1987, the PUMA Slipstream Mid entered the scene as a basketball sneaker. A high-flying, slam-dunking, statement-making basketball sneaker. Now, it’s joined by the Slipstream – a rework of the original that brings an all-new energy to the game while staying true to the OG’s sporting roots.",
                             Gender = "Women",
+                            IsFeatured = false,
                             Name = "Slipstream Leather Sneakers",
                             Price = 70m,
                             StarRating = 0,
@@ -1007,6 +1284,7 @@ namespace EcommerceApp.Infrastructure.Migrations
                             Color = "Green",
                             Description = "ULTRA - Not even you knew you could be this fast. Turn seconds into records with the ULTRA ULTIMATE football boot. Lighter means quicker, so the ULTRAWEAVE upper material makes every gram and every second count. Ultra-light. Ultra-fast. ULTRA ULTIMATE.",
                             Gender = "Men",
+                            IsFeatured = true,
                             Name = "ULTRA ULTIMATE MG Football Cleats Men",
                             Price = 70m,
                             StarRating = 0,
@@ -1020,6 +1298,7 @@ namespace EcommerceApp.Infrastructure.Migrations
                             Color = "Blue",
                             Description = "ULTRA - Not even you knew you could be this fast. Turn seconds into records with the ULTRA ULTIMATE football boot. Lighter means quicker, so the ULTRAWEAVE upper material makes every gram and every second count. Ultra-light. Ultra-fast. ULTRA ULTIMATE.",
                             Gender = "Men",
+                            IsFeatured = false,
                             Name = "ULTRA PLAY IT Youth Football Boots",
                             Price = 60m,
                             StarRating = 0,
@@ -1219,10 +1498,11 @@ namespace EcommerceApp.Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("EcommerceApp.Models.ApplicationUser", b =>
+            modelBuilder.Entity("EcommerceApp.Infrastructure.Data.Models.User", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
@@ -1261,6 +1541,9 @@ namespace EcommerceApp.Infrastructure.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<int?>("RefreshTokenId")
+                        .HasColumnType("int");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -1284,10 +1567,11 @@ namespace EcommerceApp.Infrastructure.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -1311,7 +1595,7 @@ namespace EcommerceApp.Infrastructure.Migrations
                     b.ToTable("AspNetRoles", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1325,9 +1609,8 @@ namespace EcommerceApp.Infrastructure.Migrations
                     b.Property<string>("ClaimValue")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RoleId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -1336,7 +1619,7 @@ namespace EcommerceApp.Infrastructure.Migrations
                     b.ToTable("AspNetRoleClaims", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1350,9 +1633,8 @@ namespace EcommerceApp.Infrastructure.Migrations
                     b.Property<string>("ClaimValue")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -1361,7 +1643,7 @@ namespace EcommerceApp.Infrastructure.Migrations
                     b.ToTable("AspNetUserClaims", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
                     b.Property<string>("LoginProvider")
                         .HasMaxLength(128)
@@ -1374,9 +1656,8 @@ namespace EcommerceApp.Infrastructure.Migrations
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
@@ -1385,13 +1666,13 @@ namespace EcommerceApp.Infrastructure.Migrations
                     b.ToTable("AspNetUserLogins", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
                 {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("RoleId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("UserId", "RoleId");
 
@@ -1400,10 +1681,10 @@ namespace EcommerceApp.Infrastructure.Migrations
                     b.ToTable("AspNetUserRoles", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
                 {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("LoginProvider")
                         .HasMaxLength(128)
@@ -1451,7 +1732,7 @@ namespace EcommerceApp.Infrastructure.Migrations
             modelBuilder.Entity("EcommerceApp.Infrastructure.Data.Models.Picture", b =>
                 {
                     b.HasOne("EcommerceApp.Infrastructure.Data.Models.Clothes", "Cloth")
-                        .WithMany()
+                        .WithMany("Pictures")
                         .HasForeignKey("ClothId");
 
                     b.HasOne("EcommerceApp.Infrastructure.Data.Models.Shoes", "Shoes")
@@ -1462,6 +1743,17 @@ namespace EcommerceApp.Infrastructure.Migrations
                     b.Navigation("Cloth");
 
                     b.Navigation("Shoes");
+                });
+
+            modelBuilder.Entity("EcommerceApp.Infrastructure.Data.Models.RefreshToken", b =>
+                {
+                    b.HasOne("EcommerceApp.Infrastructure.Data.Models.User", "User")
+                        .WithOne("RefreshToken")
+                        .HasForeignKey("EcommerceApp.Infrastructure.Data.Models.RefreshToken", "UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("EcommerceApp.Infrastructure.Data.Models.Shoes", b =>
@@ -1502,51 +1794,51 @@ namespace EcommerceApp.Infrastructure.Migrations
                     b.Navigation("MainCategory");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
                 {
-                    b.HasOne("EcommerceApp.Models.ApplicationUser", null)
+                    b.HasOne("EcommerceApp.Infrastructure.Data.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
-                    b.HasOne("EcommerceApp.Models.ApplicationUser", null)
+                    b.HasOne("EcommerceApp.Infrastructure.Data.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("EcommerceApp.Models.ApplicationUser", null)
+                    b.HasOne("EcommerceApp.Infrastructure.Data.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
                 {
-                    b.HasOne("EcommerceApp.Models.ApplicationUser", null)
+                    b.HasOne("EcommerceApp.Infrastructure.Data.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1558,6 +1850,11 @@ namespace EcommerceApp.Infrastructure.Migrations
                     b.Navigation("Clothes");
 
                     b.Navigation("Shoes");
+                });
+
+            modelBuilder.Entity("EcommerceApp.Infrastructure.Data.Models.Clothes", b =>
+                {
+                    b.Navigation("Pictures");
                 });
 
             modelBuilder.Entity("EcommerceApp.Infrastructure.Data.Models.MainCategory", b =>
@@ -1579,6 +1876,11 @@ namespace EcommerceApp.Infrastructure.Migrations
                     b.Navigation("Clothes");
 
                     b.Navigation("Shoes");
+                });
+
+            modelBuilder.Entity("EcommerceApp.Infrastructure.Data.Models.User", b =>
+                {
+                    b.Navigation("RefreshToken");
                 });
 #pragma warning restore 612, 618
         }

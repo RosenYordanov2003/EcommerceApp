@@ -1,7 +1,6 @@
 ﻿namespace EcommerceApp.Infrastructure.Data.Models
 {
     using System.ComponentModel.DataAnnotations.Schema;
-    using Microsoft.AspNetCore.Identity;
     public class RefreshToken
     {
         public int Id { get; set; }
@@ -13,7 +12,7 @@
         public DateTime ExpireData { get; set; }
 
         [ForeignKey(nameof(User))]
-        public string UserId { get; set; } = null!;
-        public IdentityUser User { get; set; } = null!;
+        public Guid UserId { get; set; }
+        public User User { get; set; } = null!;
     }
 }

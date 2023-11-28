@@ -35,3 +35,11 @@ export async function login(userInfo) {
 
     return response;
 }
+export async function refreshToken() {
+
+    const request = await fetch(`${baseUrl}RefreshToken`, { credentials: 'include' })
+
+    const response = await request;
+
+    return response;
+}

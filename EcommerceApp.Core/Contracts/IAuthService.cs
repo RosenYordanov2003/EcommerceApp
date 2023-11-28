@@ -5,10 +5,12 @@
 
     public interface IAuthService
     {
-        Task<RefreshToken> GenerateRefreshTokenAsync(string userId, string jwtId);
+        Task<RefreshToken> GenerateRefreshTokenAsync(Guid userId, string jwtId);
 
         Task<RefreshToken> FindRefreshTokenAsync(string refreshToken);
         Task <bool> CheckIsRefreshTokenExistAsync(string refreshToken);
         Task SetRefreshTokenIsUsed(string refreshToken);
+        Task<User> GetUserByRefreshTokenAsync(string refreshToken);
+        Task<bool> CheckIfRefreshTokenIsActiveAsync(string refreshToken);   
     }
 }

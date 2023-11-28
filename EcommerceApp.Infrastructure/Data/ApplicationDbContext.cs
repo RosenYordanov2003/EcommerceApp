@@ -1,11 +1,12 @@
 ﻿using EcommerceApp.Infrastructure.Data.Configurations;
 using EcommerceApp.Infrastructure.Data.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace EcommerceApp.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
     {
         public ApplicationDbContext(DbContextOptions options)
             : base(options)
@@ -21,6 +22,11 @@ namespace EcommerceApp.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+            builder.Entity<RefreshToken>()
+              .HasOne(u => u.User)
+              .WithOne(u => u.RefreshToken)
+              .OnDelete(DeleteBehavior.NoAction);
+
             builder.ApplyConfiguration(new BrandEntityConfiguration());
             builder.ApplyConfiguration(new MainCategoryEntityConfiguration());
             builder.ApplyConfiguration(new SubCategoryEntityConfiguration());

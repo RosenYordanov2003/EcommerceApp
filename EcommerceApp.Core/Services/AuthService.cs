@@ -15,6 +15,13 @@
             this.applicationDbContext = applicationDbContext;
         }
 
+        public async Task<bool> CheckIfRefreshTokenIsActiveAsync(string refreshToken)
+        {
+            RefreshToken refreshTokenToCheck = await applicationDbContext.RefreshTokens.FirstOrDefaultAsync(rt => rt.Token == refreshToken);
+           
+            return refreshTokenToCheck.ExpireData > DateTime.UtcNow;
+        }
+
         public async Task<bool> CheckIsRefreshTokenExistAsync(string refreshToken)
         {
             return await applicationDbContext.RefreshTokens.FirstOrDefaultAsync(rt => rt.Token == refreshToken) != null;
@@ -27,7 +34,7 @@
             return refreshTokenToFind;
         }
 
-        public async Task<RefreshToken> GenerateRefreshTokenAsync(string userId, string jwtId)
+        public async Task<RefreshToken> GenerateRefreshTokenAsync(Guid userId, string jwtId)
         {
             RefreshToken refreshToken = new RefreshToken()
             {
@@ -39,11 +46,28 @@
                 IsRevoked = false,
                 Token = Guid.NewGuid().ToString()
             };
+            User user = await applicationDbContext.Users.Include(u => u.RefreshToken).FirstOrDefaultAsync(u => u.Id == userId);
+            await DeleteUserRefreshToken(user);
+            user.RefreshToken = refreshToken;
+            user.RefreshTokenId = refreshToken.Id;
 
             await applicationDbContext.RefreshTokens.AddAsync(refreshToken);
             await applicationDbContext.SaveChangesAsync();
 
             return refreshToken;
+        }
+
+        private async Task DeleteUserRefreshToken(User user)
+        {
+            applicationDbContext.RefreshTokens.Remove(user.RefreshToken);
+            await applicationDbContext.SaveChangesAsync();
+        }
+
+        public async Task<User> GetUserByRefreshTokenAsync(string refreshToken)
+        {
+            return await applicationDbContext.RefreshTokens.Where(rt => rt.Token == refreshToken)
+                .Select(rt => rt.User)
+                .FirstOrDefaultAsync();
         }
 
         public async Task SetRefreshTokenIsUsed(string refreshToken)

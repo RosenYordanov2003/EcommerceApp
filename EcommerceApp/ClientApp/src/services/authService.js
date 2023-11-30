@@ -37,8 +37,23 @@ export async function login(userInfo) {
 }
 export async function refreshToken() {
 
-    const request = await fetch(`${baseUrl}RefreshToken`, { credentials: 'include' })
+    const request = await fetch(`${baseUrl}RefreshToken`, { credentials: 'include' });
 
+    if (!request.ok) {
+        throw new Error(`HTTP error! Status: ${request.status}`);
+    }
+
+    const response = await request.json();
+
+    return response;
+}
+export async function logout() {
+    console.log("in authService");
+    const request = await fetch(`${baseUrl}Logout`, { credentials: 'include' });
+
+    if (!request.ok) {
+        throw new Error(`HTTP error! Status: ${request.status}`);
+    }
     const response = await request;
 
     return response;

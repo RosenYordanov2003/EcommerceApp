@@ -12,6 +12,7 @@
     using Infrastructure.Data.Models;
     using Models.Account;
     using EcommerceApp.Models.Responses;
+    using System.Linq;
 
     [ApiController]
     [Route("api/account")]
@@ -83,6 +84,7 @@
                         Secure = true,
                         Expires = DateTimeOffset.UtcNow.AddMinutes(15),
                     });
+
                     return Ok(new LoginResponse() { Username = loginModel.Username });
                 }
             }
@@ -116,7 +118,38 @@
                 Expires = DateTimeOffset.UtcNow.AddMinutes(15),
             });
 
-            return Ok();
+            return Ok(new { Username = user.UserName });
+        }
+        [HttpGet]
+        [Route("Logout")]
+        public async Task<IActionResult> Logout()
+        {
+            string jwtToken = Request.Cookies["token"];
+            string refreshToken = Request.Cookies["X-Refresh-Token"];
+
+            if (jwtToken != null && refreshToken != null)
+            {
+                HttpContext.Response.Cookies.Append("token", jwtToken, new CookieOptions()
+                {
+                    HttpOnly = true,
+                    IsEssential = true,
+                    SameSite = SameSiteMode.None,
+                    Secure = true,
+                    Expires = DateTimeOffset.UtcNow.AddMinutes(-2),
+                });
+
+               HttpContext.Response.Cookies.Append("X-Refresh-Token", refreshToken,
+               new CookieOptions
+               {
+                   Expires = DateTimeOffset.UtcNow.AddMinutes(-2),
+                   HttpOnly = true,
+                   IsEssential = true,
+                   Secure = true,
+                   SameSite = SameSiteMode.None,
+               });
+                return Ok();
+            }
+            return BadRequest();
         }
         private async Task<AuthResult> GenerateJwtToken(User user)
         {

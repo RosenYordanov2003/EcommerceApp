@@ -61,7 +61,7 @@ export default function Navigation({ loadCategories, setIsActive }) {
                         <i className="fa-solid fa-cart-shopping"></i>
                     </Link>
                 </li>
-            <li onClick={onLogout}>
+            <li className = "logout" onClick={onLogout}>
                     Logout
                 </li>
             </>

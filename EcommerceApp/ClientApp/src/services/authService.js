@@ -48,7 +48,6 @@ export async function refreshToken() {
     return response;
 }
 export async function logout() {
-    console.log("in authService");
     const request = await fetch(`${baseUrl}Logout`, { credentials: 'include' });
 
     if (!request.ok) {

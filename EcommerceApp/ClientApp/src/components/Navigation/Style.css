@@ -60,3 +60,6 @@ nav ul li a{
     animation: rotation;
     animation-duration: 0.8s;
 }
+nav .logout{
+    cursor: pointer;
+}

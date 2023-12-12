@@ -93,7 +93,7 @@ builder.Services.AddRazorPages();
 
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IShoesService, ShoesService>();
-builder.Services.AddScoped<IClothesService, ClothesService>();
+builder.Services.AddScoped<IProductSevice, ProductService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 
 var app = builder.Build();

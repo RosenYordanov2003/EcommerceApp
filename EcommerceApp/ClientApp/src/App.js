@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useParams } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { UserContext } from "./Contexts/UserContext";
@@ -9,6 +9,7 @@ import Register from "./components/Auth/Register/Register";
 import Login from "./components/Auth/Login/Login";
 import RefreshToken from "./components/Auth/RefreshToken/RefreshToken";
 import { refreshToken } from "./services/authService";
+import GenderProducts from "../src/components/GenderProducts/GenderProducts";
 
 
 export default function App() {
@@ -42,6 +43,9 @@ export default function App() {
                     <Route path="/Home" element={<Home categories={categories} isActive={isActive} />} />
                     <Route path="/Register" element={<Register />} />
                     <Route path="/Login" element={<Login />} />
+                    <Route path="/Gender" element={<GenderProducts/>}>
+                        <Route path=":gender" element={<GenderProducts />} />
+                    </Route>
                 </Routes>
             </UserContext.Provider>
           

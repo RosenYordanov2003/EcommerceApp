@@ -17,8 +17,8 @@
         public async Task<IEnumerable<CategoryModel>> GetCategoriesByGender(string gender)
         {
             gender = gender.ToLower();
-            return await this.applicationDbContext.Categories
-                .Where(c => c.Gender.ToLower().IndexOf(gender) > - 1)
+            return await applicationDbContext.Categories
+                  .Where(c => c.Gender.ToLower().IndexOf(gender) > -1)
                   .Select(c => new CategoryModel()
                   {
                       Id = c.Id,

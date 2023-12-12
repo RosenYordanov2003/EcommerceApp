@@ -100,7 +100,7 @@ export default function Navigation() {
                 <ul>
                     <li>
 
-                        <Link to="">
+                        <Link to="/Gender/men">
                             Men{" "}
                         </Link>
                         <i
@@ -110,7 +110,7 @@ export default function Navigation() {
                         ></i>
                     </li>
                     <li>
-                        <Link to="">
+                        <Link to= "/Gender/women">
                             Women{" "}
                         </Link>
                         <i

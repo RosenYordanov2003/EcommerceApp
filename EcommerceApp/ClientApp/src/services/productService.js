@@ -15,3 +15,14 @@ export async function loadFeaturedClothes() {
 
     return responseAsJson;
 }
+export async function loadProductsByGender(gender) {
+    const request = await fetch(`${baseUrl}/GetProductsByGender?gender=${gender}`, { credentials: 'include' });
+
+    if (!request.ok) {
+        throw Error(request.Error);
+    }
+    const response = await request.json();
+
+    return response;
+    
+}

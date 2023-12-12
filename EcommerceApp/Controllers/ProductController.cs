@@ -11,8 +11,8 @@
     public class ProductController : ControllerBase
     {
         private readonly IShoesService shoesService;
-        private readonly IClothesService clothesService;
-        public ProductController(IShoesService shoesService, IClothesService clothesService)
+        private readonly IProductSevice clothesService;
+        public ProductController(IShoesService shoesService, IProductSevice clothesService)
         {
             this.shoesService = shoesService;
             this.clothesService = clothesService;
@@ -31,6 +31,13 @@
             IEnumerable<ProductModel> featuredProducts = await clothesService.GetFeaturedClothesAsync();
 
             return Ok(featuredProducts);
+        }
+        [HttpGet("GetProductsByGender")]
+        public async Task<IActionResult> GetProductsByGender([FromQuery]string gender)
+        {
+            var result = await this.clothesService.GetProductByGender(gender);
+
+            return Ok(result);
         }
     }
 }

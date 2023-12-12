@@ -5,6 +5,7 @@ import { loadFeaturedShoes } from "../../services/productService";
 import FeaturedProduct from "../Products/FeaturedProduct";
 import { loadFeaturedClothes } from "../../services/productService";
 import HomeStyle from "../Home/HomeStyle.css";
+import ContactContainer from "../ContactContainer/ContactContainer";
 
 export default function Home({ categories, isActive }) {
     const [featuredShoes, setFeaturedShoes] = useState([]);
@@ -36,6 +37,7 @@ export default function Home({ categories, isActive }) {
             <section className="featured-shoes-section">
                 {clothesResult}
             </section>
+            <ContactContainer/>
          </>
     );
 }

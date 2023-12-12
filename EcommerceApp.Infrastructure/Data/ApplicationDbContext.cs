@@ -15,9 +15,12 @@ namespace EcommerceApp.Data
         }
         public DbSet<MainCategory> Categories { get; set; }
         public DbSet<Shoes> Shoes { get; set; }
-        public DbSet<Clothes> Clothes { get; set; }
+        public DbSet<Product> Clothes { get; set; }
         public DbSet<Brand> Brands { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
+
+        public DbSet<ProductStock> ProductStocks { get; set; }
+        public DbSet<ShoesStock> ShoesStock { get; set; }
        
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -31,7 +34,7 @@ namespace EcommerceApp.Data
             builder.ApplyConfiguration(new MainCategoryEntityConfiguration());
             builder.ApplyConfiguration(new SubCategoryEntityConfiguration());
             builder.ApplyConfiguration(new ShoesEntityConfiguration());
-            builder.ApplyConfiguration(new ClothesEntityConfiguration());
+            builder.ApplyConfiguration(new ProductEntityConfiguration());
             builder.ApplyConfiguration(new PictureEntityConfiguration());
         }
     }

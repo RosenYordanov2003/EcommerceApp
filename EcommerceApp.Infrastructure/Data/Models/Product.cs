@@ -4,11 +4,12 @@
     using System.ComponentModel.DataAnnotations.Schema;
     using static EcommerceApp.GlobalConstants.EntityValidation.ClothesEntity;
 
-    public class Clothes
+    public class Product
     {
-        public Clothes()
+        public Product()
         {
             Pictures = new List<Picture>();
+            ProductStocks = new List<ProductStock>();
         }
         [Key]
         public int Id { get; set; }
@@ -40,5 +41,6 @@
         public string Gender { get; set; } = null!;
         public bool IsFeatured { get; set; }
         public ICollection<Picture> Pictures { get; set; }
+        public ICollection<ProductStock> ProductStocks { get; set; }
     }
 }

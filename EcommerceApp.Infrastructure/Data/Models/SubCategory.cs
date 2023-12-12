@@ -7,7 +7,7 @@
     {
         public SubCategory()
         {
-            Clothes = new List<Clothes>();
+            Clothes = new List<Product>();
             Shoes = new List<Shoes>();
         }
         [Key]
@@ -19,7 +19,7 @@
 
         [Required]
         [MaxLength(NameMaxLength)]
-        public ICollection<Clothes> Clothes { get; set; }
+        public ICollection<Product> Clothes { get; set; }
         public ICollection<Shoes> Shoes { get; set; }
         public string Name { get; set; } = null!;
     }

@@ -19,12 +19,6 @@ export default function App() {
     const [user, setUser] = useState(undefined);
 
 
-    function loadCategories(categories) {
-        setCategories(categories);
-    }
-    function setIsActive(activity) {
-        setActivity(activity);
-    }
     useEffect(() => {
         if (!user) {
             refreshToken()
@@ -41,7 +35,7 @@ export default function App() {
         <>
             <UserContext.Provider value={{ user, setUser }}>
                 
-                <Navigation loadCategories={loadCategories} setIsActive={setIsActive}></Navigation>
+                <Navigation/>
                 <RefreshToken/>
                 <Routes>
                     <Route path="/" element={<Home categories={categories} isActive={isActive} />} />

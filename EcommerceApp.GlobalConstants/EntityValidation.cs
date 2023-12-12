@@ -37,15 +37,15 @@
             public const int GenderMinLength = 3;
             public const int GenderMaxLength = 5;
         }
-        public static class ClothesSizeEntity
+        public static class ProductStockEntity
         {
             public const int SizeMinLength = 1;
-            public const int SizeMaxLength = 10;
+            public const int SizeMaxLength = 6;
         }
         public static class ShoesSizeEntity
         {
-            public const double SizeMinValue = 30.00;
-            public const double SizeMaxValue = 50.00;
+            public const double SizeMinValue = 35.00;
+            public const double SizeMaxValue = 45.00;
         }
     }
 }

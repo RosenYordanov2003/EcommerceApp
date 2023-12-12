@@ -6,7 +6,7 @@
     {
         public MainCategory()
         {
-            Clothes = new List<Clothes>();
+            Clothes = new List<Product>();
             Shoes = new List<Shoes>();
             SubCategories = new List<SubCategory>();
         }
@@ -18,7 +18,7 @@
         [Required]
         [MaxLength(GenderMaxLength)]
         public string Gender { get; set; } = null!;
-        public ICollection<Clothes> Clothes { get; set; }
+        public ICollection<Product> Clothes { get; set; }
         public ICollection<Shoes> Shoes { get; set; }
         public ICollection<SubCategory> SubCategories { get; set; }
     }

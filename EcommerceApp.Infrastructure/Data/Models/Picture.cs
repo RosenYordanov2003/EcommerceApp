@@ -7,7 +7,7 @@
         public int Id { get; set; }
         [ForeignKey(nameof(Cloth))]
         public int? ClothId { get; set; }
-        public Clothes? Cloth { get; set; }
+        public Product? Cloth { get; set; }
         [ForeignKey(nameof(Shoes))]
         public int? ShoesId { get; set; }
         public Shoes? Shoes { get; set; }

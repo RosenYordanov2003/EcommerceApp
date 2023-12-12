@@ -63,3 +63,6 @@ nav ul li a{
 nav .logout{
     cursor: pointer;
 }
+.arrow{
+    margin-left: 0.3rem;
+}

@@ -5,13 +5,16 @@ import { UserContext } from "../../Contexts/UserContext";
 import { Link } from "react-router-dom";
 import Style from "../Navigation/Style.css"
 import { logout } from "../../services/authService";
+import CategoriesSection from "../Categories/CategoriesSection";
 
-export default function Navigation({ loadCategories, setIsActive }) {
-
-    const navigate = useNavigate();
-    const { user, setUser } = useContext(UserContext);
+export default function Navigation() {
 
     const baseUrl = "https://localhost:7122/api/categories";
+    const navigate = useNavigate();
+    const { user, setUser } = useContext(UserContext);
+    const [categories, setCategories] = useState([]);
+    const [isActive, setActivity] = useState(true);
+
 
     const [isMenArrowActive, setIsMenArrowActive] = useState(false);
     const [isWomenArrowActive, setIsWomenArrowActive] = useState(false);
@@ -19,10 +22,10 @@ export default function Navigation({ loadCategories, setIsActive }) {
     function handleToggleMenCategories() {
         setIsMenArrowActive(!isMenArrowActive);
         if (isMenArrowActive) {
-            setIsActive(false);
+            setActivity(false);
         }
         else {
-            setIsActive(true);
+            setActivity(true);
             loadCategoriesByGender("m");
         }
 
@@ -32,10 +35,10 @@ export default function Navigation({ loadCategories, setIsActive }) {
     function handleToggleWomenCategories() {
         setIsWomenArrowActive(!isWomenArrowActive);
         if (isWomenArrowActive) {
-            setIsActive(false);
+            setActivity(false);
         }
         else {
-            setIsActive(true);
+            setActivity(true);
             loadCategoriesByGender("w");
         }
 
@@ -46,7 +49,7 @@ export default function Navigation({ loadCategories, setIsActive }) {
         fetch(`${baseUrl}?gender=${gender}`)
             .then((res) => res.json())
             .then((res) => {
-                loadCategories(res);
+                setCategories(res);
             })
             .catch((error) => console.error(error));
     }
@@ -61,7 +64,7 @@ export default function Navigation({ loadCategories, setIsActive }) {
                         <i className="fa-solid fa-cart-shopping"></i>
                     </Link>
                 </li>
-            <li className = "logout" onClick={onLogout}>
+                <li className="logout" onClick={onLogout}>
                     Logout
                 </li>
             </>
@@ -87,35 +90,39 @@ export default function Navigation({ loadCategories, setIsActive }) {
                 setUser(undefined);
                 navigate("/");
             })
-        .catch(error => console.error(error))
+            .catch(error => console.error(error))
     }
 
     return (
-        <nav>
-            <h2 className="nav-logo">Fashion Store</h2>
-            <ul>
-                <li>
-                    <Link to="">
-                        Men{" "}
+        <>
+            <nav>
+                <h2 className="nav-logo">Fashion Store</h2>
+                <ul>
+                    <li>
+
+                        <Link to="">
+                            Men{" "}
+                        </Link>
                         <i
                             onClick={handleToggleMenCategories}
-                            className={`men-arrow down-arrow fa-solid fa-angle-down ${isMenArrowActive ? "active-arrow" : "not-active-arrow"
-                                }`}
+                            className={`men-arrow down-arrow fa-solid arrow fa-angle-down ${isMenArrowActive ? "active-arrow" : "not-active-arrow"
+                            }`}
                         ></i>
-                    </Link>
-                </li>
-                <li>
-                    <Link to="">
-                        Women{" "}
+                    </li>
+                    <li>
+                        <Link to="">
+                            Women{" "}
+                        </Link>
                         <i
                             onClick={handleToggleWomenCategories}
-                            className={`women-arrow down-arrow fa-solid fa-angle-down ${isWomenArrowActive ? "active-arrow" : ""
+                            className={`women-arrow down-arrow arrow fa-solid fa-angle-down ${isWomenArrowActive ? "active-arrow" : ""
                                 }`}
                         ></i>
-                    </Link>
-                </li>
-                {listImes}
-            </ul>
-        </nav>
+                    </li>
+                    {listImes}
+                </ul>
+            </nav>
+            {categories.length > 0 ? <CategoriesSection categories={categories} isActive={isActive} /> : ""}
+        </>
     );
 }

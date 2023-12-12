@@ -6,7 +6,7 @@
     {
         public Brand()
         {
-            Clothes = new List<Clothes>();
+            Clothes = new List<Product>();
             Shoes = new List<Shoes>();
         }
         [Key]
@@ -16,7 +16,7 @@
         public string Name { get; set; } = null!;
         [Required]
         public string LogoUrl { get; set; } = null!;
-        public ICollection<Clothes> Clothes { get; set; }
+        public ICollection<Product> Clothes { get; set; }
         public ICollection<Shoes> Shoes { get; set; }
     }
 }

@@ -1,0 +1,10 @@
+﻿#filter-menu-navigation ul {
+    display: flex;
+    flex-direction: column;
+    align-items: self-start;
+}
+#filter-menu-navigation ul li div{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

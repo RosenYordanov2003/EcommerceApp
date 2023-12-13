@@ -47,20 +47,23 @@
                       Description = cl.Description,
                       Pictures = cl.Pictures.Select(p => new PictureModel() { ImgUrl = p.ImgUrl }).Take(2),
                       Price = cl.Price,
-                      StarRating = cl.StarRating
+                      StarRating = cl.StarRating,
+                      Category = cl.Category.Name,
+                      SubCategories = cl.Category.SubCategories.Select(subc => subc.Name).ToList()
                   })
                   .ToListAsync();
 
             productModel.Shoes = await applicationDbContext.Shoes
                 .Where(sh => sh.Gender.ToLower() == gender)
-                .Select(sh => new ShoesFeatureModel()
+                .Select(sh => new ProductModel()
                 {
                     Id = sh.Id,
                     Name = sh.Name,
                     Pictures = sh.Pictures.Select(p => new PictureModel() { ImgUrl = p.ImgUrl }).Take(2),
                     StarRating = sh.StarRating,
                     Price = sh.Price,
-
+                    SubCategory = sh.SubCategory.Name,
+                    Category = sh.Category.Name,
                 })
                 .ToListAsync();
 

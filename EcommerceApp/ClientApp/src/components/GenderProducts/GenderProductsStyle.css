@@ -5,3 +5,18 @@
     padding: 2rem;
     margin-left: 3rem;
 }
+.main-container{
+   display: flex;
+   /*justify-content: flex-end;*/
+   justify-content: space-around;
+
+}
+/*#filter-menu-navigation {
+    position: fixed;
+    left: 0px;
+    top: 100px;
+    overflow: auto;
+    height: 100vh; 
+    max-height: 100vh;
+    margin-bottom: 2rem;
+}*/

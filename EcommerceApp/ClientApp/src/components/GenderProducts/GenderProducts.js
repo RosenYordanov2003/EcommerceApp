@@ -20,7 +20,7 @@ export default function GenderProducts() {
     const shoesResult = resultObject == undefined ? "" : resultObject.shoes.map((shoes) => <FeaturedProduct key={shoes.id} product={shoes} />)
     const productsResult = resultObject == undefined ? "" : resultObject.products.map((product) => <FeaturedProduct key={product.id} product={product} />)
     return (
-        <div>
+        <div className = "main-container">
 
             { resultObject && <FilterMenu props={resultObject} />}
 

@@ -17,7 +17,7 @@
     }
 }
 
-nav {
+.main-nav {
     display: flex;
     align-items: center;
     padding: 2.5rem 2.2rem;
@@ -26,13 +26,13 @@ nav {
     animation-fill-mode: forwards;
     animation-duration: 2.5s;
 }
-nav ul{
+.main-nav ul {
     list-style: none;
     display: flex;
     align-items: center;
     gap: 1rem;
 }
-nav ul li a{
+.main-nav ul li a{
     text-decoration: none;
     color: black;
     display: inline-block;
@@ -60,7 +60,7 @@ nav ul li a{
     animation: rotation;
     animation-duration: 0.8s;
 }
-nav .logout{
+.main-nav .logout{
     cursor: pointer;
 }
 .arrow{

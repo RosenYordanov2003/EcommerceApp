@@ -1,8 +1,8 @@
 ﻿export default function FilterItem({ filterItem }) {
     return (
         <div>
-            <input type="checkBox" />
-            <p>{filterItem.name}</p>
+            <input className = "filter-input" type="checkBox" />
+            <p className = "filter-name">{filterItem.name}</p>
         </div>
     )
 }

@@ -7,18 +7,17 @@
     color: white;
     padding: 2rem;
 }
-input {
+.contact-input {
     border: none;
     min-width : 340px;
     border-radius: 4px;
     padding-left: 1.8rem;
-    scroll-padding-right: 2rem;
     height: 2rem;
 }
-form{
+.contact-form {
     position: relative;
 }
-button {
+.send-button {
     position: absolute;
     right: 0;
     background-color: #fa6d69;

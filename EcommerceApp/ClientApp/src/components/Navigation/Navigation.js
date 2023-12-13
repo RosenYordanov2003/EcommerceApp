@@ -95,7 +95,7 @@ export default function Navigation() {
 
     return (
         <>
-            <nav>
+            <nav className = "main-nav">
                 <h2 className="nav-logo">Fashion Store</h2>
                 <ul>
                     <li>

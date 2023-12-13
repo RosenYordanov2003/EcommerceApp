@@ -1,10 +1,33 @@
-﻿#filter-menu-navigation ul {
+﻿#filter-menu-navigation,
+.filter-title{
+    padding: 2rem;
+}
+.filter-title{
+    font-size: 1.7rem;
+}
+
+.filter-name{
+    margin: 0px;
+    font-weight: 700;
+}
+
+#filter-menu-navigation ul {
     display: flex;
     flex-direction: column;
     align-items: self-start;
+    list-style: none;
 }
+
 #filter-menu-navigation ul li div{
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    align-items: normal;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+}
+input.filter-input{
+  min-width: 20px;
+  border: 12px solid black;
+}
+hr{
+    width: 80%;
 }

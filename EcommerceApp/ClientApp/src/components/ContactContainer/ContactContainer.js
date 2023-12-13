@@ -10,12 +10,12 @@ export default function ContactContainer() {
                 <h2 className = "title">Contact Us</h2>
                 <p>Send us an E-mail </p>
             </div>
-            <form>
-                <input type="text">
+            <form className = "contact-form">
+                <input className = "contact-input" type="text">
 
                 </input>
                  <i className="fa-regular message-icon fa-envelope"></i>
-                <button>Send</button>
+                <button className = "send-button">Send</button>
             </form>
         </div>
     )

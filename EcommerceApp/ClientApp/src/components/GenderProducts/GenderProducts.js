@@ -11,34 +11,50 @@ export default function GenderProducts() {
     const [resultObject, setResultObject] = useState(undefined);
     const [products, setProducts] = useState([]);
     const [shoes, setShoes] = useState([]);
+    const [filters, setFilters] = useState({ brands: [], categories: []});
 
     useEffect(() => {
         loadProductsByGender(gender)
             .then((result) => {
+                const filteredProducts = filter(filters.brands, filters.categories, result.products);
+                const filteredShoes = filter(filters.brands, filters.categories, result.shoes);
+
                 setResultObject(result);
-                setProducts(result.products);
-                setShoes(result.shoes);
+                setProducts(filteredProducts);
+                setShoes(filteredShoes);
             })
             .catch((error) => console.error(error));
-    }, [gender])
+    }, [gender]);
 
     function filterProducts(brandsArray, categoriesArray) {
+
+
         const brandNames = brandsArray.map((brand) => brand.name);
         const categoryNames = categoriesArray.map((category) => category.name);
 
-        const filterByBrandAndCategory = (item) => {
-            const brandMatch = brandNames.length === 0 || brandNames.includes(item.brand);
-            const categoryMatch = categoryNames.length === 0 || categoryNames.includes(item.category);
+        const filterByBrandAndCategory = (product) => {
+            const brandMatch = brandNames.length === 0 || brandNames.includes(product.brand);
+            const categoryMatch = categoryNames.length === 0 || categoryNames.includes(product.category);
             return brandMatch && categoryMatch;
         };
 
-        if (brandNames.length > 0 || categoryNames.length > 0) {
-            const filteredProducts = resultObject.products.filter(filterByBrandAndCategory);
-            const filteredShoes = resultObject.shoes.filter(filterByBrandAndCategory);
+        const filteredProducts = resultObject.products.filter(filterByBrandAndCategory);
+        const filteredShoes = resultObject.shoes.filter(filterByBrandAndCategory);
+        setFilters({ brands: brandsArray, categories: categoriesArray });
+        setProducts(filteredProducts);
+        setShoes(filteredShoes);
+    }
+    function filter(brandsArray, categoriesArray, productsArray) {
+        const brandNames = brandsArray.map((brand) => brand.name);
+        const categoryNames = categoriesArray.map((category) => category.name);
 
-            setProducts(filteredProducts);
-            setShoes(filteredShoes);
-        }
+        const filterByBrandAndCategory = (product) => {
+            const brandMatch = brandNames.length === 0 || brandNames.includes(product.brand);
+            const categoryMatch = categoryNames.length === 0 || categoryNames.includes(product.category);
+            return brandMatch && categoryMatch;
+        };
+
+        return productsArray.filter(filterByBrandAndCategory);
     }
 
     let shoesResult;

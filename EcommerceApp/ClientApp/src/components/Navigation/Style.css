@@ -25,6 +25,7 @@
     animation: delaying;
     animation-fill-mode: forwards;
     animation-duration: 2.5s;
+    z-index: 99;
 }
 .main-nav ul {
     list-style: none;

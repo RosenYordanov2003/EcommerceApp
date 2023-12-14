@@ -13,6 +13,8 @@
         public decimal Price { get; set; }
         public string? Category { get; set; }
         public string SubCategory { get; set; }
+        public string Brand { get; set; }
         public IEnumerable<PictureModel> Pictures { get; set; }
+
     }
 }

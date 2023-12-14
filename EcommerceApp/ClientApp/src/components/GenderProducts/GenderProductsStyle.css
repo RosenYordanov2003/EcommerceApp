@@ -7,11 +7,10 @@
 }
 .main-container{
    display: flex;
-   /*justify-content: flex-end;*/
-   justify-content: space-around;
+   justify-content: flex-end;
 
 }
-/*#filter-menu-navigation {
+#filter-menu-navigation {
     position: fixed;
     left: 0px;
     top: 100px;
@@ -19,4 +18,4 @@
     height: 100vh; 
     max-height: 100vh;
     margin-bottom: 2rem;
-}*/
+}

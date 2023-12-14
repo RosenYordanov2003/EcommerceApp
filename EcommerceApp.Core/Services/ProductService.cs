@@ -64,6 +64,7 @@
                     Price = sh.Price,
                     SubCategory = sh.SubCategory.Name,
                     Category = sh.Category.Name,
+                    Brand = sh.Brand.Name
                 })
                 .ToListAsync();
 

@@ -1,11 +1,18 @@
 ﻿import FilterItem from "../FilterItem/FilterItem";
 //import ResetStyle from "../../ResetStyles/ResetStyle.css";
 import FilterMenuStyle from "../ProductsFilterMenu/FilterMenuStyle.css";
+import { useState, useEffect } from "react";
 
+export default function FilterMenu({ result: {brands, categories }, onCheckInput }) {
 
-export default function FilterMenu({ props: { brands, categories } }) {
+    const [checkedBrnadInputs, setBrandCheckedInputs] = useState([]);
+    const [checkedCategoryInputs, setCategoryInputs] = useState([]);
 
-    const brandElements = brands.map((brand) => <li key={brand.id}><FilterItem filterItem={brand}></FilterItem></li>);
+    useEffect(() => {
+        onCheckInput(checkedBrnadInputs, checkedCategoryInputs);
+    }, [checkedBrnadInputs, checkedCategoryInputs]);
+
+    const brandElements = brands.map((brand) => <li key={brand.id}><FilterItem addCheckedInputValues={addCheckedInputValues} filterItem={brand}></FilterItem></li>);
     const categoryElements = categories.map((category) => <li key={category.id}><FilterItem filterItem={category}></FilterItem></li>);
     const subCategoryArrays = categories.map((category) => category.subCategories.map(subCateogry => subCateogry));
 
@@ -15,10 +22,29 @@ export default function FilterMenu({ props: { brands, categories } }) {
         subCategoryElements = currentArray;
     });
 
+    function addCheckedInputValues(checkedInputObject) {
+
+        if (brands.some((brand) => brand.name == checkedInputObject.name)) {
+            if (checkedInputObject.checkedValue === true) {
+                setBrandCheckedInputs([...checkedBrnadInputs, checkedInputObject]);
+            }
+            else {
+                setBrandCheckedInputs(checkedBrnadInputs.filter(({ name }) => name !== checkedInputObject.name));
+            }
+        }
+        else
+        {
+            if (checkedInputObject.checkedValue === true) {
+                setCategoryInputs([...checkedCategoryInputs, checkedInputObject]);
+            } else {
+                setCategoryInputs(checkedCategoryInputs.filter(({ name }) => name !== checkedInputObject.name));
+            }
+        }
+    }
+
 
     const subCategoryItems = subCategoryElements.map((subCategory) => <li key={subCategory.id}><FilterItem filterItem={subCategory}></FilterItem></li>)
 
-    console.log(categoryElements.Length + subCategoryElements.Length);
     return (
         <nav id="filter-menu-navigation">
           
@@ -30,7 +56,7 @@ export default function FilterMenu({ props: { brands, categories } }) {
             <h4 className="filter-title">Categories</h4>
             <ul>
                 {categoryElements}
-                {subCategoryItems}
+                {/*{subCategoryItems}*/}
             </ul>
             <hr></hr>
         </nav>

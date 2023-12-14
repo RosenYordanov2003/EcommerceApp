@@ -13,7 +13,7 @@ export default function FilterMenu({ result: {brands, categories }, onCheckInput
     }, [checkedBrnadInputs, checkedCategoryInputs]);
 
     const brandElements = brands.map((brand) => <li key={brand.id}><FilterItem addCheckedInputValues={addCheckedInputValues} filterItem={brand}></FilterItem></li>);
-    const categoryElements = categories.map((category) => <li key={category.id}><FilterItem filterItem={category}></FilterItem></li>);
+    const categoryElements = categories.map((category) => <li key={category.id}><FilterItem filterItem={category} addCheckedInputValues={addCheckedInputValues}></FilterItem></li>);
     const subCategoryArrays = categories.map((category) => category.subCategories.map(subCateogry => subCateogry));
 
     let subCategoryElements = [];

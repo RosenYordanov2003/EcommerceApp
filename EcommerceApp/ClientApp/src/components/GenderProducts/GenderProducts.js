@@ -23,23 +23,18 @@ export default function GenderProducts() {
     }, [gender])
 
     function filterProducts(brandsArray, categoriesArray) {
-        brandsArray = brandsArray.map((brand) => brand.name);
-        categoriesArray = categoriesArray.map((category) => category.name);
+        const brandNames = brandsArray.map((brand) => brand.name);
+        const categoryNames = categoriesArray.map((category) => category.name);
 
-        console.log(brandsArray.length);
+        const filterByBrandAndCategory = (item) => {
+            const brandMatch = brandNames.length === 0 || brandNames.includes(item.brand);
+            const categoryMatch = categoryNames.length === 0 || categoryNames.includes(item.category);
+            return brandMatch && categoryMatch;
+        };
 
-        if (brandsArray.length > 0) {
-            console.log("set filter products");
-            let filteredProducts = "";
-            filteredProducts = resultObject.products.filter(({ brand }) => brandsArray.includes(brand));
-            let filteredShoes = "";
-            filteredShoes = resultObject.shoes.filter(({ brand }) => brandsArray.includes(brand));
-
-            if (categoriesArray.length > 0) {
-                console.log('in category if');
-                filteredProducts = resultObject.products.filter(({ category }) => categoriesArray.includes(category));
-                filteredShoes = resultObject.shoes.filter(({ category }) => categoriesArray.includes(category));
-            }
+        if (brandNames.length > 0 || categoryNames.length > 0) {
+            const filteredProducts = resultObject.products.filter(filterByBrandAndCategory);
+            const filteredShoes = resultObject.shoes.filter(filterByBrandAndCategory);
 
             setProducts(filteredProducts);
             setShoes(filteredShoes);
@@ -63,7 +58,6 @@ export default function GenderProducts() {
         productsResult = resultObject == undefined ? "" : resultObject.products.map((product) => <FeaturedProduct key={product.id} product={product} />)
     }
 
-    //const productsResult = resultObject == undefined ? "" : resultObject.products.map((product) => <FeaturedProduct key={product.id} product={product} />)
     return (
         <div className="main-container">
 

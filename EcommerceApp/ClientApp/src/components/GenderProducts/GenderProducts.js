@@ -1,8 +1,10 @@
-﻿import { useEffect, useState } from "react";
+﻿import { useEffect, useState, useMemo } from "react";
 import { loadProductsByGender } from "../../services/productService";
 import FeaturedProduct from "../Products/FeaturedProduct";
 import FilterMenu from "../ProductsFilterMenu/FilterMenu";
+import GridSpinner from "../GridSpinner/GrindSpinner";
 import GenderProductsStyle from "../GenderProducts/GenderProductsStyle.css";
+import { faL } from "../../../../../node_modules/@fortawesome/free-solid-svg-icons/index";
 
 export default function GenderProducts() {
     const pathArray = window.location.pathname.split('/');
@@ -11,7 +13,8 @@ export default function GenderProducts() {
     const [resultObject, setResultObject] = useState(undefined);
     const [products, setProducts] = useState([]);
     const [shoes, setShoes] = useState([]);
-    const [filters, setFilters] = useState({ brands: [], categories: []});
+    const [filters, setFilters] = useState({ brands: [], categories: [] });
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         loadProductsByGender(gender)
@@ -28,7 +31,6 @@ export default function GenderProducts() {
 
     function filterProducts(brandsArray, categoriesArray) {
 
-
         const brandNames = brandsArray.map((brand) => brand.name);
         const categoryNames = categoriesArray.map((category) => category.name);
 
@@ -43,6 +45,7 @@ export default function GenderProducts() {
         setFilters({ brands: brandsArray, categories: categoriesArray });
         setProducts(filteredProducts);
         setShoes(filteredShoes);
+      
     }
     function filter(brandsArray, categoriesArray, productsArray) {
         const brandNames = brandsArray.map((brand) => brand.name);
@@ -57,37 +60,29 @@ export default function GenderProducts() {
         return productsArray.filter(filterByBrandAndCategory);
     }
 
-    let shoesResult;
-    let productsResult;
+    const shoesResult = useMemo(() => {
+        return shoes.map((product) => <FeaturedProduct key={product.id} product={product} />);
+    }, [shoes]);
 
-    if (shoes) {
-        shoesResult = shoes.map((product) => <FeaturedProduct key={product.id} product={product} />)
-    }
-    else {
-        shoesResult = resultObject == undefined ? "" : resultObject.shoes.map((shoes) => <FeaturedProduct key={shoes.id} product={shoes} />)
-    }
-
-    if (products) {
-        productsResult = products.map((product) => <FeaturedProduct key={product.id} product={product} />)
-    }
-    else {
-        productsResult = resultObject == undefined ? "" : resultObject.products.map((product) => <FeaturedProduct key={product.id} product={product} />)
-    }
+    const productsResult = useMemo(() => {
+        return products.map((product) => <FeaturedProduct key={product.id} product={product} />);
+    }, [products]);
 
     return (
-        <div className="main-container">
 
-            {resultObject && <FilterMenu result={resultObject} onCheckInput={filterProducts} />}
+            <div className="main-container">
 
-            <div className="products-container">
-                <section className="products-section">
-                    {productsResult}
-                </section>
-                <section className="products-section">
-                    {shoesResult}
-                </section>
+                {resultObject && <FilterMenu result={resultObject} onCheckInput={filterProducts} />}
+
+                <div className="products-container">
+                    <section className="products-section">
+                        {productsResult}
+                    </section>
+                    <section className="products-section">
+                        {shoesResult}
+                    </section>
+                </div>
             </div>
-        </div>
 
     )
 }

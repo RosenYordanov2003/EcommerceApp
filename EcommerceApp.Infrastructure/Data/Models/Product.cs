@@ -10,6 +10,7 @@
         {
             Pictures = new List<Picture>();
             ProductStocks = new List<ProductStock>();
+            UserFavoriteProducts = new HashSet<UserFavoriteProducts>();
         }
         [Key]
         public int Id { get; set; }
@@ -42,5 +43,6 @@
         public bool IsFeatured { get; set; }
         public ICollection<Picture> Pictures { get; set; }
         public ICollection<ProductStock> ProductStocks { get; set; }
+        public ICollection<UserFavoriteProducts> UserFavoriteProducts { get; set; }
     }
 }

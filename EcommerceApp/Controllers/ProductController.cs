@@ -46,6 +46,7 @@
             {
                 return BadRequest(new {Error = "Product with such an id does not exist"});
             }
+            return Ok();
         }
     }
 }

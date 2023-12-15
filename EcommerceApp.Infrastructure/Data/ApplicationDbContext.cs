@@ -21,6 +21,11 @@ namespace EcommerceApp.Data
 
         public DbSet<ProductStock> ProductStocks { get; set; }
         public DbSet<ShoesStock> ShoesStock { get; set; }
+
+        public DbSet<Review> Reviews { get; set; }
+
+        public DbSet<UserFavoriteProducts> UserFavoriteProducts { get; set; }
+        public DbSet<UserFavoriteShoes> UserFavoriteShoes { get; set; }
        
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -29,6 +34,24 @@ namespace EcommerceApp.Data
               .HasOne(u => u.User)
               .WithOne(u => u.RefreshToken)
               .OnDelete(DeleteBehavior.NoAction);
+
+            builder.Entity<UserFavoriteShoes>()
+                .HasKey(ck => new { ck.UserId, ck.ShoesId });
+
+            builder.Entity<UserFavoriteProducts>()
+               .HasKey(ck => new { ck.UserId, ck.ProductId });
+
+            builder.Entity<UserFavoriteShoes>()
+                .HasOne(us => us.User)
+                .WithMany(u => u.UserFavoriteShoes)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            builder.Entity<UserFavoriteProducts>()
+             .HasOne(us => us.User)
+             .WithMany(u => u.UserFavoriteProducts)
+             .OnDelete(DeleteBehavior.NoAction);
+
+
 
             builder.ApplyConfiguration(new BrandEntityConfiguration());
             builder.ApplyConfiguration(new MainCategoryEntityConfiguration());

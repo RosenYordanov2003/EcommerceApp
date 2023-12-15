@@ -5,6 +5,7 @@ import FilterMenu from "../ProductsFilterMenu/FilterMenu";
 import GenderProductsStyle from "../GenderProducts/GenderProductsStyle.css";
 import { faL } from "../../../../../node_modules/@fortawesome/free-solid-svg-icons/index";
 import { Grid } from 'react-loader-spinner';
+import ContactContainer from "../ContactContainer/ContactContainer";
 
 export default function GenderProducts() {
     const pathArray = window.location.pathname.split('/');
@@ -74,32 +75,44 @@ export default function GenderProducts() {
         return products.map((product) => <FeaturedProduct key={product.id} product={product} />);
     }, [products]);
 
-    const resultContainer = isLoading ?<Grid
-      height="80"
-      width="80"
-      color="#035096"
-      ariaLabel="grid-loading"
-      radius="12.5"
-      wrapperStyle={{}}
-      wrapperClass="spinner"
+    const resultContainer = isLoading ? <Grid
+        height="80"
+        width="80"
+        color="#035096"
+        ariaLabel="grid-loading"
+        radius="12.5"
+        wrapperStyle={{}}
+        wrapperClass="spinner"
         visible={true} />
 
         : <div className="products-container">
-        <section className="products-section">
-            {productsResult}
-        </section>
-        <section className="products-section">
-            {shoesResult}
-        </section>
-    </div>
+            <section className="products-section">
+                {productsResult}
+            </section>
+            <section className="products-section">
+                {shoesResult}
+            </section>
+        </div>
 
     return (
+
 
         <div className="main-container">
 
             {resultObject && <FilterMenu result={resultObject} onCheckInput={filterProducts} />}
 
-            {resultContainer}
+            <div>
+                <form className="searchForm">
+                    <div className = "search-input-container">
+                        <input placeholder="Search for products" className="search" type="text"></input>
+                        <button className="search-button">Search</button>
+                        <i class=" search-icon fa-solid fa-magnifying-glass"></i>
+                    </div>
+                   
+                </form>
+                {resultContainer}
+
+            </div>
         </div>
 
     )

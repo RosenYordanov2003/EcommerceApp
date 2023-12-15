@@ -23,8 +23,8 @@ export default function Home({ categories, isActive }) {
         .catch((error) => console.error(error))
     }, [])
 
-    const shoesResult = featuredShoes.map((shoes) => <FeaturedProduct key={shoes.id} product={shoes} />)
-    const clothesResult = featuredClothes.map((clothes) => <FeaturedProduct key={clothes.id} product={clothes} />);
+    const shoesResult = featuredShoes.length > 0? featuredShoes.map((shoes) => <FeaturedProduct key={shoes.id} product={shoes} />) : "";
+    const clothesResult = featuredClothes.length > 0 ?featuredShoes.map((clothes) => <FeaturedProduct key={clothes.id} product={clothes} />): "";
 
     return (
         <>

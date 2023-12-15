@@ -39,5 +39,13 @@
 
             return Ok(result);
         }
+        [HttpGet("AboutProduct")]
+        public async Task<IActionResult>GetProductById([FromQuery]int productId)
+        {
+            if (!await clothesService.CheckIfProductExistsByIdAsync(productId))
+            {
+                return BadRequest(new {Error = "Product with such an id does not exist"});
+            }
+        }
     }
 }

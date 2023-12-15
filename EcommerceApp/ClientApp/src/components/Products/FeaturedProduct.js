@@ -1,7 +1,10 @@
 ﻿import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import FeaturedProductStyle from "../Products/FeaturedProductStyle.css";
 
 export default function FeaturedProduct({ product }) {
+
+    const navigate = useNavigate();
 
     const stars = Array.from({ length: product.starRating }, (star, index) => (
         <i key={index} className="fa-solid fa-star star"></i>
@@ -23,12 +26,17 @@ export default function FeaturedProduct({ product }) {
         event.currentTarget.children[0].classList.add('favorite-removed');
         event.currentTarget.children[0].classList.remove('favorite');
     }
+    function handleProductClick() {
+        if (product) {
+            navigate(`/ProductAbout/${product.id}`);
+        }
+    }
 
     return (
         <div className="product-card">
             <div onMouseOver={activateProductCard} onMouseLeave={deactivateProductCard} className="img-container">
                 <i className="fa-regular fa-heart"></i>
-                <img src={imgUrl} />
+                <img onClick={handleProductClick} src={imgUrl} />
             </div>
             <div className="product-content">
                 <div className="star-rating">{stars}</div>

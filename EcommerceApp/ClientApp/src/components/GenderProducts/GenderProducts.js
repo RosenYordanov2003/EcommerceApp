@@ -16,6 +16,7 @@ export default function GenderProducts() {
     const [shoes, setShoes] = useState([]);
     const [filters, setFilters] = useState({ brands: [], categories: [] });
     const [isLoading, setIsLoading] = useState(false);
+    const [searchQuery, setSearchQuery] = useState(undefined);
 
     useEffect(() => {
         loadProductsByGender(gender)
@@ -23,6 +24,8 @@ export default function GenderProducts() {
                 const filteredProducts = filter(filters.brands, filters.categories, result.products);
                 const filteredShoes = filter(filters.brands, filters.categories, result.shoes);
 
+
+                setSearchQuery("");
                 setResultObject(result);
                 setProducts(filteredProducts);
                 setShoes(filteredShoes);
@@ -48,6 +51,7 @@ export default function GenderProducts() {
         setProducts(filteredProducts);
         setShoes(filteredShoes);
 
+        setSearchQuery("");
         configureLoading();
 
     }
@@ -68,6 +72,8 @@ export default function GenderProducts() {
         e.preventDefault();
 
         const formData = new FormData(e.target);
+
+
         let queryString = formData.get("query");
 
         queryString = queryString.toLowerCase();
@@ -94,9 +100,6 @@ export default function GenderProducts() {
 
         setProducts(filterPoducts);
         setShoes(filterShoes);
-
-
-
         configureLoading();
 
     }
@@ -108,6 +111,12 @@ export default function GenderProducts() {
             setIsLoading(false);
         }, 700)
     }
+
+    function handleInputChange(e) {
+
+        setSearchQuery(e.target.value);
+    }
+
 
     const shoesResult = useMemo(() => {
         return shoes.map((product) => <FeaturedProduct key={product.id} product={product} />);
@@ -141,7 +150,7 @@ export default function GenderProducts() {
         <>
             <form onSubmit={filterProductsByQueryString} className="searchForm">
                 <div className="search-input-container">
-                    <input name = "query" placeholder="Search for products" className="search" type="text"></input>
+                    <input onChange={handleInputChange} name="query" placeholder="Search for products" value={searchQuery} className="search" type="text"></input>
                     <button className="search-button">Search</button>
                     <i className="search-icon fa-solid fa-magnifying-glass"></i>
                 </div>

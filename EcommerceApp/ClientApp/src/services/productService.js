@@ -26,3 +26,13 @@ export async function loadProductsByGender(gender) {
     return response;
     
 }
+export async function loadProductById(id) {
+    const request = await fetch(`${baseUrl}/AboutProduct?productid=${id}`, { credentials = 'include' });
+
+    if (!request.ok) {
+        throw Error(request.Error);
+    }
+    const response = await request.json();
+
+    return response;
+}

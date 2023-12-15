@@ -17,6 +17,19 @@
             this.applicationDbContext = applicationDbContext;
         }
 
+        public async Task<bool> CheckIfProductExistsByIdAsync(int productId)
+        {
+            if (await applicationDbContext.Clothes.AnyAsync(cl => cl.Id == productId))
+            {
+                return true;
+            }
+            if (await applicationDbContext.Shoes.AnyAsync(sh => sh.Id == productId))
+            {
+                return true;
+            }
+            return false;
+        }
+
         public async Task<IEnumerable<ProductModel>> GetFeaturedClothesAsync()
         {
             return await applicationDbContext.Clothes

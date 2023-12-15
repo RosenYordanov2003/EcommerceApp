@@ -2,9 +2,9 @@
 import { loadProductsByGender } from "../../services/productService";
 import FeaturedProduct from "../Products/FeaturedProduct";
 import FilterMenu from "../ProductsFilterMenu/FilterMenu";
-import GridSpinner from "../GridSpinner/GrindSpinner";
 import GenderProductsStyle from "../GenderProducts/GenderProductsStyle.css";
 import { faL } from "../../../../../node_modules/@fortawesome/free-solid-svg-icons/index";
+import { Grid } from 'react-loader-spinner';
 
 export default function GenderProducts() {
     const pathArray = window.location.pathname.split('/');
@@ -42,10 +42,16 @@ export default function GenderProducts() {
 
         const filteredProducts = resultObject.products.filter(filterByBrandAndCategory);
         const filteredShoes = resultObject.shoes.filter(filterByBrandAndCategory);
+
         setFilters({ brands: brandsArray, categories: categoriesArray });
         setProducts(filteredProducts);
         setShoes(filteredShoes);
-      
+        setIsLoading(true);
+
+        setTimeout(() => {
+            setIsLoading(false);
+        }, 500)
+
     }
     function filter(brandsArray, categoriesArray, productsArray) {
         const brandNames = brandsArray.map((brand) => brand.name);
@@ -68,21 +74,33 @@ export default function GenderProducts() {
         return products.map((product) => <FeaturedProduct key={product.id} product={product} />);
     }, [products]);
 
+    const resultContainer = isLoading ?<Grid
+      height="80"
+      width="80"
+      color="#035096"
+      ariaLabel="grid-loading"
+      radius="12.5"
+      wrapperStyle={{}}
+      wrapperClass="spinner"
+        visible={true} />
+
+        : <div className="products-container">
+        <section className="products-section">
+            {productsResult}
+        </section>
+        <section className="products-section">
+            {shoesResult}
+        </section>
+    </div>
+
     return (
 
-            <div className="main-container">
+        <div className="main-container">
 
-                {resultObject && <FilterMenu result={resultObject} onCheckInput={filterProducts} />}
+            {resultObject && <FilterMenu result={resultObject} onCheckInput={filterProducts} />}
 
-                <div className="products-container">
-                    <section className="products-section">
-                        {productsResult}
-                    </section>
-                    <section className="products-section">
-                        {shoesResult}
-                    </section>
-                </div>
-            </div>
+            {resultContainer}
+        </div>
 
     )
 }

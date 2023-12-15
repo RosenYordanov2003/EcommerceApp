@@ -7,14 +7,14 @@
     {
         public AllProductsModel()
         {
-            Products = new List<ProductModel>();
-            Shoes = new List<ShoesFeatureModel>();
+            Products = new List<FilterProductModel>();
+            Shoes = new List<ShoesFilterModel>();
             Brands = new List<BrandModel>();
             Categories = new List<CategoryModel>();
         }
-        public IEnumerable<ProductModel> Products { get; set; }
+        public IEnumerable<FilterProductModel> Products { get; set; }
 
-        public IEnumerable<ShoesFeatureModel> Shoes { get; set; }
+        public IEnumerable<ShoesFilterModel> Shoes { get; set; }
 
         public IEnumerable<BrandModel> Brands { get; set; }
 

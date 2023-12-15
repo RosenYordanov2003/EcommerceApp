@@ -40,7 +40,7 @@
 
             productModel.Products = await applicationDbContext.Clothes
                   .Where(cl => cl.Gender.ToLower() == gender)
-                  .Select(cl => new ProductModel()
+                  .Select(cl => new FilterProductModel()
                   {
                       Id = cl.Id,
                       Name = cl.Name,
@@ -48,14 +48,14 @@
                       Pictures = cl.Pictures.Select(p => new PictureModel() { ImgUrl = p.ImgUrl }).Take(2),
                       Price = cl.Price,
                       StarRating = cl.StarRating,
-                      Category = cl.Category.Name,
+                     CategoryName  = cl.Category.Name,
                       SubCategories = cl.Category.SubCategories.Select(subc => subc.Name).ToList()
                   })
                   .ToListAsync();
 
             productModel.Shoes = await applicationDbContext.Shoes
                 .Where(sh => sh.Gender.ToLower() == gender)
-                .Select(sh => new ProductModel()
+                .Select(sh => new ShoesFilterModel()
                 {
                     Id = sh.Id,
                     Name = sh.Name,

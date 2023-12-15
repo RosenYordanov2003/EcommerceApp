@@ -95,6 +95,8 @@ export default function GenderProducts() {
         setProducts(filterPoducts);
         setShoes(filterShoes);
 
+
+
         configureLoading();
 
     }
@@ -104,7 +106,7 @@ export default function GenderProducts() {
 
         setTimeout(() => {
             setIsLoading(false);
-        }, 500)
+        }, 700)
     }
 
     const shoesResult = useMemo(() => {

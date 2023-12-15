@@ -99,6 +99,11 @@ export default function Navigation() {
                 <h2 className="nav-logo">Fashion Store</h2>
                 <ul>
                     <li>
+                        <Link to="/Home">
+                            Home
+                        </Link>
+                    </li>
+                    <li>
 
                         <Link to="/Gender/men">
                             Men{" "}

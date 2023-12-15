@@ -47,11 +47,8 @@ export default function GenderProducts() {
         setFilters({ brands: brandsArray, categories: categoriesArray });
         setProducts(filteredProducts);
         setShoes(filteredShoes);
-        setIsLoading(true);
 
-        setTimeout(() => {
-            setIsLoading(false);
-        }, 500)
+        configureLoading();
 
     }
     function filter(brandsArray, categoriesArray, productsArray) {
@@ -65,6 +62,49 @@ export default function GenderProducts() {
         };
 
         return productsArray.filter(filterByBrandAndCategory);
+    }
+
+    function filterProductsByQueryString(e) {
+        e.preventDefault();
+
+        const formData = new FormData(e.target);
+        let queryString = formData.get("query");
+
+        queryString = queryString.toLowerCase();
+
+        let filterShoes = [];
+        let filterPoducts = [];
+
+        if (products.length > 0 && (filters.brands.length > 0 || filters.categories.length > 0)) {
+            filterPoducts = products.filter((product) => product.name.toLowerCase().startsWith(queryString));
+            setProducts(filterPoducts);
+        }
+        else {
+            filterPoducts = resultObject.products.filter((product) => product.name.toLowerCase().startsWith(queryString));
+        }
+
+        if (shoes.length > 0 && (filters.brands.length > 0 || filters.categories.length > 0)) {
+            filterShoes = shoes.filter((shoes) => shoes.name.toLowerCase().startsWith(queryString));
+            setShoes(filterShoes);
+        }
+        else {
+            filterShoes = resultObject.shoes.filter((shoes) => shoes.name.toLowerCase().startsWith(queryString));
+        }
+
+
+        setProducts(filterPoducts);
+        setShoes(filterShoes);
+
+        configureLoading();
+
+    }
+
+    function configureLoading() {
+        setIsLoading(true);
+
+        setTimeout(() => {
+            setIsLoading(false);
+        }, 500)
     }
 
     const shoesResult = useMemo(() => {
@@ -96,24 +136,24 @@ export default function GenderProducts() {
 
     return (
 
+        <>
+            <form onSubmit={filterProductsByQueryString} className="searchForm">
+                <div className="search-input-container">
+                    <input name = "query" placeholder="Search for products" className="search" type="text"></input>
+                    <button className="search-button">Search</button>
+                    <i className="search-icon fa-solid fa-magnifying-glass"></i>
+                </div>
 
-        <div className="main-container">
+            </form>
+            <div className="main-container">
 
-            {resultObject && <FilterMenu result={resultObject} onCheckInput={filterProducts} />}
+                {resultObject && <FilterMenu result={resultObject} onCheckInput={filterProducts} />}
 
-            <div>
-                <form className="searchForm">
-                    <div className = "search-input-container">
-                        <input placeholder="Search for products" className="search" type="text"></input>
-                        <button className="search-button">Search</button>
-                        <i class=" search-icon fa-solid fa-magnifying-glass"></i>
-                    </div>
-                   
-                </form>
-                {resultContainer}
+                <div>
+                    {resultContainer}
 
+                </div>
             </div>
-        </div>
-
+        </>
     )
 }

@@ -10,10 +10,13 @@
    justify-content: space-around;
 
 }
+input:focus{
+    outline: none;
+}
 #filter-menu-navigation {
     position: fixed;
     left: 0px;
-    top: 100px;
+    top: 200px;
     overflow: auto;
     height: 100vh; 
     max-height: 100vh;
@@ -28,6 +31,7 @@
 .searchForm {
     background-color: #443c59;
     padding: 2rem;
+    
 }
 .search {
   padding: 0.2rem;
@@ -39,7 +43,7 @@
 }
 .search-input-container{
     position: relative;
-    width: 100%;
+    width: 80%;
 }
 .search-button {
     position: absolute;
@@ -50,6 +54,10 @@
     background-color: #f66e69;
     border: none;
     height: 3rem;
+    transition: all 0.5s ease;
+}
+.search-button:hover{
+    opacity: 0.8;
 }
 .search-icon {
     position: absolute;

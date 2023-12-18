@@ -19,11 +19,6 @@
             this.applicationDbContext = applicationDbContext;
         }
 
-        public async Task<bool> CheckForProductIsShoesAsync(int productId)
-        {
-            return await applicationDbContext.Shoes.AnyAsync(sh => sh.Id == productId);
-        }
-
         public async Task<bool> CheckIfProductExistsByIdAsync(int productId)
         {
             if (await applicationDbContext.Clothes.AnyAsync(cl => cl.Id == productId))
@@ -48,7 +43,8 @@
                     Name = c.Name,
                     Price = c.Price,
                     StarRating = c.StarRating,
-                    Pictures = c.Pictures.Select(p => new PictureModel() { ImgUrl = p.ImgUrl }).Take(2)
+                    Pictures = c.Pictures.Select(p => new PictureModel() { ImgUrl = p.ImgUrl }).Take(2),
+                    CategoryName = c.Category.Name
                 })
                 .ToArrayAsync();
         }
@@ -56,10 +52,11 @@
         public async Task<AllProductsModel> GetProductByGender(string gender)
         {
             gender = gender.ToLower();
+            string genderLetter = gender[0].ToString().ToLower();
             AllProductsModel productModel = new AllProductsModel();
 
             productModel.Products = await applicationDbContext.Clothes
-                  .Where(cl => cl.Gender.ToLower() == gender)
+                  .Where(cl => cl.Gender.ToLower() == genderLetter)
                   .Select(cl => new FilterProductModel()
                   {
                       Id = cl.Id,
@@ -83,7 +80,7 @@
                     StarRating = sh.StarRating,
                     Price = sh.Price,
                     SubCategory = sh.SubCategory.Name,
-                    Category = sh.Category.Name,
+                    CategoryName = sh.Category.Name,
                     Brand = sh.Brand.Name
                 })
                 .ToListAsync();
@@ -111,10 +108,10 @@
             return productModel;
         }
 
-        public async Task<ProductInfo<T>> GetProductByIdAsync<T>(int productId)
+        public async Task<ProductInfo<T>> GetProductByIdAsync<T>(int productId, string categoryName)
         {
 
-            if (await applicationDbContext.Clothes.AnyAsync(cl => cl.Id == productId))
+            if (categoryName.ToLower() != "shoes")
             {
                 var productInfo = await applicationDbContext.Clothes.Where(cl => cl.Id == productId).Select(cl => new ProductInfo<T>()
                 {
@@ -134,16 +131,16 @@
             }
             else
             {
-                var productInfo = await applicationDbContext.Shoes.Where(cl => cl.Id == productId).Select(cl => new ProductInfo<T>()
+                var productInfo = await applicationDbContext.Shoes.Where(shoes => shoes.Id == productId).Select(shoes => new ProductInfo<T>()
                 {
-                    Id = cl.Id,
-                    Description = cl.Description,
-                    Name = cl.Name,
-                    Price = cl.Price,
-                    StarRating = cl.StarRating,
-                    Pictures = cl.Pictures.Select(p => new PictureModel() { ImgUrl = p.ImgUrl }).ToArray(),
-                    ProductStocks = cl.ShoesStocks.Select(ps => new ProductStock<T> { Size = (T)(object)ps.Size, Quantity = ps.Quantity }).ToArray(),
-                    Reviews = cl.Reviews.Select(r => new ReviewModel() { Content = r.Content, StarEvaluation = r.StarЕvaluation })
+                    Id = shoes.Id,
+                    Description = shoes.Description,
+                    Name = shoes.Name,
+                    Price = shoes.Price,
+                    StarRating = shoes.StarRating,
+                    Pictures = shoes.Pictures.Select(p => new PictureModel() { ImgUrl = p.ImgUrl }).ToArray(),
+                    ProductStocks = shoes.ShoesStocks.Select(ps => new ProductStock<T> { Size = (T)(object)ps.Size, Quantity = ps.Quantity }).ToArray(),
+                    Reviews = shoes.Reviews.Select(r => new ReviewModel() { Content = r.Content, StarEvaluation = r.StarЕvaluation })
 
                 })
                 .FirstAsync();

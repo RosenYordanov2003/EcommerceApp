@@ -28,7 +28,7 @@ export default function FeaturedProduct({ product }) {
     }
     function handleProductClick() {
         if (product) {
-            navigate(`/ProductAbout/${product.id}`);
+            navigate(`/ProductAbout/${product.id}/${product.categoryName}`);
         }
     }
 

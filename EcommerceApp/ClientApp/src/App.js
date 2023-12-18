@@ -47,7 +47,7 @@ export default function App() {
                     <Route path="/Gender" element={<GenderProducts/>}>
                         <Route path=":gender" element={<GenderProducts />} />
                     </Route>
-                    <Route path="/ProductAbout/:productid" element={<ProductInfo/>}/>
+                    <Route path="/ProductAbout/:productid/:category" element={<ProductInfo/>}/>
                     <Route path="/" element={<Home categories={categories} isActive={isActive} />} />
                 </Routes>
             </UserContext.Provider>

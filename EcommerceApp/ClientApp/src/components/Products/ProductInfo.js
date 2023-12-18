@@ -5,10 +5,11 @@ export default function ProductInfo() {
     const [product, setProduct] = useState({});
 
     const pathArray = window.location.pathname.split('/');
-    const id = pathArray[pathArray.length - 1];
+    const id = pathArray[pathArray.length - 2];
+    const categoryName = pathArray[pathArray.length - 1];
 
     useEffect(() => {
-        loadProductById(id)
+        loadProductById(id, categoryName)
             .then((res) => {
                 console.log(res);
                 setProduct(res)

@@ -4,6 +4,7 @@
     using EcommerceApp.Core.Contracts;
     using EcommerceApp.Core.Models.Shoes;
     using EcommerceApp.Core.Models.Products;
+    using Microsoft.Extensions.Primitives;
 
     [ApiController]
     [Produces("application/json")]
@@ -40,20 +41,20 @@
             return Ok(result);
         }
         [HttpGet("AboutProduct")]
-        public async Task<IActionResult>GetProductById([FromQuery]int productId)
+        public async Task<IActionResult>GetProductById([FromQuery]int productId, [FromQuery] string categoryName)
         {
             if (!await clothesService.CheckIfProductExistsByIdAsync(productId))
             {
                 return BadRequest(new {Error = "Product with such an id does not exist"});
             }
-            if (await clothesService.CheckForProductIsShoesAsync(productId))
+            if (categoryName.ToLower() == "shoes")
             {
-                ProductInfo<double> shoesproductInfo = await clothesService.GetProductByIdAsync<double>(productId);
+                ProductInfo<double> shoesproductInfo = await clothesService.GetProductByIdAsync<double>(productId, categoryName);
 
                 return Ok(shoesproductInfo);
             }
 
-            ProductInfo<string> productInfo = await clothesService.GetProductByIdAsync<string>(productId);
+            ProductInfo<string> productInfo = await clothesService.GetProductByIdAsync<string>(productId, categoryName);
 
             return Ok(productInfo);
         }

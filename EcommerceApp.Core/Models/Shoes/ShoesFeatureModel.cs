@@ -12,6 +12,6 @@
         public int StarRating { get; set; }
         public decimal Price { get; set; }
         public IEnumerable<PictureModel> Pictures { get; set; }
-
+        public string CategoryName { get; set; } = null!;
     }
 }

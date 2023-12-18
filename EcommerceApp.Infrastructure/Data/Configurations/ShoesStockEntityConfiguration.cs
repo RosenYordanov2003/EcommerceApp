@@ -14,7 +14,7 @@
 
         private IEnumerable<ShoesStock> GenerateProductStock()
         {
-            return new List<ShoesStock>()
+           return new List<ShoesStock>()
            {
                new ShoesStock()
                {
@@ -51,7 +51,7 @@
                    Quantity = 18,
                    Size = 45
                },
-            };
+           };
         }
     }
 }

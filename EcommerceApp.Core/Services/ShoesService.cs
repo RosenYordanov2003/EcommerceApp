@@ -24,7 +24,8 @@
                     Name = s.Name,
                     StarRating = s.StarRating,
                     Price = s.Price,
-                    Pictures = s.Pictures.Select(p => new PictureModel() { ImgUrl = p.ImgUrl }).Take(2)
+                    Pictures = s.Pictures.Select(p => new PictureModel() { ImgUrl = p.ImgUrl }).Take(2),
+                    CategoryName = s.Category.Name
                 })
                 .ToArrayAsync();
         }

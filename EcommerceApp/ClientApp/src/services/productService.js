@@ -26,8 +26,8 @@ export async function loadProductsByGender(gender) {
     return response;
     
 }
-export async function loadProductById(id) {
-    const request = await fetch(`${baseUrl}/AboutProduct?productid=${id}`, { credentials: 'include' });
+export async function loadProductById(id, categoryName) {
+    const request = await fetch(`${baseUrl}/AboutProduct?productid=${id}&categoryName=${categoryName}`, { credentials: 'include' });
 
     if (!request.ok) {
         throw Error(request.Error);

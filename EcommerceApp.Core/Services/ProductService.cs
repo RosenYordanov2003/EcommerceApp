@@ -120,8 +120,10 @@
                     Name = cl.Name,
                     Price = cl.Price,
                     StarRating = cl.StarRating,
+                    Brand = cl.Brand.Name,
+                    CategoryName = cl.Category.Name,
                     Pictures = cl.Pictures.Select(p => new PictureModel() { ImgUrl = p.ImgUrl }).ToArray(),
-                    ProductStocks = cl.ProductStocks.Select(ps => new ProductStock<T>() { Size = (T)(object)ps.Size, Quantity = ps.Quantity }).ToArray(),
+                    ProductStocks = cl.ProductStocks.Select(ps => new ProductStock<T>() { Size = (T)(object)ps.Size, Quantity = ps.Quantity , Id = ps.Id }).ToArray(),
                     Reviews = cl.Reviews.Select(r => new ReviewModel() { Content = r.Content, StarEvaluation = r.StarЕvaluation })
 
                 })
@@ -138,8 +140,10 @@
                     Name = shoes.Name,
                     Price = shoes.Price,
                     StarRating = shoes.StarRating,
+                    Brand = shoes.Brand.Name,
+                    CategoryName = shoes.Category.Name,
                     Pictures = shoes.Pictures.Select(p => new PictureModel() { ImgUrl = p.ImgUrl }).ToArray(),
-                    ProductStocks = shoes.ShoesStocks.Select(ps => new ProductStock<T> { Size = (T)(object)ps.Size, Quantity = ps.Quantity }).ToArray(),
+                    ProductStocks = shoes.ShoesStocks.Select(ps => new ProductStock<T> { Size = (T)(object)ps.Size, Quantity = ps.Quantity, Id = ps.Id}).ToArray(),
                     Reviews = shoes.Reviews.Select(r => new ReviewModel() { Content = r.Content, StarEvaluation = r.StarЕvaluation })
 
                 })

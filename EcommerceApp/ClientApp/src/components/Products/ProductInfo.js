@@ -2,6 +2,7 @@
 import { loadProductById } from "../../services/productService";
 import ProductInfoStyle from "../Products/ProductInfoStyle.css";
 import SizeMenu from "../SizeMenu/SizeMenu";
+import ProductDetails from "../Products/ProductDetails/ProductDetails";
 export default function ProductInfo() {
 
     const [product, setProduct] = useState({});
@@ -27,9 +28,10 @@ export default function ProductInfo() {
 
     let sizeItmes = "";
     if (product.productStocks) {
-        sizeItmes = product.productStocks.map((productStock) => <SizeMenu productSize={productStock} />);
+        sizeItmes = product.productStocks.map((productStock) => <SizeMenu productSize={productStock} key={productStock.id } />);
     }
 
+    const productDetails = <ProductDetails product={product}/>
 
     function handleimgRightArrowClick() {
         console.log(indexPicture);
@@ -63,6 +65,7 @@ export default function ProductInfo() {
             setCount(count + 1);
         }
     }
+    console.log(product);
     let className = isActiveArrows ? "active-arrow" : "";
     return (
         <div className="productinfo-card-container">
@@ -90,6 +93,10 @@ export default function ProductInfo() {
                     <button className="wishlist-button"><i className="fa-regular fa-heart"></i></button>
                     <p>Wishlist</p>
                 </div>
+                <hr></hr>
+                <section className="product-details">
+                    {productDetails }
+                </section>
             </div>
         </div>
     )

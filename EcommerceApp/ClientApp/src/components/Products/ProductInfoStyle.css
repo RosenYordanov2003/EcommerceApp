@@ -1,10 +1,37 @@
-﻿.productinfo-card-container{
+﻿@keyframes showing {
+    from {
+        display: none;
+        opacity: 0;
+    }
+
+    to {
+        display: flex;
+        opacity: 1;
+    }
+}
+@keyframes showingDescription{
+    from{
+        display: none;
+        opacity: 0;
+    }
+    to{
+        display: block;
+        opacity : 1;
+    }
+}
+
+
+
+.productinfo-card-container{
     padding: 2rem;
     margin-bottom: 10rem;
     display: flex;
     justify-content: center;
     align-items: flex-start;
     gap: 4rem;
+}
+.productinfo-card-container p{
+    margin: 0px;
 }
 
 .size-ul {
@@ -102,6 +129,7 @@ main {
    display: flex;
    flex-direction: column;
    gap: 1.2rem;
+   max-width: 40%;
 }
 .wishlist-container{
     display: flex;
@@ -109,12 +137,57 @@ main {
     gap: 0.8rem;
 }
 .wishlist-container p {
-    margin: 0;
     font-size: 1.3rem;
 }
 .wishlist-button{
     background-color: transparent;
     border: none;
     font-size: 1.6rem;
+}
+.product-about{
+    display: none;
+}
+.product-about-title{
+    font-size: 1rem;
+    margin: 0;
+}
+.product-about-content{
+    font-size: 1rem;
+}
+.product-section-header{
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.product-section-header{
+    text-transform: capitalize;
+    font-weight: bolder;
+}
+.product-section-header i{
+    padding: 1rem;
+}
+.product-description {
+    width: 600px;
+    margin-top: 1.2rem;
+    animation: showingDescription;
+    animation-duration: 1.3s;
+    animation-fill-mode: backwards;
+    animation-timing-function: ease-in;
+}
+.product-description p{
+    width: 100%;
+}
+.active-information
+ {
+   display: flex;
+   align-items: center;
+   justify-content: flex-start;
+   gap: 1.5rem;
+   margin: 1rem 0rem 1.5rem 5rem;
+   animation: showing;
+   animation-duration: 1s;
+   animation-fill-mode: backwards;
+   animation-timing-function: ease-in;
 }
 

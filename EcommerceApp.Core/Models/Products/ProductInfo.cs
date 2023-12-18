@@ -13,5 +13,6 @@
         public IEnumerable<ReviewModel> Reviews { get; set; }
 
         public IEnumerable<ProductStock<T>> ProductStocks { get; set; }
+        public string Brand { get; set; } = null!;
     }
 }

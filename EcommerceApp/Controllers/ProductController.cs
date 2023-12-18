@@ -4,7 +4,6 @@
     using EcommerceApp.Core.Contracts;
     using EcommerceApp.Core.Models.Shoes;
     using EcommerceApp.Core.Models.Products;
-    using Microsoft.Extensions.Primitives;
 
     [ApiController]
     [Produces("application/json")]

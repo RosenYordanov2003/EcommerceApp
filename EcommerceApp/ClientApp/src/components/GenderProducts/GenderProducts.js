@@ -38,9 +38,10 @@ export default function GenderProducts() {
         const brandNames = brandsArray.map((brand) => brand.name);
         const categoryNames = categoriesArray.map((category) => category.name);
 
+
         const filterByBrandAndCategory = (product) => {
             const brandMatch = brandNames.length === 0 || brandNames.includes(product.brand);
-            const categoryMatch = categoryNames.length === 0 || categoryNames.includes(product.category);
+            const categoryMatch = categoryNames.length === 0 || categoryNames.includes(product.categoryName);
             return brandMatch && categoryMatch;
         };
 
@@ -61,7 +62,7 @@ export default function GenderProducts() {
 
         const filterByBrandAndCategory = (product) => {
             const brandMatch = brandNames.length === 0 || brandNames.includes(product.brand);
-            const categoryMatch = categoryNames.length === 0 || categoryNames.includes(product.category);
+            const categoryMatch = categoryNames.length === 0 || categoryNames.includes(product.categoryName);
             return brandMatch && categoryMatch;
         };
 
@@ -140,6 +141,7 @@ export default function GenderProducts() {
             <section className="products-section">
                 {productsResult}
             </section>
+            {shoesResult.length > 0 && productsResult.length > 0 ? <h2 className="shoes-title">Shoes</h2> : ""}
             <section className="products-section">
                 {shoesResult}
             </section>

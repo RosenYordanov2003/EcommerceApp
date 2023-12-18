@@ -44,5 +44,5 @@ export default function FeaturedProduct({ product }) {
                 <p className = "price">${product.price.toFixed("2") }</p>
             </div>
         </div>
-       )
+    )
 }

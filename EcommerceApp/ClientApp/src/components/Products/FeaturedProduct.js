@@ -35,7 +35,7 @@ export default function FeaturedProduct({ product }) {
     return (
         <div className="product-card">
             <div onMouseOver={activateProductCard} onMouseLeave={deactivateProductCard} className="img-container">
-                <i className="fa-regular fa-heart"></i>
+                <i className="fa-regular fa-heart heart"></i>
                 <img onClick={handleProductClick} src={imgUrl} />
             </div>
             <div className="product-content">

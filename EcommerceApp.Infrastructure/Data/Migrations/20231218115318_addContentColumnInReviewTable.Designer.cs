@@ -4,6 +4,7 @@ using EcommerceApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EcommerceApp.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231218115318_addContentColumnInReviewTable")]
+    partial class addContentColumnInReviewTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1387,43 +1389,6 @@ namespace EcommerceApp.Infrastructure.Migrations
                     b.HasIndex("ShoesId");
 
                     b.ToTable("ShoesStock");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Quantity = 3,
-                            ShoesId = 2,
-                            Size = 40.0
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Quantity = 6,
-                            ShoesId = 2,
-                            Size = 41.0
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Quantity = 7,
-                            ShoesId = 2,
-                            Size = 43.0
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Quantity = 8,
-                            ShoesId = 2,
-                            Size = 44.0
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Quantity = 18,
-                            ShoesId = 2,
-                            Size = 45.0
-                        });
                 });
 
             modelBuilder.Entity("EcommerceApp.Infrastructure.Data.Models.SubCategory", b =>

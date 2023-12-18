@@ -8,6 +8,8 @@
     using Core.Models.Shoes;
     using Models.Brands;
     using Models.Categories;
+    using Models.ProductStocks;
+    using Models.Review;
 
     public class ProductService : IProductSevice
     {
@@ -15,6 +17,11 @@
         public ProductService(ApplicationDbContext applicationDbContext)
         {
             this.applicationDbContext = applicationDbContext;
+        }
+
+        public async Task<bool> CheckForProductIsShoesAsync(int productId)
+        {
+            return await applicationDbContext.Shoes.AnyAsync(sh => sh.Id == productId);
         }
 
         public async Task<bool> CheckIfProductExistsByIdAsync(int productId)
@@ -61,7 +68,7 @@
                       Pictures = cl.Pictures.Select(p => new PictureModel() { ImgUrl = p.ImgUrl }).Take(2),
                       Price = cl.Price,
                       StarRating = cl.StarRating,
-                     CategoryName  = cl.Category.Name,
+                      CategoryName = cl.Category.Name,
                       SubCategories = cl.Category.SubCategories.Select(subc => subc.Name).ToList()
                   })
                   .ToListAsync();
@@ -102,6 +109,47 @@
 
 
             return productModel;
+        }
+
+        public async Task<ProductInfo<T>> GetProductByIdAsync<T>(int productId)
+        {
+
+            if (await applicationDbContext.Clothes.AnyAsync(cl => cl.Id == productId))
+            {
+                var productInfo = await applicationDbContext.Clothes.Where(cl => cl.Id == productId).Select(cl => new ProductInfo<T>()
+                {
+                    Id = cl.Id,
+                    Description = cl.Description,
+                    Name = cl.Name,
+                    Price = cl.Price,
+                    StarRating = cl.StarRating,
+                    Pictures = cl.Pictures.Select(p => new PictureModel() { ImgUrl = p.ImgUrl }).ToArray(),
+                    ProductStocks = cl.ProductStocks.Select(ps => new ProductStock<T>() { Size = (T)(object)ps.Size, Quantity = ps.Quantity }).ToArray(),
+                    Reviews = cl.Reviews.Select(r => new ReviewModel() { Content = r.Content, StarEvaluation = r.StarЕvaluation })
+
+                })
+                 .FirstAsync();
+
+                return productInfo;
+            }
+            else
+            {
+                var productInfo = await applicationDbContext.Shoes.Where(cl => cl.Id == productId).Select(cl => new ProductInfo<T>()
+                {
+                    Id = cl.Id,
+                    Description = cl.Description,
+                    Name = cl.Name,
+                    Price = cl.Price,
+                    StarRating = cl.StarRating,
+                    Pictures = cl.Pictures.Select(p => new PictureModel() { ImgUrl = p.ImgUrl }).ToArray(),
+                    ProductStocks = cl.ShoesStocks.Select(ps => new ProductStock<T> { Size = (T)(object)ps.Size, Quantity = ps.Quantity }).ToArray(),
+                    Reviews = cl.Reviews.Select(r => new ReviewModel() { Content = r.Content, StarEvaluation = r.StarЕvaluation })
+
+                })
+                .FirstAsync();
+
+                return productInfo;
+            }
         }
     }
 }

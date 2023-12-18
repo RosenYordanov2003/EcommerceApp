@@ -59,6 +59,7 @@ namespace EcommerceApp.Data
             builder.ApplyConfiguration(new ShoesEntityConfiguration());
             builder.ApplyConfiguration(new ProductEntityConfiguration());
             builder.ApplyConfiguration(new PictureEntityConfiguration());
+            builder.ApplyConfiguration(new ShoesStockEntityConfiguration());
         }
     }
 }

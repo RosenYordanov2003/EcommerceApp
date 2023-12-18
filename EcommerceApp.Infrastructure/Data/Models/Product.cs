@@ -11,6 +11,7 @@
             Pictures = new List<Picture>();
             ProductStocks = new List<ProductStock>();
             UserFavoriteProducts = new HashSet<UserFavoriteProducts>();
+            Reviews = new HashSet<Review>();
         }
         [Key]
         public int Id { get; set; }
@@ -44,5 +45,6 @@
         public ICollection<Picture> Pictures { get; set; }
         public ICollection<ProductStock> ProductStocks { get; set; }
         public ICollection<UserFavoriteProducts> UserFavoriteProducts { get; set; }
+        public ICollection<Review> Reviews { get; set; }
     }
 }

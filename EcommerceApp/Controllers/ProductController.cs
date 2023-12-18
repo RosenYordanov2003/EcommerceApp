@@ -46,7 +46,16 @@
             {
                 return BadRequest(new {Error = "Product with such an id does not exist"});
             }
-            return Ok();
+            if (await clothesService.CheckForProductIsShoesAsync(productId))
+            {
+                ProductInfo<double> shoesproductInfo = await clothesService.GetProductByIdAsync<double>(productId);
+
+                return Ok(shoesproductInfo);
+            }
+
+            ProductInfo<string> productInfo = await clothesService.GetProductByIdAsync<string>(productId);
+
+            return Ok(productInfo);
         }
     }
 }

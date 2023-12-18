@@ -9,6 +9,8 @@
         {
             Pictures = new List<Picture>();
             UserFavoriteShoes = new HashSet<UserFavoriteShoes>();
+            Reviews = new HashSet<Review>();
+            ShoesStocks = new List<ShoesStock>();
         }
         public int Id { get; set; }
         [ForeignKey(nameof(Brand))]
@@ -39,5 +41,8 @@
         public bool IsFeatured { get; set; }
 
         public ICollection<UserFavoriteShoes> UserFavoriteShoes { get; set; }
+        public ICollection<Review> Reviews { get; set; }
+
+        public ICollection<ShoesStock> ShoesStocks { get; set; }
     }
 }

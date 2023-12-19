@@ -50,6 +50,8 @@ main {
     font-size: 1.4rem;
     padding: 0.5rem;
     border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease-in;
 }
 
 .order-section button{
@@ -147,6 +149,10 @@ main {
 .product-about{
     display: none;
 }
+.product-info-title{
+    font-size: 1.7rem;
+    margin: 0;
+}
 .product-about-title{
     font-size: 1rem;
     margin: 0;
@@ -168,10 +174,10 @@ main {
     padding: 1rem;
 }
 .product-description {
-    width: 600px;
+    max-width: 400px;
     margin-top: 1.2rem;
     animation: showingDescription;
-    animation-duration: 1.3s;
+    animation-duration: 1s;
     animation-fill-mode: backwards;
     animation-timing-function: ease-in;
 }
@@ -189,5 +195,33 @@ main {
    animation-duration: 1s;
    animation-fill-mode: backwards;
    animation-timing-function: ease-in;
+}
+.not-available{
+    opacity: 0.4;
+}
+.product-stock {
+    color: #7fdacf;
+    font-size: 1.2rem;
+    font-weight: bolder;
+    background-color: #f3f7f6;
+    max-width: 160px;
+    text-align: center;
+    padding: 0.2rem 0rem
+}
+.active-size{
+    color: white;
+    background-color: black;
+}
+.in-stock {
+    color: #7fdacf;
+    font-size: 1.2rem;
+    font-weight: bolder;
+    background-color: #f3f7f6;
+    max-width: 110px;
+    text-align: center;
+    padding: 0.2rem 0rem
+}
+.out-of-stock{
+    color: red;
 }
 

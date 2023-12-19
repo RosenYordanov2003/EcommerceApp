@@ -51,6 +51,13 @@
                    Quantity = 18,
                    Size = 45
                },
+               new ShoesStock()
+               {
+                   Id = 6,
+                   ShoesId = 2,
+                   Quantity = 0,
+                   Size = 46
+               },
            };
         }
     }

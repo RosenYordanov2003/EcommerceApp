@@ -66,6 +66,7 @@
                       Price = cl.Price,
                       StarRating = cl.StarRating,
                       CategoryName = cl.Category.Name,
+                      Brand = cl.Brand.Name,
                       SubCategories = cl.Category.SubCategories.Select(subc => subc.Name).ToList()
                   })
                   .ToListAsync();

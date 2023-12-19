@@ -1,7 +1,7 @@
 ﻿import { useEffect, useState } from "react";
 import { loadProductById } from "../../services/productService";
 import ProductInfoStyle from "../Products/ProductInfoStyle.css";
-import SizeMenu from "../SizeMenu/SizeMenu";
+import SizeItem from "../SizeMenu/SizeMenu";
 import ProductDetails from "../Products/ProductDetails/ProductDetails";
 export default function ProductInfo() {
 
@@ -10,7 +10,7 @@ export default function ProductInfo() {
     const [indexPicture, setIndexPicture] = useState(0);
     const [count, setCount] = useState(1);
     const [isActiveArrows, setActiveArrows] = useState(false);
-
+    const [activeSizeItem, setActiveSizeItem] = useState(undefined);
 
     const pathArray = window.location.pathname.split('/');
     const id = pathArray[pathArray.length - 2];
@@ -26,9 +26,15 @@ export default function ProductInfo() {
             .catch((error) => console.error(error));
     }, [])
 
+    function handleSizeItem(index) {
+        const activeItem = product.productStocks[index];
+        setActiveSizeItem(activeItem);
+        
+    }
+
     let sizeItmes = "";
     if (product.productStocks) {
-        sizeItmes = product.productStocks.map((productStock) => <SizeMenu productSize={productStock} key={productStock.id } />);
+        sizeItmes = product.productStocks.map((productStock, index) => <SizeItem productSize={productStock} index={index} handleSizeItem={handleSizeItem} key={productStock.id } />);
     }
 
     const productDetails = <ProductDetails product={product}/>
@@ -65,7 +71,6 @@ export default function ProductInfo() {
             setCount(count + 1);
         }
     }
-    console.log(product);
     let className = isActiveArrows ? "active-arrow" : "";
     return (
         <div className="productinfo-card-container">
@@ -75,7 +80,9 @@ export default function ProductInfo() {
                 <button onClick={handleimgRightArrowClick} className={`arrow-button right-arrow-button ${className}`}> <i className="fa-solid fa-chevron-right"></i></button>
             </div>
             <div className="productinfo-about-container">
-                <h2 className="product-about-title">{product.name}</h2>
+                <h2 className="product-info-title">{product.name}</h2>
+                <p className={`product-stock ${activeSizeItem?.quantity > 0 ? 'in-stock' : 'out-of-stock'}`}>
+                    {activeSizeItem?.quantity <= 0 ? "Out of stock" : "In Stock"}</p>
                 <p className="product-price">${Number.parseFloat(product?.price).toFixed(2)}</p>
                 <h4>Size</h4>
                 <ul className="size-ul">

@@ -33,6 +33,8 @@ export default function GenderProducts() {
             .catch((error) => console.error(error));
     }, [gender]);
 
+    console.log(resultObject);
+
     function filterProducts(brandsArray, categoriesArray) {
 
         const brandNames = brandsArray.map((brand) => brand.name);

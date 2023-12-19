@@ -7,11 +7,13 @@ export default function ProductDetails({ product }) {
 
     let informationClassName = informationVisibility ? "active-information" : "product-about";
     let descriptionClassName = descriptionVisibility ? "active-description" : "product-about";
+
+
     return (
         <>
             <div className="product-information">
                 <div className="product-section-header">
-                    <i onClick={() => { setInformationVisibility(!informationVisibility); } } className="fa-solid fa-plus"></i>
+                    <i onClick={() => { setInformationVisibility(!informationVisibility); } } className={`fa-solid ${informationVisibility == true ? "fa-minus" : "fa-plus"}`}></i>
                     <p>Information</p>
                 </div>
                 <div className={`${informationClassName}`}>
@@ -26,7 +28,7 @@ export default function ProductDetails({ product }) {
             <hr></hr>
             <div className="product-information">
                 <div className="product-section-header">
-                    <i onClick={() => setDescriptionVisibility(!descriptionVisibility)} className="fa-solid fa-plus"></i>
+                    <i onClick={() => setDescriptionVisibility(!descriptionVisibility)} className={`fa-solid ${descriptionVisibility == true ? "fa-minus" : "fa-plus"}`}></i>
                     <p>Description</p>
                 </div>
                 <div className={`${descriptionClassName}`}>

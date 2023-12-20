@@ -43,7 +43,7 @@ export default function ProductInfo() {
         });
     }
 
-    const productDetails = <ProductDetails product={product} />
+    const productDetails = <ProductDetails product={product} id={id} category={categoryName} />
 
     function handleimgRightArrowClick() {
         if (indexPicture >= product.pictures.length - 1) {
@@ -108,17 +108,6 @@ export default function ProductInfo() {
                 <hr></hr>
                 <section className="product-details">
                     {productDetails}
-                    {/*<h2 className="review-title">Customor Reviews</h2>*/}
-                    {/*<div className="evaluation-container">*/}
-                    {/*    <p className="product-evaluation">4.9</p>*/}
-                    {/*    <div className="divider">/</div>*/}
-                    {/*    <p className="reviews-count">2221 Reviews</p>*/}
-                    {/*</div>*/}
-                    {/*<button className="review-button">Write Review</button>*/}
-                    {/*<h2 className="write-title">Write Review</h2>*/}
-                    {/*<div className = "write-review-star-container">*/}
-                    {/*    <p>Your evaluation</p>*/}
-                    {/*</div>*/}
                 </section>
             </div>
         </div>

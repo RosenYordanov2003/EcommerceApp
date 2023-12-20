@@ -25,7 +25,11 @@ export default function Login() {
         }
         login(userInfoObject)
             .then(res => {
-                setUser(res.username);
+                const user = {
+                    username: res.username,
+                    id: res.id
+                };
+                setUser(user);
                 navigate('/Home');
 
             })

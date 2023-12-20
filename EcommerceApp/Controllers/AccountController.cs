@@ -85,7 +85,7 @@
                         Expires = DateTimeOffset.UtcNow.AddMinutes(15),
                     });
 
-                    return Ok(new LoginResponse() { Username = loginModel.Username });
+                    return Ok(new LoginResponse() { Username = loginModel.Username, Id = user.Id });
                 }
             }
             return BadRequest(new { Error = "Username does not exist!" });
@@ -118,7 +118,7 @@
                 Expires = DateTimeOffset.UtcNow.AddMinutes(15),
             });
 
-            return Ok(new { Username = user.UserName });
+            return Ok(new { Username = user.UserName, Id = user.Id });
         }
         [HttpGet]
         [Route("Logout")]

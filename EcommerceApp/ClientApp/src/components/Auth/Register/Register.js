@@ -45,7 +45,7 @@ export default function Register() {
                 <input name="password" onBlur={onInputBlur} onFocus={onInputFouc} id="password" type="password" autoComplete="password" aria-required="true" placeholder="Enter password" />
             </section>
             <section className="input-container">
-                <label htmlFor="confirm-password" >Confirm Password</label>
+                <label htmlFor="confirm-password">Confirm Password</label>
                 <input name="confirm-password" onBlur={onInputBlur} onFocus={onInputFouc} id="confirm-password" type="password" placeholder="Repeat password..." aria-required="true" />
             </section>
             <button className="submit-btn" type="submit">Register</button>

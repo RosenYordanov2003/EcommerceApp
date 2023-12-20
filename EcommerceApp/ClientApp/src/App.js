@@ -26,7 +26,11 @@ export default function App() {
         if (!user) {
             refreshToken()
                 .then((res) => {
-                    setUser(res.username);
+                    const user = {
+                        username: res.username,
+                        id: res.id
+                    };
+                    setUser(user);
                 })
                 .catch(() => {
                     navigate("/Login");

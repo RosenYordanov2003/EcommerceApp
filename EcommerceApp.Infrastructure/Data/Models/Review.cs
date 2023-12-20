@@ -23,6 +23,6 @@
         [ForeignKey(nameof(Shoes))]
         public int? ShoesId { get; set; }
         public Shoes? Shoes { get; set; }
-
+        public DateTime CreatedOn { get; set; }
     }
 }

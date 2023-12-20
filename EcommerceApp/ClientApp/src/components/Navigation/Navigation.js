@@ -11,10 +11,9 @@ export default function Navigation() {
 
     const baseUrl = "https://localhost:7122/api/categories";
     const navigate = useNavigate();
-    const { user, setUser } = useContext(UserContext);
+    const context = useContext(UserContext);
     const [categories, setCategories] = useState([]);
     const [isActive, setActivity] = useState(true);
-
 
     const [isMenArrowActive, setIsMenArrowActive] = useState(false);
     const [isWomenArrowActive, setIsWomenArrowActive] = useState(false);
@@ -55,10 +54,10 @@ export default function Navigation() {
     }
 
     let listImes;
-    if (user) {
+    if (context.user) {
         listImes =
             <>
-                <li>{user}</li>
+                <li>{context.user.username}</li>
                 <li>
                     <Link to="/Cart">
                         <i className="fa-solid fa-cart-shopping"></i>
@@ -87,7 +86,7 @@ export default function Navigation() {
     function onLogout() {
         logout()
             .then(() => {
-                setUser(undefined);
+                context.setUser({});
                 navigate("/");
             })
             .catch(error => console.error(error))

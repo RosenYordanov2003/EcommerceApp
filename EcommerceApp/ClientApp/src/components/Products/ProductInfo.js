@@ -29,18 +29,23 @@ export default function ProductInfo() {
     function handleSizeItem(index) {
         const activeItem = product.productStocks[index];
         setActiveSizeItem(activeItem);
-        
     }
 
-    let sizeItmes = "";
+    let sizeItmes = [];
     if (product.productStocks) {
-        sizeItmes = product.productStocks.map((productStock, index) => <SizeItem productSize={productStock} index={index} handleSizeItem={handleSizeItem} key={productStock.id } />);
+        sizeItmes = product.productStocks.map((productStock, index) => {
+            if (activeSizeItem !== undefined && activeSizeItem.id === productStock.id) {
+                return <SizeItem productSize={productStock} index={index} handleSizeItem={handleSizeItem} isActive={true} key={productStock.id} />
+            }
+            else {
+              return <SizeItem productSize={productStock} index={index} handleSizeItem={handleSizeItem} isActive={false} key={productStock.id} />
+            }
+        });
     }
 
     const productDetails = <ProductDetails product={product}/>
 
     function handleimgRightArrowClick() {
-        console.log(indexPicture);
         if (indexPicture >= product.pictures.length - 1) {
             setIndexPicture(0);
             setActivePictures(product.pictures[0]);
@@ -81,7 +86,7 @@ export default function ProductInfo() {
             </div>
             <div className="productinfo-about-container">
                 <h2 className="product-info-title">{product.name}</h2>
-                <p className={`product-stock ${activeSizeItem?.quantity > 0 ? 'in-stock' : 'out-of-stock'}`}>
+                <p className={`product-stock ${activeSizeItem?.quantity <= 0 ? 'out-of-stock' : 'in-stock'}`}>
                     {activeSizeItem?.quantity <= 0 ? "Out of stock" : "In Stock"}</p>
                 <p className="product-price">${Number.parseFloat(product?.price).toFixed(2)}</p>
                 <h4>Size</h4>

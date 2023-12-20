@@ -34,7 +34,7 @@ export default function Login() {
     }
 
     return (
-        <form onSubmit={onFormSubmit} className="register-form" method="post">
+        <form className="auth-form" onSubmit={onFormSubmit} className="register-form" method="post">
 
             <section className="input-container">
                 <label htmlFor="username">Username</label>

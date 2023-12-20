@@ -1,12 +1,15 @@
 ﻿import { useState } from "react";
+import ReviewContainer from "../../ReviewContainer/ReviewContainer";
 
 export default function ProductDetails({ product }) {
 
     const [informationVisibility, setInformationVisibility] = useState(false);
     const [descriptionVisibility, setDescriptionVisibility] = useState(false);
+    const [reviewVisibility, setReviewVisibility] = useState(false);
 
     let informationClassName = informationVisibility ? "active-information" : "product-about";
     let descriptionClassName = descriptionVisibility ? "active-description" : "product-about";
+    let reviewClassName = reviewVisibility ? "active-review" : "product-about"; 
 
 
     return (
@@ -33,6 +36,16 @@ export default function ProductDetails({ product }) {
                 </div>
                 <div className={`${descriptionClassName}`}>
                     <p className= "product-description">{product.description }</p>
+                </div>
+            </div>
+            <hr></hr>
+            <div className="product-reviews">
+                <div className="product-section-header">
+                    <i onClick={() => setReviewVisibility(!reviewVisibility)} className={`fa-solid ${reviewVisibility == true ? "fa-minus" : "fa-plus"}`}></i>
+                    <p>Reviews</p>
+                </div>
+                <div className={reviewClassName}>
+                   <ReviewContainer/>
                 </div>
             </div>
         </>

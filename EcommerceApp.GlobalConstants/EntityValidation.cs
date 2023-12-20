@@ -47,5 +47,10 @@
             public const double SizeMinValue = 35.00;
             public const double SizeMaxValue = 45.00;
         }
+        public static class ReviewEntity
+        {
+            public const int ContentMaxValue = 200;
+            public const int ContentMinValue = 5;
+        }
     }
 }

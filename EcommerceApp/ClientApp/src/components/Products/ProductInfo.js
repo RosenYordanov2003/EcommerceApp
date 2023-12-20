@@ -38,12 +38,12 @@ export default function ProductInfo() {
                 return <SizeItem productSize={productStock} index={index} handleSizeItem={handleSizeItem} isActive={true} key={productStock.id} />
             }
             else {
-              return <SizeItem productSize={productStock} index={index} handleSizeItem={handleSizeItem} isActive={false} key={productStock.id} />
+                return <SizeItem productSize={productStock} index={index} handleSizeItem={handleSizeItem} isActive={false} key={productStock.id} />
             }
         });
     }
 
-    const productDetails = <ProductDetails product={product}/>
+    const productDetails = <ProductDetails product={product} />
 
     function handleimgRightArrowClick() {
         if (indexPicture >= product.pictures.length - 1) {
@@ -98,7 +98,7 @@ export default function ProductInfo() {
                         <button onClick={handleMinusClick} className="order-button"><i className="fa-solid fa-minus"></i></button>
                         <div className="order-number">{count}</div>
                         <button onClick={handlePlusClick} className="order-button"><i className="fa-solid fa-plus"></i></button>
-                        <button className="add-to-cart">Add to cart</button>
+                        {activeSizeItem?.quantity <= 0 ? "" : <button disabled className="add-to-cart">Add to cart</button>}
                     </div>
                 </section>
                 <div className="wishlist-container">
@@ -107,7 +107,18 @@ export default function ProductInfo() {
                 </div>
                 <hr></hr>
                 <section className="product-details">
-                    {productDetails }
+                    {productDetails}
+                    {/*<h2 className="review-title">Customor Reviews</h2>*/}
+                    {/*<div className="evaluation-container">*/}
+                    {/*    <p className="product-evaluation">4.9</p>*/}
+                    {/*    <div className="divider">/</div>*/}
+                    {/*    <p className="reviews-count">2221 Reviews</p>*/}
+                    {/*</div>*/}
+                    {/*<button className="review-button">Write Review</button>*/}
+                    {/*<h2 className="write-title">Write Review</h2>*/}
+                    {/*<div className = "write-review-star-container">*/}
+                    {/*    <p>Your evaluation</p>*/}
+                    {/*</div>*/}
                 </section>
             </div>
         </div>

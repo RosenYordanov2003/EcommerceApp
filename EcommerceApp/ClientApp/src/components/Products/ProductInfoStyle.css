@@ -306,8 +306,16 @@ main {
     text-align: center;
     width: 100%;
     padding: 0.7rem;
+    transition: 0.5s ease-in all;
 }
-textarea{
+.submit-review-button:hover{
+  opacity: 0.8;
+  transform:scale(1.020);
+}
+.submit-review-button:active {
+    opacity: 0.6;
+}
+textarea {
     outline: none;
 }
 .active-review {

@@ -2,14 +2,15 @@
 import { UserContext } from '../../Contexts/UserContext';
 import { postReview } from "../../services/reviewService";
 
-export default function ReviewContainer({id, category }) {
+export default function ReviewContainer({ id, category, product, updateProduct }) {
+
     const { user, setUser } = useContext(UserContext);
     const [starIndex, setStarIndex] = useState(-1);
+    const [inputObject, setInputObject] = useState({ name: undefined, summary: undefined, review: undefined });
 
     function handleOnStarClick(idnex) {
         setStarIndex(idnex);
     }
-
 
     const stars = Array.from({ length: 5 }, (star, index) => {
         if (index > starIndex) {
@@ -19,15 +20,12 @@ export default function ReviewContainer({id, category }) {
             return <i onClick={() => handleOnStarClick(index)} key={index} className="fa-solid fa-star star"></i>
         }
     })
-    console.log(user);
     function handleSubmitReviewPost(event) {
         event.preventDefault();
-        const formData = new FormData(event.target);
-        console.log(user.id);
         const reviewObject = {
-            content: formData.get("review"),
-            summary: formData.get("summary"),
-            username: formData.get("name"),
+            content: inputObject.review,
+            summary: inputObject.summary,
+            username: inputObject.name,
             productId: id,
             productCategory: category,
             userId: user?.id,
@@ -36,18 +34,31 @@ export default function ReviewContainer({id, category }) {
 
         postReview(reviewObject)
             .then(res => {
-                console.log(res);
+                setInputObject({ name: undefined, summary: undefined, review: undefined });
+                updateProduct(res.updatedProduct);
+                setStarIndex(-1);
             })
             .catch((error) => console.error(error));
     }
+
+    function handleOnNameChange(event) {
+        setInputObject({ ...inputObject, name: event.target.value });
+    }
+    function handleOnSummaryChange(event) {
+        setInputObject({ ...inputObject, summary: event.target.value });
+    }
+    function handleOnReviewChange(event) {
+        setInputObject({ ...inputObject, review: event.target.value });
+    }
+    console.log(inputObject);
 
     return (
         <>
             <h2 className="review-title">Customor Reviews</h2>
             <div className="evaluation-container">
-                <p className="product-evaluation">4.9</p>
+                <p className="product-evaluation">{Number.parseFloat(product.averageRating).toFixed(2)}</p>
                 <div className="divider">/</div>
-                <p className="reviews-count">2221 Reviews</p>
+                <p className="reviews-count">{product.totalReviewsCount} Reviews</p>
             </div>
             <button className="review-button">Write Review</button>
             <h2 className="write-title">Write Review</h2>
@@ -58,15 +69,15 @@ export default function ReviewContainer({id, category }) {
             <form onSubmit={handleSubmitReviewPost} className= "review-form">
                 <div className="input-container">
                     <label htmlFor="name">Name</label>
-                    <input name="name" id = "name"></input>
+                    <input onChange={handleOnNameChange} value={inputObject.name == undefined? "" : inputObject.name} name="name" id = "name"></input>
                 </div>
                 <div className="input-container">
                     <label htmlFor="summary">Summary</label>
-                    <input name="summary" id="summary"></input>
+                    <input onChange={handleOnSummaryChange} value={inputObject.summary == undefined? "" : inputObject.summary} name="summary" id="summary"></input>
                 </div>
                 <div className="input-container">
                     <label htmlFor="review">Review</label>
-                    <textarea name="review" rows={10} cols={60} id="review"></textarea>
+                    <textarea onChange={handleOnReviewChange} value={inputObject.review == undefined? "" : inputObject.review} name="review" rows={10} cols={60} id="review"></textarea>
                 </div>
                 <button className= "submit-review-button">Submit Review</button>
             </form>

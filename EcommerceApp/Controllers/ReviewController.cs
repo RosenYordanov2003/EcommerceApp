@@ -1,10 +1,10 @@
 ﻿using EcommerceApp.Core.Models.Review;
-using EcommerceApp.Infrastructure.Data.Models;
-using Microsoft.AspNetCore.Http;
 
 namespace EcommerceApp.Controllers
 {
     using Core.Contracts;
+    using EcommerceApp.Core.Models.Products;
+    using EcommerceApp.Infrastructure.Data.Models;
     using Microsoft.AspNetCore.Mvc;
 
     [ApiController]
@@ -12,11 +12,13 @@ namespace EcommerceApp.Controllers
     [Route("api/reviews")]
     public class ReviewController : ControllerBase
     {
+        private readonly IProductSevice productSevice;
         private readonly IReviewService reviewService;
 
-        public ReviewController(IReviewService reviewService)
+        public ReviewController(IReviewService reviewService, IProductSevice productSevice)
         {
             this.reviewService = reviewService;
+            this.productSevice = productSevice;
         }
 
         [Route("PostReview")]
@@ -24,12 +26,18 @@ namespace EcommerceApp.Controllers
         {
             if (!ModelState.IsValid)
             {
-                //return ModelState.AddModelError("");
                 var errors = ModelState.Values.SelectMany(ms => ms.Errors);
                 return BadRequest(errors);
             }
-            await reviewService.PostPoductReviewAsync(createReviewModel);
-            return Ok(new { Success = true });
+             await reviewService.PostPoductReviewAsync(createReviewModel);
+            if (createReviewModel.ProductCategory.ToLower() == "shoes")
+            {
+                ProductInfo<double> shoesproductInfo = await productSevice.GetProductByIdAsync<double>(createReviewModel.ProductId, createReviewModel.ProductCategory);
+                return Ok(new { Success = true, UpdatedProduct = shoesproductInfo });
+            }
+
+            ProductInfo<string> productInfo = await productSevice.GetProductByIdAsync<string>(createReviewModel.ProductId, createReviewModel.ProductCategory);
+            return Ok(new { Success = true, UpdatedProduct = productInfo });
         }
     }
 }

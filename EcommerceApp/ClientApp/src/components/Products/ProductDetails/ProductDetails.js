@@ -1,7 +1,7 @@
 ﻿import { useState } from "react";
 import ReviewContainer from "../../ReviewContainer/ReviewContainer";
 
-export default function ProductDetails({ product, id, category }) {
+export default function ProductDetails({ product, id, category, updateProduct }) {
 
     const [informationVisibility, setInformationVisibility] = useState(false);
     const [descriptionVisibility, setDescriptionVisibility] = useState(false);
@@ -45,7 +45,7 @@ export default function ProductDetails({ product, id, category }) {
                     <p>Reviews</p>
                 </div>
                 <div className={reviewClassName}>
-                    <ReviewContainer id={id} category={category}/>
+                    <ReviewContainer updateProduct={updateProduct} product={product} id={id} category={category}/>
                 </div>
             </div>
         </>

@@ -20,7 +20,6 @@ export default function Home({ categories, isActive }) {
     useEffect(() => {
         loadFeaturedClothes()
             .then(res => {
-                console.log(res);
                 setFeaturedClothes(res);
             })
         .catch((error) => console.error(error))

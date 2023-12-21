@@ -3,6 +3,7 @@ import { loadProductById } from "../../services/productService";
 import ProductInfoStyle from "../Products/ProductInfoStyle.css";
 import SizeItem from "../SizeMenu/SizeMenu";
 import ProductDetails from "../Products/ProductDetails/ProductDetails";
+
 export default function ProductInfo() {
 
     const [product, setProduct] = useState({});
@@ -26,6 +27,10 @@ export default function ProductInfo() {
             .catch((error) => console.error(error));
     }, [])
 
+    function UpdateProductInfo(productModel) {
+        setProduct(productModel);
+    }
+
     function handleSizeItem(index) {
         const activeItem = product.productStocks[index];
         setActiveSizeItem(activeItem);
@@ -43,7 +48,7 @@ export default function ProductInfo() {
         });
     }
 
-    const productDetails = <ProductDetails product={product} id={id} category={categoryName} />
+    const productDetails = <ProductDetails updateProduct={UpdateProductInfo} product={product} id={id} category={categoryName} />
 
     function handleimgRightArrowClick() {
         if (indexPicture >= product.pictures.length - 1) {
@@ -77,6 +82,7 @@ export default function ProductInfo() {
         }
     }
     let className = isActiveArrows ? "active-arrow" : "";
+
     return (
         <div className="productinfo-card-container">
             <div onMouseOver={() => { setActiveArrows(true) }} onMouseOut={() => { setActiveArrows(false) }} className="productinfo-img-container">

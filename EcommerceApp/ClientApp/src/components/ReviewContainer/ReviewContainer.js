@@ -8,6 +8,7 @@ export default function ReviewContainer({ id, category, product, updateProduct }
     const { user, setUser } = useContext(UserContext);
     const [starIndex, setStarIndex] = useState(-1);
     const [inputObject, setInputObject] = useState({ name: undefined, summary: undefined, review: undefined });
+    const [notification, setNotification] = useState(undefined);
 
     function handleOnStarClick(idnex) {
         setStarIndex(idnex);
@@ -33,13 +34,23 @@ export default function ReviewContainer({ id, category, product, updateProduct }
             starRating: starIndex + 1
         };
 
+
         postReview(reviewObject)
             .then(res => {
                 setInputObject({ name: undefined, summary: undefined, review: undefined });
                 updateProduct(res.updatedProduct);
                 setStarIndex(-1);
+                setNotification(<Notification message="You have successfully post a review" typeOfMessage="Success" />);
+
             })
-            .catch((error) => console.error(error));
+            .catch((error) => {
+                setNotification(<Notification message="Your review is invalid, please try again" typeOfMessage="Error" />)
+            });
+
+        setTimeout(() => {
+            setNotification(undefined);
+        }, 8000)
+
     }
 
     function handleOnNameChange(event) {
@@ -54,7 +65,8 @@ export default function ReviewContainer({ id, category, product, updateProduct }
 
     return (
         <>
-            <Notification message="You have successfully post a review" typeOfMessage="error" />
+           
+            {notification}
             <h2 className="review-title">Customor Reviews</h2>
             <div className="evaluation-container">
                 <p className="product-evaluation">{Number.parseFloat(product.averageRating).toFixed(2)}</p>

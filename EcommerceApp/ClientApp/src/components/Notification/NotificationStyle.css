@@ -1,4 +1,4 @@
-﻿@keyframes showing{
+﻿@keyframes showNotification{
     0%{
         transform:translateX(100%);
     }
@@ -61,7 +61,7 @@
     right: 18px;
 }
 .active-notification {
-    animation: showing 1s ease forwards;
+    animation: showNotification 1s ease forwards;
 }
 .notification-message{
     margin: 0;

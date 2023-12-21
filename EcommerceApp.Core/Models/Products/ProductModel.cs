@@ -3,6 +3,6 @@
     using Shoes;
     public class ProductModel : ShoesFeatureModel
     {
-        public string Description { get; set; } = null!;
+        public string? Description { get; set; }
     }
 }

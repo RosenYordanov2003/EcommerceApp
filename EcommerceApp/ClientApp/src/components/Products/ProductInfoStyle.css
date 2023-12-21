@@ -324,5 +324,28 @@ textarea {
     animation-fill-mode: backwards;
     animation-timing-function: ease-in;
 }
+.related-products-section{
+    margin-top: 10rem;
+    padding: 3rem;
+}
+.related-products-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+.related-products-title{
+    margin-bottom: 2.5rem;
+    position: relative;
+}
+.related-products-title::after{
+    position: absolute;
+    content: "";
+    width: 30px;
+    height: 30px;
+    background-color: mediumpurple;
+    border-radius: 50%;
+    top: 5px;
+    left: -2%;
+    opacity: 0.7;
+}
 
 

@@ -34,17 +34,18 @@ export default function ReviewContainer({ id, category, product, updateProduct }
             starRating: starIndex + 1
         };
 
-
+        const element = document.querySelector('.productinfo-card-container');
         postReview(reviewObject)
             .then(res => {
                 setInputObject({ name: undefined, summary: undefined, review: undefined });
                 updateProduct(res.updatedProduct);
                 setStarIndex(-1);
                 setNotification(<Notification message="You have successfully post a review" typeOfMessage="Success" />);
-
+                element.scrollIntoView({ behavior: 'smooth' });
             })
             .catch((error) => {
                 setNotification(<Notification message="Your review is invalid, please try again" typeOfMessage="Error" />)
+                element.scrollIntoView({ behavior: 'smooth' });
             });
 
         setTimeout(() => {

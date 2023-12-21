@@ -3,6 +3,7 @@ import { loadProductById } from "../../services/productService";
 import ProductInfoStyle from "../Products/ProductInfoStyle.css";
 import SizeItem from "../SizeMenu/SizeMenu";
 import ProductDetails from "../Products/ProductDetails/ProductDetails";
+import FeaturedProduct from "../Products/FeaturedProduct";
 
 export default function ProductInfo() {
 
@@ -17,6 +18,8 @@ export default function ProductInfo() {
     const id = pathArray[pathArray.length - 2];
     const categoryName = pathArray[pathArray.length - 1];
 
+
+    console.log(product);
 
     useEffect(() => {
         loadProductById(id, categoryName)
@@ -50,6 +53,8 @@ export default function ProductInfo() {
 
     const productDetails = <ProductDetails updateProduct={UpdateProductInfo} product={product} id={id} category={categoryName} />
 
+    const relatedProducts = product?.relatedProducts?.map((product) => <FeaturedProduct key={product.id} product={product}/>)
+
     function handleimgRightArrowClick() {
         if (indexPicture >= product.pictures.length - 1) {
             setIndexPicture(0);
@@ -59,7 +64,6 @@ export default function ProductInfo() {
             setIndexPicture(indexPicture + 1);
             setActivePictures(product?.pictures[indexPicture + 1]);
         }
-        console.log(indexPicture);
     }
     function handleimgLeftArrowClick() {
         if (indexPicture - 1 <= 0) {
@@ -84,39 +88,51 @@ export default function ProductInfo() {
     let className = isActiveArrows ? "active-arrow" : "";
 
     return (
-        <div className="productinfo-card-container">
-            <div onMouseOver={() => { setActiveArrows(true) }} onMouseOut={() => { setActiveArrows(false) }} className="productinfo-img-container">
-                <button onClick={handleimgLeftArrowClick} className={`arrow-button left-arrow-button ${className}`}>  <i className="fa-solid fa-chevron-left"></i></button>
-                <img src={activePicture?.imgUrl}></img>
-                <button onClick={handleimgRightArrowClick} className={`arrow-button right-arrow-button ${className}`}> <i className="fa-solid fa-chevron-right"></i></button>
-            </div>
-            <div className="productinfo-about-container">
-                <h2 className="product-info-title">{product.name}</h2>
-                <p className={`product-stock ${activeSizeItem?.quantity <= 0 ? 'out-of-stock' : 'in-stock'}`}>
-                    {activeSizeItem?.quantity <= 0 ? "Out of stock" : "In Stock"}</p>
-                <p className="product-price">${Number.parseFloat(product?.price).toFixed(2)}</p>
-                <h4>Size</h4>
-                <ul className="size-ul">
-                    {sizeItmes}
-                </ul>
-                <section className="order-section">
-                    <div className="order-count">
-                        <button onClick={handleMinusClick} className="order-button"><i className="fa-solid fa-minus"></i></button>
-                        <div className="order-number">{count}</div>
-                        <button onClick={handlePlusClick} className="order-button"><i className="fa-solid fa-plus"></i></button>
-                        {activeSizeItem?.quantity <= 0 ? "" : <button disabled className="add-to-cart">Add to cart</button>}
-                    </div>
-                </section>
-                <div className="wishlist-container">
-                    <button className="wishlist-button"><i className="fa-regular fa-heart"></i></button>
-                    <p>Wishlist</p>
+        <>
+            <div className="productinfo-card-container">
+                <div onMouseOver={() => { setActiveArrows(true) }} onMouseOut={() => { setActiveArrows(false) }} className="productinfo-img-container">
+                    <button onClick={handleimgLeftArrowClick} className={`arrow-button left-arrow-button ${className}`}>  <i className="fa-solid fa-chevron-left"></i></button>
+                    <img src={activePicture?.imgUrl}></img>
+                    <button onClick={handleimgRightArrowClick} className={`arrow-button right-arrow-button ${className}`}> <i className="fa-solid fa-chevron-right"></i></button>
                 </div>
-                <hr></hr>
-                <section className="product-details">
-                    {productDetails}
-                </section>
+                <div className="productinfo-about-container">
+                    <h2 className="product-info-title">{product.name}</h2>
+                    <p className={`product-stock ${activeSizeItem?.quantity <= 0 ? 'out-of-stock' : 'in-stock'}`}>
+                        {activeSizeItem?.quantity <= 0 ? "Out of stock" : "In Stock"}</p>
+                    <p className="product-price">${Number.parseFloat(product?.price).toFixed(2)}</p>
+                    <h4>Size</h4>
+                    <ul className="size-ul">
+                        {sizeItmes}
+                    </ul>
+                    <section className="order-section">
+                        <div className="order-count">
+                            <button onClick={handleMinusClick} className="order-button"><i className="fa-solid fa-minus"></i></button>
+                            <div className="order-number">{count}</div>
+                            <button onClick={handlePlusClick} className="order-button"><i className="fa-solid fa-plus"></i></button>
+                            {activeSizeItem?.quantity <= 0 ? "" : <button disabled className="add-to-cart">Add to cart</button>}
+                        </div>
+                    </section>
+                    <div className="wishlist-container">
+                        <button className="wishlist-button"><i className="fa-regular fa-heart"></i></button>
+                        <p>Wishlist</p>
+                    </div>
+                    <hr></hr>
+                    <section className="product-details">
+                        {productDetails}
+                    </section>
+                </div>
             </div>
-        </div>
+            {relatedProducts?.length > 0 &&
+                <section className="related-products-section">
+                <h2 className="related-products-title">Related Products</h2>
+                <hr></hr>
+                <div className="related-products-container">
+                    {relatedProducts}
+                </div>
+                </section>
+            }
+          
+        </>
+      
     )
-
 }

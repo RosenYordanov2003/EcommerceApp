@@ -1,6 +1,7 @@
 ﻿import { useState, useContext } from "react";
 import { UserContext } from '../../Contexts/UserContext';
 import { postReview } from "../../services/reviewService";
+import Notification from "../Notification/Notification";
 
 export default function ReviewContainer({ id, category, product, updateProduct }) {
 
@@ -50,10 +51,10 @@ export default function ReviewContainer({ id, category, product, updateProduct }
     function handleOnReviewChange(event) {
         setInputObject({ ...inputObject, review: event.target.value });
     }
-    console.log(inputObject);
 
     return (
         <>
+            <Notification message="You have successfully post a review" typeOfMessage="error" />
             <h2 className="review-title">Customor Reviews</h2>
             <div className="evaluation-container">
                 <p className="product-evaluation">{Number.parseFloat(product.averageRating).toFixed(2)}</p>
@@ -64,22 +65,22 @@ export default function ReviewContainer({ id, category, product, updateProduct }
             <h2 className="write-title">Write Review</h2>
             <div className="write-review-star-container">
                 <p>Your evaluation</p>
-                <div>{stars }</div>
+                <div>{stars}</div>
             </div>
-            <form onSubmit={handleSubmitReviewPost} className= "review-form">
+            <form onSubmit={handleSubmitReviewPost} className="review-form">
                 <div className="input-container">
                     <label htmlFor="name">Name</label>
-                    <input onChange={handleOnNameChange} value={inputObject.name == undefined? "" : inputObject.name} name="name" id = "name"></input>
+                    <input onChange={handleOnNameChange} value={inputObject.name == undefined ? "" : inputObject.name} name="name" id="name"></input>
                 </div>
                 <div className="input-container">
                     <label htmlFor="summary">Summary</label>
-                    <input onChange={handleOnSummaryChange} value={inputObject.summary == undefined? "" : inputObject.summary} name="summary" id="summary"></input>
+                    <input onChange={handleOnSummaryChange} value={inputObject.summary == undefined ? "" : inputObject.summary} name="summary" id="summary"></input>
                 </div>
                 <div className="input-container">
                     <label htmlFor="review">Review</label>
-                    <textarea onChange={handleOnReviewChange} value={inputObject.review == undefined? "" : inputObject.review} name="review" rows={10} cols={60} id="review"></textarea>
+                    <textarea onChange={handleOnReviewChange} value={inputObject.review == undefined ? "" : inputObject.review} name="review" rows={10} cols={60} id="review"></textarea>
                 </div>
-                <button className= "submit-review-button">Submit Review</button>
+                <button className="submit-review-button">Submit Review</button>
             </form>
         </>
     )

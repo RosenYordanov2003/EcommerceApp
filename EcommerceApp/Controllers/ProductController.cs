@@ -69,5 +69,17 @@
 
             return Ok();
         }
+        [HttpPost]
+        [Route("RemoveFromUserFavoriteLists")]
+        public async Task<IActionResult> RemoveFromUserFavoriteLists([FromBody] UserFavoriteProduct userFavoriteProductModel)
+        {
+            if (!await clothesService.CheckIfProductExistsByIdAsync(userFavoriteProductModel.ProductId))
+            {
+                return BadRequest(new { Error = "Product with such an id does not exist" });
+            }
+            await clothesService.RemoveProductFromUserFavoriteListAsync(userFavoriteProductModel);
+
+            return Ok();
+        }
     }
 }

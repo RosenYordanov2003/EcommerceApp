@@ -1,5 +1,5 @@
 ﻿import { useEffect, useState, useContext } from "react";
-import { loadProductById, addProductToUserFavoriteProductsList } from "../../services/productService";
+import { loadProductById, addProductToUserFavoriteProductsList, removeProductFromUserFavoriteList} from "../../services/productService";
 import ProductInfoStyle from "../Products/ProductInfoStyle.css";
 import SizeItem from "../SizeMenu/SizeMenu";
 import ProductDetails from "../Products/ProductDetails/ProductDetails";
@@ -56,8 +56,7 @@ export default function ProductInfo() {
             }
         });
     }
-
-    const productDetails = <ProductDetails updateProduct={UpdateProductInfo} product={product} id={id} category={categoryName} />
+    const productDetails = <ProductDetails updateProduct={UpdateProductInfo} product={product} id={id} category={categoryName}/>
 
     const relatedProducts = product?.relatedProducts?.map((product) => <FeaturedProduct key={product.id} product={product} />)
 
@@ -120,10 +119,13 @@ export default function ProductInfo() {
                 .then(res => console.log(res))
                 .catch((error) => console.error(error));
         }
-
+        else {
+            removeProductFromUserFavoriteList(user.id, id, categoryName)
+                .then(res => res)
+                .catch((error) => console.error(error));
+        }
         setIsFavorite(favoriteResult);
     }
-
 
     return (
         <>
@@ -170,7 +172,6 @@ export default function ProductInfo() {
                     </div>
                 </section>
             }
-
         </>
     )
 }

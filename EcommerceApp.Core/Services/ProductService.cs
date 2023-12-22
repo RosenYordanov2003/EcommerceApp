@@ -215,5 +215,24 @@
                 return productInfo;
             }
         }
+
+        public async Task RemoveProductFromUserFavoriteListAsync(UserFavoriteProduct userFavoriteProductmodel)
+        {
+            if (userFavoriteProductmodel.CategoryName.ToLower() == "shoes")
+            {
+                UserFavoriteShoes userFavoriteShoesToDelete = await applicationDbContext
+                    .UserFavoriteShoes.FirstAsync(ufs => ufs.UserId == userFavoriteProductmodel.UserId && ufs.ShoesId == userFavoriteProductmodel.ProductId);
+
+                applicationDbContext.UserFavoriteShoes.Remove(userFavoriteShoesToDelete);
+            }
+            else
+            {
+                UserFavoriteProducts userFavoriteProductsToDelete = await applicationDbContext
+                  .UserFavoriteProducts.FirstAsync(ufs => ufs.UserId == userFavoriteProductmodel.UserId && ufs.ProductId == userFavoriteProductmodel.ProductId);
+
+                applicationDbContext.UserFavoriteProducts.Remove(userFavoriteProductsToDelete);
+            }
+            await applicationDbContext.SaveChangesAsync();
+        }
     }
 }

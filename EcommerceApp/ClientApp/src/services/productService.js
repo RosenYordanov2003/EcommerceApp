@@ -59,3 +59,24 @@ export async function addProductToUserFavoriteProductsList(userId, productId, ca
 
     return response;
 }
+export async function removeProductFromUserFavoriteList(userId, productId, categoryName) {
+
+    const bodyObject = {
+        userId,
+        productId,
+        categoryName
+    }
+
+    const request = await fetch(`${baseUrl}/RemoveFromUserFavoriteLists`, {
+        credentials: 'include',
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(bodyObject)
+    })
+    if (!request.ok) {
+        throw Error(request.Error);
+    }
+    const response = await request.ok;
+
+    return response;
+}

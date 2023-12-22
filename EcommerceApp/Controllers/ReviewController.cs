@@ -21,6 +21,7 @@ namespace EcommerceApp.Controllers
             this.productSevice = productSevice;
         }
 
+        [HttpPost]
         [Route("PostReview")]
         public async Task<IActionResult> PostReview([FromBody] CreateReviewModel createReviewModel)
         {

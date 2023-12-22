@@ -9,5 +9,6 @@
         Task<bool> CheckIfProductExistsByIdAsync(int productId);
         Task<ProductInfo<Т>> GetProductByIdAsync<Т>(int productId, string categoryName, Guid userId);
         Task AddProductToUserFavoritesListAsync(UserFavoriteProduct userFavoriteProductmodel);
+        Task RemoveProductFromUserFavoriteListAsync(UserFavoriteProduct userFavoriteProductmodel);
     }
 }

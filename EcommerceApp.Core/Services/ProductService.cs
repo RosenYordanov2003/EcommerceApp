@@ -10,7 +10,7 @@
     using Models.Categories;
     using Models.ProductStocks;
     using Models.Review;
-    using System.Data.SqlTypes;
+    using Infrastructure.Data.Models;
 
     public class ProductService : IProductSevice
     {
@@ -18,6 +18,29 @@
         public ProductService(ApplicationDbContext applicationDbContext)
         {
             this.applicationDbContext = applicationDbContext;
+        }
+
+        public async Task AddProductToUserFavoritesListAsync(UserFavoriteProduct userFavoriteProductmodel)
+        {
+            if (userFavoriteProductmodel.CategoryName.ToLower() == "shoes")
+            {
+                UserFavoriteShoes userFavoriteShoes = new UserFavoriteShoes()
+                {
+                    UserId = userFavoriteProductmodel.UserId,
+                    ShoesId = userFavoriteProductmodel.ProductId
+                };
+                await applicationDbContext.UserFavoriteShoes.AddAsync(userFavoriteShoes);
+            }
+            else
+            {
+                UserFavoriteProducts userFavoriteProducts = new UserFavoriteProducts()
+                {
+                    UserId = userFavoriteProductmodel.UserId,
+                    ProductId = userFavoriteProductmodel.ProductId
+                };
+                await applicationDbContext.UserFavoriteProducts.AddAsync(userFavoriteProducts);
+            }
+            await applicationDbContext.SaveChangesAsync();
         }
 
         public async Task<bool> CheckIfProductExistsByIdAsync(int productId)
@@ -110,7 +133,7 @@
             return productModel;
         }
 
-        public async Task<ProductInfo<T>> GetProductByIdAsync<T>(int productId, string categoryName)
+        public async Task<ProductInfo<T>> GetProductByIdAsync<T>(int productId, string categoryName, Guid userId)
         {
 
             if (categoryName.ToLower() != "shoes")
@@ -126,14 +149,15 @@
                     Brand = cl.Brand.Name,
                     CategoryName = cl.Category.Name,
                     Pictures = cl.Pictures.Select(p => new PictureModel() { ImgUrl = p.ImgUrl }).ToArray(),
-                    ProductStocks = cl.ProductStocks.Select(ps => new ProductStock<T>() { Size = (T)(object)ps.Size, Quantity = ps.Quantity , Id = ps.Id }).ToArray(),
+                    ProductStocks = cl.ProductStocks.Select(ps => new ProductStock<T>() { Size = (T)(object)ps.Size, Quantity = ps.Quantity, Id = ps.Id }).ToArray(),
                     Reviews = cl.Reviews.Select(r => new ReviewModel() { Content = r.Content, StarEvaluation = r.StarЕvaluation }),
+                    IsFavorite = cl.UserFavoriteProducts.Any(uf => uf.ProductId == productId && uf.UserId == userId)
                 })
                  .FirstAsync();
 
                 productInfo.RelatedProducts = await applicationDbContext.Clothes
                     .Where(cl => (cl.Name == productInfo.Name || cl.Brand.Name == productInfo.Brand) &&
-                     cl.Gender == productInfo.Gender && cl.Id != productInfo.Id)
+                     cl.Gender == productInfo.Gender && cl.Id != productInfo.Id && cl.Category.Name == categoryName)
                     .Select(cl => new ProductModel()
                     {
                         Description = cl.Description,
@@ -142,7 +166,7 @@
                         Id = cl.Id,
                         Name = cl.Name,
                         Price = cl.Price,
-                        Pictures = cl.Pictures.Select(p => new PictureModel() { ImgUrl = p.ImgUrl }).Take(2).ToArray()
+                        Pictures = cl.Pictures.Select(p => new PictureModel() { ImgUrl = p.ImgUrl }).Take(2).ToArray(),
                     })
                     .OrderByDescending(cl => cl.StarRating)
                     .Take(3)
@@ -163,15 +187,16 @@
                     CategoryName = shoes.Category.Name,
                     Gender = shoes.Gender,
                     Pictures = shoes.Pictures.Select(p => new PictureModel() { ImgUrl = p.ImgUrl }).ToArray(),
-                    ProductStocks = shoes.ShoesStocks.Select(ps => new ProductStock<T> { Size = (T)(object)ps.Size, Quantity = ps.Quantity, Id = ps.Id}).ToArray(),
-                    Reviews = shoes.Reviews.Select(r => new ReviewModel() { Content = r.Content, StarEvaluation = r.StarЕvaluation })
+                    ProductStocks = shoes.ShoesStocks.Select(ps => new ProductStock<T> { Size = (T)(object)ps.Size, Quantity = ps.Quantity, Id = ps.Id }).ToArray(),
+                    Reviews = shoes.Reviews.Select(r => new ReviewModel() { Content = r.Content, StarEvaluation = r.StarЕvaluation }),
+                    IsFavorite = shoes.UserFavoriteShoes.Any(uf => uf.ShoesId == productId && uf.UserId == userId)
 
                 })
                 .FirstAsync();
 
                 productInfo.RelatedProducts = await applicationDbContext.Shoes
-                  .Where(sh => (sh.Name == productInfo.Name || sh.Brand.Name == productInfo.Brand) && 
-                  sh.Gender == productInfo.Gender && sh.Id != productInfo.Id)
+                  .Where(sh => (sh.Name == productInfo.Name || sh.Brand.Name == productInfo.Brand) &&
+                  sh.Gender == productInfo.Gender && sh.Id != productInfo.Id && sh.Category.Name == categoryName)
                   .Select(cl => new ProductModel()
                   {
                       Description = cl.Description,
@@ -180,10 +205,11 @@
                       Id = cl.Id,
                       Name = cl.Name,
                       Price = cl.Price,
-                      Pictures = cl.Pictures.Select(p => new PictureModel() { ImgUrl = p.ImgUrl }).Take(2).ToArray()
+                      Pictures = cl.Pictures.Select(p => new PictureModel() { ImgUrl = p.ImgUrl }).Take(2).ToArray(),
+
                   })
                   .OrderByDescending(sh => sh.StarRating)
-                  .Take(3)
+                  .Take(6)
                   .ToArrayAsync();
 
                 return productInfo;

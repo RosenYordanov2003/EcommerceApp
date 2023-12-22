@@ -1,11 +1,15 @@
-﻿import { useEffect, useState } from "react";
-import { loadProductById } from "../../services/productService";
+﻿import { useEffect, useState, useContext } from "react";
+import { loadProductById, addProductToUserFavoriteProductsList } from "../../services/productService";
 import ProductInfoStyle from "../Products/ProductInfoStyle.css";
 import SizeItem from "../SizeMenu/SizeMenu";
 import ProductDetails from "../Products/ProductDetails/ProductDetails";
 import FeaturedProduct from "../Products/FeaturedProduct";
+import { Grid } from 'react-loader-spinner';
+import { UserContext } from "../../Contexts/UserContext";
 
 export default function ProductInfo() {
+
+    const { user, setUser } = useContext(UserContext);
 
     const [product, setProduct] = useState({});
     const [activePicture, setActivePictures] = useState(undefined);
@@ -13,22 +17,24 @@ export default function ProductInfo() {
     const [count, setCount] = useState(1);
     const [isActiveArrows, setActiveArrows] = useState(false);
     const [activeSizeItem, setActiveSizeItem] = useState(undefined);
+  /*  const [isLoading, setIsLoading] = useState(false);*/
+    const [isFavorite, setIsFavorite] = useState(undefined);
 
     const pathArray = window.location.pathname.split('/');
     const id = pathArray[pathArray.length - 2];
     const categoryName = pathArray[pathArray.length - 1];
 
 
-    console.log(product);
-
     useEffect(() => {
-        loadProductById(id, categoryName)
+        loadProductById(id, categoryName, user.id)
             .then((res) => {
+               /* configureLoading();*/
                 setProduct(res);
+                setIsFavorite(res.isFavorite);
                 setActivePictures(res.pictures[indexPicture]);
             })
             .catch((error) => console.error(error));
-    }, [])
+    }, [product])
 
     function UpdateProductInfo(productModel) {
         setProduct(productModel);
@@ -53,7 +59,7 @@ export default function ProductInfo() {
 
     const productDetails = <ProductDetails updateProduct={UpdateProductInfo} product={product} id={id} category={categoryName} />
 
-    const relatedProducts = product?.relatedProducts?.map((product) => <FeaturedProduct key={product.id} product={product}/>)
+    const relatedProducts = product?.relatedProducts?.map((product) => <FeaturedProduct key={product.id} product={product} />)
 
     function handleimgRightArrowClick() {
         if (indexPicture >= product.pictures.length - 1) {
@@ -85,10 +91,43 @@ export default function ProductInfo() {
             setCount(count + 1);
         }
     }
+
+    //function configureLoading() {
+    //    setIsLoading(true);
+
+    //    setTimeout(() => {
+    //        setIsLoading(false);
+    //    }, 700)
+    //}
+
     let className = isActiveArrows ? "active-arrow" : "";
+
+    //const result = <Grid
+    //    height="80"
+    //    width="80"
+    //    color="#035096"
+    //    ariaLabel="grid-loading"
+    //    radius="12.5"
+    //    wrapperStyle={{}}
+    //    wrapperClass="spinner"
+    //    visible={true} />
+
+    function handleAddToFavoriteProduct() {
+        const favoriteResult = !isFavorite;
+
+        if (favoriteResult) {
+            addProductToUserFavoriteProductsList(user.id, id, categoryName)
+                .then(res => console.log(res))
+                .catch((error) => console.error(error));
+        }
+
+        setIsFavorite(favoriteResult);
+    }
+
 
     return (
         <>
+
             <div className="productinfo-card-container">
                 <div onMouseOver={() => { setActiveArrows(true) }} onMouseOut={() => { setActiveArrows(false) }} className="productinfo-img-container">
                     <button onClick={handleimgLeftArrowClick} className={`arrow-button left-arrow-button ${className}`}>  <i className="fa-solid fa-chevron-left"></i></button>
@@ -113,7 +152,7 @@ export default function ProductInfo() {
                         </div>
                     </section>
                     <div className="wishlist-container">
-                        <button className="wishlist-button"><i className="fa-regular fa-heart"></i></button>
+                        <button onClick={handleAddToFavoriteProduct} className="wishlist-button"><i className={!isFavorite ? "fa-regular fa-heart favorite-heart" : "fa - solid fa-heart active-heart" }></i></button>
                         <p>Wishlist</p>
                     </div>
                     <hr></hr>
@@ -124,15 +163,15 @@ export default function ProductInfo() {
             </div>
             {relatedProducts?.length > 0 &&
                 <section className="related-products-section">
-                <h2 className="related-products-title">Related Products</h2>
-                <hr></hr>
-                <div className="related-products-container">
-                    {relatedProducts}
-                </div>
+                    <h2 className="related-products-title">Related Products</h2>
+                    <hr></hr>
+                    <div className="related-products-container">
+                        {relatedProducts}
+                    </div>
                 </section>
             }
-          
+
         </>
-      
     )
 }
+

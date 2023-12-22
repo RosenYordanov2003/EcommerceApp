@@ -146,7 +146,13 @@ main {
     border: none;
     font-size: 1.6rem;
 }
-.product-about{
+.wishlist-button .favorite-heart{
+    transition: 0.4s ease all;
+}
+.wishlist-button .active-heart{
+    color: deeppink;
+}
+.product-about {
     display: none;
 }
 .product-info-title{

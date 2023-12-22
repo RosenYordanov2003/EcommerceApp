@@ -40,7 +40,7 @@
             return Ok(result);
         }
         [HttpGet("AboutProduct")]
-        public async Task<IActionResult>GetProductById([FromQuery]int productId, [FromQuery] string categoryName)
+        public async Task<IActionResult>GetProductById([FromQuery]int productId, [FromQuery] string categoryName,[FromQuery] Guid userId)
         {
             if (!await clothesService.CheckIfProductExistsByIdAsync(productId))
             {
@@ -48,14 +48,26 @@
             }
             if (categoryName.ToLower() == "shoes")
             {
-                ProductInfo<double> shoesproductInfo = await clothesService.GetProductByIdAsync<double>(productId, categoryName);
+                ProductInfo<double> shoesproductInfo = await clothesService.GetProductByIdAsync<double>(productId, categoryName, userId);
 
                 return Ok(shoesproductInfo);
             }
 
-            ProductInfo<string> productInfo = await clothesService.GetProductByIdAsync<string>(productId, categoryName);
+            ProductInfo<string> productInfo = await clothesService.GetProductByIdAsync<string>(productId, categoryName, userId);
 
             return Ok(productInfo);
+        }
+        [HttpPost]
+        [Route("AddToFavoriteProducts")]
+        public async Task<IActionResult> AddToFavoriteProducts([FromBody]UserFavoriteProduct userFavoriteProductModel)
+        {
+            if (!await clothesService.CheckIfProductExistsByIdAsync(userFavoriteProductModel.ProductId))
+            {
+                return BadRequest(new { Error = "Product with such an id does not exist" });
+            }
+            await clothesService.AddProductToUserFavoritesListAsync(userFavoriteProductModel);
+
+            return Ok();
         }
     }
 }

@@ -7,6 +7,7 @@
         Task<IEnumerable<ProductModel>> GetFeaturedClothesAsync();
         Task<AllProductsModel> GetProductByGender(string gedner);
         Task<bool> CheckIfProductExistsByIdAsync(int productId);
-        Task<ProductInfo<Т>> GetProductByIdAsync<Т>(int productId, string categoryName);
+        Task<ProductInfo<Т>> GetProductByIdAsync<Т>(int productId, string categoryName, Guid userId);
+        Task AddProductToUserFavoritesListAsync(UserFavoriteProduct userFavoriteProductmodel);
     }
 }

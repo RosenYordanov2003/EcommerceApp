@@ -26,13 +26,36 @@ export async function loadProductsByGender(gender) {
     return response;
     
 }
-export async function loadProductById(id, categoryName) {
-    const request = await fetch(`${baseUrl}/AboutProduct?productid=${id}&categoryName=${categoryName}`, { credentials: 'include' });
+export async function loadProductById(id, categoryName, userId) {
+    const request = await fetch(`${baseUrl}/AboutProduct?productid=${id}&categoryName=${categoryName}&&userId=${userId}`, { credentials: 'include',  });
 
     if (!request.ok) {
         throw Error(request.Error);
     }
     const response = await request.json();
+
+    return response;
+}
+export async function addProductToUserFavoriteProductsList(userId, productId, categoryName) {
+
+    const bodyObject = {
+        userId,
+        productId,
+        categoryName
+    }
+
+    const request = await fetch(`${baseUrl}/AddToFavoriteProducts`, {
+        credentials: "include",
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(bodyObject)    
+    })
+
+    if (!request.ok) {
+        throw Error(request.Error);
+    }
+
+    const response = await request.ok;
 
     return response;
 }

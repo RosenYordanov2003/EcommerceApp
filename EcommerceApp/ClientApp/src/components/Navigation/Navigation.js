@@ -54,10 +54,14 @@ export default function Navigation() {
     }
 
     let listImes;
-    if (context.user) {
+    console.log(context.user);
+    if (context?.user?.username) {
         listImes =
             <>
-                <li>{context.user.username}</li>
+            <li className="user-favorite">
+                <i className="fa-regular fa-heart"></i>
+                <p className="user-favorite-count">{context.user?.userFavoriteProducts?.length }</p>
+            </li>
                 <li>
                     <Link to="/Cart">
                         <i className="fa-solid fa-cart-shopping"></i>

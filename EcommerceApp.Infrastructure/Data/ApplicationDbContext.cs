@@ -52,7 +52,6 @@ namespace EcommerceApp.Data
              .OnDelete(DeleteBehavior.NoAction);
 
 
-
             builder.ApplyConfiguration(new BrandEntityConfiguration());
             builder.ApplyConfiguration(new MainCategoryEntityConfiguration());
             builder.ApplyConfiguration(new SubCategoryEntityConfiguration());

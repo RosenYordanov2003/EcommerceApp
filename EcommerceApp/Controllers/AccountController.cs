@@ -11,7 +11,7 @@
     using Core.Contracts;
     using Infrastructure.Data.Models;
     using Models.Account;
-    using EcommerceApp.Models.Responses;
+    using Models.Responses;
     using System.Linq;
 
     [ApiController]
@@ -23,15 +23,17 @@
         private readonly JwtConfig jwtConfig;
         private readonly TokenValidationParameters tokenValidationParameters;
         private readonly IAuthService authService;
+        private readonly IProductSevice productSevice;
         public AccountController(UserManager<User> userManager,
             IOptionsMonitor<JwtConfig> optionsMonitor,
             TokenValidationParameters tokenValidationParameters,
-            IAuthService authService)
+            IAuthService authService, IProductSevice productSevice)
         {
             this.userManager = userManager;
             this.jwtConfig = optionsMonitor.CurrentValue;
             this.tokenValidationParameters = tokenValidationParameters;
             this.authService = authService;
+            this.productSevice = productSevice;
         }
         [HttpPost]
         [Route("Register")]
@@ -84,8 +86,9 @@
                         Secure = true,
                         Expires = DateTimeOffset.UtcNow.AddMinutes(15),
                     });
+                    var userFavoriteProducts = await productSevice.GetUserFavoriteProductsAsync(user.Id);
 
-                    return Ok(new LoginResponse() { Username = loginModel.Username, Id = user.Id });
+                    return Ok(new LoginResponse() { Username = loginModel.Username, Id = user.Id, UserFavoriteProducts = userFavoriteProducts });
                 }
             }
             return BadRequest(new { Error = "Username does not exist!" });
@@ -118,7 +121,9 @@
                 Expires = DateTimeOffset.UtcNow.AddMinutes(15),
             });
 
-            return Ok(new { Username = user.UserName, Id = user.Id });
+            var userFavoriteProducts = await productSevice.GetUserFavoriteProductsAsync(user.Id);
+
+            return Ok(new LoginResponse() { Username = user.UserName, Id = user.Id, UserFavoriteProducts = userFavoriteProducts });
         }
         [HttpGet]
         [Route("Logout")]

@@ -33,11 +33,11 @@ namespace EcommerceApp.Controllers
              await reviewService.PostPoductReviewAsync(createReviewModel);
             if (createReviewModel.ProductCategory.ToLower() == "shoes")
             {
-                ProductInfo<double> shoesproductInfo = await productSevice.GetProductByIdAsync<double>(createReviewModel.ProductId, createReviewModel.ProductCategory, Guid.NewGuid());
+                ProductInfo<double> shoesproductInfo = await productSevice.GetProductByIdAsync<double>(createReviewModel.ProductId, createReviewModel.ProductCategory, createReviewModel.UserId);
                 return Ok(new { Success = true, UpdatedProduct = shoesproductInfo });
             }
 
-            ProductInfo<string> productInfo = await productSevice.GetProductByIdAsync<string>(createReviewModel.ProductId, createReviewModel.ProductCategory, Guid.NewGuid());
+            ProductInfo<string> productInfo = await productSevice.GetProductByIdAsync<string>(createReviewModel.ProductId, createReviewModel.ProductCategory, createReviewModel.UserId);
             return Ok(new { Success = true, UpdatedProduct = productInfo });
         }
     }

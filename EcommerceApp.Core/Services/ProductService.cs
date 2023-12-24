@@ -216,6 +216,36 @@
             }
         }
 
+        public async Task<ICollection<GetUserFavoriteProductModel>> GetUserFavoriteProductsAsync(Guid userId)
+        {
+            ICollection<GetUserFavoriteProductModel> getUserFavoriteProductModels =
+                 await applicationDbContext.UserFavoriteProducts
+                 .Where(uf => uf.UserId == userId)
+                 .Select(uf => new GetUserFavoriteProductModel()
+                 {
+                     ImgUrl = uf.Product.Pictures.FirstOrDefault() == null ? "": uf.Product.Pictures.FirstOrDefault().ImgUrl,
+                     ProductId = uf.ProductId,
+                     ProductName = uf.Product.Name
+                 }).ToArrayAsync();
+
+            ICollection<GetUserFavoriteProductModel> getUserFavoriteShoes =
+                await applicationDbContext.UserFavoriteShoes
+                .Where(uf => uf.UserId == userId)
+                .Select(uf => new GetUserFavoriteProductModel()
+                {
+                    ImgUrl = uf.Shoes.Pictures.FirstOrDefault() == null ? "" : uf.Shoes.Pictures.FirstOrDefault().ImgUrl,
+                    ProductId = uf.ShoesId,
+                    ProductName = uf.Shoes.Name
+                }).ToArrayAsync();
+
+            List<GetUserFavoriteProductModel> favoriteProducts = new List<GetUserFavoriteProductModel>();
+
+            favoriteProducts.AddRange(getUserFavoriteProductModels);
+            favoriteProducts.AddRange(getUserFavoriteShoes);
+
+            return favoriteProducts;
+        }
+
         public async Task RemoveProductFromUserFavoriteListAsync(UserFavoriteProduct userFavoriteProductmodel)
         {
             if (userFavoriteProductmodel.CategoryName.ToLower() == "shoes")

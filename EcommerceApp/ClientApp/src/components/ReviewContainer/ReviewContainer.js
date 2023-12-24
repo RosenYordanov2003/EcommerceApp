@@ -31,7 +31,7 @@ export default function ReviewContainer({ id, category, product, updateProduct }
             productId: id,
             productCategory: category,
             userId: user?.id,
-            starRating: starIndex + 1
+            starRating: starIndex + 1,
         };
 
         const element = document.querySelector('.productinfo-card-container');

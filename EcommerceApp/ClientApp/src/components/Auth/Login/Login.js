@@ -27,7 +27,8 @@ export default function Login() {
             .then(res => {
                 const user = {
                     username: res.username,
-                    id: res.id
+                    id: res.id,
+                    userFavoriteProducts: res.userFavoriteProducts
                 };
                 setUser(user);
                 navigate('/Home');

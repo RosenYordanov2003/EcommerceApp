@@ -225,7 +225,8 @@
                  {
                      ImgUrl = uf.Product.Pictures.FirstOrDefault() == null ? "": uf.Product.Pictures.FirstOrDefault().ImgUrl,
                      ProductId = uf.ProductId,
-                     ProductName = uf.Product.Name
+                     ProductName = uf.Product.Name,
+                     CategoryName = uf.Product.Category.Name
                  }).ToArrayAsync();
 
             ICollection<GetUserFavoriteProductModel> getUserFavoriteShoes =
@@ -235,7 +236,8 @@
                 {
                     ImgUrl = uf.Shoes.Pictures.FirstOrDefault() == null ? "" : uf.Shoes.Pictures.FirstOrDefault().ImgUrl,
                     ProductId = uf.ShoesId,
-                    ProductName = uf.Shoes.Name
+                    ProductName = uf.Shoes.Name,
+                     CategoryName = uf.Shoes.Category.Name
                 }).ToArrayAsync();
 
             List<GetUserFavoriteProductModel> favoriteProducts = new List<GetUserFavoriteProductModel>();

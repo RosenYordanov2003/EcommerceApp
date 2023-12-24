@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import Style from "../Navigation/Style.css"
 import { logout } from "../../services/authService";
 import CategoriesSection from "../Categories/CategoriesSection";
+import UserFavoriteProducts from "../Products/UserFavoriteProducts/UserFavoriteProducts";
 
 export default function Navigation() {
 
@@ -14,6 +15,7 @@ export default function Navigation() {
     const context = useContext(UserContext);
     const [categories, setCategories] = useState([]);
     const [isActive, setActivity] = useState(true);
+    const [favoriteMenuActivity, setFavoriteMenuActivity] = useState(false);
 
     const [isMenArrowActive, setIsMenArrowActive] = useState(false);
     const [isWomenArrowActive, setIsWomenArrowActive] = useState(false);
@@ -54,13 +56,21 @@ export default function Navigation() {
     }
 
     let listImes;
-    console.log(context.user);
+  
     if (context?.user?.username) {
+
+        const userFavoriteProducts = context?.user?.userFavoriteProducts.map((product) => <UserFavoriteProducts product={product} key={product.id} />);
+
         listImes =
             <>
-            <li className="user-favorite">
+            <li onMouseOver={() => setFavoriteMenuActivity(true)} onMouseOut={() => setFavoriteMenuActivity(false)} className="user-favorite">
                 <i className="fa-regular fa-heart"></i>
-                <p className="user-favorite-count">{context.user?.userFavoriteProducts?.length }</p>
+                <p className="user-favorite-count">{context.user?.userFavoriteProducts?.length}</p>
+                <div className={`favorite-products-container ${favoriteMenuActivity ? "active-favorite-menu" : "not-active-favorite-menu"}`}>
+                    <h4 className="favorite-products-title">{context.user?.userFavoriteProducts?.length} Items</h4>
+                    <hr></hr>
+                    {userFavoriteProducts }
+                </div>
             </li>
                 <li>
                     <Link to="/Cart">

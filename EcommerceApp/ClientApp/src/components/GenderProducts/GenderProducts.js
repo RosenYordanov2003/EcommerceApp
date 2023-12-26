@@ -3,7 +3,6 @@ import { loadProductsByGender } from "../../services/productService";
 import FeaturedProduct from "../Products/FeaturedProduct";
 import FilterMenu from "../ProductsFilterMenu/FilterMenu";
 import GenderProductsStyle from "../GenderProducts/GenderProductsStyle.css";
-import { faL } from "../../../../../node_modules/@fortawesome/free-solid-svg-icons/index";
 import { Grid } from 'react-loader-spinner';
 import ContactContainer from "../ContactContainer/ContactContainer";
 

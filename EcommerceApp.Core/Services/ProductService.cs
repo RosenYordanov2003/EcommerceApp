@@ -237,7 +237,7 @@
                     ImgUrl = uf.Shoes.Pictures.FirstOrDefault() == null ? "" : uf.Shoes.Pictures.FirstOrDefault().ImgUrl,
                     ProductId = uf.ShoesId,
                     ProductName = uf.Shoes.Name,
-                     CategoryName = uf.Shoes.Category.Name
+                    CategoryName = uf.Shoes.Category.Name
                 }).ToArrayAsync();
 
             List<GetUserFavoriteProductModel> favoriteProducts = new List<GetUserFavoriteProductModel>();

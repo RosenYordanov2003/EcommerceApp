@@ -116,17 +116,42 @@ export default function ProductInfo() {
 
         if (favoriteResult) {
             addProductToUserFavoriteProductsList(user.id, id, categoryName)
-                .then(res => setUser({ ...user, favoriteProducts: [...user.favoriteProducts, res] }))
+                .then(res => {
+
+                    const productObject = {
+                        productName: product.name,
+                        productId: id,
+                        imgUrl: product.pictures[0].imgUrl,
+                        categoryName: categoryName
+                    }
+
+                    setUser({ ...user, userFavoriteProducts: [...user.userFavoriteProducts, productObject] })
+                })
                 .catch((error) => console.error(error));
         }
         else {
             removeProductFromUserFavoriteList(user.id, id, categoryName)
-                .then(res => res)
+                .then(res => {
+                    const products = user.userFavoriteProducts.map((product) => {
+                        if (product.productId != id) {
+                            return product;
+                        }
+                        else {
+                            if (product.categoryName !== categoryName) {
+                                return product;
+                            }
+                        }
+                    });
+                    console.log(products);
+                    const filteredProducts = products.filter((product) => product !== undefined);
+                    console.log(filteredProducts);
+                    setUser({...user, userFavoriteProducts: filteredProducts})
+
+                })
                 .catch((error) => console.error(error));
         }
         setIsFavorite(favoriteResult);
     }
-
     return (
         <>
 

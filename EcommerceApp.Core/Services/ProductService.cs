@@ -56,7 +56,7 @@
             return false;
         }
 
-        public async Task<IEnumerable<ProductModel>> GetFeaturedClothesAsync()
+        public async Task<IEnumerable<ProductModel>> GetFeaturedClothesAsync(Guid? userId)
         {
             return await applicationDbContext.Clothes
                 .Where(c => c.IsFeatured)
@@ -68,7 +68,9 @@
                     Price = c.Price,
                     StarRating = c.StarRating,
                     Pictures = c.Pictures.Select(p => new PictureModel() { ImgUrl = p.ImgUrl }).Take(2),
-                    CategoryName = c.Category.Name
+                    CategoryName = c.Category.Name,
+                    IsFavorite = userId.HasValue ? applicationDbContext.Clothes.
+                    Any(c => c.UserFavoriteProducts.Any(us => us.UserId == userId && us.ProductId == c.Id)) : false,
                 })
                 .ToArrayAsync();
         }

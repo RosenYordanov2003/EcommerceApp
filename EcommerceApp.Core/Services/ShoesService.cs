@@ -14,9 +14,9 @@
             this.applicationDbContext = applicationDbContext;
         }
 
-        public async Task<IEnumerable<ShoesFeatureModel>> GetFeaturedShoesAsync()
+        public async Task<IEnumerable<ShoesFeatureModel>> GetFeaturedShoesAsync(Guid? userId)
         {
-            return await this.applicationDbContext.Shoes
+            return await applicationDbContext.Shoes
                 .Where(s => s.IsFeatured)
                 .Select(s => new ShoesFeatureModel()
                 {
@@ -25,7 +25,10 @@
                     StarRating = s.StarRating,
                     Price = s.Price,
                     Pictures = s.Pictures.Select(p => new PictureModel() { ImgUrl = p.ImgUrl }).Take(2),
-                    CategoryName = s.Category.Name
+                    CategoryName = s.Category.Name,
+                    IsFavorite = userId.HasValue ? applicationDbContext.Shoes.
+                    Any(sh => sh.UserFavoriteShoes.Any(us => us.UserId == userId && us.ShoesId == s.Id)) : false,
+                    
                 })
                 .ToArrayAsync();
         }

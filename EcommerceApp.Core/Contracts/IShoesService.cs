@@ -3,6 +3,6 @@
     using Models.Shoes;
     public interface IShoesService
     {
-        Task<IEnumerable<ShoesFeatureModel>> GetFeaturedShoesAsync();
+        Task<IEnumerable<ShoesFeatureModel>> GetFeaturedShoesAsync(Guid? userId);
     }
 }

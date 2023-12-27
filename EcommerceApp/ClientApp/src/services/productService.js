@@ -1,15 +1,15 @@
 ﻿const baseUrl = "https://localhost:7122/api/products"
 
-export async function loadFeaturedShoes() {
-    const request = await fetch(`${baseUrl}/GetFeaturedShoes`, { credentials: 'include', });
+export async function loadFeaturedShoes(userId) {
+    const request = await fetch(`${baseUrl}/GetFeaturedShoes?userId=${userId}`, { credentials: 'include', });
 
     const responseAsJson = await request.json();
 
     return responseAsJson;
 }
-export async function loadFeaturedClothes() {
+export async function loadFeaturedClothes(userId) {
 
-    const request = await fetch(`${baseUrl}/GetFeaturedClothes`, { credentials: 'include', });
+    const request = await fetch(`${baseUrl}/GetFeaturedClothes?userId=${userId}`, { credentials: 'include', });
 
     const responseAsJson = await request.json();
 

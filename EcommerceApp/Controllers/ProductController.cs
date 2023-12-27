@@ -20,16 +20,16 @@
         }
 
         [HttpGet("GetFeaturedShoes")]
-        public async Task<IActionResult> GetFeaturedShoes()
+        public async Task<IActionResult> GetFeaturedShoes([FromQuery]Guid? userId)
         {
-            IEnumerable<ShoesFeatureModel> featuredShoes = await shoesService.GetFeaturedShoesAsync();
+            IEnumerable<ShoesFeatureModel> featuredShoes = await shoesService.GetFeaturedShoesAsync(userId);
 
             return Ok(featuredShoes);
         }
         [HttpGet("GetFeaturedClothes")]
-        public async Task<IActionResult> GetFeaturedClothes()
+        public async Task<IActionResult> GetFeaturedClothes([FromQuery]Guid? userId)
         {
-            IEnumerable<ProductModel> featuredProducts = await clothesService.GetFeaturedClothesAsync();
+            IEnumerable<ProductModel> featuredProducts = await clothesService.GetFeaturedClothesAsync(userId);
 
             return Ok(featuredProducts);
         }

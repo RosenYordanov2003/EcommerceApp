@@ -1,24 +1,27 @@
 import CategoriesSection from "../Categories/CategoriesSection"
-import { useEffect } from "react";
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
 import { loadFeaturedShoes } from "../../services/productService";
 import FeaturedProduct from "../Products/FeaturedProduct";
 import { loadFeaturedClothes } from "../../services/productService";
 import HomeStyle from "../Home/HomeStyle.css";
 import ContactContainer from "../ContactContainer/ContactContainer";
+import { UserContext } from "../../Contexts/UserContext";
+
 
 export default function Home({ categories, isActive }) {
     const [featuredShoes, setFeaturedShoes] = useState([]);
     const [featuredClothes, setFeaturedClothes] = useState([]);
 
+    const { user, setUser } = useContext(UserContext);
+
     useEffect(() => {
-        loadFeaturedShoes()
+        loadFeaturedShoes(user?.id)
             .then(res => setFeaturedShoes(res))
         .catch((error) => console.error(error))
     }, [])
 
     useEffect(() => {
-        loadFeaturedClothes()
+        loadFeaturedClothes(user?.id)
             .then(res => {
                 setFeaturedClothes(res);
             })

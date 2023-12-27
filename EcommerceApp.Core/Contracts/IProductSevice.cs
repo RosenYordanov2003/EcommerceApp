@@ -4,7 +4,7 @@
 
     public interface IProductSevice
     {
-        Task<IEnumerable<ProductModel>> GetFeaturedClothesAsync();
+        Task<IEnumerable<ProductModel>> GetFeaturedClothesAsync(Guid? userId);
         Task<AllProductsModel> GetProductByGender(string gedner);
         Task<bool> CheckIfProductExistsByIdAsync(int productId);
         Task<ProductInfo<Т>> GetProductByIdAsync<Т>(int productId, string categoryName, Guid userId);

@@ -66,3 +66,6 @@
     animation-duration: 1.3s;
     animation-fill-mode: forwards;
 }
+.active-heart{
+    color: deeppink;
+}

@@ -69,8 +69,8 @@
                     StarRating = c.StarRating,
                     Pictures = c.Pictures.Select(p => new PictureModel() { ImgUrl = p.ImgUrl }).Take(2),
                     CategoryName = c.Category.Name,
-                    IsFavorite = userId.HasValue ? applicationDbContext.Clothes.
-                    Any(c => c.UserFavoriteProducts.Any(us => us.UserId == userId && us.ProductId == c.Id)) : false,
+                    IsFavorite = userId.HasValue ? applicationDbContext.UserFavoriteProducts.
+                    Any(us => us.UserId == userId && us.ProductId == c.Id) : false,
                 })
                 .ToArrayAsync();
         }

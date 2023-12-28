@@ -20,16 +20,16 @@
     }
 }
 
-.product-card{
+.featured-product-card{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
 }
-.product-card .img-container{
+.featured-product-card .img-container {
     width: 400px;
     position: relative;
 }
-.product-card .img-container img{
+.featured-product-card .img-container img{
     width: 100%;
     height: auto;
 }

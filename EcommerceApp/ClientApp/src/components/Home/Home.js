@@ -18,18 +18,16 @@ export default function Home({ categories, isActive }) {
         loadFeaturedShoes(user?.id)
             .then(res => setFeaturedShoes(res))
         .catch((error) => console.error(error))
-    }, [])
+    }, [user?.id])
+
 
     useEffect(() => {
         loadFeaturedClothes(user?.id)
-            .then(res => {
-                setFeaturedClothes(res);
-            })
+            .then(res => setFeaturedClothes(res))
         .catch((error) => console.error(error))
-    }, [])
-
-    const shoesResult = featuredShoes.length > 0? featuredShoes.map((shoes) => <FeaturedProduct key={shoes.id} product={shoes} />) : "";
-    const clothesResult = featuredClothes.length > 0 ? featuredClothes.map((clothes) => <FeaturedProduct key={clothes.id} product={clothes} />): "";
+    }, [user?.id])
+    const shoesResult =  featuredShoes?.map((shoes) => <FeaturedProduct key={shoes.id} product={shoes} />);
+    const clothesResult = featuredClothes?.map((clothes) => <FeaturedProduct key={clothes.id} product={clothes} />);
 
     return (
         <>

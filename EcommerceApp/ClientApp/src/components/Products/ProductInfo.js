@@ -1,5 +1,5 @@
 ﻿import { useEffect, useState, useContext } from "react";
-import { loadProductById, addProductToUserFavoriteProductsList, removeProductFromUserFavoriteList } from "../../services/productService";
+import { loadProductById, addProductToUserFavoriteProductsList, removeProductFromUserFavoriteList, createProductObject, filterUserFavoriteProducts } from "../../services/productService";
 import ProductInfoStyle from "../Products/ProductInfoStyle.css";
 import SizeItem from "../SizeMenu/SizeMenu";
 import ProductDetails from "../Products/ProductDetails/ProductDetails";
@@ -117,13 +117,7 @@ export default function ProductInfo() {
         if (favoriteResult) {
             addProductToUserFavoriteProductsList(user.id, id, categoryName)
                 .then(res => {
-
-                    const productObject = {
-                        productName: product.name,
-                        productId: id,
-                        imgUrl: product.pictures[0].imgUrl,
-                        categoryName: categoryName
-                    }
+                    const productObject = createProductObject(product.name, id, product.pictures[0].imgUrl, categoryName);
 
                     setUser({ ...user, userFavoriteProducts: [...user.userFavoriteProducts, productObject] })
                 })
@@ -132,21 +126,8 @@ export default function ProductInfo() {
         else {
             removeProductFromUserFavoriteList(user.id, id, categoryName)
                 .then(res => {
-                    const products = user.userFavoriteProducts.map((product) => {
-                        if (product.productId != id) {
-                            return product;
-                        }
-                        else {
-                            if (product.categoryName !== categoryName) {
-                                return product;
-                            }
-                        }
-                    });
-                    console.log(products);
-                    const filteredProducts = products.filter((product) => product !== undefined);
-                    console.log(filteredProducts);
-                    setUser({...user, userFavoriteProducts: filteredProducts})
-
+                    const products = filterUserFavoriteProducts(user.userFavoriteProducts, id, categoryName)
+                    setUser({ ...user, userFavoriteProducts: products })
                 })
                 .catch((error) => console.error(error));
         }

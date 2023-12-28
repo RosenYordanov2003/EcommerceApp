@@ -1,7 +1,8 @@
 ﻿const baseUrl = "https://localhost:7122/api/products"
 
 export async function loadFeaturedShoes(userId) {
-    const request = await fetch(`${baseUrl}/GetFeaturedShoes?userId=${userId}`, { credentials: 'include', });
+    let result = userId === undefined ? "" : userId;
+    const request = await fetch(`${baseUrl}/GetFeaturedShoes?userId=${result}`, { credentials: 'include', });
 
     const responseAsJson = await request.json();
 
@@ -9,7 +10,9 @@ export async function loadFeaturedShoes(userId) {
 }
 export async function loadFeaturedClothes(userId) {
 
-    const request = await fetch(`${baseUrl}/GetFeaturedClothes?userId=${userId}`, { credentials: 'include', });
+    let result = userId === undefined ? "" : userId;
+
+    const request = await fetch(`${baseUrl}/GetFeaturedClothes?userId=${result}`, { credentials: 'include', });
 
     const responseAsJson = await request.json();
 
@@ -79,4 +82,31 @@ export async function removeProductFromUserFavoriteList(userId, productId, categ
     const response = await request.ok;
 
     return response;
+}
+export function createProductObject(productName, productId, imgUrl, categoryName) {
+
+    return {
+        productName,
+        productId,
+        imgUrl,
+        categoryName
+    }
+}
+export function filterUserFavoriteProducts(userFavoriteProducts, productId, categoryName) {
+    const result = userFavoriteProducts.map((product) => {
+        console.log(`product category - ${product.categoryName}`);
+        console.log(categoryName);
+        if (product.productId != productId) {
+            return product;
+        }
+        else {
+            if (product.categoryName !== categoryName) {
+                return product;
+            }
+        }
+    })
+    console.log(result);
+    const filteredProducts = result.filter((product) => product !== undefined);
+
+    return filteredProducts;
 }

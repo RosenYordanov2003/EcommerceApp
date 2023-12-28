@@ -2,7 +2,7 @@
 import { useNavigate } from "react-router-dom";
 import FeaturedProductStyle from "../Products/FeaturedProductStyle.css";
 import { UserContext } from "../../Contexts/UserContext";
-import { addProductToUserFavoriteProductsList, removeProductFromUserFavoriteList } from "../../services/productService";
+import { addProductToUserFavoriteProductsList, removeProductFromUserFavoriteList, createProductObject, filterUserFavoriteProducts } from "../../services/productService";
 
 export default function FeaturedProduct({ product }) {
 
@@ -21,14 +21,21 @@ export default function FeaturedProduct({ product }) {
     function activateProductCard(event) {
         setTimeout(() => {
             setImgUrl(product.pictures[1].imgUrl);
-        },500)
+        }, 500)
+        if (user?.id == undefined) {
+            return;
+        }
         event.currentTarget.children[0].classList.remove('favorite-removed');
         event.currentTarget.children[0].classList.add('favorite');
     }
     function deactivateProductCard(event) {
+       
         setTimeout(() => {
             setImgUrl(product.pictures[0].imgUrl);
         }, 500)
+        if (user?.id == undefined) {
+            return;
+        }
         event.currentTarget.children[0].classList.add('favorite-removed');
         event.currentTarget.children[0].classList.remove('favorite');
     }
@@ -38,41 +45,20 @@ export default function FeaturedProduct({ product }) {
         }
     }
 
-    console.log(product);
-
     function handleUserFavoriteProduct() {
         const favoriteResult = !isFavorite;
-
         if (favoriteResult) {
             addProductToUserFavoriteProductsList(user.id, product.id, product.categoryName)
                 .then(res => {
-
-                    const productObject = {
-                        productName: product.name,
-                        productId: product.id,
-                        imgUrl: product.pictures[0].imgUrl,
-                        categoryName: product.categoryName
-                    }
-
-                    setUser({ ...user, userFavoriteProducts: [...user.userFavoriteProducts, productObject] })
+                    const productInstance = createProductObject(product.name, product.id, product.pictures[0].imgUrl, product.categoryName);
+                    setUser({ ...user, userFavoriteProducts: [...user.userFavoriteProducts, productInstance] })
                 })
                 .catch((error) => console.error(error));
         }
         else {
             removeProductFromUserFavoriteList(user.id, product.id, product.categoryName)
                 .then(res => {
-                    const products = user.userFavoriteProducts.map((product) => {
-                        if (product.productId != product.id) {
-                            return product;
-                        }
-                        else {
-                            if (product.categoryName !== product.categoryName) {
-                                return product;
-                            }
-                        }
-                    });
-                    const filteredProducts = products.filter((product) => product !== undefined);
-                    console.log(filteredProducts);
+                    const filteredProducts = filterUserFavoriteProducts(user.userFavoriteProducts, product.id, product.categoryName);
                     setUser({ ...user, userFavoriteProducts: filteredProducts })
 
                 })
@@ -80,19 +66,18 @@ export default function FeaturedProduct({ product }) {
         }
         setIsFavorite(favoriteResult);
     }
-
-    const heartClass = !isFavorite ? "fa-regular fa-heart favorite-heart heart" : "fa - solid fa-heart active-heart heart"
+    const heartClass = !isFavorite ? "fa-regular fa-heart favorite-heart heart" : "fa-solid fa-heart active-heart heart"
 
     return (
-        <div className="product-card">
+        <div className="featured-product-card">
             <div onMouseOver={activateProductCard} onMouseLeave={deactivateProductCard} className="img-container">
-                <i onClick={handleUserFavoriteProduct} className={heartClass}></i>
+                {user?.id != undefined && <i onClick={handleUserFavoriteProduct} className={heartClass}></i>}
                 <img onClick={handleProductClick} src={imgUrl} />
             </div>
             <div className="product-content">
                 <div className="star-rating">{stars}</div>
-                <h2 className = "name">{product.name }</h2>
-                <p className = "price">${product.price.toFixed("2") }</p>
+                <h2 className="name">{product.name}</h2>
+                <p className="price">${product.price.toFixed("2")}</p>
             </div>
         </div>
     )

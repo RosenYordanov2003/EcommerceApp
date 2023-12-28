@@ -37,6 +37,8 @@
     animation-duration: 2.5s;
     position: relative;
     z-index: 199;
+    box-sizing: border-box;
+    width: 100%;
 }
 .main-nav ul {
     list-style: none;
@@ -64,14 +66,7 @@
   border-radius: 50%;
   opacity: 0.6;
 }
-.active-arrow{
-    transform:rotate(180deg);
-    transition: linear 0.3s;
-}
-.not-active-arrow{
-    animation: rotation;
-    animation-duration: 0.8s;
-}
+
 .main-nav .logout{
     cursor: pointer;
 }

@@ -1,8 +1,9 @@
-﻿import { useState } from "react";
+﻿import { useState, useContext } from "react";
 import ReviewContainer from "../../ReviewContainer/ReviewContainer";
-
+import { UserContext, userContext } from "../../../Contexts/UserContext";
 export default function ProductDetails({ product, id, category, updateProduct }) {
 
+    const { user, setUser } = useContext(UserContext);
     const [informationVisibility, setInformationVisibility] = useState(false);
     const [descriptionVisibility, setDescriptionVisibility] = useState(false);
     const [reviewVisibility, setReviewVisibility] = useState(false);
@@ -44,8 +45,11 @@ export default function ProductDetails({ product, id, category, updateProduct })
                     <i onClick={() => setReviewVisibility(!reviewVisibility)} className={`fa-solid ${reviewVisibility == true ? "fa-minus" : "fa-plus"}`}></i>
                     <p>Reviews</p>
                 </div>
+                {/*<div className="all-reviews">*/}
+                {/*    <p>View All Reviews</p>*/}
+                {/*</div>*/}
                 <div className={reviewClassName}>
-                    <ReviewContainer updateProduct={updateProduct} product={product} id={id} category={category}/>
+                    {user?.id && <ReviewContainer updateProduct={updateProduct} product={product} id={id} category={category} />}
                 </div>
             </div>
         </>

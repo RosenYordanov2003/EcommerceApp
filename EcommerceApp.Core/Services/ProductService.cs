@@ -75,7 +75,7 @@
                 .ToArrayAsync();
         }
 
-        public async Task<AllProductsModel> GetProductByGender(string gender)
+        public async Task<AllProductsModel> GetProductByGender(string gender, Guid? userId)
         {
             gender = gender.ToLower();
             string genderLetter = gender[0].ToString().ToLower();
@@ -93,6 +93,7 @@
                       StarRating = cl.StarRating,
                       CategoryName = cl.Category.Name,
                       Brand = cl.Brand.Name,
+                      IsFavorite = userId.HasValue ? cl.UserFavoriteProducts.Any(ufcl => ufcl.UserId == userId && ufcl.ProductId == cl.Id) : false,
                       SubCategories = cl.Category.SubCategories.Select(subc => subc.Name).ToList()
                   })
                   .ToListAsync();
@@ -108,7 +109,8 @@
                     Price = sh.Price,
                     SubCategory = sh.SubCategory.Name,
                     CategoryName = sh.Category.Name,
-                    Brand = sh.Brand.Name
+                    Brand = sh.Brand.Name,
+                    IsFavorite = userId.HasValue ? sh.UserFavoriteShoes.Any(ufsh => ufsh.UserId == userId && ufsh.ShoesId == sh.Id) : false,
                 })
                 .ToListAsync();
 
@@ -135,7 +137,7 @@
             return productModel;
         }
 
-        public async Task<ProductInfo<T>> GetProductByIdAsync<T>(int productId, string categoryName, Guid userId)
+        public async Task<ProductInfo<T>> GetProductByIdAsync<T>(int productId, string categoryName, Guid? userId)
         {
 
             if (categoryName.ToLower() != "shoes")
@@ -153,7 +155,7 @@
                     Pictures = cl.Pictures.Select(p => new PictureModel() { ImgUrl = p.ImgUrl }).ToArray(),
                     ProductStocks = cl.ProductStocks.Select(ps => new ProductStock<T>() { Size = (T)(object)ps.Size, Quantity = ps.Quantity, Id = ps.Id }).ToArray(),
                     Reviews = cl.Reviews.Select(r => new ReviewModel() { Content = r.Content, StarEvaluation = r.StarЕvaluation }),
-                    IsFavorite = cl.UserFavoriteProducts.Any(uf => uf.ProductId == productId && uf.UserId == userId)
+                    IsFavorite = userId.HasValue ? cl.UserFavoriteProducts.Any(uf => uf.ProductId == productId && uf.UserId == userId) : false,
                 })
                  .FirstAsync();
 
@@ -169,6 +171,7 @@
                         Name = cl.Name,
                         Price = cl.Price,
                         Pictures = cl.Pictures.Select(p => new PictureModel() { ImgUrl = p.ImgUrl }).Take(2).ToArray(),
+                        IsFavorite = userId.HasValue ? cl.UserFavoriteProducts.Any(uf => uf.ProductId == cl.Id && uf.UserId == userId) : false,
                     })
                     .OrderByDescending(cl => cl.StarRating)
                     .Take(3)
@@ -191,7 +194,7 @@
                     Pictures = shoes.Pictures.Select(p => new PictureModel() { ImgUrl = p.ImgUrl }).ToArray(),
                     ProductStocks = shoes.ShoesStocks.Select(ps => new ProductStock<T> { Size = (T)(object)ps.Size, Quantity = ps.Quantity, Id = ps.Id }).ToArray(),
                     Reviews = shoes.Reviews.Select(r => new ReviewModel() { Content = r.Content, StarEvaluation = r.StarЕvaluation }),
-                    IsFavorite = shoes.UserFavoriteShoes.Any(uf => uf.ShoesId == productId && uf.UserId == userId)
+                    IsFavorite = userId.HasValue ? shoes.UserFavoriteShoes.Any(uf => uf.ShoesId == productId && uf.UserId == userId) : false
 
                 })
                 .FirstAsync();
@@ -208,6 +211,7 @@
                       Name = cl.Name,
                       Price = cl.Price,
                       Pictures = cl.Pictures.Select(p => new PictureModel() { ImgUrl = p.ImgUrl }).Take(2).ToArray(),
+                      IsFavorite = userId.HasValue ? cl.UserFavoriteShoes.Any(uf => uf.ShoesId == cl.Id && uf.UserId == userId) : false
 
                   })
                   .OrderByDescending(sh => sh.StarRating)

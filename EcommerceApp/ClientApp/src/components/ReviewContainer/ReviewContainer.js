@@ -66,7 +66,6 @@ export default function ReviewContainer({ id, category, product, updateProduct }
 
     return (
         <>
-           
             {notification}
             <h2 className="review-title">Customor Reviews</h2>
             <div className="evaluation-container">

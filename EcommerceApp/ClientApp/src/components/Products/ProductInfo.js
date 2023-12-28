@@ -17,7 +17,6 @@ export default function ProductInfo() {
     const [count, setCount] = useState(1);
     const [isActiveArrows, setActiveArrows] = useState(false);
     const [activeSizeItem, setActiveSizeItem] = useState(undefined);
-    /*  const [isLoading, setIsLoading] = useState(false);*/
     const [isFavorite, setIsFavorite] = useState(undefined);
 
     const pathArray = window.location.pathname.split('/');
@@ -33,7 +32,7 @@ export default function ProductInfo() {
                 setActivePictures(res.pictures[indexPicture]);
             })
             .catch((error) => console.error(error));
-    }, [id])
+    }, [id, user?.id])
 
 
     function UpdateProductInfo(productModel) {
@@ -58,6 +57,7 @@ export default function ProductInfo() {
     }
     const productDetails = <ProductDetails updateProduct={UpdateProductInfo} product={product} id={id} category={categoryName} />
 
+    console.log(product?.relatedProducts);
     const relatedProducts = product?.relatedProducts?.map((product) => <FeaturedProduct key={product.id} product={product} />)
 
     function handleimgRightArrowClick() {
@@ -91,27 +91,11 @@ export default function ProductInfo() {
         }
     }
 
-    //function configureLoading() {
-    //    setIsLoading(true);
-
-    //    setTimeout(() => {
-    //        setIsLoading(false);
-    //    }, 700)
-    //}
-
     let className = isActiveArrows ? "active-arrow" : "";
 
-    //const result = <Grid
-    //    height="80"
-    //    width="80"
-    //    color="#035096"
-    //    ariaLabel="grid-loading"
-    //    radius="12.5"
-    //    wrapperStyle={{}}
-    //    wrapperClass="spinner"
-    //    visible={true} />
 
     function handleAddToFavoriteProduct() {
+
         const favoriteResult = !isFavorite;
 
         if (favoriteResult) {
@@ -159,10 +143,10 @@ export default function ProductInfo() {
                             {activeSizeItem?.quantity <= 0 ? "" : <button disabled className="add-to-cart">Add to cart</button>}
                         </div>
                     </section>
-                    <div className="wishlist-container">
+                    {user?.id && <div className="wishlist-container">
                         <button onClick={handleAddToFavoriteProduct} className="wishlist-button"><i className={!isFavorite ? "fa-regular fa-heart favorite-heart" : "fa - solid fa-heart active-heart"}></i></button>
                         <p>Wishlist</p>
-                    </div>
+                    </div>}
                     <hr></hr>
                     <section className="product-details">
                         {productDetails}

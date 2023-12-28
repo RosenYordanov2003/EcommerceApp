@@ -1,4 +1,4 @@
-﻿import { useState, useContext } from "react";
+﻿import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import FeaturedProductStyle from "../Products/FeaturedProductStyle.css";
 import { UserContext } from "../../Contexts/UserContext";
@@ -13,6 +13,10 @@ export default function FeaturedProduct({ product }) {
     const stars = Array.from({ length: product.starRating }, (star, index) => (
         <i key={index} className="fa-solid fa-star star"></i>
     ));
+
+    useEffect(() => {
+        setIsFavorite(product.isFavorite);
+    }, [product.isFavorite])
 
     const [isFavorite, setIsFavorite] = useState(product.isFavorite);
 
@@ -66,7 +70,7 @@ export default function FeaturedProduct({ product }) {
         }
         setIsFavorite(favoriteResult);
     }
-    const heartClass = !isFavorite ? "fa-regular fa-heart favorite-heart heart" : "fa-solid fa-heart active-heart heart"
+    const heartClass = !isFavorite ? "fa-regular fa-heart favorite-heart heart" : "fa-solid fa-heart active-heart favorite heart"
 
     return (
         <div className="featured-product-card">

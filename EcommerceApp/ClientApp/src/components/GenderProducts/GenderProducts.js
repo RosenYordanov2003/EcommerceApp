@@ -1,15 +1,17 @@
-﻿import { useEffect, useState, useMemo } from "react";
+﻿import { useEffect, useState, useMemo, useContext } from "react";
 import { loadProductsByGender } from "../../services/productService";
 import FeaturedProduct from "../Products/FeaturedProduct";
 import FilterMenu from "../ProductsFilterMenu/FilterMenu";
 import GenderProductsStyle from "../GenderProducts/GenderProductsStyle.css";
 import { Grid } from 'react-loader-spinner';
 import ContactContainer from "../ContactContainer/ContactContainer";
+import { UserContext } from "../../Contexts/UserContext";
 
 export default function GenderProducts() {
     const pathArray = window.location.pathname.split('/');
     const gender = pathArray[pathArray.length - 1];
 
+    const { user, setUser } = useContext(UserContext);
     const [resultObject, setResultObject] = useState(undefined);
     const [products, setProducts] = useState([]);
     const [shoes, setShoes] = useState([]);
@@ -18,7 +20,7 @@ export default function GenderProducts() {
     const [searchQuery, setSearchQuery] = useState(undefined);
 
     useEffect(() => {
-        loadProductsByGender(gender)
+        loadProductsByGender(gender, user?.id)
             .then((result) => {
                 const filteredProducts = filter(filters.brands, filters.categories, result.products);
                 const filteredShoes = filter(filters.brands, filters.categories, result.shoes);
@@ -30,7 +32,7 @@ export default function GenderProducts() {
                 setShoes(filteredShoes);
             })
             .catch((error) => console.error(error));
-    }, [gender]);
+    }, [gender, user?.id]);
 
 
     function filterProducts(brandsArray, categoriesArray) {

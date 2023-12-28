@@ -20,54 +20,56 @@
         }
 
         [HttpGet("GetFeaturedShoes")]
-        public async Task<IActionResult> GetFeaturedShoes([FromQuery]string? userId)
+        public async Task<IActionResult> GetFeaturedShoes([FromQuery] string? userId)
         {
-            userId = userId?.ToUpper();
-            Guid? result =  string.IsNullOrWhiteSpace(userId) ? null : Guid.Parse(userId);
-            
-            IEnumerable<ShoesFeatureModel> featuredShoes = await shoesService.GetFeaturedShoesAsync(result);
+            Guid? userIdResult = ExtractUserId(userId);
+
+            IEnumerable<ShoesFeatureModel> featuredShoes = await shoesService.GetFeaturedShoesAsync(userIdResult);
 
             return Ok(featuredShoes);
         }
         [HttpGet("GetFeaturedClothes")]
-        public async Task<IActionResult> GetFeaturedClothes([FromQuery]string? userId)
+        public async Task<IActionResult> GetFeaturedClothes([FromQuery] string? userId)
         {
-            userId = userId?.ToUpper();
-            Guid? result = string.IsNullOrWhiteSpace(userId) ? null : Guid.Parse(userId);
+            Guid? userIdResult = ExtractUserId(userId);
 
-            IEnumerable<ProductModel> featuredProducts = await clothesService.GetFeaturedClothesAsync(result);
+            IEnumerable<ProductModel> featuredProducts = await clothesService.GetFeaturedClothesAsync(userIdResult);
 
             return Ok(featuredProducts);
         }
         [HttpGet("GetProductsByGender")]
-        public async Task<IActionResult> GetProductsByGender([FromQuery]string gender)
+        public async Task<IActionResult> GetProductsByGender([FromQuery] string gender, [FromQuery]string? userId)
         {
-            var result = await this.clothesService.GetProductByGender(gender);
+            Guid? userIdResult = ExtractUserId(userId);
+            var result = await this.clothesService.GetProductByGender(gender, userIdResult);
 
             return Ok(result);
         }
+
         [HttpGet("AboutProduct")]
-        public async Task<IActionResult>GetProductById([FromQuery]int productId, [FromQuery] string categoryName,[FromQuery] Guid userId)
+        public async Task<IActionResult> GetProductById([FromQuery] int productId, [FromQuery] string categoryName, [FromQuery] string? userId)
         {
+            Guid? userIdResult = ExtractUserId(userId);
+
             if (!await clothesService.CheckIfProductExistsByIdAsync(productId))
             {
-                return BadRequest(new {Error = "Product with such an id does not exist"});
+                return BadRequest(new { Error = "Product with such an id does not exist" });
             }
             if (categoryName.ToLower() == "shoes")
             {
-                ProductInfo<double> shoesproductInfo = await clothesService.GetProductByIdAsync<double>(productId, categoryName, userId);
+                ProductInfo<double> shoesproductInfo = await clothesService.GetProductByIdAsync<double>(productId, categoryName, userIdResult);
 
                 return Ok(shoesproductInfo);
             }
 
-            ProductInfo<string> productInfo = await clothesService.GetProductByIdAsync<string>(productId, categoryName, userId);
+            ProductInfo<string> productInfo = await clothesService.GetProductByIdAsync<string>(productId, categoryName, userIdResult);
 
             return Ok(productInfo);
         }
         [HttpPost]
         [Authorize]
         [Route("AddToFavoriteProducts")]
-        public async Task<IActionResult> AddToFavoriteProducts([FromBody]UserFavoriteProduct userFavoriteProductModel)
+        public async Task<IActionResult> AddToFavoriteProducts([FromBody] UserFavoriteProduct userFavoriteProductModel)
         {
             if (!await clothesService.CheckIfProductExistsByIdAsync(userFavoriteProductModel.ProductId))
             {
@@ -88,6 +90,13 @@
             await clothesService.RemoveProductFromUserFavoriteListAsync(userFavoriteProductModel);
 
             return Ok();
+        }
+
+        private static Guid? ExtractUserId(string? userId)
+        {
+            userId = userId?.ToUpper();
+            Guid? userIdResult = string.IsNullOrWhiteSpace(userId) ? null : Guid.Parse(userId);
+            return userIdResult;
         }
     }
 }

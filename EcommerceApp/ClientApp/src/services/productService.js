@@ -18,8 +18,10 @@ export async function loadFeaturedClothes(userId) {
 
     return responseAsJson;
 }
-export async function loadProductsByGender(gender) {
-    const request = await fetch(`${baseUrl}/GetProductsByGender?gender=${gender}`, { credentials: 'include' });
+export async function loadProductsByGender(gender, userId) {
+
+    const result = userId == undefined ? "" : userId;
+    const request = await fetch(`${baseUrl}/GetProductsByGender?gender=${gender}&&userId=${result}`, { credentials: 'include' });
 
     if (!request.ok) {
         throw Error(request.Error);
@@ -30,7 +32,9 @@ export async function loadProductsByGender(gender) {
     
 }
 export async function loadProductById(id, categoryName, userId) {
-    const request = await fetch(`${baseUrl}/AboutProduct?productid=${id}&categoryName=${categoryName}&&userId=${userId}`, { credentials: 'include',  });
+    let result = userId === undefined ? "" : userId;
+
+    const request = await fetch(`${baseUrl}/AboutProduct?productid=${id}&categoryName=${categoryName}&&userId=${result}`, { credentials: 'include',  });
 
     if (!request.ok) {
         throw Error(request.Error);

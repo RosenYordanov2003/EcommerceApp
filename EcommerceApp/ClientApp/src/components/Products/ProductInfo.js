@@ -57,7 +57,6 @@ export default function ProductInfo() {
     }
     const productDetails = <ProductDetails updateProduct={UpdateProductInfo} product={product} id={id} category={categoryName} />
 
-    console.log(product?.relatedProducts);
     const relatedProducts = product?.relatedProducts?.map((product) => <FeaturedProduct key={product.id} product={product} />)
 
     function handleimgRightArrowClick() {

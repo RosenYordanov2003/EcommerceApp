@@ -11,7 +11,19 @@ export async function postReview(reviewObject) {
     });
 
     if (!request.ok) {
-        throw Error(request.ok);
+        throw Error(request.Error);
+    }
+    const response = request.json();
+
+    return response;
+}
+export async function loadAllReviewsAboutProduct(productId, productCategory) {
+    const request = await fetch(`${baseUrl}/AllReviews?productId=${productId}&&productCategory=${productCategory}`, {
+        credentials: 'include'
+    })
+
+    if (!request.ok) {
+        throw Error(request.Error);
     }
     const response = request.json();
 

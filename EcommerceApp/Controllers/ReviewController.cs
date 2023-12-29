@@ -1,11 +1,9 @@
-﻿using EcommerceApp.Core.Models.Review;
-
-namespace EcommerceApp.Controllers
+﻿namespace EcommerceApp.Controllers
 {
-    using Core.Contracts;
-    using EcommerceApp.Core.Models.Products;
-    using EcommerceApp.Infrastructure.Data.Models;
     using Microsoft.AspNetCore.Mvc;
+    using Core.Contracts;
+    using Core.Models.Products;
+    using Core.Models.Review;
 
     [ApiController]
     [Produces("application/json")]
@@ -39,6 +37,14 @@ namespace EcommerceApp.Controllers
 
             ProductInfo<string> productInfo = await productSevice.GetProductByIdAsync<string>(createReviewModel.ProductId, createReviewModel.ProductCategory, createReviewModel.UserId);
             return Ok(new { Success = true, UpdatedProduct = productInfo });
+        }
+        [HttpGet]
+        [Route("AllReviews")]
+        public async Task<IActionResult> AllReviews([FromQuery] int productId, [FromQuery] string productCategory)
+        {
+            var reviews = await reviewService.LoadAllReviewsForParticularProductAsync(productId, productCategory);
+
+            return Ok(reviews);
         }
     }
 }

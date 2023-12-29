@@ -1,6 +1,7 @@
 ﻿import { useState, useContext } from "react";
 import ReviewContainer from "../../ReviewContainer/ReviewContainer";
 import { UserContext, userContext } from "../../../Contexts/UserContext";
+import { useNavigate } from "react-router-dom";
 export default function ProductDetails({ product, id, category, updateProduct }) {
 
     const { user, setUser } = useContext(UserContext);
@@ -8,10 +9,15 @@ export default function ProductDetails({ product, id, category, updateProduct })
     const [descriptionVisibility, setDescriptionVisibility] = useState(false);
     const [reviewVisibility, setReviewVisibility] = useState(false);
 
+    const navigate = useNavigate();
+
     let informationClassName = informationVisibility ? "active-information" : "product-about";
     let descriptionClassName = descriptionVisibility ? "active-description" : "product-about";
     let reviewClassName = reviewVisibility ? "active-review" : "product-about"; 
 
+    function handleAllReviewsClick() {
+        navigate(`/AllReviews/${id}/${category}`);
+    }
 
     return (
         <>
@@ -45,13 +51,11 @@ export default function ProductDetails({ product, id, category, updateProduct })
                     <i onClick={() => setReviewVisibility(!reviewVisibility)} className={`fa-solid ${reviewVisibility == true ? "fa-minus" : "fa-plus"}`}></i>
                     <p>Reviews</p>
                 </div>
-                {/*<div className="all-reviews">*/}
-                {/*    <p>View All Reviews</p>*/}
-                {/*</div>*/}
                 <div className={reviewClassName}>
                     {user?.id && <ReviewContainer updateProduct={updateProduct} product={product} id={id} category={category} />}
                 </div>
             </div>
+            <button onClick={handleAllReviewsClick} className="all-reviews-button">View All Reviews</button>
         </>
     )
 }

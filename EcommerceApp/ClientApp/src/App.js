@@ -11,7 +11,7 @@ import RefreshToken from "./components/Auth/RefreshToken/RefreshToken";
 import { refreshToken } from "./services/authService";
 import GenderProducts from "../src/components/GenderProducts/GenderProducts";
 import ProductInfo from "../src/components/Products/ProductInfo";
-
+import AllReviews from "../src/components/AllReviews/AllReviews";
 
 
 export default function App() {
@@ -54,6 +54,7 @@ export default function App() {
                     </Route>
                     <Route path="/ProductAbout/:productid/:category" element={<ProductInfo/>}/>
                     <Route path="/" element={<Home categories={categories} isActive={isActive} />} />
+                    <Route path="/AllReviews/:id/:category" element={<AllReviews/>}/>
                 </Routes>
             </UserContext.Provider>
           

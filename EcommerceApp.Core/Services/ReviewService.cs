@@ -1,7 +1,9 @@
 ﻿namespace EcommerceApp.Core.Services
 {
+    using System.Collections.Generic;
+    using Microsoft.EntityFrameworkCore;
     using Contracts;
-    using EcommerceApp.Data;
+    using Data;
     using Infrastructure.Data.Models;
     using Models.Review;
 
@@ -13,6 +15,35 @@
         {
           this.dbContext = dbContext;
         }
+
+        public async Task<IEnumerable<ReviewModel>> LoadAllReviewsForParticularProductAsync(int productId, string productCategory)
+        {
+            if (productCategory.ToLower() == "shoes")
+            {
+                return await dbContext.Reviews.Where(r => r.ShoesId == productId)
+                    .Select(r => new ReviewModel()
+                    {
+                        UserId = r.UserId,
+                        Content = r.Content,
+                        CreatedOn = r.CreatedOn,
+                        StarEvaluation = r.StarЕvaluation,
+                        Username = r.User.UserName
+                    })
+                    .ToArrayAsync();
+                    
+            }
+            return await dbContext.Reviews.Where(r => r.ProductId == productId)
+                  .Select(r => new ReviewModel()
+                  {
+                      UserId = r.UserId,
+                      Content = r.Content,
+                      CreatedOn = r.CreatedOn,
+                      StarEvaluation = r.StarЕvaluation,
+                      Username = r.User.UserName
+                  })
+                  .ToArrayAsync();
+        }
+
         public async Task PostPoductReviewAsync(CreateReviewModel createReviewModel)
         {
 

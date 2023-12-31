@@ -1,6 +1,8 @@
 ﻿import { useEffect, useContext, useState } from "react";
 import { UserContext } from "../../Contexts/UserContext";
 import { loadAllReviewsAboutProduct } from "../../services/reviewService";
+import ReviewCard from "../../components/ReviewCard/ReviewCard";
+import AllReviewsStyle from "../AllReviews/AllReviewsStyle.css";
 
 export default function AllReviews() {
     const { user, setUser } = useContext(UserContext);
@@ -18,7 +20,11 @@ export default function AllReviews() {
     }, [])
 
 
+    const reviewsResult = reviews?.map((review) => <ReviewCard review={review}/> )
+
     return (
-        <p>All Reviews</p>
+        <div className="review-container">
+        { reviewsResult }
+        </div>
     )
 }

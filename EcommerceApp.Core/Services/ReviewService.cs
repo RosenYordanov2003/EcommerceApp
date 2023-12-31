@@ -23,6 +23,7 @@
                 return await dbContext.Reviews.Where(r => r.ShoesId == productId)
                     .Select(r => new ReviewModel()
                     {
+                        Id = r.Id,
                         UserId = r.UserId,
                         Content = r.Content,
                         CreatedOn = r.CreatedOn,
@@ -35,6 +36,7 @@
             return await dbContext.Reviews.Where(r => r.ProductId == productId)
                   .Select(r => new ReviewModel()
                   {
+                      Id = r.Id,
                       UserId = r.UserId,
                       Content = r.Content,
                       CreatedOn = r.CreatedOn,

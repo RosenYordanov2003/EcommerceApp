@@ -1,0 +1,7 @@
+﻿.review-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin: 5rem 0rem;
+}

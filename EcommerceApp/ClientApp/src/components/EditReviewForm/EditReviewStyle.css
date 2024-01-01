@@ -2,7 +2,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
 }
+/*.edit-form .hide-notification{
+    display: none;
+}*/
 .edit-review-button {
     border-radius: 8px;
     border: none;

@@ -1,39 +1,46 @@
-﻿@keyframes showNotification{
-    0%{
-        transform:translateX(100%);
+﻿@keyframes showNotification {
+    0% {
+        transform: translateX(100%);
     }
-    40%{
-        transform:translateX(-5%);
+
+    40% {
+        transform: translateX(-5%);
     }
-    80%{
-        transform:translateX(0%);
+
+    80% {
+        transform: translateX(0%);
     }
+
     100% {
         transform: translateX(-18px);
     }
 }
-@keyframes barProgress{
-    100%{
+
+@keyframes barProgress {
+    100% {
         width: 0%;
     }
 }
 
-@keyframes hide{
-   0%{
-       transform: translateX(-10px)
-   }
-   40%{
-       transform: translateX(0%);
-   }
-   80% {
-       transform: translateX(-5%);
-   }
-   100% {
-       transform: translateX(calc(100% + 20px));
-   }
+@keyframes hide {
+    0% {
+        transform: translateX(-10px)
+    }
+
+    40% {
+        transform: translateX(0%);
+    }
+
+    80% {
+        transform: translateX(-5%);
+    }
+
+    100% {
+        transform: translateX(calc(100% + 20px));
+    }
 }
 
-.hide-notification{
+.hide-notification {
     animation: hide 0.5s ease-in-out forwards;
 }
 
@@ -48,6 +55,7 @@
     left: 0;
     animation: barProgress 5s linear forwards;
 }
+
 .notification-container {
     display: flex;
     align-items: center;
@@ -60,25 +68,30 @@
     top: 200px;
     right: 18px;
 }
+
 .active-notification {
     animation: showNotification 1s ease forwards;
 }
-.notification-message{
+
+.notification-message {
     margin: 0;
     font-size: 1.3rem;
     font-weight: bolder;
     position: relative;
 }
-.notification-container i{
+
+.notification-container i {
     font-size: 1.8rem;
 }
 
 .notification-container .fa-circle-check {
-   color: #0fbe35;
+    color: #0fbe35;
 }
+
 .notification-error .error-mark {
     color: #e44d4c;
 }
+
 .notification-error:before {
     width: 100%;
     height: 3px;

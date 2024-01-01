@@ -2,6 +2,7 @@
 import { getReviewToEdit, editReview } from "../../services/reviewService";
 import { UserContext } from "../../Contexts/UserContext";
 import EditReviewStyle from "../EditReviewForm/EditReviewStyle.css";
+import Notification from "../Notification/Notification";
 
 export default function EditReview() {
 
@@ -10,6 +11,7 @@ export default function EditReview() {
 
     const [formObject, setFormObject] = useState({});
     const { user, setUser } = useContext(UserContext);
+    const [notification, setNotification] = useState(undefined);
 
     useEffect(() => {
         if (user?.id) {
@@ -43,13 +45,18 @@ export default function EditReview() {
         event.preventDefault();
         editReview(formObject)
             .then(res => {
-                console.log(res);
+                setNotification(<Notification message="You have successfully edited your review" typeOfMessage="Success" />);
             })
             .catch((error) => console.error(error));
+
+        setTimeout(() => {
+            setNotification(undefined);
+        }, 8000)
     }
 
     return (
         <form onSubmit={handleEditReviewSubmit} className="review-form edit-form">
+            {notification }
             <div className="write-review-star-container">
                 <p>Your evaluation</p>
                 <div>{stars}</div>

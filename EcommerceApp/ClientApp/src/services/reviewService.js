@@ -29,3 +29,31 @@ export async function loadAllReviewsAboutProduct(productId, productCategory) {
 
     return response;
 }
+export async function getReviewToEdit(reviewId, userId) {
+    const request = await fetch(`${baseUrl}/GetReviewToEdit?reviewId=${reviewId}&&userId=${userId}`, { credentials: 'include' });
+
+    if (!request.ok) {
+        throw Error(request.Error);
+    }
+    const response = request.json();
+
+    return response;
+}
+export async function editReview(reviewObject) {
+
+    const request = await fetch(`${baseUrl}/EditReview`, {
+        credentials: 'include',
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(reviewObject),
+    })
+
+    if (!request.ok) {
+        throw Error(request.Error);
+    }
+    const response = request.json();
+
+    return response;
+}

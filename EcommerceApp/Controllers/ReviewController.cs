@@ -4,6 +4,8 @@
     using Core.Contracts;
     using Core.Models.Products;
     using Core.Models.Review;
+    using Microsoft.AspNetCore.Authorization;
+    using System.ComponentModel;
 
     [ApiController]
     [Produces("application/json")]
@@ -45,6 +47,35 @@
             var reviews = await reviewService.LoadAllReviewsForParticularProductAsync(productId, productCategory);
 
             return Ok(reviews);
+        }
+        [Authorize]
+        [HttpGet]
+        [Route("GetReviewToEdit")]
+        public async Task<IActionResult> GetReviewToEdit([FromQuery]int reviewId,[FromQuery] Guid userId)
+        {
+            if (!await reviewService.CheckIfReviewByReviewIdAndUserIdExistsAsync(reviewId, userId))
+            {
+                return Unauthorized();
+            }
+            var review = await reviewService.GetReviewToEditAsync(reviewId);
+            return Ok(review);
+        }
+        [Authorize]
+        [HttpPost]
+        [Route("EditReview")]
+        public async Task<IActionResult> EditReview([FromBody]EditReviewModel editReviewModel)
+        {
+            if (!await reviewService.CheckIfReviewExistsByIdAsync(editReviewModel.Id))
+            {
+                return BadRequest();
+            }
+            if (!ModelState.IsValid)
+            {
+                var errors = ModelState.Values.SelectMany(ms => ms.Errors);
+                return BadRequest(errors);
+            }
+            await reviewService.EditReviewAsync(editReviewModel.Id, editReviewModel);
+            return Ok(new {success = true});
         }
     }
 }

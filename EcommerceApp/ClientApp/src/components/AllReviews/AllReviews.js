@@ -20,7 +20,7 @@ export default function AllReviews() {
     }, [])
 
 
-    const reviewsResult = reviews?.map((review) => <ReviewCard review={review}/> )
+    const reviewsResult = reviews?.map((review) => <ReviewCard review={review} key={review.id }/> )
 
     return (
         <div className="review-container">

@@ -1,8 +1,11 @@
 ﻿import ReviewCardStyle from "../ReviewCard/ReviewCardStyle.css";
 import { useContext } from "react";
 import { UserContext } from "../../Contexts/UserContext";
+import { getReviewToEdit } from "../../services/reviewService";
+import { useNavigate } from "react-router-dom";
 export default function ReviewCard({ review }) {
 
+    const navigate = useNavigate();
     const { user, setUser } = useContext(UserContext);
 
     const stars = Array.from({ length: 5 }, (star, index) => {
@@ -23,10 +26,6 @@ export default function ReviewCard({ review }) {
 
     const result = currentDateYear - reviewDateYear;
 
-    function handleEditReviewAction() {
-        
-    }
-
     let modifySectionResult = user?.id == review.userId ?
         <section className="modifyReviewSection">
             <button onClick={handleEditReviewAction} className="edit-button">Edit</button>
@@ -34,6 +33,9 @@ export default function ReviewCard({ review }) {
         </section>
         : "";
 
+    function handleEditReviewAction() {
+        navigate(`/Review/${review.id}`);
+    }
 
     return (
         <div className="review-card">

@@ -51,6 +51,11 @@
         {
             public const int ContentMaxValue = 200;
             public const int ContentMinValue = 5;
+
+            public const int StarEvaluationMinValue = 0;
+            public const int StarEvaluationMaxValue = 5;
+
+            public const int SummaryMaxValue = 30;
         }
     }
 }

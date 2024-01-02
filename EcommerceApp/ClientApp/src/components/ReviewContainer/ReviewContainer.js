@@ -40,18 +40,17 @@ export default function ReviewContainer({ id, category, product, updateProduct }
                 setInputObject({ name: undefined, summary: undefined, review: undefined });
                 updateProduct(res.updatedProduct);
                 setStarIndex(-1);
-                setNotification(<Notification message="You have successfully post a review" typeOfMessage="Success" />);
+                setNotification(<Notification closeNotification={closeNotification} message="You have successfully post a review" typeOfMessage="Success" />);
                 element.scrollIntoView({ behavior: 'smooth' });
             })
             .catch((error) => {
-                setNotification(<Notification message="Your review is invalid, please try again" typeOfMessage="Error" />)
+                setNotification(<Notification closeNotification={closeNotification} message="Your review is invalid, please try again" typeOfMessage="Error" />)
                 element.scrollIntoView({ behavior: 'smooth' });
             });
 
-        setTimeout(() => {
+        function closeNotification() {
             setNotification(undefined);
-        }, 8000)
-
+        }
     }
 
     function handleOnNameChange(event) {

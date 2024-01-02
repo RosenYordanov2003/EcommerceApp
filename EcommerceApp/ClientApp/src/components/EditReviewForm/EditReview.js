@@ -45,13 +45,13 @@ export default function EditReview() {
         event.preventDefault();
         editReview(formObject)
             .then(res => {
-                setNotification(<Notification message="You have successfully edited your review" typeOfMessage="Success" />);
+                setNotification(<Notification closeNotification={closeNotification} message="You have successfully edited your review" typeOfMessage="Success" />);
             })
             .catch((error) => console.error(error));
 
-        setTimeout(() => {
+        function closeNotification() {
             setNotification(undefined);
-        }, 8000)
+        }
     }
 
     return (

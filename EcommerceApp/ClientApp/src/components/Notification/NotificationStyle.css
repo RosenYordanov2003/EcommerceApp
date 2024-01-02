@@ -1,4 +1,5 @@
-﻿@keyframes showNotification {
+﻿
+@keyframes showNotification {
     0% {
         transform: translateX(100%);
     }

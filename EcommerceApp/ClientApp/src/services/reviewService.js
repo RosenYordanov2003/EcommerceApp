@@ -53,7 +53,19 @@ export async function editReview(reviewObject) {
     if (!request.ok) {
         throw Error(request.Error);
     }
-    const response = request.json();
-
-    return response;
+    return request.ok;
+}
+export async function deleteReview(reviewId) {
+    const request = await fetch(`${baseUrl}/DeleteReview`, {
+        credentials: 'include',
+        method: 'POST',
+        headers: {
+            "Content-type": "application/json"
+        },
+        body: JSON.stringify(reviewId)
+    })
+    if (!request.ok) {
+        throw Error(request.Error);
+    }
+    return request.ok;
 }

@@ -1,7 +1,15 @@
-﻿.review-container{
+﻿.all-review-container{
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
     margin: 5rem 0rem;
+    position: relative;
+}
+.no-reviews{
+    font-weight: bolder;
+    font-size: 1.7rem;
+}
+.all-review-container .notification-container{
+    top: 10px;
 }

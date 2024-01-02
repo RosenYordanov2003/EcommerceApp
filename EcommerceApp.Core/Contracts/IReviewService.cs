@@ -9,5 +9,6 @@
         Task<EditReviewModel> GetReviewToEditAsync(int reviewId);
         Task EditReviewAsync(int reviewId, EditReviewModel editReviewModel);
         Task<bool> CheckIfReviewExistsByIdAsync(int reviewId);
+        Task DeleteReviewByIdAsync(int reviewId);
     }
 }

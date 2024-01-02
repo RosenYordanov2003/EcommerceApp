@@ -30,3 +30,6 @@
 .edit-form textarea{
    padding: 0.3rem;
 }
+.edit-form .notification-container{
+    top: 0px;
+}

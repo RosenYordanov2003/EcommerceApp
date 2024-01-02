@@ -30,6 +30,7 @@ export default function ProductInfo() {
                 setProduct(res);
                 setIsFavorite(res.isFavorite);
                 setActivePictures(res.pictures[indexPicture]);
+                window.scrollTo({ top: 0, behavior: "smooth" })
             })
             .catch((error) => console.error(error));
     }, [id, user?.id])
@@ -152,7 +153,7 @@ export default function ProductInfo() {
                     </section>
                 </div>
             </div>
-            {relatedProducts?.length > 0 &&
+            {product?.id && relatedProducts?.length > 0 &&
                 <section className="related-products-section">
                     <h2 className="related-products-title">Related Products</h2>
                     <hr></hr>

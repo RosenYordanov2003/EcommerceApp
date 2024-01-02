@@ -26,13 +26,21 @@
             return dbContext.Reviews.AnyAsync(r => r.Id == reviewId);
         }
 
+        public async Task DeleteReviewByIdAsync(int reviewId)
+        {
+            Review reviewToDelete = await dbContext.Reviews.FirstAsync(r => r.Id == reviewId);
+            dbContext.Reviews.Remove(reviewToDelete);
+
+            await dbContext.SaveChangesAsync();
+        }
+
         public async Task EditReviewAsync(int reviewId, EditReviewModel editReviewModel)
         {
             Review reviewToEdit = await dbContext.Reviews.FirstAsync(r => r.Id == reviewId);
             reviewToEdit.Content = editReviewModel.Content;
             reviewToEdit.StarЕvaluation = editReviewModel.StarEvaluation;
 
-           await dbContext.SaveChangesAsync();
+            await dbContext.SaveChangesAsync();
         }
 
         public async Task<EditReviewModel> GetReviewToEditAsync(int reviewId)

@@ -1,10 +1,12 @@
-﻿.pager-container{
+﻿.pager-container {
     display: flex;
     align-items: center;
     margin-bottom: 2rem;
-    justify-content: flex-start;
-    gap: 1.5rem;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-right: 3rem;
 }
+
 .pager-ul {
     list-style: none;
     display: flex;
@@ -12,28 +14,34 @@
     gap: 1.4rem;
     margin: 0px;
 }
-.pager-ul li{
-    border-radius: 50%;
-    background-color: black;
-    color: whitesmoke;
-    font-size: 1.1rem;
-    padding: 0.2rem 0.7rem;
-    cursor: pointer;
-    font-weight: bolder;
-    transition: 0.4s ease-in;
+
+.pager-ul li {
+  border-radius: 50%;
+  background-color: black;
+  color: whitesmoke;
+  font-size: 1.1rem;
+  padding: 0.7rem 0.9rem;
+  cursor: pointer;
+  font-weight: bolder;
+  transition: 0.4s ease-in;
 }
-.pager-ul li:hover{
+
+.pager-ul li:hover,
+.previous-button:hover,
+.next-button:hover {
     opacity: 0.7;
 }
+
 .previous-button,
 .next-button {
-    color: #aaaaaa;
-    border: 2px solid #eeeeee;
-    padding: 0.8rem 1.3rem;
-    border-radius: 40px;
-    transition: all 0.5s ease;
-    font-weight: bolder;
+  color: #aaaaaa;
+  border: 2px solid #eeeeee;
+  padding: 0.8rem 1.3rem;
+  border-radius: 40px;
+  transition: all 0.5s ease;
+  font-weight: bolder;
+  transition: 0.4s ease-in;
 }
-.previous-button{
-    margin-left: 1rem;
-}
+
+
+

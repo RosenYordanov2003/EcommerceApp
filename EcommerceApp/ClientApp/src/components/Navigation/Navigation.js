@@ -16,22 +16,31 @@ export default function Navigation() {
 
 
     let listImes;
-  
+
     if (context?.user?.username) {
 
         const userFavoriteProducts = context?.user?.userFavoriteProducts.map((product) => <UserFavoriteProducts product={product} key={product.id} />);
 
         listImes =
             <>
-            <li onMouseOver={() => setFavoriteMenuActivity(true)} onMouseOut={() => setFavoriteMenuActivity(false)} className="user-favorite">
-                <i className="fa-regular fa-heart"></i>
-                <p className="user-favorite-count">{context.user?.userFavoriteProducts?.length}</p>
-                <div className={`favorite-products-container ${favoriteMenuActivity ? "active-favorite-menu" : "not-active-favorite-menu"}`}>
-                    <h4 className="favorite-products-title">{context.user?.userFavoriteProducts?.length} Items</h4>
-                    <hr></hr>
-                    {userFavoriteProducts }
-                </div>
-            </li>
+                {
+                    context?.user?.userFavoriteProducts?.length > 0 ?
+                        <li onMouseOver={() => setFavoriteMenuActivity(true)} onMouseOut={() => setFavoriteMenuActivity(false)} className="user-favorite">
+                            <i className="fa-regular fa-heart"></i>
+                            <p className="user-favorite-count">{context.user?.userFavoriteProducts?.length}</p>
+                            <div className={`favorite-products-container ${favoriteMenuActivity ? "active-favorite-menu" : "not-active-favorite-menu"}`}>
+                                <h4 className="favorite-products-title">{context.user?.userFavoriteProducts?.length} Items</h4>
+                                <hr></hr>
+                                {userFavoriteProducts}
+                            </div>
+                        </li>
+                        :
+                        <li onMouseOver={() => setFavoriteMenuActivity(true)} onMouseOut={() => setFavoriteMenuActivity(false)} className="user-favorite">
+                        <i className="fa-regular fa-heart"></i>
+                        <p className="user-favorite-count">0</p>
+                        </li>
+                }
+
                 <li>
                     <Link to="/Cart">
                         <i className="fa-solid fa-cart-shopping"></i>
@@ -68,7 +77,7 @@ export default function Navigation() {
 
     return (
         <>
-            <nav className = "main-nav">
+            <nav className="main-nav">
                 <h2 className="nav-logo">Fashion Store</h2>
                 <ul>
                     <li>
@@ -83,7 +92,7 @@ export default function Navigation() {
                         </Link>
                     </li>
                     <li>
-                        <Link to= "/Gender/women">
+                        <Link to="/Gender/women">
                             Women{" "}
                         </Link>
                     </li>

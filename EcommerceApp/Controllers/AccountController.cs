@@ -87,6 +87,7 @@
                         Expires = DateTimeOffset.UtcNow.AddMinutes(15),
                     });
                     var userFavoriteProducts = await productSevice.GetUserFavoriteProductsAsync(user.Id);
+                    //var userCart =
 
                     return Ok(new LoginResponse() { Username = loginModel.Username, Id = user.Id, UserFavoriteProducts = userFavoriteProducts });
                 }

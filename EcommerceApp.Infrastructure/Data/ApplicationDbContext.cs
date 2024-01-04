@@ -23,6 +23,7 @@ namespace EcommerceApp.Data
         public DbSet<ShoesStock> ShoesStock { get; set; }
 
         public DbSet<Review> Reviews { get; set; }
+        public DbSet<Cart> Carts { get; set; }
 
         public DbSet<UserFavoriteProducts> UserFavoriteProducts { get; set; }
         public DbSet<UserFavoriteShoes> UserFavoriteShoes { get; set; }

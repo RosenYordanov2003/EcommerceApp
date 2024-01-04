@@ -15,8 +15,11 @@
         public int? RefreshTokenId { get; set; }
         public RefreshToken? RefreshToken { get; set; }
         public ICollection<Review> Reviews { get; set; }
-        public ICollection<UserFavoriteProducts> UserFavoriteProducts { get; set; }
 
+        [ForeignKey(nameof(Cart))]
+        public Guid? CartId { get; set; }
+        public Cart? Cart { get; set; }
+        public ICollection<UserFavoriteProducts> UserFavoriteProducts { get; set; }
         public ICollection<UserFavoriteShoes> UserFavoriteShoes { get; set; }
 
     }

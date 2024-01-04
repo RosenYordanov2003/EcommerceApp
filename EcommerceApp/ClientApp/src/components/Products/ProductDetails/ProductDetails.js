@@ -2,6 +2,7 @@
 import ReviewContainer from "../../ReviewContainer/ReviewContainer";
 import { UserContext, userContext } from "../../../Contexts/UserContext";
 import { useNavigate } from "react-router-dom";
+
 export default function ProductDetails({ product, id, category, updateProduct }) {
 
     const { user, setUser } = useContext(UserContext);

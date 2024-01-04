@@ -96,6 +96,7 @@ builder.Services.AddScoped<IShoesService, ShoesService>();
 builder.Services.AddScoped<IProductSevice, ProductService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IReviewService, ReviewService>();
+builder.Services.AddScoped<ICartService, CartService>();
 
 var app = builder.Build();
 

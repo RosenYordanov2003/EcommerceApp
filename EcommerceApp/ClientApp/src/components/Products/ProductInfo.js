@@ -6,6 +6,7 @@ import ProductDetails from "../Products/ProductDetails/ProductDetails";
 import FeaturedProduct from "../Products/FeaturedProduct";
 import { Grid } from 'react-loader-spinner';
 import { UserContext } from "../../Contexts/UserContext";
+import { addToCartProduct } from "../../services/cartService";
 
 export default function ProductInfo() {
 
@@ -117,6 +118,36 @@ export default function ProductInfo() {
         }
         setIsFavorite(favoriteResult);
     }
+    function handleAddToCartProduct() {
+        addToCartProduct(id, user?.id, categoryName)
+            .then(() => {
+
+                const productObject = {
+                    id,
+                    name: product.name,
+                    categoryName,
+                    price: product.price,
+                    imgUrl: product.pictures[0].imgUrl
+                };
+
+                if (categoryName.toLocaleLowerCase() === 'shoes') {
+                    
+                    //const cartObject = { ...user.cart, cartShoes: [...cartShoes, productObject ] }
+                    //setUser({ ...user, cart: cartObject })
+                    //console.log(user);
+                }
+            })
+        .catch((error) => console.error(error))
+    }
+
+    let addToCartResult;
+
+    if (activeSizeItem?.quantity) {
+        addToCartResult = activeSizeItem.quantity > 0 ? <button onClick={handleAddToCartProduct} className="add-to-cart">Add to cart</button> : "";
+    }
+    else {
+        addToCartResult = product.isAvalilable ? <button onClick={handleAddToCartProduct} className="add-to-cart">Add to cart</button> : "";
+    }
     return (
         <>
 
@@ -140,7 +171,7 @@ export default function ProductInfo() {
                             <button onClick={handleMinusClick} className="order-button"><i className="fa-solid fa-minus"></i></button>
                             <div className="order-number">{count}</div>
                             <button onClick={handlePlusClick} className="order-button"><i className="fa-solid fa-plus"></i></button>
-                            {activeSizeItem?.quantity <= 0 ? "" : <button disabled className="add-to-cart">Add to cart</button>}
+                            {addToCartResult}
                         </div>
                     </section>
                     {user?.id && <div className="wishlist-container">

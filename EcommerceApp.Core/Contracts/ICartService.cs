@@ -4,5 +4,6 @@
     public  interface ICartService
     {
         Task<CartModel>GetUserCartByUserIdAsync(Guid userId);
+        Task AddProductToUserCartAsync(AddProductToCartModel addProductToCartModel);
     }
 }

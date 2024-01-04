@@ -24,16 +24,18 @@
         private readonly TokenValidationParameters tokenValidationParameters;
         private readonly IAuthService authService;
         private readonly IProductSevice productSevice;
+        private readonly ICartService cartService;
         public AccountController(UserManager<User> userManager,
             IOptionsMonitor<JwtConfig> optionsMonitor,
             TokenValidationParameters tokenValidationParameters,
-            IAuthService authService, IProductSevice productSevice)
+            IAuthService authService, IProductSevice productSevice, ICartService cartService)
         {
             this.userManager = userManager;
             this.jwtConfig = optionsMonitor.CurrentValue;
             this.tokenValidationParameters = tokenValidationParameters;
             this.authService = authService;
             this.productSevice = productSevice;
+            this.cartService = cartService;
         }
         [HttpPost]
         [Route("Register")]
@@ -87,9 +89,9 @@
                         Expires = DateTimeOffset.UtcNow.AddMinutes(15),
                     });
                     var userFavoriteProducts = await productSevice.GetUserFavoriteProductsAsync(user.Id);
-                    //var userCart =
+                    var userCart = await cartService.GetUserCartByUserIdAsync(user.Id);
 
-                    return Ok(new LoginResponse() { Username = loginModel.Username, Id = user.Id, UserFavoriteProducts = userFavoriteProducts });
+                    return Ok(new LoginResponse() { Username = loginModel.Username, Id = user.Id, UserFavoriteProducts = userFavoriteProducts, CartModel = userCart });
                 }
             }
             return BadRequest(new { Error = "Username does not exist!" });
@@ -123,8 +125,9 @@
             });
 
             var userFavoriteProducts = await productSevice.GetUserFavoriteProductsAsync(user.Id);
+            var userCart = await cartService.GetUserCartByUserIdAsync(user.Id);
 
-            return Ok(new LoginResponse() { Username = user.UserName, Id = user.Id, UserFavoriteProducts = userFavoriteProducts });
+            return Ok(new LoginResponse() { Username = user.UserName, Id = user.Id, UserFavoriteProducts = userFavoriteProducts, CartModel = userCart });
         }
         [HttpGet]
         [Route("Logout")]

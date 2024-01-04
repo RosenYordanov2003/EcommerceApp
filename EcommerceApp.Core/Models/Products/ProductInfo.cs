@@ -19,6 +19,6 @@
         public int TotalReviewsCount => Reviews.Count();
         public string Gender { get; set; } = null!;
         public IEnumerable<ProductModel> RelatedProducts { get; set; }
-        public bool IsFavorite { get; set; }
+        public bool IsAvalilable { get; set; }
     }
 }

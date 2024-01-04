@@ -6,10 +6,12 @@
         public CartModel()
         {
             CartProducts = new List<ProductCartModel>();
+            CartShoes = new List<ProductCartModel>();
         }
 
-        public int CartId { get; set; }
+        public Guid? CartId { get; set; }
         public ICollection<ProductCartModel> CartProducts { get; set; }
+        public ICollection<ProductCartModel> CartShoes { get; set; }
         public decimal TotalPrice { get; set; }
     }
 }

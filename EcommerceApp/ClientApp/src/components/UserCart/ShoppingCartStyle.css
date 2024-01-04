@@ -1,0 +1,38 @@
+﻿.shopping-cart-headers {
+    display: flex;
+    justify-content: space-around;
+    margin: 5rem 3rem 0rem 3rem;
+    background-color: #f0f3f2;
+    padding: 2.5rem 1rem;
+    align-items: center;
+}
+.shopping-cart-title{
+    font-size: 2rem;
+    margin: 4rem 0rem 0rem 2rem;
+}
+.item-cotnainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2.5rem 1rem;
+    margin: 0rem 3rem 0rem 3rem;
+}
+.item-img-container{
+    width: 150px;
+}
+.item-img-container img{
+    width: 100%;
+}
+.item-info{
+    display: flex;
+    gap: 1rem;
+}
+.item-about{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.item-category{
+    font-size: 1.1rem;
+    font-weight: bolder;
+}

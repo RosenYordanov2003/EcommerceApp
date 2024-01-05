@@ -131,13 +131,13 @@ export default function ProductInfo() {
                 };
 
                 if (categoryName.toLocaleLowerCase() === 'shoes') {
-                    
+
                     //const cartObject = { ...user.cart, cartShoes: [...cartShoes, productObject ] }
                     //setUser({ ...user, cart: cartObject })
                     //console.log(user);
                 }
             })
-        .catch((error) => console.error(error))
+            .catch((error) => console.error(error))
     }
 
     let addToCartResult;
@@ -147,6 +147,30 @@ export default function ProductInfo() {
     }
     else {
         addToCartResult = product.isAvalilable ? <button onClick={handleAddToCartProduct} className="add-to-cart">Add to cart</button> : "";
+    }
+
+    let stockObject = {};
+    console.log(product)
+
+    if (activeSizeItem?.id) {
+        if (activeSizeItem.quantity > 0) {
+            stockObject.content = 'In Stock'
+            stockObject.class = 'in-stock'
+        }
+        else {
+            stockObject.content = 'Out Of Stock'
+            stockObject.class = 'out-of-stock'
+        }
+    }
+    else {
+        if (product.isAvalilable) {
+            stockObject.content = 'In Stock'
+            stockObject.class = 'in-stock'
+        }
+        else {
+            stockObject.content = 'Out Of Stock'
+            stockObject.class = 'out-of-stock'
+        }
     }
     return (
         <>
@@ -159,8 +183,8 @@ export default function ProductInfo() {
                 </div>
                 <div className="productinfo-about-container">
                     <h2 className="product-info-title">{product.name}</h2>
-                    <p className={`product-stock ${activeSizeItem?.quantity <= 0 ? 'out-of-stock' : 'in-stock'}`}>
-                        {activeSizeItem?.quantity <= 0 ? "Out of stock" : "In Stock"}</p>
+                    <p className={`product-stock ${stockObject.class}`}>
+                        {stockObject.content}</p>
                     <p className="product-price">${Number.parseFloat(product?.price).toFixed(2)}</p>
                     <h4>Size</h4>
                     <ul className="size-ul">

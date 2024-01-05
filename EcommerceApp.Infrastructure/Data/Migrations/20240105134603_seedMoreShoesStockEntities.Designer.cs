@@ -4,6 +4,7 @@ using EcommerceApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EcommerceApp.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240105134603_seedMoreShoesStockEntities")]
+    partial class seedMoreShoesStockEntities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1417,637 +1419,637 @@ namespace EcommerceApp.Infrastructure.Migrations
                         new
                         {
                             Id = 7,
-                            Quantity = 7,
+                            Quantity = 15,
                             ShoesId = 1,
                             Size = 37.0
                         },
                         new
                         {
                             Id = 8,
-                            Quantity = 18,
+                            Quantity = 19,
                             ShoesId = 1,
                             Size = 38.0
                         },
                         new
                         {
                             Id = 9,
-                            Quantity = 6,
+                            Quantity = 11,
                             ShoesId = 1,
                             Size = 39.0
                         },
                         new
                         {
                             Id = 10,
-                            Quantity = 5,
+                            Quantity = 18,
                             ShoesId = 1,
                             Size = 40.0
                         },
                         new
                         {
                             Id = 11,
-                            Quantity = 16,
+                            Quantity = 2,
                             ShoesId = 1,
                             Size = 41.0
                         },
                         new
                         {
                             Id = 12,
-                            Quantity = 9,
+                            Quantity = 3,
                             ShoesId = 1,
                             Size = 42.0
                         },
                         new
                         {
                             Id = 13,
-                            Quantity = 7,
+                            Quantity = 13,
                             ShoesId = 1,
                             Size = 43.0
                         },
                         new
                         {
                             Id = 14,
-                            Quantity = 12,
+                            Quantity = 7,
                             ShoesId = 1,
                             Size = 44.0
                         },
                         new
                         {
                             Id = 15,
-                            Quantity = 3,
+                            Quantity = 14,
                             ShoesId = 1,
                             Size = 45.0
                         },
                         new
                         {
                             Id = 16,
-                            Quantity = 5,
+                            Quantity = 4,
                             ShoesId = 1,
                             Size = 46.0
                         },
                         new
                         {
                             Id = 17,
-                            Quantity = 2,
+                            Quantity = 6,
                             ShoesId = 2,
                             Size = 37.0
                         },
                         new
                         {
                             Id = 18,
-                            Quantity = 2,
+                            Quantity = 17,
                             ShoesId = 2,
                             Size = 38.0
                         },
                         new
                         {
                             Id = 19,
-                            Quantity = 7,
+                            Quantity = 5,
                             ShoesId = 2,
                             Size = 39.0
                         },
                         new
                         {
                             Id = 20,
-                            Quantity = 13,
+                            Quantity = 17,
                             ShoesId = 2,
                             Size = 40.0
                         },
                         new
                         {
                             Id = 21,
-                            Quantity = 5,
+                            Quantity = 10,
                             ShoesId = 2,
                             Size = 41.0
                         },
                         new
                         {
                             Id = 22,
-                            Quantity = 14,
+                            Quantity = 13,
                             ShoesId = 2,
                             Size = 42.0
                         },
                         new
                         {
                             Id = 23,
-                            Quantity = 20,
+                            Quantity = 6,
                             ShoesId = 2,
                             Size = 43.0
                         },
                         new
                         {
                             Id = 24,
-                            Quantity = 16,
+                            Quantity = 19,
                             ShoesId = 2,
                             Size = 44.0
                         },
                         new
                         {
                             Id = 25,
-                            Quantity = 10,
+                            Quantity = 16,
                             ShoesId = 2,
                             Size = 45.0
                         },
                         new
                         {
                             Id = 26,
-                            Quantity = 20,
+                            Quantity = 7,
                             ShoesId = 2,
                             Size = 46.0
                         },
                         new
                         {
                             Id = 27,
-                            Quantity = 1,
+                            Quantity = 3,
                             ShoesId = 3,
                             Size = 37.0
                         },
                         new
                         {
                             Id = 28,
-                            Quantity = 3,
+                            Quantity = 10,
                             ShoesId = 3,
                             Size = 38.0
                         },
                         new
                         {
                             Id = 29,
-                            Quantity = 11,
+                            Quantity = 5,
                             ShoesId = 3,
                             Size = 39.0
                         },
                         new
                         {
                             Id = 30,
-                            Quantity = 14,
+                            Quantity = 10,
                             ShoesId = 3,
                             Size = 40.0
                         },
                         new
                         {
                             Id = 31,
-                            Quantity = 5,
+                            Quantity = 11,
                             ShoesId = 3,
                             Size = 41.0
                         },
                         new
                         {
                             Id = 32,
-                            Quantity = 6,
+                            Quantity = 14,
                             ShoesId = 3,
                             Size = 42.0
                         },
                         new
                         {
                             Id = 33,
-                            Quantity = 19,
+                            Quantity = 14,
                             ShoesId = 3,
                             Size = 43.0
                         },
                         new
                         {
                             Id = 34,
-                            Quantity = 14,
+                            Quantity = 11,
                             ShoesId = 3,
                             Size = 44.0
                         },
                         new
                         {
                             Id = 35,
-                            Quantity = 8,
+                            Quantity = 4,
                             ShoesId = 3,
                             Size = 45.0
                         },
                         new
                         {
                             Id = 36,
-                            Quantity = 9,
+                            Quantity = 12,
                             ShoesId = 3,
                             Size = 46.0
                         },
                         new
                         {
                             Id = 37,
-                            Quantity = 2,
+                            Quantity = 6,
                             ShoesId = 4,
                             Size = 37.0
                         },
                         new
                         {
                             Id = 38,
-                            Quantity = 1,
+                            Quantity = 17,
                             ShoesId = 4,
                             Size = 38.0
                         },
                         new
                         {
                             Id = 39,
-                            Quantity = 13,
+                            Quantity = 15,
                             ShoesId = 4,
                             Size = 39.0
                         },
                         new
                         {
                             Id = 40,
-                            Quantity = 13,
+                            Quantity = 0,
                             ShoesId = 4,
                             Size = 40.0
                         },
                         new
                         {
                             Id = 41,
-                            Quantity = 1,
+                            Quantity = 14,
                             ShoesId = 4,
                             Size = 41.0
                         },
                         new
                         {
                             Id = 42,
-                            Quantity = 2,
+                            Quantity = 17,
                             ShoesId = 4,
                             Size = 42.0
                         },
                         new
                         {
                             Id = 43,
-                            Quantity = 6,
+                            Quantity = 12,
                             ShoesId = 4,
                             Size = 43.0
                         },
                         new
                         {
                             Id = 44,
-                            Quantity = 3,
+                            Quantity = 4,
                             ShoesId = 4,
                             Size = 44.0
                         },
                         new
                         {
                             Id = 45,
-                            Quantity = 10,
+                            Quantity = 17,
                             ShoesId = 4,
                             Size = 45.0
                         },
                         new
                         {
                             Id = 46,
-                            Quantity = 9,
+                            Quantity = 1,
                             ShoesId = 4,
                             Size = 46.0
                         },
                         new
                         {
                             Id = 47,
-                            Quantity = 14,
+                            Quantity = 17,
                             ShoesId = 5,
                             Size = 37.0
                         },
                         new
                         {
                             Id = 48,
-                            Quantity = 5,
+                            Quantity = 14,
                             ShoesId = 5,
                             Size = 38.0
                         },
                         new
                         {
                             Id = 49,
-                            Quantity = 8,
+                            Quantity = 5,
                             ShoesId = 5,
                             Size = 39.0
                         },
                         new
                         {
                             Id = 50,
-                            Quantity = 20,
+                            Quantity = 13,
                             ShoesId = 5,
                             Size = 40.0
                         },
                         new
                         {
                             Id = 51,
-                            Quantity = 6,
+                            Quantity = 5,
                             ShoesId = 5,
                             Size = 41.0
                         },
                         new
                         {
                             Id = 52,
-                            Quantity = 17,
+                            Quantity = 18,
                             ShoesId = 5,
                             Size = 42.0
                         },
                         new
                         {
                             Id = 53,
-                            Quantity = 9,
+                            Quantity = 8,
                             ShoesId = 5,
                             Size = 43.0
                         },
                         new
                         {
                             Id = 54,
-                            Quantity = 15,
+                            Quantity = 7,
                             ShoesId = 5,
                             Size = 44.0
                         },
                         new
                         {
                             Id = 55,
-                            Quantity = 10,
+                            Quantity = 8,
                             ShoesId = 5,
                             Size = 45.0
                         },
                         new
                         {
                             Id = 56,
-                            Quantity = 14,
+                            Quantity = 9,
                             ShoesId = 5,
                             Size = 46.0
                         },
                         new
                         {
                             Id = 57,
-                            Quantity = 20,
+                            Quantity = 11,
                             ShoesId = 6,
                             Size = 37.0
                         },
                         new
                         {
                             Id = 58,
-                            Quantity = 16,
+                            Quantity = 19,
                             ShoesId = 6,
                             Size = 38.0
                         },
                         new
                         {
                             Id = 59,
-                            Quantity = 4,
+                            Quantity = 17,
                             ShoesId = 6,
                             Size = 39.0
                         },
                         new
                         {
                             Id = 60,
-                            Quantity = 18,
+                            Quantity = 9,
                             ShoesId = 6,
                             Size = 40.0
                         },
                         new
                         {
                             Id = 61,
-                            Quantity = 5,
+                            Quantity = 19,
                             ShoesId = 6,
                             Size = 41.0
                         },
                         new
                         {
                             Id = 62,
-                            Quantity = 9,
+                            Quantity = 18,
                             ShoesId = 6,
                             Size = 42.0
                         },
                         new
                         {
                             Id = 63,
-                            Quantity = 2,
+                            Quantity = 20,
                             ShoesId = 6,
                             Size = 43.0
                         },
                         new
                         {
                             Id = 64,
-                            Quantity = 1,
+                            Quantity = 0,
                             ShoesId = 6,
                             Size = 44.0
                         },
                         new
                         {
                             Id = 65,
-                            Quantity = 6,
+                            Quantity = 4,
                             ShoesId = 6,
                             Size = 45.0
                         },
                         new
                         {
                             Id = 66,
-                            Quantity = 9,
+                            Quantity = 4,
                             ShoesId = 6,
                             Size = 46.0
                         },
                         new
                         {
                             Id = 67,
-                            Quantity = 9,
+                            Quantity = 19,
                             ShoesId = 7,
                             Size = 37.0
                         },
                         new
                         {
                             Id = 68,
-                            Quantity = 19,
+                            Quantity = 4,
                             ShoesId = 7,
                             Size = 38.0
                         },
                         new
                         {
                             Id = 69,
-                            Quantity = 17,
+                            Quantity = 2,
                             ShoesId = 7,
                             Size = 39.0
                         },
                         new
                         {
                             Id = 70,
-                            Quantity = 18,
+                            Quantity = 6,
                             ShoesId = 7,
                             Size = 40.0
                         },
                         new
                         {
                             Id = 71,
-                            Quantity = 17,
+                            Quantity = 4,
                             ShoesId = 7,
                             Size = 41.0
                         },
                         new
                         {
                             Id = 72,
-                            Quantity = 11,
+                            Quantity = 8,
                             ShoesId = 7,
                             Size = 42.0
                         },
                         new
                         {
                             Id = 73,
-                            Quantity = 3,
+                            Quantity = 2,
                             ShoesId = 7,
                             Size = 43.0
                         },
                         new
                         {
                             Id = 74,
-                            Quantity = 19,
+                            Quantity = 7,
                             ShoesId = 7,
                             Size = 44.0
                         },
                         new
                         {
                             Id = 75,
-                            Quantity = 1,
+                            Quantity = 15,
                             ShoesId = 7,
                             Size = 45.0
                         },
                         new
                         {
                             Id = 76,
-                            Quantity = 9,
+                            Quantity = 10,
                             ShoesId = 7,
                             Size = 46.0
                         },
                         new
                         {
                             Id = 77,
-                            Quantity = 15,
+                            Quantity = 3,
                             ShoesId = 8,
                             Size = 37.0
                         },
                         new
                         {
                             Id = 78,
-                            Quantity = 15,
+                            Quantity = 12,
                             ShoesId = 8,
                             Size = 38.0
                         },
                         new
                         {
                             Id = 79,
-                            Quantity = 20,
+                            Quantity = 8,
                             ShoesId = 8,
                             Size = 39.0
                         },
                         new
                         {
                             Id = 80,
-                            Quantity = 10,
+                            Quantity = 16,
                             ShoesId = 8,
                             Size = 40.0
                         },
                         new
                         {
                             Id = 81,
-                            Quantity = 4,
+                            Quantity = 2,
                             ShoesId = 8,
                             Size = 41.0
                         },
                         new
                         {
                             Id = 82,
-                            Quantity = 2,
+                            Quantity = 6,
                             ShoesId = 8,
                             Size = 42.0
                         },
                         new
                         {
                             Id = 83,
-                            Quantity = 12,
+                            Quantity = 13,
                             ShoesId = 8,
                             Size = 43.0
                         },
                         new
                         {
                             Id = 84,
-                            Quantity = 1,
+                            Quantity = 4,
                             ShoesId = 8,
                             Size = 44.0
                         },
                         new
                         {
                             Id = 85,
-                            Quantity = 20,
+                            Quantity = 16,
                             ShoesId = 8,
                             Size = 45.0
                         },
                         new
                         {
                             Id = 86,
-                            Quantity = 15,
+                            Quantity = 4,
                             ShoesId = 8,
                             Size = 46.0
                         },
                         new
                         {
                             Id = 87,
-                            Quantity = 3,
+                            Quantity = 9,
                             ShoesId = 9,
                             Size = 37.0
                         },
                         new
                         {
                             Id = 88,
-                            Quantity = 0,
+                            Quantity = 7,
                             ShoesId = 9,
                             Size = 38.0
                         },
                         new
                         {
                             Id = 89,
-                            Quantity = 19,
+                            Quantity = 11,
                             ShoesId = 9,
                             Size = 39.0
                         },
                         new
                         {
                             Id = 90,
-                            Quantity = 18,
+                            Quantity = 6,
                             ShoesId = 9,
                             Size = 40.0
                         },
                         new
                         {
                             Id = 91,
-                            Quantity = 7,
+                            Quantity = 16,
                             ShoesId = 9,
                             Size = 41.0
                         },
                         new
                         {
                             Id = 92,
-                            Quantity = 2,
+                            Quantity = 18,
                             ShoesId = 9,
                             Size = 42.0
                         },
                         new
                         {
                             Id = 93,
-                            Quantity = 2,
+                            Quantity = 17,
                             ShoesId = 9,
                             Size = 43.0
                         },
                         new
                         {
                             Id = 94,
-                            Quantity = 11,
+                            Quantity = 4,
                             ShoesId = 9,
                             Size = 44.0
                         },
                         new
                         {
                             Id = 95,
-                            Quantity = 9,
+                            Quantity = 12,
                             ShoesId = 9,
                             Size = 45.0
                         },
                         new
                         {
                             Id = 96,
-                            Quantity = 18,
+                            Quantity = 4,
                             ShoesId = 9,
                             Size = 46.0
                         },
                         new
                         {
                             Id = 97,
-                            Quantity = 12,
+                            Quantity = 5,
                             ShoesId = 10,
                             Size = 37.0
                         },
@@ -2061,105 +2063,105 @@ namespace EcommerceApp.Infrastructure.Migrations
                         new
                         {
                             Id = 99,
-                            Quantity = 19,
+                            Quantity = 16,
                             ShoesId = 10,
                             Size = 39.0
                         },
                         new
                         {
                             Id = 100,
-                            Quantity = 14,
+                            Quantity = 6,
                             ShoesId = 10,
                             Size = 40.0
                         },
                         new
                         {
                             Id = 101,
-                            Quantity = 7,
+                            Quantity = 8,
                             ShoesId = 10,
                             Size = 41.0
                         },
                         new
                         {
                             Id = 102,
-                            Quantity = 18,
+                            Quantity = 12,
                             ShoesId = 10,
                             Size = 42.0
                         },
                         new
                         {
                             Id = 103,
-                            Quantity = 10,
+                            Quantity = 16,
                             ShoesId = 10,
                             Size = 43.0
                         },
                         new
                         {
                             Id = 104,
-                            Quantity = 16,
+                            Quantity = 13,
                             ShoesId = 10,
                             Size = 44.0
                         },
                         new
                         {
                             Id = 105,
-                            Quantity = 13,
+                            Quantity = 10,
                             ShoesId = 10,
                             Size = 45.0
                         },
                         new
                         {
                             Id = 106,
-                            Quantity = 0,
+                            Quantity = 13,
                             ShoesId = 10,
                             Size = 46.0
                         },
                         new
                         {
                             Id = 107,
-                            Quantity = 9,
+                            Quantity = 17,
                             ShoesId = 11,
                             Size = 37.0
                         },
                         new
                         {
                             Id = 108,
-                            Quantity = 6,
+                            Quantity = 11,
                             ShoesId = 11,
                             Size = 38.0
                         },
                         new
                         {
                             Id = 109,
-                            Quantity = 8,
+                            Quantity = 11,
                             ShoesId = 11,
                             Size = 39.0
                         },
                         new
                         {
                             Id = 110,
-                            Quantity = 16,
+                            Quantity = 1,
                             ShoesId = 11,
                             Size = 40.0
                         },
                         new
                         {
                             Id = 111,
-                            Quantity = 4,
+                            Quantity = 20,
                             ShoesId = 11,
                             Size = 41.0
                         },
                         new
                         {
                             Id = 112,
-                            Quantity = 17,
+                            Quantity = 19,
                             ShoesId = 11,
                             Size = 42.0
                         },
                         new
                         {
                             Id = 113,
-                            Quantity = 13,
+                            Quantity = 8,
                             ShoesId = 11,
                             Size = 43.0
                         },
@@ -2173,70 +2175,70 @@ namespace EcommerceApp.Infrastructure.Migrations
                         new
                         {
                             Id = 115,
-                            Quantity = 17,
+                            Quantity = 20,
                             ShoesId = 11,
                             Size = 45.0
                         },
                         new
                         {
                             Id = 116,
-                            Quantity = 18,
+                            Quantity = 5,
                             ShoesId = 11,
                             Size = 46.0
                         },
                         new
                         {
                             Id = 117,
-                            Quantity = 5,
+                            Quantity = 13,
                             ShoesId = 12,
                             Size = 37.0
                         },
                         new
                         {
                             Id = 118,
-                            Quantity = 4,
+                            Quantity = 12,
                             ShoesId = 12,
                             Size = 38.0
                         },
                         new
                         {
                             Id = 119,
-                            Quantity = 15,
+                            Quantity = 14,
                             ShoesId = 12,
                             Size = 39.0
                         },
                         new
                         {
                             Id = 120,
-                            Quantity = 10,
+                            Quantity = 12,
                             ShoesId = 12,
                             Size = 40.0
                         },
                         new
                         {
                             Id = 121,
-                            Quantity = 10,
+                            Quantity = 0,
                             ShoesId = 12,
                             Size = 41.0
                         },
                         new
                         {
                             Id = 122,
-                            Quantity = 20,
+                            Quantity = 9,
                             ShoesId = 12,
                             Size = 42.0
                         },
                         new
                         {
                             Id = 123,
-                            Quantity = 10,
+                            Quantity = 0,
                             ShoesId = 12,
                             Size = 43.0
                         },
                         new
                         {
                             Id = 124,
-                            Quantity = 7,
+                            Quantity = 2,
                             ShoesId = 12,
                             Size = 44.0
                         },
@@ -2250,175 +2252,175 @@ namespace EcommerceApp.Infrastructure.Migrations
                         new
                         {
                             Id = 126,
-                            Quantity = 10,
+                            Quantity = 7,
                             ShoesId = 12,
                             Size = 46.0
                         },
                         new
                         {
                             Id = 127,
-                            Quantity = 19,
+                            Quantity = 12,
                             ShoesId = 13,
                             Size = 37.0
                         },
                         new
                         {
                             Id = 128,
-                            Quantity = 19,
+                            Quantity = 17,
                             ShoesId = 13,
                             Size = 38.0
                         },
                         new
                         {
                             Id = 129,
-                            Quantity = 5,
+                            Quantity = 16,
                             ShoesId = 13,
                             Size = 39.0
                         },
                         new
                         {
                             Id = 130,
-                            Quantity = 0,
+                            Quantity = 5,
                             ShoesId = 13,
                             Size = 40.0
                         },
                         new
                         {
                             Id = 131,
-                            Quantity = 0,
+                            Quantity = 11,
                             ShoesId = 13,
                             Size = 41.0
                         },
                         new
                         {
                             Id = 132,
-                            Quantity = 7,
+                            Quantity = 14,
                             ShoesId = 13,
                             Size = 42.0
                         },
                         new
                         {
                             Id = 133,
-                            Quantity = 4,
+                            Quantity = 3,
                             ShoesId = 13,
                             Size = 43.0
                         },
                         new
                         {
                             Id = 134,
-                            Quantity = 4,
+                            Quantity = 18,
                             ShoesId = 13,
                             Size = 44.0
                         },
                         new
                         {
                             Id = 135,
-                            Quantity = 9,
+                            Quantity = 4,
                             ShoesId = 13,
                             Size = 45.0
                         },
                         new
                         {
                             Id = 136,
-                            Quantity = 3,
+                            Quantity = 13,
                             ShoesId = 13,
                             Size = 46.0
                         },
                         new
                         {
                             Id = 137,
-                            Quantity = 18,
+                            Quantity = 1,
                             ShoesId = 14,
                             Size = 37.0
                         },
                         new
                         {
                             Id = 138,
-                            Quantity = 14,
+                            Quantity = 16,
                             ShoesId = 14,
                             Size = 38.0
                         },
                         new
                         {
                             Id = 139,
-                            Quantity = 19,
+                            Quantity = 0,
                             ShoesId = 14,
                             Size = 39.0
                         },
                         new
                         {
                             Id = 140,
-                            Quantity = 20,
+                            Quantity = 12,
                             ShoesId = 14,
                             Size = 40.0
                         },
                         new
                         {
                             Id = 141,
-                            Quantity = 16,
+                            Quantity = 4,
                             ShoesId = 14,
                             Size = 41.0
                         },
                         new
                         {
                             Id = 142,
-                            Quantity = 5,
+                            Quantity = 7,
                             ShoesId = 14,
                             Size = 42.0
                         },
                         new
                         {
                             Id = 143,
-                            Quantity = 20,
+                            Quantity = 18,
                             ShoesId = 14,
                             Size = 43.0
                         },
                         new
                         {
                             Id = 144,
-                            Quantity = 8,
+                            Quantity = 0,
                             ShoesId = 14,
                             Size = 44.0
                         },
                         new
                         {
                             Id = 145,
-                            Quantity = 17,
+                            Quantity = 3,
                             ShoesId = 14,
                             Size = 45.0
                         },
                         new
                         {
                             Id = 146,
-                            Quantity = 8,
+                            Quantity = 19,
                             ShoesId = 14,
                             Size = 46.0
                         },
                         new
                         {
                             Id = 147,
-                            Quantity = 17,
+                            Quantity = 10,
                             ShoesId = 15,
                             Size = 37.0
                         },
                         new
                         {
                             Id = 148,
-                            Quantity = 6,
+                            Quantity = 8,
                             ShoesId = 15,
                             Size = 38.0
                         },
                         new
                         {
                             Id = 149,
-                            Quantity = 3,
+                            Quantity = 10,
                             ShoesId = 15,
                             Size = 39.0
                         },
                         new
                         {
                             Id = 150,
-                            Quantity = 13,
+                            Quantity = 8,
                             ShoesId = 15,
                             Size = 40.0
                         },
@@ -2432,105 +2434,105 @@ namespace EcommerceApp.Infrastructure.Migrations
                         new
                         {
                             Id = 152,
-                            Quantity = 2,
+                            Quantity = 8,
                             ShoesId = 15,
                             Size = 42.0
                         },
                         new
                         {
                             Id = 153,
-                            Quantity = 9,
+                            Quantity = 0,
                             ShoesId = 15,
                             Size = 43.0
                         },
                         new
                         {
                             Id = 154,
-                            Quantity = 18,
+                            Quantity = 14,
                             ShoesId = 15,
                             Size = 44.0
                         },
                         new
                         {
                             Id = 155,
-                            Quantity = 18,
+                            Quantity = 9,
                             ShoesId = 15,
                             Size = 45.0
                         },
                         new
                         {
                             Id = 156,
-                            Quantity = 5,
+                            Quantity = 15,
                             ShoesId = 15,
                             Size = 46.0
                         },
                         new
                         {
                             Id = 157,
-                            Quantity = 5,
+                            Quantity = 9,
                             ShoesId = 16,
                             Size = 37.0
                         },
                         new
                         {
                             Id = 158,
-                            Quantity = 6,
+                            Quantity = 1,
                             ShoesId = 16,
                             Size = 38.0
                         },
                         new
                         {
                             Id = 159,
-                            Quantity = 5,
+                            Quantity = 8,
                             ShoesId = 16,
                             Size = 39.0
                         },
                         new
                         {
                             Id = 160,
-                            Quantity = 12,
+                            Quantity = 19,
                             ShoesId = 16,
                             Size = 40.0
                         },
                         new
                         {
                             Id = 161,
-                            Quantity = 10,
+                            Quantity = 6,
                             ShoesId = 16,
                             Size = 41.0
                         },
                         new
                         {
                             Id = 162,
-                            Quantity = 13,
+                            Quantity = 19,
                             ShoesId = 16,
                             Size = 42.0
                         },
                         new
                         {
                             Id = 163,
-                            Quantity = 9,
+                            Quantity = 16,
                             ShoesId = 16,
                             Size = 43.0
                         },
                         new
                         {
                             Id = 164,
-                            Quantity = 6,
+                            Quantity = 17,
                             ShoesId = 16,
                             Size = 44.0
                         },
                         new
                         {
                             Id = 165,
-                            Quantity = 0,
+                            Quantity = 17,
                             ShoesId = 16,
                             Size = 45.0
                         },
                         new
                         {
                             Id = 166,
-                            Quantity = 14,
+                            Quantity = 18,
                             ShoesId = 16,
                             Size = 46.0
                         });

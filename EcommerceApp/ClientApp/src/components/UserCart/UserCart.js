@@ -10,15 +10,18 @@ export default function UserCart() {
 
 
     return (
-        <div className="shopping-cart-container">
+        <>
             <h2 className="shopping-cart-title">Shopping Cart</h2>
-            <section className="shopping-cart-headers">
-                    <h4 className="main-header">Item</h4>
-                    <h4>Price</h4>
-                    <h4>Quantity</h4>
-                    <h4>Subtotal</h4>
-            </section>
-            <>{items }</>
-        </div>
+            <table className="shopping-cart-table">
+                <thead className="shopping-cart-headers">
+                    <th>Item</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Subtotal</th>
+                </thead>
+                {items}
+            </table>
+        </>
+       
     )
 }

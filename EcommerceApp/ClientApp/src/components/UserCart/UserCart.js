@@ -8,20 +8,24 @@ export default function UserCart() {
 
     const items = user?.cart?.cartProducts?.map((item) => <UserCartItem item={item} key={item.id} />)
 
+    const shoesItems = user?.cart?.cartShoes?.map((item) => <UserCartItem item={item} key={item.id} />)
+
+    console.log(user);
 
     return (
         <>
             <h2 className="shopping-cart-title">Shopping Cart</h2>
             <table className="shopping-cart-table">
                 <thead className="shopping-cart-headers">
-                    <th>Item</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
-                    <th>Subtotal</th>
+                    <tr>Item</tr>
+                    <tr>Price</tr>
+                    <tr>Quantity</tr>
+                    <tr>Subtotal</tr>
                 </thead>
                 {items}
+                {shoesItems }
             </table>
         </>
-       
+
     )
 }

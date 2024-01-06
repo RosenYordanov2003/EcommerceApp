@@ -61,6 +61,8 @@ export default function ProductInfo() {
 
     const relatedProducts = product?.relatedProducts?.map((product) => <FeaturedProduct key={product.id} product={product} />)
 
+    console.log(product);
+
     function handleimgRightArrowClick() {
         if (indexPicture >= product?.pictures?.length - 1) {
             setIndexPicture(0);
@@ -121,9 +123,9 @@ export default function ProductInfo() {
     function handleAddToCartProduct() {
         addToCartProduct(id, user?.id, categoryName)
             .then(() => {
-
+                const productId = Number.parseFloat(id);
                 const productObject = {
-                    id,
+                    id: productId,
                     name: product.name,
                     categoryName,
                     price: product.price,
@@ -131,10 +133,13 @@ export default function ProductInfo() {
                 };
 
                 if (categoryName.toLocaleLowerCase() === 'shoes') {
-
-                    //const cartObject = { ...user.cart, cartShoes: [...cartShoes, productObject ] }
-                    //setUser({ ...user, cart: cartObject })
-                    //console.log(user);
+                    setUser({
+                        ...user,
+                        cart: {
+                            ...user.cart,
+                            cartShoes: [...user.cart.cartShoes, productObject]
+                        }
+                    })
                 }
             })
             .catch((error) => console.error(error))
@@ -220,4 +225,13 @@ export default function ProductInfo() {
         </>
     )
 }
+
+
+//setUser({
+//    ...user,
+//    cart: {
+//        ...user.cart,
+//        cartShoes: user.cart.cartShoes.filter(shoe => shoe.id !== id)
+//    }
+//})
 

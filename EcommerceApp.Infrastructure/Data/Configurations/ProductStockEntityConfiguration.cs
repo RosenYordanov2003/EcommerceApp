@@ -17,17 +17,19 @@
         {
             Random random = new Random();
             List<ProductStock> productStocks = new List<ProductStock>();
+            int key = 1;
             for (int productId = 1; productId <= 12; productId++)
             {
                 for (int productSize = 0; productSize < sizes.Length; productSize++)
                 {
                     productStocks.Add(new ProductStock()
                     {
-                        Id = productId,
+                        Id = key,
                         ProductId = productId,
                         Size = sizes[productSize],
                         Quantity = random.Next(21)
                     });
+                    key++;
                 }
             }
             return productStocks;

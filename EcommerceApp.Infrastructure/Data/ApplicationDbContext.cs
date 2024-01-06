@@ -60,6 +60,7 @@ namespace EcommerceApp.Data
             builder.ApplyConfiguration(new ProductEntityConfiguration());
             builder.ApplyConfiguration(new PictureEntityConfiguration());
             builder.ApplyConfiguration(new ShoesStockEntityConfiguration());
+            //builder.ApplyConfiguration(new ProductStockEntityConfiguration());
         }
     }
 }

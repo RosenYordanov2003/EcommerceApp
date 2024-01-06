@@ -18,13 +18,14 @@
         public async Task AddProductToUserCartAsync(AddProductToCartModel addProductToCartModel)
         {
             User user =  await dbContext.Users.FirstAsync(u => u.Id == addProductToCartModel.UserId);
-            Cart? userCart = await dbContext.Users.Select(u => u.Cart).FirstOrDefaultAsync(u => u.Id == addProductToCartModel.UserId);
-            if (userCart == null)
+            if (user.CartId == null)
             {
-                userCart = new Cart();
-                user.Cart = userCart;
+                Cart cart = new Cart();
+                user.Cart = cart;
+                await dbContext.SaveChangesAsync();
             }
-            if (addProductToCartModel.CategoryName.ToLower() == "shoes")
+            Cart userCart = await dbContext.Carts.Where(c => c.Id == user.CartId).FirstAsync();
+            if (addProductToCartModel.CategoryName.ToLower() != "shoes")
             {
                 Product productToAdd = await dbContext.Clothes.FirstAsync(p => p.Id == addProductToCartModel.ProductId);
                 userCart.ProductStocks.Add(productToAdd);

@@ -24,7 +24,7 @@ export default function UserCartItem({ item }) {
                     <button>+</button>
                 </td>
                 <td className="item-subtotal-price">${Number.parseFloat(item.price * quantity).toFixed(2)}</td>
-                <button className="remove-button"><i class="fa-solid fa-xmark"></i></button>
+                <button className="remove-button"><i className="fa-solid fa-xmark"></i></button>
             </tr>
             <hr className="item-hr"></hr>
         </>

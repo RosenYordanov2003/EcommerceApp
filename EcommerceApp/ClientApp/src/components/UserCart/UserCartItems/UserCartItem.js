@@ -1,5 +1,6 @@
 ﻿import { useState, useContext } from "react";
 import { UserContext } from "../../../Contexts/UserContext";
+import { removeProductFromUserCart } from "../../../services/cartService";
 
 export default function UserCartItem({ item, handleIncreaseItemPrice, handleDecreaseItemPrice }) {
 
@@ -20,6 +21,13 @@ export default function UserCartItem({ item, handleIncreaseItemPrice, handleDecr
         }
     }
     function handleOnRemovingItem() {
+
+        const productObject = {
+            userId: user.id,
+            categoryName: item.categoryName,
+            productId: item.id
+        }
+
         if (item.categoryName === "Shoes") {
             setUser({
                 ...user,
@@ -38,6 +46,11 @@ export default function UserCartItem({ item, handleIncreaseItemPrice, handleDecr
                 }
             })
         }
+
+        removeProductFromUserCart(productObject)
+            .then(() => {
+                console.log(true);
+            })
 
         handleDecreaseItemPrice(undefined, item.price * quantity);
 

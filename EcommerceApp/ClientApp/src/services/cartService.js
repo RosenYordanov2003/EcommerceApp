@@ -23,3 +23,20 @@ export async function addToCartProduct(productId, userId, categoryName, quantity
     return request.ok;
 
 }
+export async function removeProductFromUserCart(productObject){
+
+    const request = await fetch(`${baseUrl}/RemoveProduct`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+            "Content-type": "application/json"
+        },
+        body: JSON.stringify(productObject)
+    });
+
+    if (!request.ok) {
+        throw Error(request.Error)
+    }
+    return request.ok;
+
+}

@@ -27,6 +27,9 @@ namespace EcommerceApp.Data
 
         public DbSet<UserFavoriteProducts> UserFavoriteProducts { get; set; }
         public DbSet<UserFavoriteShoes> UserFavoriteShoes { get; set; }
+
+        public DbSet<ShoesCartEntity> ShoesCartEntities { get; set; }
+        public DbSet<ProductCartEntity> ProductCartEntities { get; set; }
        
         protected override void OnModelCreating(ModelBuilder builder)
         {

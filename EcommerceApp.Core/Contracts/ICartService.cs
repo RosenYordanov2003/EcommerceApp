@@ -5,5 +5,6 @@
     {
         Task<CartModel>GetUserCartByUserIdAsync(Guid userId);
         Task AddProductToUserCartAsync(AddProductToCartModel addProductToCartModel);
+        Task RemoveProductFromUserCartAsync(RemoveCartProductModel removeCartProductModel);
     }
 }

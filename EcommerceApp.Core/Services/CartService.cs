@@ -3,9 +3,9 @@
     using Microsoft.EntityFrameworkCore;
     using Contracts;
     using Models.Cart;
-    using EcommerceApp.Data;
-    using EcommerceApp.Core.Models.Products;
-    using EcommerceApp.Infrastructure.Data.Models;
+    using Data;
+    using Models.Products;
+    using Infrastructure.Data.Models;
 
     public class CartService : ICartService
     {
@@ -71,6 +71,26 @@
 
             return userCart;
 
+        }
+
+        public async Task RemoveProductFromUserCartAsync(RemoveCartProductModel removeCartProductModel)
+        {
+
+            User user = await dbContext.Users.FirstAsync(u => u.Id == removeCartProductModel.UserId);
+
+            Cart userCart = await dbContext.Carts.Where(c => c.Id == user.CartId).FirstAsync();
+
+            if (removeCartProductModel.CategoryName.ToLower() == "shoes")
+            {
+                ShoesCartEntity shoesCartEntity = await dbContext.ShoesCartEntities.FirstOrDefaultAsync(shc => shc.ShoesId == removeCartProductModel.ProductId);
+                userCart.ShoesCartEntities.Remove(shoesCartEntity);
+            }
+            else
+            {
+                ProductCartEntity productCartEntity = await dbContext.ProductCartEntities.FirstOrDefaultAsync(pc => pc.ProductId == removeCartProductModel.ProductId);
+                userCart.ProductCartEntities.Remove(productCartEntity);
+            }
+            await dbContext.SaveChangesAsync();
         }
     }
 }

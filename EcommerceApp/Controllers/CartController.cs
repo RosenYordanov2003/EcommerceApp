@@ -23,5 +23,13 @@
 
             return Ok();
         }
+        [HttpPost]
+        [Route("RemoveProduct")]
+        public async Task<IActionResult> RemoveProductFromUserCart([FromBody] RemoveCartProductModel removeCartProductModel)
+        {
+            await cartService.RemoveProductFromUserCartAsync(removeCartProductModel);
+
+            return Ok();
+        }
     }
 }

@@ -238,11 +238,3 @@ export default function ProductInfo() {
 }
 
 
-//setUser({
-//    ...user,
-//    cart: {
-//        ...user.cart,
-//        cartShoes: user.cart.cartShoes.filter(shoe => shoe.id !== id)
-//    }
-//})
-

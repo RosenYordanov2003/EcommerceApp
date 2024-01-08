@@ -1,11 +1,18 @@
-﻿.shopping-cart-table {
+﻿.cart-container {
+    display: flex;
+    align-items: flex-start;
+    margin-top: 7rem;
+}
+.cart-order {
+    flex-basis: 66%
+}
+.shopping-cart-table {
     display: block;
     text-align: center;
     width: 80%;
     position: relative;
     transform: translateX(-50%);
     left: 50%;
-    margin-top: 7rem;
 }
 .shopping-cart-headers {
     display: flex;
@@ -71,7 +78,6 @@
     width: 100%;
 }
 
-
 .remove-button{
     background-color: transparent;
     border: none;
@@ -82,4 +88,86 @@
     justify-content: space-between;
     align-items: center;
     padding: 2.5rem 1rem;
+}
+.order-info {
+    background-color: #f0f3f2;
+    padding: 5rem 1rem;
+}
+.cart-input-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.cart-input-container label{
+    font-size: 1.1rem;
+    color: black;
+    text-transform: capitalize;
+    font-weight: bolder;
+    margin: 0.8rem 0rem 0.8rem 0rem;
+}
+.cart-shipping-container{
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: center;
+}
+.cart-shipping-container label{
+    margin: 0px;
+}
+.finish-order {
+    background-color: #e4e8ea;
+    padding: 2rem;
+}
+.order-final-details{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+    font-weight: bolder;
+    font-size: 1.1rem;
+}
+.order-info-container{
+    flex-basis: 20%;
+    padding-bottom: 2rem;
+}
+.check-out-button {
+    color: white;
+    background-color: #32174D;
+    opacity: 0.9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    border-radius: 30px;
+    padding: 1rem 1rem;
+    width: 300px;
+    border: none;
+    transition: 0.3s ease-in;
+}
+.apply-cuppon-button{
+    background-color: black;
+    color: white;
+    padding: 0.4rem 0.5rem;
+    border: 2px solid black;
+    transition: 0.3s ease-in;
+}
+.cuppon-container input {
+    outline: none;
+    border: 2px solid double;
+    padding: 0.4rem 0.5rem;
+}
+.cart-input-container :where(select, input){
+    width: 90%;
+    padding: 0.2rem 0rem;
+}
+.apply-cuppon-button:hover,
+.check-out-button:hover{
+    opacity: 0.6;
+}
+#postal-code{
+    margin-bottom: 3rem;
+}
+.cart-shipping-container{
+    margin-bottom: 1.5rem;
 }

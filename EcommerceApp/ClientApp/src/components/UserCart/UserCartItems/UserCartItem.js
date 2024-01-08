@@ -7,8 +7,8 @@ export default function UserCartItem({ item }) {
 
     return (
         <>
-            <tr className="item-cotnainer">
-                <td className="item-info">
+            <section className="item-cotnainer">
+                <div className="item-info">
                     <div className="item-img-container">
                         <img src={item.imgUrl}></img>
                     </div>
@@ -16,16 +16,16 @@ export default function UserCartItem({ item }) {
                         <h4 className="item-name">{item.name}</h4>
                         <p className="item-category">Category: {item.categoryName}</p>
                     </div>
-                </td>
-                <td className="item-price">${Number.parseFloat(item.price).toFixed(2)}</td>
-                <td className="quantity-buttons-container">
+                </div>
+                <p className="item-price">${Number.parseFloat(item.price).toFixed(2)}</p>
+                <div className="quantity-buttons-container">
                     <button>-</button>
                     {quantity}
                     <button>+</button>
-                </td>
-                <td className="item-subtotal-price">${Number.parseFloat(item.price * quantity).toFixed(2)}</td>
+                </div>
+                <p className="item-subtotal-price">${Number.parseFloat(item.price * quantity).toFixed(2)}</p>
                 <button className="remove-button"><i className="fa-solid fa-xmark"></i></button>
-            </tr>
+            </section>
             <hr className="item-hr"></hr>
         </>
 

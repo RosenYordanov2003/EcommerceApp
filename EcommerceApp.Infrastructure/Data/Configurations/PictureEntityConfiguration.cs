@@ -158,97 +158,97 @@
                {
                    Id = 24,
                    ShoesId = 7,
-                   ImgUrl = "https://www.sambabulgariashop.me/images/adidasbulgaria/Adidas%20Alphabounce%20Beyond%20Team%20-%20BG-%20675.jpg"
+                   ImgUrl = "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/e9091962695943f6a5ed67219538ad6d_9366/Ultraboost_1.0_Shoes_Grey_IF1912_04_standard.jpg"
                },
                new Picture()
                {
                    Id = 25,
                    ShoesId = 7,
-                   ImgUrl = "https://www.sambabulgariashop.me/images/adidasbulgaria/Adidas%20Alphabounce%20Beyond%20Team%20-%20BG-%20675_2.jpg"
+                   ImgUrl = "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/b8c729aec8104a78a71a1b99013b100f_9366/Ultraboost_1.0_Shoes_Grey_IF1912_02_standard_hover.jpg"
                },
                new Picture()
                {
                    Id = 26,
                    ShoesId = 7,
-                   ImgUrl = "https://www.sambabulgariashop.me/images/adidasbulgaria/Adidas%20Alphabounce%20Beyond%20Team%20-%20BG-%20675_4.jpg"
+                   ImgUrl = "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/7f359276eda44bd1b5406251b2be5d55_9366/Ultraboost_1.0_Shoes_Grey_IF1912_03_standard.jpg"
                },
                new Picture()
                {
                    Id = 27,
                    ShoesId = 7,
-                   ImgUrl = "https://www.sambabulgariashop.me/images/adidasbulgaria/Adidas%20Alphabounce%20Beyond%20Team%20-%20BG-%20675_5.jpg"
+                   ImgUrl = "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/b8c729aec8104a78a71a1b99013b100f_9366/Ultraboost_1.0_Shoes_Grey_IF1912_02_standard_hover.jpg"
                },
                new Picture()
                {
                    Id = 28,
                    ShoesId = 8,
-                   ImgUrl = "https://www.sambabulgariashop.me/images/adidasbulgaria/Adidas%20Alphabounce%20Beyond%20Team%20-%20BG-%20673.jpg"
+                   ImgUrl = "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/b79a6a72567845b4b8a6a6cd35426ef9_9366/Pureboost_23_Running_Shoes_Green_IF1548_01_standard.jpg"
                },
                new Picture()
                {
                    Id = 29,
                    ShoesId = 8,
-                   ImgUrl = "https://www.sambabulgariashop.me/images/adidasbulgaria/Adidas%20Alphabounce%20Beyond%20Team%20-%20BG-%20673_2.jpg"
+                   ImgUrl = "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/9a8c1e54acab4922a97463898dfa5b6b_9366/Pureboost_23_Running_Shoes_Green_IF1548_02_standard_hover.jpg"
                },
                new Picture()
                {
                    Id = 30,
                    ShoesId = 8,
-                   ImgUrl = "https://www.sambabulgariashop.me/images/adidasbulgaria/Adidas%20Alphabounce%20Beyond%20Team%20-%20BG-%20673_4.jpg"
+                   ImgUrl = "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/2850801c47684ba7a0aee1c75ca864fd_9366/Pureboost_23_Running_Shoes_Green_IF1548_03_standard.jpg"
                },
                new Picture()
                {
                    Id = 31,
                    ShoesId = 8,
-                   ImgUrl = "https://www.sambabulgariashop.me/images/adidasbulgaria/Adidas%20Alphabounce%20Beyond%20Team%20-%20BG-%20673_5.jpg"
+                   ImgUrl = "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/b0742a0521ca4a67856b4f1fff27e6b3_9366/Pureboost_23_Running_Shoes_Green_IF1548_04_standard.jpg"
                },
                new Picture()
                {
                    Id = 32,
                    ShoesId = 9,
-                   ImgUrl = "https://www.sambabulgariashop.me/images/adidasbulgaria/Adidas%20ACE%2017%203%20Firm%20Ground%20-%20BG-O96%203371_1.jpg"
+                   ImgUrl = "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/1856d88d74fe4d02b678ea56a7130b97_9366/Adizero_Impact_American_Football_Cleats_Black_ID1828_01_standard.jpg"
                },
                new Picture()
                {
                    Id = 33,
                    ShoesId = 9,
-                   ImgUrl = "https://www.sambabulgariashop.me/images/adidasbulgaria/Adidas%20ACE%2017%203%20Firm%20Ground%20-%20BG-O96%203371_2.jpg"
+                   ImgUrl = "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/419feb4c7ba3459f9eed646c26645387_9366/Adizero_Impact_American_Football_Cleats_Black_ID1828_02_standard_hover.jpg"
                },
                new Picture()
                {
                    Id = 34,
                    ShoesId = 9,
-                   ImgUrl = "https://www.sambabulgariashop.me/images/adidasbulgaria/Adidas%20ACE%2017%203%20Firm%20Ground%20-%20BG-O96%203371.jpg"
+                   ImgUrl = "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/e12b2c6d8c4b4ec68dc2dc0ea32804dc_9366/Adizero_Impact_American_Football_Cleats_Black_ID1828_03_standard.jpg"
                },
                new Picture()
                {
                    Id = 35,
                    ShoesId = 9,
-                   ImgUrl = "https://www.sambabulgariashop.me/images/adidasbulgaria/Adidas%20ACE%2017%203%20Firm%20Ground%20-%20BG-O96%203371_3.jpg"
+                   ImgUrl = "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/ef07175df84147b9becfe5dae432b104_9366/Adizero_Impact_American_Football_Cleats_Black_ID1828_04_standard.jpg"
                },
                new Picture()
                {
                    Id = 36,
                    ShoesId = 10,
-                   ImgUrl = "https://www.sambabulgariashop.me/images/adidasbulgaria/Adidas%20Adizero%208%200%20-%20BG-L307B%20521.jpg"
+                   ImgUrl = "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/2872eabe08dd4141a718bf2326e19ca0_9366/Adizero_Electric_American_Football_Cleats_White_IE4374_01_standard.jpg"
                },
                new Picture()
                {
                    Id = 37,
                    ShoesId = 10,
-                   ImgUrl = "https://www.sambabulgariashop.me/images/adidasbulgaria/Adidas%20Adizero%208%200%20-%20BG-L307B%20521_2.jpg"
+                   ImgUrl = "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/beddd0544dc94959b107e174d8a4294f_9366/Adizero_Electric_American_Football_Cleats_White_IE4374_02_standard_hover.jpg"
                },
                new Picture()
                {
                    Id = 38,
                    ShoesId = 10,
-                   ImgUrl = "https://www.sambabulgariashop.me/images/adidasbulgaria/Adidas%20Adizero%208%200%20-%20BG-L307B%20521_3.jpg"
+                   ImgUrl = "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/09f4413fe2d54fe0b34434de76c25fdf_9366/Adizero_Electric_American_Football_Cleats_White_IE4374_03_standard.jpg"
                },
                new Picture()
                {
                    Id = 39,
                    ShoesId = 10,
-                   ImgUrl = "https://www.sambabulgariashop.me/images/adidasbulgaria/Adidas%20Adizero%208%200%20-%20BG-L307B%20521_5.jpg"
+                   ImgUrl = "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/6c0cac3d8958498694ae53c78ad021bc_9366/Adizero_Electric_American_Football_Cleats_White_IE4374_04_standard.jpg"
                },
                new Picture()
                {

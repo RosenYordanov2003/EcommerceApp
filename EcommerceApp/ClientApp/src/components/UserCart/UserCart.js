@@ -33,10 +33,10 @@ export default function UserCart() {
             let sum = 0;
 
             for (let i = 0; i < user?.cart?.cartShoes.length; i++) {
-                sum += Number.parseFloat(user?.cart?.cartShoes[i]?.price);
+                sum += Number.parseFloat(user?.cart?.cartShoes[i]?.price) * user?.cart?.cartShoes[i]?.quantity;
             }
             for (let i = 0; i < user?.cart?.cartProducts.length; i++) {
-                sum += Number.parseFloat(user?.cart?.cartProducts[i]?.price);
+                sum += Number.parseFloat(user?.cart?.cartProducts[i]?.price) * user?.cart?.cartProducts[i]?.quantity;
             }
             setTotalPrice(sum);
         }

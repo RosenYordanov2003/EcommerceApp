@@ -12,6 +12,10 @@
                  .WithOne(p => p.Shoes)
                  .OnDelete(DeleteBehavior.NoAction);
 
+            builder.HasMany(sh => sh.ShoesCartEntities)
+                .WithOne(sh => sh.Shoes)
+                .OnDelete(DeleteBehavior.NoAction);
+
             builder.HasData(GenerateShoes());
         }
 
@@ -133,7 +137,7 @@
                     BrandId = 2,
                     CategoryId = 9,
                     SubCategoryId = 4,
-                    Color = "Orange",
+                    Color = "Black",
                     Price = 78.41M,
                     Gender = "Men",
                     Description = "Dominate space. Command the play. Create goal-destined shots from impossible angles. Control the game with every touch in ACE. These juniors' soccer cleats have a 3D Control Skin upper that delivers precise control with zero wear-in time. Designed to dominate on firm ground."

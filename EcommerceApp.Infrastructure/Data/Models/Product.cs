@@ -12,6 +12,7 @@
             ProductStocks = new List<ProductStock>();
             UserFavoriteProducts = new HashSet<UserFavoriteProducts>();
             Reviews = new HashSet<Review>();
+            ProductCartEntities = new List<ProductCartEntity>();
         }
         [Key]
         public int Id { get; set; }
@@ -46,5 +47,6 @@
         public ICollection<ProductStock> ProductStocks { get; set; }
         public ICollection<UserFavoriteProducts> UserFavoriteProducts { get; set; }
         public ICollection<Review> Reviews { get; set; }
+        public ICollection<ProductCartEntity> ProductCartEntities { get; set; }
     }
 }

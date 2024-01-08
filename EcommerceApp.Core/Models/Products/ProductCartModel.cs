@@ -7,5 +7,6 @@
         public string CategoryName { get; set; } = null!;
         public decimal Price { get; set; }
         public string ImgUrl { get; set; } = null!;
+        public int Quantity { get; set; }
     }
 }

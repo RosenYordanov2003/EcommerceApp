@@ -102,7 +102,7 @@ export default function ProductInfo() {
         const favoriteResult = !isFavorite;
 
         if (favoriteResult) {
-            addProductToUserFavoriteProductsList(user.id, id, categoryName)
+            addProductToUserFavoriteProductsList(user.id, id, categoryName, count)
                 .then(res => {
                     const productObject = createProductObject(product.name, id, product.pictures[0].imgUrl, categoryName);
 
@@ -121,15 +121,17 @@ export default function ProductInfo() {
         setIsFavorite(favoriteResult);
     }
     function handleAddToCartProduct() {
-        addToCartProduct(id, user?.id, categoryName)
+        addToCartProduct(id, user?.id, categoryName, count)
             .then(() => {
                 const productId = Number.parseFloat(id);
+
                 const productObject = {
                     id: productId,
                     name: product.name,
                     categoryName,
                     price: product.price,
-                    imgUrl: product.pictures[0].imgUrl
+                    imgUrl: product.pictures[0].imgUrl,
+                    quantity: count
                 };
 
                 if (categoryName.toLocaleLowerCase() === 'shoes') {

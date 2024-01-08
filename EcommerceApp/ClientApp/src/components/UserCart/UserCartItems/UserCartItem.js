@@ -3,11 +3,8 @@ import { UserContext } from "../../../Contexts/UserContext";
 
 export default function UserCartItem({ item, handleIncreaseItemPrice, handleDecreaseItemPrice }) {
 
-    const [quantity, setQuantity] = useState(1);
+    const [quantity, setQuantity] = useState(item.quantity);
     const { user, setUser } = useContext(UserContext);
-
-
-    console.log(item);
 
     function handleOnDecreasingProductQuantity() {
         if (quantity == 1) {

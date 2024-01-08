@@ -9,6 +9,19 @@
     {
         public void Configure(EntityTypeBuilder<Product> builder)
         {
+            builder.HasMany(p => p.ProductCartEntities)
+                .WithOne(ce => ce.Product)
+                .OnDelete(DeleteBehavior.NoAction);
+
+
+            builder.HasMany(p => p.Reviews)
+                .WithOne(r => r.Product)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            builder.HasMany(p => p.ProductStocks)
+                .WithOne(p => p.Product)
+                .OnDelete(DeleteBehavior.NoAction); 
+
             builder.HasData(GenerateClothes());
         }
 

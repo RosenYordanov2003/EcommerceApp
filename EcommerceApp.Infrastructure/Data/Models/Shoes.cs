@@ -11,6 +11,7 @@
             UserFavoriteShoes = new HashSet<UserFavoriteShoes>();
             Reviews = new HashSet<Review>();
             ShoesStocks = new List<ShoesStock>();
+            ShoesCartEntities = new List<ShoesCartEntity>();
         }
         public int Id { get; set; }
         [ForeignKey(nameof(Brand))]
@@ -44,5 +45,6 @@
         public ICollection<Review> Reviews { get; set; }
 
         public ICollection<ShoesStock> ShoesStocks { get; set; }
+        public ICollection<ShoesCartEntity> ShoesCartEntities { get; set; }
     }
 }

@@ -4,7 +4,7 @@
     margin-top: 7rem;
 }
 .cart-order {
-    flex-basis: 66%
+    flex-basis: 76%
 }
 .shopping-cart-table {
     display: block;
@@ -110,7 +110,11 @@
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
-    justify-content: center;
+    justify-content: center; 
+    gap: 1rem;
+}
+input:nth-of-type(checkbox){
+    border-radius: 50%;
 }
 .cart-shipping-container label{
     margin: 0px;

@@ -8,9 +8,23 @@ export default function UserCart() {
     const [totalPrice, setTotalPrice] = useState();
     const [shippingMethod, setShippingMethod] = useState(undefined);
 
-    const items = user?.cart?.cartProducts?.map((item) => <UserCartItem item={item} key={item.id} />)
 
-    const shoesItems = user?.cart?.cartShoes?.map((item) => <UserCartItem item={item} key={item.id} />)
+
+
+    function handleIncreaseItemPrice(productId, price) {
+        console.log(price + totalPrice);
+        setTotalPrice(totalPrice + price);
+    }
+    function handleDecreaseItemPrice(productId, price) {
+        setTotalPrice(totalPrice - price);
+    }
+
+    console.log(user);
+
+
+    const items = user?.cart?.cartProducts?.map((item) => <UserCartItem handleIncreaseItemPrice={handleIncreaseItemPrice} handleDecreaseItemPrice={handleDecreaseItemPrice} item={item} key={item.id} />)
+
+    const shoesItems = user?.cart?.cartShoes?.map((item) => <UserCartItem handleIncreaseItemPrice={handleIncreaseItemPrice} handleDecreaseItemPrice={handleDecreaseItemPrice} item={item} key={item.id} />)
 
 
     useEffect(() => {
@@ -28,6 +42,7 @@ export default function UserCart() {
         }
     }, [user?.cart?.cartId])
 
+   
 
     return (
         <>

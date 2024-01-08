@@ -141,6 +141,15 @@ export default function ProductInfo() {
                         }
                     })
                 }
+                else {
+                    setUser({
+                        ...user,
+                        cart: {
+                            ...user.cart,
+                            cartProducts: [...user.cart.cartProducts, productObject]
+                        }
+                    })
+                }
             })
             .catch((error) => console.error(error))
     }

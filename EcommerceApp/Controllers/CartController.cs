@@ -2,9 +2,11 @@
 {
     using Core.Contracts;
     using Core.Models.Cart;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
     [ApiController]
+    [Authorize]
     [Produces("application/json")]
     [Route("api/cart")]
     public class CartController : ControllerBase

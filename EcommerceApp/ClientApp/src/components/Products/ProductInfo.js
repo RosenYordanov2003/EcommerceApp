@@ -158,7 +158,9 @@ export default function ProductInfo() {
 
     let addToCartResult;
 
-    if (activeSizeItem?.quantity) {
+
+
+    if (activeSizeItem) {
         addToCartResult = activeSizeItem.quantity > 0 ? <button onClick={handleAddToCartProduct} className="add-to-cart">Add to cart</button> : "";
     }
     else {
@@ -166,7 +168,6 @@ export default function ProductInfo() {
     }
 
     let stockObject = {};
-    console.log(product)
 
     if (activeSizeItem?.id) {
         if (activeSizeItem.quantity > 0) {

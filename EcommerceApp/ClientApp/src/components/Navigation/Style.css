@@ -73,14 +73,16 @@
 .arrow{
     margin-left: 0.3rem;
 }
-.user-favorite{
-   position: relative;
-   cursor: pointer;
+.user-favorite,
+.user-cart-container {
+    position: relative;
+    cursor: pointer;
 }
 .user-favorite i{
    font-size: 1.4rem;
 }
-.user-favorite-count {
+.user-favorite-count,
+.user-products-count {
     position: absolute;
     top: -16px;
     right: -6px;

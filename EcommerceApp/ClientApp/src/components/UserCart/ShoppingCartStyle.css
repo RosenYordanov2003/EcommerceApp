@@ -106,12 +106,13 @@
     font-weight: bolder;
     margin: 0.8rem 0rem 0.8rem 0rem;
 }
-.cart-shipping-container{
+.cart-shipping-container {
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
-    justify-content: center; 
-    gap: 1rem;
+    justify-content: flex-end;
+    gap: 1.5rem;
+    margin: 0rem  0rem 1.5rem 2rem;
 }
 input:nth-of-type(checkbox){
     border-radius: 50%;
@@ -149,6 +150,10 @@ input:nth-of-type(checkbox){
     border: none;
     transition: 0.3s ease-in;
 }
+.cuppon-container{
+    display: flex;
+    align-items: center;
+}
 .apply-cuppon-button{
     background-color: black;
     color: white;
@@ -160,10 +165,11 @@ input:nth-of-type(checkbox){
     outline: none;
     border: 2px solid double;
     padding: 0.4rem 0.5rem;
+    width: 100%;
 }
 .cart-input-container :where(select, input){
     width: 90%;
-    padding: 0.2rem 0rem;
+    padding: 0.2rem 0.2rem;
 }
 .apply-cuppon-button:hover,
 .check-out-button:hover{
@@ -172,6 +178,48 @@ input:nth-of-type(checkbox){
 #postal-code{
     margin-bottom: 3rem;
 }
-.cart-shipping-container{
-    margin-bottom: 1.5rem;
+
+
+.round {
+    position: relative;
 }
+
+.round label {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    cursor: pointer;
+    height: 28px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 28px;
+}
+
+.round label:after {
+    border: 2px solid #fff;
+    border-top: none;
+    border-right: none;
+    content: "";
+    height: 6px;
+    left: 7px;
+    opacity: 0;
+    position: absolute;
+    top: 8px;
+    transform: rotate(-45deg);
+    width: 12px;
+}
+
+.round input[type="checkbox"] {
+    visibility: hidden;
+}
+
+.round input[type="checkbox"]:checked + label {
+    background-color: #66bb6a;
+    border-color: #66bb6a;
+}
+
+.round input[type="checkbox"]:checked + label:after {
+    opacity: 1;
+}
+

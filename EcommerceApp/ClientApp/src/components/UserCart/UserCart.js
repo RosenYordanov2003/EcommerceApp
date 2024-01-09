@@ -19,7 +19,6 @@ export default function UserCart() {
         setTotalPrice(totalPrice - price);
     }
 
-    console.log(user);
 
 
     const items = user?.cart?.cartProducts?.map((item) => <UserCartItem handleIncreaseItemPrice={handleIncreaseItemPrice} handleDecreaseItemPrice={handleDecreaseItemPrice} item={item} key={item.id} />)
@@ -41,8 +40,6 @@ export default function UserCart() {
             setTotalPrice(sum);
         }
     }, [user?.cart?.cartId])
-
-   
 
     return (
         <>
@@ -84,12 +81,18 @@ export default function UserCart() {
                             <input type="text" id="postal-code"></input>
                         </div>
                         <div className="cart-shipping-container">
-                            <label htmlFor="postal-code">Standard Shipping: $5.00</label>
-                            <input type="checkbox" id="standard-shipping"></input>
+                            <label htmlFor="standard-shipping">Standard Shipping: $5.00</label>
+                            <div className="round">
+                                <input onClick={() => setShippingMethod({ method: 'standard', price: 5 })} id="standard-shipping" checked={shippingMethod?.method === 'standard'} type="checkbox" />
+                                <label htmlFor="standard-shipping"></label>
+                            </div>
                         </div>
                         <div className="cart-shipping-container">
-                            <label htmlFor="postal-code">Fast Shipping: $10.00</label>
-                            <input type="checkbox" id="fast-shipping"></input>
+                            <label htmlFor="fast-shipping">Fast Shipping: $10.00</label>
+                            <div className="round">
+                                <input onClick={() => setShippingMethod({ method: 'fast', price: 10 }) } type="checkbox" checked={shippingMethod?.method === 'fast'} id="fast-shipping"></input>
+                                <label htmlFor="fast-shipping"></label>
+                            </div>
                         </div>
                     </div>
                     <div className="finish-order">

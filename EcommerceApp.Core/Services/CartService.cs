@@ -73,6 +73,39 @@
 
         }
 
+        public async Task IncreaseProductQuantityAsync(ModifyProductCartQuantityModel modifyProductCartQuantityModel)
+        {
+            User user = await dbContext.Users.FirstAsync(u => u.Id == modifyProductCartQuantityModel.UserId);
+
+            Cart userCart = await dbContext.Carts.Include(c => c.ProductCartEntities).Include(c => c.ShoesCartEntities).Where(c => c.Id == user.CartId).FirstAsync();
+
+            if (modifyProductCartQuantityModel.ProductCategoryName.ToLower() != "shoes")
+            {
+                ProductCartEntity productToModify = userCart.ProductCartEntities.FirstOrDefault(p => p.ProductId == modifyProductCartQuantityModel.ProductId);
+                if (modifyProductCartQuantityModel.Operation == "increase")
+                {
+                    productToModify.Quantity++;
+                }
+                else
+                {
+                    productToModify.Quantity --;
+                }
+            }
+            else
+            {
+                ShoesCartEntity productToModify = userCart.ShoesCartEntities.FirstOrDefault(sh => sh.ShoesId == modifyProductCartQuantityModel.ProductId);
+                if (modifyProductCartQuantityModel.Operation == "increase")
+                {
+                    productToModify.Quantity++;
+                }
+                else
+                {
+                    productToModify.Quantity--;
+                }
+            }
+            await dbContext.SaveChangesAsync();
+        }
+
         public async Task RemoveProductFromUserCartAsync(RemoveCartProductModel removeCartProductModel)
         {
 

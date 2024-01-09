@@ -40,3 +40,17 @@ export async function removeProductFromUserCart(productObject){
     return request.ok;
 
 }
+export async function modifyProductCartQuantity(productObject) {
+    const request = await fetch(`${baseUrl}/ModifyProducCarttQuantity`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+            "Content-type": "application/json"
+        },
+        body: JSON.stringify(productObject)
+    })
+    if (!request.ok) {
+        throw Error(request.Error)
+    }
+    return request.ok;
+}

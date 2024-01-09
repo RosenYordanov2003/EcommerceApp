@@ -1,6 +1,6 @@
 ﻿import { useState, useContext } from "react";
 import { UserContext } from "../../../Contexts/UserContext";
-import { removeProductFromUserCart } from "../../../services/cartService";
+import { removeProductFromUserCart, modifyProductCartQuantity } from "../../../services/cartService";
 
 export default function UserCartItem({ item, handleIncreaseItemPrice, handleDecreaseItemPrice }) {
 
@@ -11,13 +11,35 @@ export default function UserCartItem({ item, handleIncreaseItemPrice, handleDecr
         if (quantity == 1) {
             return;
         }
-        setQuantity(quantity - 1);
-        handleDecreaseItemPrice(item.id, item.price);
+        const object = {
+            userId: user.id,
+            productCategoryName: item.categoryName,
+            productId: item.id,
+            operation: 'decrease'
+        };
+        modifyProductCartQuantity(object)
+            .then(() => {
+                setQuantity(quantity - 1);
+                handleDecreaseItemPrice(item.id, item.price);
+            })
+            .catch((error) => console.error(error));
     }
     function handleOnIncreasingItemQuantity() {
         if (quantity + 1 <= 20) {
-            setQuantity(quantity + 1);
-            handleIncreaseItemPrice(item.id ,item.price);
+
+            const object = {
+                userId: user.id,
+                productCategoryName: item.categoryName,
+                productId: item.id,
+                operation: 'increase'
+            };
+
+            modifyProductCartQuantity(object)
+                .then(() => {
+                    setQuantity(quantity + 1);
+                    handleIncreaseItemPrice(item.id, item.price);
+                })
+                .catch((error) => console.error(error));
         }
     }
     function handleOnRemovingItem() {

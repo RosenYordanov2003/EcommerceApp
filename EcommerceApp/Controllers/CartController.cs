@@ -31,5 +31,13 @@
 
             return Ok();
         }
+        [HttpPost]
+        [Route("ModifyProducCarttQuantity")]
+        public async Task<IActionResult> IncreaseProductQuantity([FromBody] ModifyProductCartQuantityModel modifyProductCartQuantityModel)
+        {
+            await cartService.IncreaseProductQuantityAsync(modifyProductCartQuantityModel);
+
+            return Ok();
+        }
     }
 }

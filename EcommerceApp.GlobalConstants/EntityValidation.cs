@@ -57,5 +57,18 @@
 
             public const int SummaryMaxValue = 30;
         }
+        public static class OrderEntity
+        {
+            public const int FirstNameMaxLength = 30;
+            public const int FirstNameMinLength = 3;
+
+            public const int AdressMaxLength = 60;
+            public const int AdressMinLength = 4;
+
+            public const int CountryMaxLength = 56;
+            public const int CountryMinLength = 4;
+
+            public const int ShippingMethodMaxLength = 20;
+        }
     }
 }

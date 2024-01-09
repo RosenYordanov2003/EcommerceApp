@@ -1,11 +1,10 @@
-﻿using EcommerceApp.Infrastructure.Data.Configurations;
-using EcommerceApp.Infrastructure.Data.Models;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
-
-namespace EcommerceApp.Data
+﻿namespace EcommerceApp.Data
 {
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore;
+    using Infrastructure.Data.Models;
+    using Infrastructure.Data.Configurations;
     public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
     {
         public ApplicationDbContext(DbContextOptions options)
@@ -30,6 +29,7 @@ namespace EcommerceApp.Data
 
         public DbSet<ShoesCartEntity> ShoesCartEntities { get; set; }
         public DbSet<ProductCartEntity> ProductCartEntities { get; set; }
+        public DbSet<Order> Orders { get; set; }
        
         protected override void OnModelCreating(ModelBuilder builder)
         {

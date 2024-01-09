@@ -13,7 +13,6 @@ export default function Navigation() {
     const context = useContext(UserContext);
     const [favoriteMenuActivity, setFavoriteMenuActivity] = useState(false);
 
-    console.log(context?.user);
 
     let listImes;
 

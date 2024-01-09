@@ -30,7 +30,7 @@ export default function UserFavoriteProducts({ product }) {
             <div onClick={handleProductClick} className="favorite-product-info">
                 <h3 className="product-title">{product.productName}</h3>
             </div>
-            <i onClick={handleRemoveProductFromUserFavorite} class="fa-solid fa-xmark remove-mark"></i>
+            <i onClick={handleRemoveProductFromUserFavorite} className="fa-solid fa-xmark remove-mark"></i>
         </article>
     )
 }

@@ -14,7 +14,7 @@ import ProductInfo from "../src/components/Products/ProductInfo";
 import AllReviews from "../src/components/AllReviews/AllReviews";
 import EditReview from "../src/components/EditReviewForm/EditReview";
 import UserCart from "../src/components/UserCart/UserCart";
-
+import Order from "../src/components/Order/Order";
 
 export default function App() {
 
@@ -59,7 +59,8 @@ export default function App() {
                     <Route path="/" element={<Home categories={categories} isActive={isActive} />} />
                     <Route path="/AllReviews/:id/:category" element={<AllReviews />} />
                     <Route path="/Review/:id" element={<EditReview />} />
-                    <Route path="/Cart" element={<UserCart/> }/>
+                    <Route path="/Cart" element={<UserCart />} />
+                    <Route path="/Order" element={<Order />} />
                 </Routes>
             </UserContext.Provider>
           

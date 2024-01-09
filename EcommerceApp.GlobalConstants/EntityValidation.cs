@@ -69,6 +69,9 @@
             public const int CountryMinLength = 4;
 
             public const int ShippingMethodMaxLength = 20;
+
+            public const int CityMaxLength = 60;
+            public const int CityMinLength = 4;
         }
     }
 }

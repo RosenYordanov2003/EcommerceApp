@@ -35,5 +35,9 @@
         [Required]
         [MaxLength(CountryMaxLength)]
         public string Country { get; set; } = null!;
+        [Required]
+        [MaxLength(CityMaxLength)]
+        public string City { get; set; } = null!;
+
     }
 }

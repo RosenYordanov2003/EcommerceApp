@@ -1,15 +1,16 @@
-﻿import { useEffect, useState, useEffet, useContext } from "react";
+﻿import { useEffect, useState, useContext } from "react";
 import { UserContext } from "../../Contexts/UserContext";
+import { useNavigate } from "react-router-dom";
 import ShoppingCartStyle from "../UserCart/ShoppingCartStyle.css";
 import UserCartItem from "../UserCart/UserCartItems/UserCartItem";
 
 export default function UserCart() {
-    const { user, setUser } = useContext(UserContext);
+
+    const navigate = useNavigate();
+    const { user} = useContext(UserContext);
     const [totalPrice, setTotalPrice] = useState();
     const [shippingMethod, setShippingMethod] = useState(undefined);
-
-
-
+    const [inputObject, setInputObject] = useState({ city: '', postalCode: '', country: 'Bulgaria'});
 
     function handleIncreaseItemPrice(productId, price) {
         console.log(price + totalPrice);
@@ -41,6 +42,19 @@ export default function UserCart() {
         }
     }, [user?.cart?.cartId])
 
+
+    function handleCheckoutClick() {
+        const checkOutObject = {
+            country: inputObject.country,
+            city: inputObject.city,
+            postalCode: inputObject.postalCode,
+            shippingObject: shippingMethod,
+            totalPrice
+        };
+        localStorage.setItem('checkout-info', JSON.stringify(checkOutObject));
+        navigate('/Order');
+    }
+
     return (
         <>
             <h2 className="shopping-cart-title">Shopping Cart</h2>
@@ -65,7 +79,7 @@ export default function UserCart() {
                     <div className="order-info">
                         <div className="cart-input-container">
                             <label htmlFor="country">country</label>
-                            <select id="country">
+                            <select onChange={(event) => setInputObject({...inputObject, country: event.target.value})} id="country" value={inputObject.country}>
                                 <option value="Bulgaria">Bulgaria</option>
                                 <option value="Greece">Greece</option>
                                 <option value="Turkey">Turkey</option>
@@ -73,12 +87,12 @@ export default function UserCart() {
                             </select>
                         </div>
                         <div className="cart-input-container">
-                            <label htmlFor="adress">Adress</label>
-                            <input type="text" id="adress" placeholder="Enter adress"></input>
+                            <label htmlFor="city">City</label>
+                            <input onChange={(event) => setInputObject({...inputObject, city: event.target.value})} type="text" id="city" placeholder="Enter city"></input>
                         </div>
                         <div className="cart-input-container">
                             <label htmlFor="postal-code">ZIP/POSTAL CODE</label>
-                            <input type="text" id="postal-code"></input>
+                            <input onChange={(event) => setInputObject({ ...inputObject, postalCode: event.target.value })} placeholder="Enter postal/zip code" type="text" value={inputObject.postalCode} id="postal-code"></input>
                         </div>
                         <div className="cart-shipping-container">
                             <label htmlFor="standard-shipping">Standard Shipping: $5.00</label>
@@ -103,9 +117,9 @@ export default function UserCart() {
                             <p>${Number.parseFloat(0).toFixed(2)}</p>
                         </p>
                         <p className="total-price order-final-details">Shipping
-                            <p>${Number.parseFloat(10).toFixed(2)}</p>
+                            <p>${Number.parseFloat(shippingMethod?.price ?? 0).toFixed(2)}</p>
                         </p>
-                        <button className="check-out-button">Checkout</button>
+                        <button onClick={handleCheckoutClick} className="check-out-button">Checkout</button>
                     </div>
                 </section>
             </div>

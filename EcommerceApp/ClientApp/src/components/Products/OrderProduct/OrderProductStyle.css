@@ -1,0 +1,18 @@
+﻿.order-product-container{
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+.order-product-img-container{
+    width: 150px;
+    height: auto;
+}
+.order-product-img-container img{
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+.product-order-info p {
+    color: #92949a;
+}

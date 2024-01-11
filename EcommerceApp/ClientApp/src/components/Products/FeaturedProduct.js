@@ -14,6 +14,8 @@ export default function FeaturedProduct({ product }) {
         <i key={index} className="fa-solid fa-star star"></i>
     ));
 
+    console.log(user);
+
     useEffect(() => {
         setIsFavorite(product.isFavorite);
     }, [product.isFavorite])

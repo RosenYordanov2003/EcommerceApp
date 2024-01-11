@@ -44,7 +44,7 @@
     font-weight: bolder;
     font-size: 1.2rem;
 }
-.total-price{
+.order-container .total-price{
     font-weight: bold;
     font-size: 3rem;
 }

@@ -2,6 +2,7 @@
 import { UserContext } from "../../Contexts/UserContext";
 import OrderProduct from "../Products/OrderProduct/OrderProduct";
 import OrderStyle from "../Order/OrderStyle.css";
+import { finishOrder } from "../../services/cartService";
 
 export default function Order() {
     const { user } = useContext(UserContext);
@@ -26,11 +27,38 @@ export default function Order() {
             setInputObject({ ...inputObject, city: checkOutObject.city, country: checkOutObject.country, postalCode: checkOutObject.postalCode });
             setShippingObject(checkOutObject.shippingObject);
             setTotalPrice(checkOutObject.totalPrice);
-            localStorage.removeItem('checkout-info');
+           
         }
     }, [user?.id])
 
 
+    function handleFormSubmit(event) {
+        event.preventDefault();
+
+        console.log(shippingObject);
+
+        const object = {
+            userOrderInfo: inputObject,
+            shippingInfo: shippingObject,
+            totalPrice,
+            userId: user.id,
+            discount: 0
+        };
+
+        finishOrder(object)
+            .then((res) => {
+
+                if (res) {
+                    console.log(true)
+                    localStorage.removeItem('checkout-info');
+                }
+                else {
+                    console.log(false);
+                }
+            })
+            .catch((error) => console.error(error));
+
+    }
 
     const products = user?.cart?.cartProducts?.map((product) => <OrderProduct key={product.id} product={product} />);
     const shoes = user?.cart?.cartShoes?.map((product) => <OrderProduct key={product.id} product={product} />);
@@ -39,10 +67,10 @@ export default function Order() {
         <div className="order-container">
             <div className="order-details-container">
                 <h1 className="order-title">Order Details</h1>
-                <form>
+                <form onSubmit={handleFormSubmit}>
                     <div className="order-input-container">
                         <label htmlFor="email-adress">Email Adress</label>
-                        <input onChange={(event) => setInputObject({ ...inputObject, email: event.target.value })} value={inputObject.email} id="email-adress">
+                        <input onChange={(event) => setInputObject({ ...inputObject, email: event.target.value })} value={inputObject.emailAdress} id="email-adress">
                         </input>
                     </div>
                     <div className="order-input-container">
@@ -81,7 +109,7 @@ export default function Order() {
                     </div>
                     <div className="order-input-container">
                         <label htmlFor="phone-number">Phone Number</label>
-                        <input onChange={(event) => setInputObject({ ...inputObject, phoneNumber: event.target.value })} value={inputObject.country} id="phone-number"></input>
+                        <input onChange={(event) => setInputObject({ ...inputObject, phoneNumber: event.target.value })} value={inputObject.phoneNumber} id="phone-number"></input>
                     </div>
                     <button type="submit" className="place-order-button">Place Order</button>
                 </form>

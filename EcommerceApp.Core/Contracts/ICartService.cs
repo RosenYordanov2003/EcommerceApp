@@ -7,5 +7,7 @@
         Task AddProductToUserCartAsync(AddProductToCartModel addProductToCartModel);
         Task RemoveProductFromUserCartAsync(RemoveCartProductModel removeCartProductModel);
         Task IncreaseProductQuantityAsync (ModifyProductCartQuantityModel increaseProductQuantityModel);
+        Task<bool> CheckICartProductsQuantityIsAvailableAsync(Guid userId);
+        Task ClearUserCartAsyncAfterFinishingOrder(Guid userId);
     }
 }

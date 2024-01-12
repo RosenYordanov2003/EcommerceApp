@@ -1,9 +1,14 @@
 ﻿namespace EcommerceApp.Controllers
 {
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity.UI.Services;
+    using Microsoft.AspNetCore.Mvc;
     using Core.Contracts;
     using Core.Models.Cart;
-    using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Mvc;
+    using Core.Models.Orders;
+    using Infrastructure.Data.Models;
+  
 
     [ApiController]
     [Authorize]
@@ -12,9 +17,16 @@
     public class CartController : ControllerBase
     {
         private readonly ICartService cartService;
-        public CartController(ICartService cartService)
+        private readonly IEmailSender emailSender;
+        private readonly IOrderService orderService;
+        private readonly UserManager<User> userManager;
+        public CartController(ICartService cartService, IEmailSender emailSender, 
+            UserManager<User> userManager, IOrderService orderService)
         {
             this.cartService = cartService;
+            this.emailSender = emailSender;
+            this.userManager = userManager;
+            this.orderService = orderService;
         }
 
         [HttpPost]
@@ -40,6 +52,25 @@
             await cartService.IncreaseProductQuantityAsync(modifyProductCartQuantityModel);
 
             return Ok();
+        }
+        [HttpPost]
+        [Route("FinishOrder")]
+        public async Task<IActionResult> FinishOrder([FromBody]OrderModel orderModel)
+        {
+            if (!await cartService.CheckICartProductsQuantityIsAvailableAsync(orderModel.UserId))
+            {
+                return Ok(new { Success = false });
+            }
+
+            await orderService.MakeOrderAsync(orderModel);
+            var user = await userManager.FindByIdAsync(orderModel.UserId.ToString());
+
+            await cartService.ClearUserCartAsyncAfterFinishingOrder(orderModel.UserId);
+
+           await emailSender.SendEmailAsync(user.Email, "Successfully complete your order",
+                "<h1>You have successfully completed your order<h1/>");
+
+            return Ok(new { Success = true });
         }
     }
 }

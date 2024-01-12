@@ -18,7 +18,7 @@
         public async Task<bool> CheckIfRefreshTokenIsActiveAsync(string refreshToken)
         {
             RefreshToken refreshTokenToCheck = await applicationDbContext.RefreshTokens.FirstOrDefaultAsync(rt => rt.Token == refreshToken);
-           
+
             return refreshTokenToCheck.ExpireData > DateTime.UtcNow;
         }
 
@@ -47,7 +47,10 @@
                 Token = Guid.NewGuid().ToString()
             };
             User user = await applicationDbContext.Users.Include(u => u.RefreshToken).FirstOrDefaultAsync(u => u.Id == userId);
-            await DeleteUserRefreshToken(user);
+            if (user.RefreshToken != null)
+            {
+                await DeleteUserRefreshToken(user);
+            }
             user.RefreshToken = refreshToken;
             user.RefreshTokenId = refreshToken.Id;
 

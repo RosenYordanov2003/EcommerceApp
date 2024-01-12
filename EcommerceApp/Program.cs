@@ -5,6 +5,7 @@ using EcommerceApp.Data;
 using EcommerceApp.Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -97,6 +98,8 @@ builder.Services.AddScoped<IProductSevice, ProductService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IReviewService, ReviewService>();
 builder.Services.AddScoped<ICartService, CartService>();
+builder.Services.AddScoped<IEmailSender, EmailSender>();
+builder.Services.AddScoped<IOrderService, OrderService>();
 
 var app = builder.Build();
 

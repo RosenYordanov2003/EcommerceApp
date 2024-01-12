@@ -13,7 +13,6 @@ export default function UserCart() {
     const [inputObject, setInputObject] = useState({ city: '', postalCode: '', country: 'Bulgaria'});
 
     function handleIncreaseItemPrice(productId, price) {
-        console.log(price + totalPrice);
         setTotalPrice(totalPrice + price);
     }
     function handleDecreaseItemPrice(productId, price) {
@@ -55,10 +54,11 @@ export default function UserCart() {
         navigate('/Order');
     }
 
+
     return (
         <>
-            <h2 className="shopping-cart-title">Shopping Cart</h2>
-            <div className="cart-container">
+            <h2 className="shopping-cart-title">{items.length + shoesItems.length > 0 ? "Shopping Cart" : "Shopping Cart Is Empty" }</h2>
+            {items.length + shoesItems.length > 0 && <div className="cart-container">
                 <section className="cart-order">
                     <div className="shopping-cart-table">
                         <section className="shopping-cart-headers">
@@ -79,7 +79,7 @@ export default function UserCart() {
                     <div className="order-info">
                         <div className="cart-input-container">
                             <label htmlFor="country">country</label>
-                            <select onChange={(event) => setInputObject({...inputObject, country: event.target.value})} id="country" value={inputObject.country}>
+                            <select onChange={(event) => setInputObject({ ...inputObject, country: event.target.value })} id="country" value={inputObject.country}>
                                 <option value="Bulgaria">Bulgaria</option>
                                 <option value="Greece">Greece</option>
                                 <option value="Turkey">Turkey</option>
@@ -88,7 +88,7 @@ export default function UserCart() {
                         </div>
                         <div className="cart-input-container">
                             <label htmlFor="city">City</label>
-                            <input onChange={(event) => setInputObject({...inputObject, city: event.target.value})} type="text" id="city" placeholder="Enter city"></input>
+                            <input onChange={(event) => setInputObject({ ...inputObject, city: event.target.value })} type="text" id="city" placeholder="Enter city"></input>
                         </div>
                         <div className="cart-input-container">
                             <label htmlFor="postal-code">ZIP/POSTAL CODE</label>
@@ -104,7 +104,7 @@ export default function UserCart() {
                         <div className="cart-shipping-container">
                             <label htmlFor="fast-shipping">Fast Shipping: $10.00</label>
                             <div className="round">
-                                <input onClick={() => setShippingMethod({ method: 'fast', price: 10 }) } type="checkbox" checked={shippingMethod?.method === 'fast'} id="fast-shipping"></input>
+                                <input onClick={() => setShippingMethod({ method: 'fast', price: 10 })} type="checkbox" checked={shippingMethod?.method === 'fast'} id="fast-shipping"></input>
                                 <label htmlFor="fast-shipping"></label>
                             </div>
                         </div>
@@ -122,7 +122,8 @@ export default function UserCart() {
                         <button onClick={handleCheckoutClick} className="check-out-button">Checkout</button>
                     </div>
                 </section>
-            </div>
+            </div>}
+          
         </>
     )
 }

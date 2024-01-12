@@ -38,6 +38,50 @@
             await dbContext.SaveChangesAsync();
         }
 
+        public async Task<bool> CheckICartProductsQuantityIsAvailableAsync(Guid userId)
+        {
+            User user = await dbContext.Users.FirstAsync(u => u.Id == userId);
+
+            Cart userCart = await dbContext.Carts.Include(c => c.ProductCartEntities).Include(c => c.ShoesCartEntities).Where(c => c.Id == user.CartId).FirstAsync();
+
+            foreach (ProductCartEntity product in userCart.ProductCartEntities)
+            {
+                ProductStock productStock = await dbContext.ProductStocks.FirstOrDefaultAsync(p => p.ProductId == product.Id && p.Quantity >= product.Quantity);
+
+                if (productStock == null)
+                {
+                    return false;
+                }
+                productStock.Quantity-= product.Quantity;
+            }
+
+            foreach (ShoesCartEntity shoes in userCart.ShoesCartEntities)
+            {
+                ShoesStock shoesStock = await dbContext.ShoesStock.FirstOrDefaultAsync(sh => sh.ShoesId == shoes.Id && sh.Quantity >= sh.Quantity);
+
+                if (shoesStock == null)
+                {
+                    return false;
+                }
+                shoesStock.Quantity -= shoes.Quantity;
+            }
+
+            await dbContext.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task ClearUserCartAsyncAfterFinishingOrder(Guid userId)
+        {
+            User user = await dbContext.Users.FirstAsync(u => u.Id == userId);
+
+            Cart userCart = await dbContext.Carts.Include(c => c.ProductCartEntities).Include(c => c.ShoesCartEntities).Where(c => c.Id == user.CartId).FirstAsync();
+
+            userCart.ShoesCartEntities.Clear();
+            userCart.ProductCartEntities.Clear();
+
+            await dbContext.SaveChangesAsync();
+        }
+
         public async Task<CartModel> GetUserCartByUserIdAsync(Guid userId)
         {
             CartModel? userCart = await dbContext.Users

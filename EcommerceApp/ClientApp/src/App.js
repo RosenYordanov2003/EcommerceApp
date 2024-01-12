@@ -15,6 +15,7 @@ import AllReviews from "../src/components/AllReviews/AllReviews";
 import EditReview from "../src/components/EditReviewForm/EditReview";
 import UserCart from "../src/components/UserCart/UserCart";
 import Order from "../src/components/Order/Order";
+import SuccessFullPage from "../src/components/SuccessfullPage/SuccessfullPage";
 
 export default function App() {
 
@@ -61,6 +62,7 @@ export default function App() {
                     <Route path="/Review/:id" element={<EditReview />} />
                     <Route path="/Cart" element={<UserCart />} />
                     <Route path="/Order" element={<Order />} />
+                    <Route path="/CompletedOrder" element={<SuccessFullPage />} />
                 </Routes>
             </UserContext.Provider>
           

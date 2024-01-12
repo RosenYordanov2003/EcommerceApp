@@ -3,9 +3,11 @@ import { UserContext } from "../../Contexts/UserContext";
 import OrderProduct from "../Products/OrderProduct/OrderProduct";
 import OrderStyle from "../Order/OrderStyle.css";
 import { finishOrder } from "../../services/cartService";
+import { useNavigate } from "react-router-dom";
 
 export default function Order() {
-    const { user } = useContext(UserContext);
+    const { user, setUser } = useContext(UserContext);
+    const navigate = useNavigate();
 
     const [inputObject, setInputObject] = useState({
         firstName: '',
@@ -27,7 +29,6 @@ export default function Order() {
             setInputObject({ ...inputObject, city: checkOutObject.city, country: checkOutObject.country, postalCode: checkOutObject.postalCode });
             setShippingObject(checkOutObject.shippingObject);
             setTotalPrice(checkOutObject.totalPrice);
-           
         }
     }, [user?.id])
 
@@ -51,6 +52,15 @@ export default function Order() {
                 if (res) {
                     console.log(true)
                     localStorage.removeItem('checkout-info');
+                    setUser({
+                        ...user, cart: {
+                            ...user.cart,
+                            cartShoes: [],
+                            cartProducts: []
+                        }
+                    });
+
+                    navigate("/CompletedOrder");
                 }
                 else {
                     console.log(false);
@@ -100,7 +110,7 @@ export default function Order() {
                     </div>
                     <div className="order-input-container">
                         <label htmlFor="country">Country</label>
-                        <select onChange={(event) => setInputObject({...inputObject, country: event.target.vaalue})} id="country" value={inputObject.country}>
+                        <select onChange={(event) => setInputObject({ ...inputObject, country: event.target.vaalue })} id="country" value={inputObject.country}>
                             <option value="Bulgaria">Bulgaria</option>
                             <option value="Greece">Greece</option>
                             <option value="Turkey">Turkey</option>
@@ -119,7 +129,7 @@ export default function Order() {
                 <section className="order-price">
                     <div className="order-price-container">
                         <p>Shipping: {shippingObject?.method === "fast" ? "Fast Shipping" : "Standard Shipping"}</p>
-                        <p>${shippingObject?.price?.toFixed(2) ?? 0 }</p>
+                        <p>${shippingObject?.price?.toFixed(2) ?? 0}</p>
                     </div>
                     <div className="order-price-container">
                         <p>Discount:</p>

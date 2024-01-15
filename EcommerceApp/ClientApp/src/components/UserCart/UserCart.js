@@ -57,13 +57,14 @@ export default function UserCart() {
 
     return (
         <>
-            <h2 className="shopping-cart-title">{items.length + shoesItems.length > 0 ? "Shopping Cart" : "Shopping Cart Is Empty" }</h2>
-            {items.length + shoesItems.length > 0 && <div className="cart-container">
+            <h2 className="shopping-cart-title">{items?.length + shoesItems?.length > 0 ? "Shopping Cart" : "Shopping Cart Is Empty" }</h2>
+            {items?.length + shoesItems?.length > 0 && <div className="cart-container">
                 <section className="cart-order">
                     <div className="shopping-cart-table">
                         <section className="shopping-cart-headers">
                             <h4>Item</h4>
                             <h4>Price</h4>
+                            <h4>Size</h4>
                             <h4>Quantity</h4>
                             <h4>Subtotal</h4>
                         </section>

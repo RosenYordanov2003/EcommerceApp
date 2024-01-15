@@ -1,12 +1,13 @@
 ﻿const baseUrl = "https://localhost:7122/api/cart"
 
-export async function addToCartProduct(productId, userId, categoryName, quantity) {
+export async function addToCartProduct(productId, userId, categoryName, quantity, size) {
 
     const bodyObject = {
         productId,
         userId,
         categoryName,
-        quantity
+        quantity,
+        size
     };
     const request = await fetch(`${baseUrl}/AddProduct`, {
         method: 'POST',

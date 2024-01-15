@@ -13,5 +13,6 @@
         [ForeignKey(nameof(Cart))]
         public Guid CartId { get; set; }
         public Cart Cart { get; set; } = null!;
+        public int Size { get; set; }
     }
 }

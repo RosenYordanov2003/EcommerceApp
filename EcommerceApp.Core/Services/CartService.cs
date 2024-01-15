@@ -28,12 +28,12 @@
             if (addProductToCartModel.CategoryName.ToLower() != "shoes")
             {
                 Product productToAdd = await dbContext.Clothes.FirstAsync(p => p.Id == addProductToCartModel.ProductId);
-                userCart.ProductCartEntities.Add(new ProductCartEntity() { ProductId = addProductToCartModel.ProductId, CartId = userCart.Id, Quantity = addProductToCartModel.Quantity});
+                userCart.ProductCartEntities.Add(new ProductCartEntity() { ProductId = addProductToCartModel.ProductId, CartId = userCart.Id, Quantity = addProductToCartModel.Quantity, Size = addProductToCartModel.Size});
             }
             else
             {
                 Shoes shoesToAdd = await dbContext.Shoes.FirstAsync(sh => sh.Id == addProductToCartModel.ProductId);
-                userCart.ShoesCartEntities.Add(new ShoesCartEntity() { ShoesId = addProductToCartModel.ProductId, CartId = userCart.Id, Quantity = addProductToCartModel.Quantity });
+                userCart.ShoesCartEntities.Add(new ShoesCartEntity() { ShoesId = addProductToCartModel.ProductId, CartId = userCart.Id, Quantity = addProductToCartModel.Quantity, Size = int.Parse(addProductToCartModel.Size) });
             }
             await dbContext.SaveChangesAsync();
         }
@@ -57,7 +57,7 @@
 
             foreach (ShoesCartEntity shoes in userCart.ShoesCartEntities)
             {
-                ShoesStock shoesStock = await dbContext.ShoesStock.FirstOrDefaultAsync(sh => sh.ShoesId == shoes.Id && sh.Quantity >= sh.Quantity);
+                ShoesStock shoesStock = await dbContext.ShoesStock.FirstOrDefaultAsync(sh => sh.ShoesId == shoes.ShoesId && sh.Quantity >= sh.Quantity && sh.Size == shoes.Size);
 
                 if (shoesStock == null)
                 {
@@ -96,7 +96,8 @@
                            ImgUrl = p.Product.Pictures.First().ImgUrl,
                            Name = p.Product.Name,
                            Price = p.Product.Price,
-                           Quantity = p.Quantity
+                           Quantity = p.Quantity,
+                           Size = p.Size,
                        })
                        .ToArray(),
                        CartShoes = uc.Cart.ShoesCartEntities.Select(sh => new ProductCartModel()
@@ -106,7 +107,8 @@
                            ImgUrl = sh.Shoes.Pictures.First().ImgUrl,
                            Name = sh.Shoes.Name,
                            Price = sh.Shoes.Price,
-                           Quantity = sh.Quantity
+                           Quantity = sh.Quantity,
+                           Size = sh.Size.ToString()
                        })
                        .ToArray()
 
@@ -155,12 +157,11 @@
 
             User user = await dbContext.Users.FirstAsync(u => u.Id == removeCartProductModel.UserId);
 
-            Cart userCart = await dbContext.Carts.Where(c => c.Id == user.CartId).FirstAsync();
+            Cart userCart = await dbContext.Carts.Include(c => c.ShoesCartEntities).Include(c => c.ProductCartEntities).Where(c => c.Id == user.CartId).FirstAsync();
 
             if (removeCartProductModel.CategoryName.ToLower() == "shoes")
             {
-                ShoesCartEntity shoesCartEntity = await dbContext.ShoesCartEntities.FirstOrDefaultAsync(shc => shc.ShoesId == removeCartProductModel.ProductId);
-                userCart.ShoesCartEntities.Remove(shoesCartEntity);
+                userCart.ShoesCartEntities = userCart.ShoesCartEntities.Where(sh => sh.ShoesId != removeCartProductModel.ProductId).ToList();
             }
             else
             {

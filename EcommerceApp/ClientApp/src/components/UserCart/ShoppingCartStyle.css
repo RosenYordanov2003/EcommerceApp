@@ -38,7 +38,8 @@
 .item-info{
     display: flex;
     gap: 1rem;
-    max-width: 310px;
+    max-width: 260px;
+    margin-left: -3.1rem;
 }
 .item-about{
     display: flex;

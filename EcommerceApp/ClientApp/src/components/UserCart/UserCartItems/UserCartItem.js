@@ -91,6 +91,7 @@ export default function UserCartItem({ item, handleIncreaseItemPrice, handleDecr
                     </div>
                 </div>
                 <p className="item-price">${Number.parseFloat(item.price).toFixed(2)}</p>
+                <p className="item-price">{item.size }</p>
                 <div className="quantity-buttons-container">
                     <button onClick={handleOnDecreasingProductQuantity}>-</button>
                     {quantity}

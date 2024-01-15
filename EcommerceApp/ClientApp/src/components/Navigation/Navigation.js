@@ -20,6 +20,7 @@ export default function Navigation() {
 
         const userFavoriteProducts = context?.user?.userFavoriteProducts.map((product) => <UserFavoriteProducts product={product} key={product.id} />);
 
+
         listImes =
             <>
                 {
@@ -43,7 +44,7 @@ export default function Navigation() {
                 <li className="user-cart-container">
                     <Link to="/Cart">
                     <i className="fa-solid fa-cart-shopping user-cart"></i>
-                    <p className="user-products-count">{context.user?.cart?.cartProducts?.length +  context.user?.cart?.cartShoes?.length }</p>
+                    <p className="user-products-count">{context.user?.cart?.cartProducts?.length === undefined ? 0 : context.user?.cart?.cartProducts?.length +  context.user?.cart?.cartShoes?.length }</p>
                     </Link>
                 </li>
                 <li className="logout" onClick={onLogout}>

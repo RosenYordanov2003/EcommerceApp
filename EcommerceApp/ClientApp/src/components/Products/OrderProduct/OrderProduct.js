@@ -10,6 +10,7 @@ export default function OrderProduct({ product }) {
                 <h4>{product.name}</h4>
                 <p className="order-product-price">${Number.parseFloat(Number.parseFloat(product.price)).toFixed(2)}</p>
                 <p className="order-product-quantity">X {product.quantity }</p>
+                <p className="order-product-quantity">Size: {product.size }</p>
             </div>
         </article>
     )

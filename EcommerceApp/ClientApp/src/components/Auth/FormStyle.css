@@ -1,19 +1,109 @@
-﻿.auth-form{
+﻿:root {
+    --border-bold: 6px;
+}
+
+
+@keyframes changingBorderColors {
+    0% {
+        border: var(--border-bold) solid white;
+    }
+
+    30% {
+        border-top: var(--border-bold) solid #018aa7;
+    }
+
+    55% {
+        border-right: var(--border-bold) solid #018aa7;
+    }
+
+    75% {
+        border-bottom: var(--border-bold) solid #018aa7;
+    }
+
+    100% {
+        border-left: var(--border-bold) solid #018aa7;
+    }
+}
+
+
+body:has(.auth-form) {
+    background-image: url("../../../imgs//pexels-sameer-khan-16918373.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    color: white;
+    overflow-x: hidden;
+}
+
+    body:has(.auth-form) .main-nav ul li a {
+        color: white;
+    }
+
+.auth-form-container {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+}
+
+.auth-form {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1.2rem;
+    gap: 5rem;
+    color: white;
+    border: var(--border-bold) solid white;
+    width: 50%;
+    padding: 4rem 2rem;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    animation: changingBorderColors 2s infinite;
+    animation-timing-function: ease-in;
 }
-.input-container{
+
+.input-container {
     display: flex;
     flex-direction: column;
 }
-label {
+
+.auth-form input {
+    outline: none;
+}
+
+.auth-form label {
     margin-bottom: 0.5rem;
     transform: translateY(0px);
     transition: 0.3s ease all;
+    font-size: 1.2rem;
 }
-.active-label{
-    transform:translateY(-7px);
+
+.auth-form input {
+    padding: 0.2rem;
+}
+
+.active-label {
+    transform: translateY(-7px);
     transition: 0.3s ease all;
+}
+
+.auth-form .submit-btn {
+    border: none;
+    width: 200px;
+    padding: 0.6rem 1rem;
+    border-radius: 14px;
+    background-color: #018aa7;
+    color: white;
+    transition: 0.3s ease-in all;
+    font-weight: bolder;
+}
+
+.auth-form-title {
+    text-align: center;
+    margin: 3rem 0rem 3rem 0rem;
+    font-size: 2.8rem;
+}
+
+.auth-form .submit-btn:hover {
+    opacity: 0.7;
 }

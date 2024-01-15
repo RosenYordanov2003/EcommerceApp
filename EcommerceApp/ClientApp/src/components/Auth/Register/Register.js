@@ -30,25 +30,32 @@ export default function Register() {
             .catch((error) => console.error(error));
     }
     return (
-        <form className="auth-form" onSubmit={onFormSubmit} className="register-form" method="post">
+        <div className="auth-form-container">
 
-            <section className="input-container">
-                <label htmlFor="username">Username</label>
-                <input name="username" onBlur={onInputBlur} onFocus={onInputFouc} id="username" type="text" autoComplete="username" aria-required="true" placeholder="Enter username..." />
-            </section>
-            <section className="input-container">
-                <label htmlFor="email">Email</label>
-                <input name="email" onBlur={onInputBlur} onFocus={onInputFouc} id="email" type="text" autoComplete="email" aria-required="true" placeholder="Enter email..." />
-            </section>
-            <section className="input-container">
-                <label htmlFor="password">Password</label>
-                <input name="password" onBlur={onInputBlur} onFocus={onInputFouc} id="password" type="password" autoComplete="password" aria-required="true" placeholder="Enter password" />
-            </section>
-            <section className="input-container">
-                <label htmlFor="confirm-password">Confirm Password</label>
-                <input name="confirm-password" onBlur={onInputBlur} onFocus={onInputFouc} id="confirm-password" type="password" placeholder="Repeat password..." aria-required="true" />
-            </section>
-            <button className="submit-btn" type="submit">Register</button>
-        </form>
+            <h1 className="auth-form-title">Register</h1>
+
+            <form className="auth-form" onSubmit={onFormSubmit} method="post">
+
+                <section className="input-container">
+                    <label htmlFor="username">Username</label>
+                    <input name="username" onBlur={onInputBlur} onFocus={onInputFouc} id="username" type="text" autoComplete="username" aria-required="true" placeholder="Enter username..." />
+                </section>
+                <section className="input-container">
+                    <label htmlFor="email">Email</label>
+                    <input name="email" onBlur={onInputBlur} onFocus={onInputFouc} id="email" type="text" autoComplete="email" aria-required="true" placeholder="Enter email..." />
+                </section>
+                <section className="input-container">
+                    <label htmlFor="password">Password</label>
+                    <input name="password" onBlur={onInputBlur} onFocus={onInputFouc} id="password" type="password" autoComplete="password" aria-required="true" placeholder="Enter password" />
+                </section>
+                <section className="input-container">
+                    <label htmlFor="confirm-password">Confirm Password</label>
+                    <input name="confirm-password" onBlur={onInputBlur} onFocus={onInputFouc} id="confirm-password" type="password" placeholder="Repeat password..." aria-required="true" />
+                </section>
+                <button className="submit-btn" type="submit">Register</button>
+            </form>
+
+       </div>
+       
     )
 }

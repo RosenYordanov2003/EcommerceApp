@@ -39,17 +39,22 @@ export default function Login() {
     }
 
     return (
-        <form className="auth-form" onSubmit={onFormSubmit} className="register-form" method="post">
+        <div className="auth-form-container">
+            <h1 className="auth-form-title">Login</h1>
+            <form className="auth-form" onSubmit={onFormSubmit} method="post">
 
-            <section className="input-container">
-                <label htmlFor="username">Username</label>
-                <input name="username" onBlur={onInputBlur} onFocus={onInputFouc} id="username" type="text" autoComplete="username" aria-required="true" placeholder="Enter username..." />
-            </section>
-            <section className="input-container">
-                <label htmlFor="password">Password</label>
-                <input name="password" onBlur={onInputBlur} onFocus={onInputFouc} id="password" type="password" autoComplete="password" aria-required="true" placeholder="Enter password" />
-            </section>
-            <button className="submit-btn" type="submit">Login</button>
-        </form>
+                <section className="input-container">
+                    <label htmlFor="username">Username</label>
+                    <input name="username" onBlur={onInputBlur} onFocus={onInputFouc} id="username" type="text" autoComplete="username" aria-required="true" placeholder="Enter username..." />
+                </section>
+                <section className="input-container">
+                    <label htmlFor="password">Password</label>
+                    <input name="password" onBlur={onInputBlur} onFocus={onInputFouc} id="password" type="password" autoComplete="password" aria-required="true" placeholder="Enter password" />
+                </section>
+                <button className="submit-btn" type="submit">Login</button>
+            </form>
+
+        </div>
+       
     )
 }

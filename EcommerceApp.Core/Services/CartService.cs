@@ -165,8 +165,7 @@
             }
             else
             {
-                ProductCartEntity productCartEntity = await dbContext.ProductCartEntities.FirstOrDefaultAsync(pc => pc.ProductId == removeCartProductModel.ProductId);
-                userCart.ProductCartEntities.Remove(productCartEntity);
+                userCart.ProductCartEntities = userCart.ProductCartEntities.Where(pc => pc.ProductId != removeCartProductModel.ProductId).ToList();
             }
             await dbContext.SaveChangesAsync();
         }

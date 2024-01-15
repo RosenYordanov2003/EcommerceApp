@@ -33,7 +33,7 @@ export default function App() {
                         username: res.username,
                         id: res.id,
                         userFavoriteProducts: res.userFavoriteProducts,
-                        cart: res.cartModel
+                        cart: res.cartModel,
                     };
                     setUser(user);
                 })

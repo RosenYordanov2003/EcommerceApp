@@ -34,7 +34,7 @@ export default function ProductInfo() {
                 window.scrollTo({ top: 0, behavior: "smooth" })
             })
             .catch((error) => console.error(error));
-    }, [id, user?.id])
+    }, [id, user?.id, user?.userFavoriteProducts])
 
 
     function UpdateProductInfo(productModel) {

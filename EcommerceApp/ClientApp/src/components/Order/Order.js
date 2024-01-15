@@ -9,6 +9,8 @@ export default function Order() {
     const { user, setUser } = useContext(UserContext);
     const navigate = useNavigate();
 
+    console.log(user);
+
     const [inputObject, setInputObject] = useState({
         firstName: '',
         lastName: '',
@@ -49,8 +51,9 @@ export default function Order() {
         finishOrder(object)
             .then((res) => {
 
-                if (res) {
-                    console.log(true)
+                console.log(res);
+
+                if (res === true) {
                     localStorage.removeItem('checkout-info');
                     setUser({
                         ...user, cart: {

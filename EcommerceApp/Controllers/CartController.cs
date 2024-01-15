@@ -73,7 +73,7 @@
 
             string htmlEmailContent = GenereateEmailHtmlContent(userCart, orderModel);
 
-           await emailSender.SendEmailAsync(user.Email, "Successfully complete your order", htmlEmailContent);
+           await emailSender.SendEmailAsync(orderModel.UserOrderInfo.Email, "Successfully complete your order", htmlEmailContent);
 
             return Ok(new { Success = true });
         }

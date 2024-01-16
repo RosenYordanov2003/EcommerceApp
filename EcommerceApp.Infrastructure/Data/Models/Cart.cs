@@ -5,13 +5,12 @@
     {
         public Cart()
         {
-            Users = new List<User>();
             ProductCartEntities = new List<ProductCartEntity>();
             ShoesCartEntities = new List<ShoesCartEntity>();
         }
         [Key]
         public Guid Id { get; set; }
-        public ICollection<User> Users { get; set; }
+        public User User { get; set; } = null!;
         public ICollection<ProductCartEntity> ProductCartEntities { get; set; }
         public ICollection <ShoesCartEntity> ShoesCartEntities { get; set; }
     }

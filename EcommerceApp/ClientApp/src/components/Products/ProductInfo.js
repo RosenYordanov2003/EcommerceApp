@@ -95,6 +95,7 @@ export default function ProductInfo() {
 
     let className = isActiveArrows ? "active-arrow" : "";
 
+    console.log(user);
 
     function handleAddToFavoriteProduct() {
 

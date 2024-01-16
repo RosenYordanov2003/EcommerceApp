@@ -47,7 +47,7 @@ main {
 .size-item {
     background-color: #f7f8f5;
     font-size: 1.4rem;
-    padding: 0.5rem;
+    padding: 0.5rem 0.7rem;
     border-radius: 50%;
     cursor: pointer;
     transition: all 0.3s ease-in;

@@ -165,7 +165,7 @@
             }
             else
             {
-                userCart.ProductCartEntities = userCart.ProductCartEntities.Where(pc => pc.ProductId != removeCartProductModel.ProductId).ToList();
+                userCart.ProductCartEntities = userCart.ProductCartEntities.Where(pc => pc.Product.Id != removeCartProductModel.ProductId).ToList();
             }
             await dbContext.SaveChangesAsync();
         }

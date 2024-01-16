@@ -5,10 +5,11 @@
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
     using System;
 
-    public class ProductStockEntityConfiguration : IEntityTypeConfiguration<ProductStockEntityConfiguration>
+    public class ProductStockEntityConfiguration : IEntityTypeConfiguration<ProductStock>
     {
         private static string[] sizes = new string[] { "S", "M", "L", "XL", "XXL" };
-        public void Configure(EntityTypeBuilder<ProductStockEntityConfiguration> builder)
+
+        public void Configure(EntityTypeBuilder<ProductStock> builder)
         {
             builder.HasData(GenereateProductStocks());
         }

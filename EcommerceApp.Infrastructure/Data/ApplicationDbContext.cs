@@ -30,6 +30,8 @@
         public DbSet<ShoesCartEntity> ShoesCartEntities { get; set; }
         public DbSet<ProductCartEntity> ProductCartEntities { get; set; }
         public DbSet<Order> Orders { get; set; }
+
+        public DbSet<PromotionCode> PromotionCodes { get; set; }
        
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -55,6 +57,11 @@
              .WithMany(u => u.UserFavoriteProducts)
              .OnDelete(DeleteBehavior.NoAction);
 
+            builder.Entity<PromotionCode>()
+                .HasOne(pc => pc.User)
+                .WithMany(u => u.PromotionCodes)
+                .OnDelete(DeleteBehavior.NoAction);
+
 
             builder.ApplyConfiguration(new BrandEntityConfiguration());
             builder.ApplyConfiguration(new MainCategoryEntityConfiguration());
@@ -63,7 +70,7 @@
             builder.ApplyConfiguration(new ProductEntityConfiguration());
             builder.ApplyConfiguration(new PictureEntityConfiguration());
             builder.ApplyConfiguration(new ShoesStockEntityConfiguration());
-            //builder.ApplyConfiguration(new ProductStockEntityConfiguration());
+            builder.ApplyConfiguration(new ProductStockEntityConfiguration());
         }
     }
 }

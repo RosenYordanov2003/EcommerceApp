@@ -6,5 +6,9 @@
         Task<bool> CheckWheterUserReachOrdersCountAsync(Guid userId);
 
         Task<PromotionCodeModel> GeneratePromotionCodeForUserAsync(Guid userId);
+        Task<bool> CheckIfPromotionCodeExistByIdAsync(Guid cupponId);
+        Task<bool> CheckIfPromotionCodeIsRelatedWithParticularUserAsync(Guid userId, Guid cupponId);
+        Task<PromotionCodeModel> GetPromotionCodeByIdAsync(Guid id);
+
     }
 }

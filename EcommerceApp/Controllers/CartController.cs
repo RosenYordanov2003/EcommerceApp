@@ -9,8 +9,7 @@
     using Core.Models.Orders;
     using Infrastructure.Data.Models;
     using System.Text;
-    using System;
-    using EcommerceApp.Core.Models.PromotionCodes;
+    using Core.Models.PromotionCodes;
 
     [ApiController]
     [Authorize]

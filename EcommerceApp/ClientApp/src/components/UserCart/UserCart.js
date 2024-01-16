@@ -3,6 +3,7 @@ import { UserContext } from "../../Contexts/UserContext";
 import { useNavigate } from "react-router-dom";
 import ShoppingCartStyle from "../UserCart/ShoppingCartStyle.css";
 import UserCartItem from "../UserCart/UserCartItems/UserCartItem";
+import { applyCuppon } from "../../services/cupponService";
 
 export default function UserCart() {
 
@@ -10,7 +11,10 @@ export default function UserCart() {
     const { user} = useContext(UserContext);
     const [totalPrice, setTotalPrice] = useState();
     const [shippingMethod, setShippingMethod] = useState(undefined);
-    const [inputObject, setInputObject] = useState({ city: '', postalCode: '', country: 'Bulgaria'});
+    const [inputObject, setInputObject] = useState({ city: '', postalCode: '', country: 'Bulgaria', cuppon: ''});
+    const [isActiveCuppon, setIsActiveCuppon] = useState(false);
+    const [cuppon, setCuppon] = useState(undefined);
+    const [discount, setDiscount] = useState(0);
 
     function handleIncreaseItemPrice(productId, price) {
         setTotalPrice(totalPrice + price);
@@ -53,6 +57,21 @@ export default function UserCart() {
         localStorage.setItem('checkout-info', JSON.stringify(checkOutObject));
         navigate('/Order');
     }
+    console.log(cuppon);
+    function handleApplyCupponClick() {
+        applyCuppon(inputObject.cuppon, user?.id)
+            .then((res) => {
+                if (res.error) {
+                    console.log(res.error)
+                }
+                else {
+                    setIsActiveCuppon(true);
+                    setCuppon(res.cuppon);
+                    setTotalPrice(totalPrice - (totalPrice * res.cuppon.discountPercantages) / 100);
+                    setDiscount(totalPrice * res.cuppon.discountPercantages / 100);
+                }
+            })
+    }
 
 
     return (
@@ -73,9 +92,9 @@ export default function UserCart() {
                     </div>
                 </section>
                 <section className="order-info-container">
-                    <div className="cuppon-container">
-                        <input type="text" placeholder="Enter cupon"></input>
-                        <button className="apply-cuppon-button">Apply</button>
+                    <div className={`cuppon-container ${isActiveCuppon && 'active-cuppon'}`}>
+                        <input type="text" placeholder="Enter cupon" value={inputObject.cuppon} onChange={(event) => setInputObject({...inputObject, cuppon: event.target.value}) }></input>
+                        <button onClick={handleApplyCupponClick} className="apply-cuppon-button">Apply</button>
                     </div>
                     <div className="order-info">
                         <div className="cart-input-container">
@@ -115,7 +134,7 @@ export default function UserCart() {
                             <p>${Number.parseFloat(totalPrice).toFixed(2)}</p>
                         </p>
                         <p className="total-price order-final-details">Discount
-                            <p>${Number.parseFloat(0).toFixed(2)}</p>
+                            <p>${Number.parseFloat(discount).toFixed(2)}</p>
                         </p>
                         <p className="total-price order-final-details">Shipping
                             <p>${Number.parseFloat(shippingMethod?.price ?? 0).toFixed(2)}</p>
@@ -123,7 +142,8 @@ export default function UserCart() {
                         <button onClick={handleCheckoutClick} className="check-out-button">Checkout</button>
                     </div>
                 </section>
-            </div>}
+            </div>
+            }
           
         </>
     )

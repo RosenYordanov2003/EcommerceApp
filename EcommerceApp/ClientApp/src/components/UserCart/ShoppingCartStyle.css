@@ -1,4 +1,23 @@
-﻿.cart-container {
+﻿:root{
+    --border: 2px;
+}
+
+@keyframes changingInputBorder{
+    20%{
+        border-top: var(--border) solid green;
+    }
+    45% {
+        border-right: var(--border) solid green;
+    }
+    75% {
+        border-bottom: var(--border) solid green;
+    }
+    100% {
+       border: var(--border) solid green;
+    }
+}
+
+.cart-container {
     display: flex;
     align-items: flex-start;
     margin-top: 7rem;
@@ -154,6 +173,9 @@ input:nth-of-type(checkbox){
 .cuppon-container{
     display: flex;
     align-items: center;
+}
+.active-cuppon{
+   animation: changingInputBorder forwards ease-in 0.5s;
 }
 .apply-cuppon-button{
     background-color: black;

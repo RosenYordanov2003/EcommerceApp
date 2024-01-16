@@ -1,10 +1,10 @@
 ﻿namespace EcommerceApp.Core.Services
 {
     using Microsoft.EntityFrameworkCore;
-    using Core.Contracts;
     using Data;
-    using EcommerceApp.Infrastructure.Data.Models;
-    using EcommerceApp.Core.Models.PromotionCodes;
+    using Core.Contracts;
+    using Infrastructure.Data.Models;
+    using Core.Models.PromotionCodes;
 
     public class PromotionCodeService : IPromotionCodeService
     {
@@ -12,6 +12,16 @@
         public PromotionCodeService(ApplicationDbContext dbContext)
         {
             this.dbContext = dbContext;
+        }
+
+        public async Task<bool> CheckIfPromotionCodeExistByIdAsync(Guid cupponId)
+        {
+            return await dbContext.PromotionCodes.AnyAsync(c => c.Id == cupponId);
+        }
+
+        public async Task<bool> CheckIfPromotionCodeIsRelatedWithParticularUserAsync(Guid cupponId, Guid userId)
+        {
+            return  await dbContext.PromotionCodes.AnyAsync(c => c.Id == cupponId && c.UserId == userId);
         }
 
         public async Task<bool> CheckWheterUserReachOrdersCountAsync(Guid userId)
@@ -48,6 +58,19 @@
                 DiscountPercantages = promotionCode.PromotionPercentages,
                 ExpirationTime = promotionCode.ExpirationTime
             };
+        }
+
+        public async Task<PromotionCodeModel> GetPromotionCodeByIdAsync(Guid id)
+        {
+            return await dbContext.PromotionCodes.
+                Where(pc => pc.Id == id)
+                .Select(pc => new PromotionCodeModel()
+                {
+                    Id = pc.Id,
+                    DiscountPercantages = pc.PromotionPercentages,
+                    ExpirationTime = pc.ExpirationTime
+                })
+                .FirstAsync();
         }
 
         private async Task<int> GetUserOrdersCount(Guid userId)

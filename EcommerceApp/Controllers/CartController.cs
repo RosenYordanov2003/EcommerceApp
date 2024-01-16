@@ -67,6 +67,11 @@
 
             await orderService.MakeOrderAsync(orderModel);
 
+            if (orderModel.Cuppon != null)
+            {
+                await promotionCodeService.RemoveCupponByIdAsync(orderModel.Cuppon.Id);
+            }
+
             var userCart = await cartService.GetUserCartByUserIdAsync(orderModel.UserId);
 
             var user = await userManager.FindByIdAsync(orderModel.UserId.ToString());

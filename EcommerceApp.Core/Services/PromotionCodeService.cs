@@ -73,6 +73,15 @@
                 .FirstAsync();
         }
 
+        public async Task RemoveCupponByIdAsync(Guid id)
+        {
+            PromotionCode promotionCode =  await dbContext.PromotionCodes.FirstAsync(pc => pc.Id == id);
+
+            dbContext.PromotionCodes.Remove(promotionCode);
+
+            await dbContext.SaveChangesAsync();
+        }
+
         private async Task<int> GetUserOrdersCount(Guid userId)
         {
             return await dbContext.Users

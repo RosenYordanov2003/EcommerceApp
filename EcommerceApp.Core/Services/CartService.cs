@@ -46,7 +46,7 @@
 
             foreach (ProductCartEntity product in userCart.ProductCartEntities)
             {
-                ProductStock productStock = await dbContext.ProductStocks.FirstOrDefaultAsync(p => p.ProductId == product.Id && p.Quantity >= product.Quantity);
+                ProductStock productStock = await dbContext.ProductStocks.FirstOrDefaultAsync(p => p.ProductId == product.ProductId && p.Quantity >= product.Quantity);
 
                 if (productStock == null)
                 {
@@ -91,7 +91,7 @@
                        CartId = uc.CartId,
                        CartProducts = uc.Cart.ProductCartEntities.Select(p => new ProductCartModel()
                        {
-                           Id = p.Id,
+                           Id = p.ProductId,
                            CategoryName = p.Product.Category.Name,
                            ImgUrl = p.Product.Pictures.First().ImgUrl,
                            Name = p.Product.Name,
@@ -165,7 +165,7 @@
             }
             else
             {
-                userCart.ProductCartEntities = userCart.ProductCartEntities.Where(pc => pc.Product.Id != removeCartProductModel.ProductId).ToList();
+                userCart.ProductCartEntities = userCart.ProductCartEntities.Where(pc => pc.ProductId != removeCartProductModel.ProductId).ToList();
             }
             await dbContext.SaveChangesAsync();
         }

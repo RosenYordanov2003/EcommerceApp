@@ -8,10 +8,10 @@ import { applyCuppon } from "../../services/cupponService";
 export default function UserCart() {
 
     const navigate = useNavigate();
-    const { user} = useContext(UserContext);
+    const { user } = useContext(UserContext);
     const [totalPrice, setTotalPrice] = useState();
     const [shippingMethod, setShippingMethod] = useState(undefined);
-    const [inputObject, setInputObject] = useState({ city: '', postalCode: '', country: 'Bulgaria', cuppon: ''});
+    const [inputObject, setInputObject] = useState({ city: '', postalCode: '', country: 'Bulgaria', cuppon: '' });
     const [isActiveCuppon, setIsActiveCuppon] = useState(false);
     const [cuppon, setCuppon] = useState(undefined);
     const [discount, setDiscount] = useState(0);
@@ -52,7 +52,11 @@ export default function UserCart() {
             city: inputObject.city,
             postalCode: inputObject.postalCode,
             shippingObject: shippingMethod,
-            totalPrice
+            priceObject: {
+                totalPrice,
+                discount,
+                cuppon
+            }
         };
         localStorage.setItem('checkout-info', JSON.stringify(checkOutObject));
         navigate('/Order');
@@ -76,7 +80,7 @@ export default function UserCart() {
 
     return (
         <>
-            <h2 className="shopping-cart-title">{items?.length + shoesItems?.length > 0 ? "Shopping Cart" : "Shopping Cart Is Empty" }</h2>
+            <h2 className="shopping-cart-title">{items?.length + shoesItems?.length > 0 ? "Shopping Cart" : "Shopping Cart Is Empty"}</h2>
             {items?.length + shoesItems?.length > 0 && <div className="cart-container">
                 <section className="cart-order">
                     <div className="shopping-cart-table">
@@ -93,7 +97,7 @@ export default function UserCart() {
                 </section>
                 <section className="order-info-container">
                     <div className={`cuppon-container ${isActiveCuppon && 'active-cuppon'}`}>
-                        <input type="text" placeholder="Enter cupon" value={inputObject.cuppon} onChange={(event) => setInputObject({...inputObject, cuppon: event.target.value}) }></input>
+                        <input type="text" placeholder="Enter cupon" value={inputObject.cuppon} onChange={(event) => setInputObject({ ...inputObject, cuppon: event.target.value })}></input>
                         <button onClick={handleApplyCupponClick} className="apply-cuppon-button">Apply</button>
                     </div>
                     <div className="order-info">
@@ -144,7 +148,6 @@ export default function UserCart() {
                 </section>
             </div>
             }
-          
         </>
     )
 }

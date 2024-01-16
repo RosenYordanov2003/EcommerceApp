@@ -9,7 +9,6 @@ export default function Order() {
     const { user, setUser } = useContext(UserContext);
     const navigate = useNavigate();
 
-    console.log(user);
 
     const [inputObject, setInputObject] = useState({
         firstName: '',
@@ -22,7 +21,7 @@ export default function Order() {
         phoneNumber: ''
     })
     const [shippingObject, setShippingObject] = useState(undefined);
-    const [totalPrice, setTotalPrice] = useState(0);
+    const [priceObject, setPriceObject] = useState(undefined);
 
     useEffect(() => {
 
@@ -30,7 +29,7 @@ export default function Order() {
         if (checkOutObject) {
             setInputObject({ ...inputObject, city: checkOutObject.city, country: checkOutObject.country, postalCode: checkOutObject.postalCode });
             setShippingObject(checkOutObject.shippingObject);
-            setTotalPrice(checkOutObject.totalPrice);
+            setPriceObject(checkOutObject.priceObject);
         }
     }, [user?.id])
 
@@ -38,14 +37,14 @@ export default function Order() {
     function handleFormSubmit(event) {
         event.preventDefault();
 
-        console.log(shippingObject);
 
         const object = {
             userOrderInfo: inputObject,
             shippingInfo: shippingObject,
-            totalPrice,
+            totalPrice: priceObject?.totalPrice,
             userId: user.id,
-            discount: 0
+            discount: priceObject?.discount,
+            cuppon: priceObject?.cuppon
         };
 
         finishOrder(object)
@@ -136,11 +135,11 @@ export default function Order() {
                     </div>
                     <div className="order-price-container">
                         <p>Discount:</p>
-                        <p>${Number(0).toFixed(2)}</p>
+                        <p>${priceObject?.discount.toFixed(2)}</p>
                     </div>
                     <div className="order-price-container">
                         <p className="total">Total</p>
-                        <p className="total-price">${totalPrice?.toFixed(2) ?? 0}</p>
+                        <p className="total-price">${priceObject?.totalPrice.toFixed(2) ?? 0}</p>
                     </div>
                 </section>
                 <hr></hr>

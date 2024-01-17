@@ -2,9 +2,9 @@
 {
     using Microsoft.EntityFrameworkCore;
     using Data;
-    using Core.Contracts;
+    using Contracts;
     using Infrastructure.Data.Models;
-    using Core.Models.PromotionCodes;
+    using Models.PromotionCodes;
 
     public class PromotionCodeService : IPromotionCodeService
     {
@@ -12,6 +12,13 @@
         public PromotionCodeService(ApplicationDbContext dbContext)
         {
             this.dbContext = dbContext;
+        }
+
+        public async Task<bool> CheckIfCupponHasExpiredByIdAsync(Guid id)
+        {
+            PromotionCode promotionCode = await dbContext.PromotionCodes.FirstAsync(pc => pc.Id == id);
+
+            return promotionCode.ExpirationTime > DateTime.UtcNow;
         }
 
         public async Task<bool> CheckIfPromotionCodeExistByIdAsync(Guid cupponId)

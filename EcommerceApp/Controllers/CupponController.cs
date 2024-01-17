@@ -29,9 +29,13 @@
             {
                 return Ok(new { Error = "Invalid cuppon" });
             }
+            if (!await promotionCodeService.CheckIfCupponHasExpiredByIdAsync(promotionCodeApplyModel.CupponId))
+            {
+                return Ok(new { Error = "Invalid cuppon" });
+            }
             PromotionCodeModel cuppon = await promotionCodeService.GetPromotionCodeByIdAsync(promotionCodeApplyModel.CupponId);
 
-            return Ok(new {Success = true, Cuppon = cuppon});
+            return Ok(new { Success = true, Cuppon = cuppon });
         }
     }
 }

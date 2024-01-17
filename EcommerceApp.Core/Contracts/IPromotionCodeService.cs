@@ -10,6 +10,7 @@
         Task<bool> CheckIfPromotionCodeIsRelatedWithParticularUserAsync(Guid userId, Guid cupponId);
         Task<PromotionCodeModel> GetPromotionCodeByIdAsync(Guid id);
         Task RemoveCupponByIdAsync(Guid id);
+        Task<bool> CheckIfCupponHasExpiredByIdAsync(Guid id);
 
     }
 }

@@ -1,4 +1,4 @@
-﻿import { useState } from "react";
+﻿import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useContext } from 'react';
 import { UserContext } from "../../Contexts/UserContext";
@@ -12,7 +12,32 @@ export default function Navigation() {
     const navigate = useNavigate();
     const context = useContext(UserContext);
     const [favoriteMenuActivity, setFavoriteMenuActivity] = useState(false);
+    const [theme, setTheme] = useState(undefined);
 
+    useEffect(() => {
+
+        let themeObject = JSON.parse(localStorage.getItem('theme'));
+
+        if (themeObject) {
+            setTheme(themeObject);
+        }
+        else {
+            setTheme('light');
+        }
+
+    },[theme])
+
+
+    function handleThemeChange() {
+        if (theme == 'light') {
+            setTheme('dark');
+            localStorage.setItem('theme', JSON.stringify('dark'));
+        }
+        else {
+            setTheme("light");
+            localStorage.setItem('theme', JSON.stringify('light'));
+        }
+    }
 
     let listImes;
 
@@ -97,6 +122,7 @@ export default function Navigation() {
                             Women{" "}
                         </Link>
                     </li>
+                    <li onClick={handleThemeChange} className="theme-icon"><i className={`${theme === 'light' ? "fa-regular fa-moon" : "fa-regular fa-sun"}`}></i></li>
                     {listImes}
                 </ul>
             </nav>

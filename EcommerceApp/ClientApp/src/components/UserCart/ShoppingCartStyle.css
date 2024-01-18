@@ -21,6 +21,7 @@
     display: flex;
     align-items: flex-start;
     margin-top: 7rem;
+    position: relative;
 }
 .cart-order {
     flex-basis: 76%
@@ -245,4 +246,5 @@ input:nth-of-type(checkbox){
 .round input[type="checkbox"]:checked + label:after {
     opacity: 1;
 }
+
 

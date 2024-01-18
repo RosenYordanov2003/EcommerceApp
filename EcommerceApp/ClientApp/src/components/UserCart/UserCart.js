@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import ShoppingCartStyle from "../UserCart/ShoppingCartStyle.css";
 import UserCartItem from "../UserCart/UserCartItems/UserCartItem";
 import { applyCuppon } from "../../services/cupponService";
+import PoppupMessage from "../PoppupMessage/PoppupMessage";
 
 export default function UserCart() {
 
@@ -15,6 +16,7 @@ export default function UserCart() {
     const [isActiveCuppon, setIsActiveCuppon] = useState(false);
     const [cuppon, setCuppon] = useState(undefined);
     const [discount, setDiscount] = useState(0);
+    const [poppUpMessage, setpoppUpMessage] = useState(undefined);
 
     function handleIncreaseItemPrice(productId, price) {
         setTotalPrice(totalPrice + price);
@@ -42,6 +44,7 @@ export default function UserCart() {
                 sum += Number.parseFloat(user?.cart?.cartProducts[i]?.price) * user?.cart?.cartProducts[i]?.quantity;
             }
             setTotalPrice(sum);
+            setpoppUpMessage(<PoppupMessage message="You Have Successfully Applied Your Promotion Code"/>)
         }
     }, [user?.cart?.cartId])
 
@@ -81,7 +84,8 @@ export default function UserCart() {
     return (
         <>
             <h2 className="shopping-cart-title">{items?.length + shoesItems?.length > 0 ? "Shopping Cart" : "Shopping Cart Is Empty"}</h2>
-            {items?.length + shoesItems?.length > 0 && <div className="cart-container">
+            {items?.length + shoesItems?.length > 0 &&
+                <div className="cart-container">
                 <section className="cart-order">
                     <div className="shopping-cart-table">
                         <section className="shopping-cart-headers">
@@ -95,6 +99,7 @@ export default function UserCart() {
                         {shoesItems}
                     </div>
                 </section>
+                {poppUpMessage }
                 <section className="order-info-container">
                     <div className={`cuppon-container ${isActiveCuppon && 'active-cuppon'}`}>
                         <input type="text" placeholder="Enter cupon" value={inputObject.cuppon} onChange={(event) => setInputObject({ ...inputObject, cuppon: event.target.value })}></input>

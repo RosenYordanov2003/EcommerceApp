@@ -52,6 +52,9 @@
     display: inline-block;
     font-size: 1.2rem;
 }
+.main-nav:has(.fa-moon)  :where(a, .nav-logo, i) {
+    color: white;
+}
 .nav-logo{
     position: relative;
 }
@@ -129,4 +132,14 @@
 }
 .product-favorite-card .remove-mark {
     margin-left: 2.2rem;
+}
+.theme-icon{
+    font-size: 1.8em;
+    padding: 0.3rem;
+}
+.fa-moon{
+    color: white;
+}
+body:has(.fa-moon) {
+    background-color: #23272f;
 }

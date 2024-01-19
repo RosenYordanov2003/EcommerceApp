@@ -246,5 +246,11 @@ input:nth-of-type(checkbox){
 .round input[type="checkbox"]:checked + label:after {
     opacity: 1;
 }
+body:has(.fa-moon) :where(.shopping-cart-headers, .order-info, .quantity-buttons-container) {
+    background-color: #343a46;
+}
+body:has(.fa-moon) :where(.item-category, .item-price, .item-subtotal-price, .quantity-buttons-container, .quantity-buttons-container button, label){
+    color: white;
+}
 
 

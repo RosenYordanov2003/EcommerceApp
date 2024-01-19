@@ -52,7 +52,7 @@
     display: inline-block;
     font-size: 1.2rem;
 }
-.main-nav:has(.fa-moon)  :where(a, .nav-logo, i) {
+.main-nav:has(.fa-moon)  :where(a, .nav-logo, i, li) {
     color: white;
 }
 .nav-logo{
@@ -140,6 +140,12 @@
 .fa-moon{
     color: white;
 }
+body{
+    transition: background-color 500ms ease-in;
+}
 body:has(.fa-moon) {
     background-color: #23272f;
+}
+body:has(.fa-moon) .favorite-products-container{
+    background-color: #343a46
 }

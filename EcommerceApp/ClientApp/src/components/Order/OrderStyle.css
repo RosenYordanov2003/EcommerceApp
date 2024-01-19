@@ -65,3 +65,9 @@
 .place-order-button:active {
    opacity: 0.7;
 }
+body:has(.fa-moon) :where(.order-summary-title, .order-price-container, .order-title){
+    color: white;
+}
+body:has(.fa-moon) :where(.order-details-container) {
+    background-color: #343a46;
+}

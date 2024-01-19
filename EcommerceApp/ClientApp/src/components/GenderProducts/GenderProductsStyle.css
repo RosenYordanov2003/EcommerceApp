@@ -71,3 +71,12 @@ input:focus{
     font-size: 2.6rem;
     margin: 2.2rem 2.2rem;
 }
+body:has(.fa-moon) :where(.filter-name, .filter-title){
+    color: white;
+}
+body:has(.fa-moon) .searchForm {
+    background-color: #343a46;
+}
+body:has(.fa-moon) .search-button {
+    background-color: #1f84a8;
+}

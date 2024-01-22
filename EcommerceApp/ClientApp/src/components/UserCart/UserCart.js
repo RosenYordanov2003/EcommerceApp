@@ -5,6 +5,7 @@ import ShoppingCartStyle from "../UserCart/ShoppingCartStyle.css";
 import UserCartItem from "../UserCart/UserCartItems/UserCartItem";
 import { applyCuppon } from "../../services/cupponService";
 import PoppupMessage from "../PoppupMessage/PoppupMessage";
+import ResponsiveStyle from "../UserCart/ResponsiveStyle.css";
 
 export default function UserCart() {
 
@@ -148,8 +149,10 @@ export default function UserCart() {
                         </p>
                         <p className="total-price order-final-details">Shipping
                             <p>${Number.parseFloat(shippingMethod?.price ?? 0).toFixed(2)}</p>
-                        </p>
-                        <button onClick={handleCheckoutClick} className="check-out-button">Checkout</button>
+                            </p>
+                            <div className="check-out-button-container">
+                                <button onClick={handleCheckoutClick} className="check-out-button">Checkout</button>
+                            </div>
                     </div>
                 </section>
             </div>

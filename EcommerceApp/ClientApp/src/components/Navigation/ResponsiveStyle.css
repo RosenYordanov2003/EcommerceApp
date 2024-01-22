@@ -1,0 +1,17 @@
+﻿@media all and (min-width: 280px) and (max-width: 800px){
+    .main-nav{
+        display: none;
+    }
+    .mobile-nav{
+        display: flex;
+        padding: 1rem 5%;
+        justify-content: space-between;
+    }
+    .mobile-nav ul{
+      list-style: none;
+    }
+     .mobile-nav ul li a{
+        text-decoration: none;
+        color: black;
+     }
+}

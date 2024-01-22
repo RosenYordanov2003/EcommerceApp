@@ -26,6 +26,9 @@
         display: flex;
     }
 }
+body{
+    font-family:Verdana, Geneva, Tahoma, sans-serif
+}
 
 .main-nav {
     display: flex;
@@ -148,4 +151,13 @@ body:has(.fa-moon) {
 }
 body:has(.fa-moon) .favorite-products-container{
     background-color: #343a46
+}
+.mobile-nav{
+    display: none;
+}
+.open-nav{
+    font-size: 1.5rem;
+    cursor: pointer;
+    position: absolute;
+    right: 5%;
 }

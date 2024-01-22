@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import Style from "../Navigation/Style.css"
 import { logout } from "../../services/authService";
 import UserFavoriteProducts from "../Products/UserFavoriteProducts/UserFavoriteProducts";
+import ResponsiveStyle from "../Navigation/ResponsiveStyle.css";
 
 export default function Navigation() {
 
@@ -124,6 +125,61 @@ export default function Navigation() {
                     </li>
                     <li onClick={handleThemeChange} className="theme-icon"><i className={`${theme === 'light' ? "fa-regular fa-moon" : "fa-regular fa-sun"}`}></i></li>
                     {listImes}
+                </ul>
+            </nav>
+
+
+            <nav className="mobile-nav">
+                <i class="fa-solid fa-bars open-nav"></i>
+                <h2 className="nav-logo">Fashion Store</h2>
+                <ul>
+                    <li>
+                        <Link to="/Home">
+                            Home
+                        </Link>
+                    </li>
+                    <li>
+
+                        <Link to="/Gender/men">
+                            Men{" "}
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/Gender/women">
+                            Women{" "}
+                        </Link>
+                    </li>
+                    {useContext.user !== undefined ?
+                     <>
+                            <li>
+                                <Link to="/Gender/women">
+                                    Favorite Products
+                                </Link>
+                            </li>
+
+                            <li>
+                                <Link to="/Cart">
+                                   Cart
+                                </Link>
+                            </li>
+                            <li className="logout" onClick={onLogout}>
+                                Logout
+                            </li>
+                    </> 
+                        :
+                        <>
+                            <li>
+                                <Link to="/Register">
+                                    Register
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/Login">
+                                    Login
+                                </Link>
+                            </li>
+                        </>
+                    }
                 </ul>
             </nav>
         </>

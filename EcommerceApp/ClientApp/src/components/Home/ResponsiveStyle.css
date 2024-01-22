@@ -1,0 +1,20 @@
+﻿@media screen and (min-width: 280px) and (max-width:700px){
+    .featured-shoes-section{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .featured-product-card .img-container{
+        width: 240px;
+    }
+    .product-content :is(.name, .price, .star-rating){
+        font-size: 1.1rem;
+    }
+    .contact-container{
+        flex-direction: column;
+    }
+    .contact-form .contact-input{
+        min-width: 130px;
+    }
+}

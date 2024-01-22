@@ -62,6 +62,11 @@
                 .WithMany(u => u.PromotionCodes)
                 .OnDelete(DeleteBehavior.NoAction);
 
+            builder.Entity<Cart>()
+                .HasOne(c => c.User)
+                .WithOne(u => u.Cart)
+                .OnDelete(DeleteBehavior.NoAction);
+
 
             builder.ApplyConfiguration(new BrandEntityConfiguration());
             builder.ApplyConfiguration(new MainCategoryEntityConfiguration());

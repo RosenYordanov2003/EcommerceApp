@@ -9,5 +9,6 @@
         Task IncreaseProductQuantityAsync (ModifyProductCartQuantityModel increaseProductQuantityModel);
         Task<bool> CheckICartProductsQuantityIsAvailableAsync(Guid userId);
         Task ClearUserCartAsyncAfterFinishingOrder(Guid userId);
+        Task CreateUserCartAsync(Guid userId);
     }
 }

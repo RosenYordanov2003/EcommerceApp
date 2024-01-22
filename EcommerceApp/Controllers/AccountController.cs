@@ -59,6 +59,7 @@
                 var errors = result.Errors.Select(e => e.Description);
                 return BadRequest(new RegisterResponse() { Erros = errors.ToList() });
             }
+            await cartService.CreateUserCartAsync(newUser.Id);
             return Ok(new { Message = "You have successfully created an account" });
         }
         [HttpPost("Login")]
@@ -89,8 +90,11 @@
                         Expires = DateTimeOffset.UtcNow.AddMinutes(15),
                     });
                     var userFavoriteProducts = await productSevice.GetUserFavoriteProductsAsync(user.Id);
+                    if (user.Cart == null)
+                    {
+                        await cartService.CreateUserCartAsync(user.Id);
+                    }
                     var userCart = await cartService.GetUserCartByUserIdAsync(user.Id);
-
                     return Ok(new LoginResponse() { Username = loginModel.Username, Id = user.Id, UserFavoriteProducts = userFavoriteProducts, CartModel = userCart });
                 }
             }
@@ -147,15 +151,15 @@
                     Expires = DateTimeOffset.UtcNow.AddMinutes(-2),
                 });
 
-               HttpContext.Response.Cookies.Append("X-Refresh-Token", refreshToken,
-               new CookieOptions
-               {
-                   Expires = DateTimeOffset.UtcNow.AddMinutes(-2),
-                   HttpOnly = true,
-                   IsEssential = true,
-                   Secure = true,
-                   SameSite = SameSiteMode.None,
-               });
+                HttpContext.Response.Cookies.Append("X-Refresh-Token", refreshToken,
+                new CookieOptions
+                {
+                    Expires = DateTimeOffset.UtcNow.AddMinutes(-2),
+                    HttpOnly = true,
+                    IsEssential = true,
+                    Secure = true,
+                    SameSite = SameSiteMode.None,
+                });
                 return Ok();
             }
             return BadRequest();

@@ -17,14 +17,7 @@
 
         public async Task AddProductToUserCartAsync(AddProductToCartModel addProductToCartModel)
         {
-            User user = await dbContext.Users.FirstAsync(u => u.Id == addProductToCartModel.UserId);
-            if (user.CartId == null)
-            {
-                Cart cart = new Cart();
-                user.Cart = cart;
-                await dbContext.SaveChangesAsync();
-            }
-            Cart userCart = await dbContext.Carts.Where(c => c.Id == user.CartId).FirstAsync();
+            Cart userCart = await dbContext.Carts.Where(c => c.UserId == addProductToCartModel.UserId).FirstAsync();
             if (addProductToCartModel.CategoryName.ToLower() != "shoes")
             {
                 Product productToAdd = await dbContext.Clothes.FirstAsync(p => p.Id == addProductToCartModel.ProductId);
@@ -40,9 +33,8 @@
 
         public async Task<bool> CheckICartProductsQuantityIsAvailableAsync(Guid userId)
         {
-            User user = await dbContext.Users.FirstAsync(u => u.Id == userId);
 
-            Cart userCart = await dbContext.Carts.Include(c => c.ProductCartEntities).Include(c => c.ShoesCartEntities).Where(c => c.Id == user.CartId).FirstAsync();
+            Cart userCart = await dbContext.Carts.Include(c => c.ProductCartEntities).Include(c => c.ShoesCartEntities).Where(c => c.UserId == userId).FirstAsync();
 
             foreach (ProductCartEntity product in userCart.ProductCartEntities)
             {
@@ -72,9 +64,8 @@
 
         public async Task ClearUserCartAsyncAfterFinishingOrder(Guid userId)
         {
-            User user = await dbContext.Users.FirstAsync(u => u.Id == userId);
 
-            Cart userCart = await dbContext.Carts.Include(c => c.ProductCartEntities).Include(c => c.ShoesCartEntities).Where(c => c.Id == user.CartId).FirstAsync();
+            Cart userCart = await dbContext.Carts.Include(c => c.ProductCartEntities).Include(c => c.ShoesCartEntities).Where(c => c.UserId == userId).FirstAsync();
 
             userCart.ShoesCartEntities.Clear();
             userCart.ProductCartEntities.Clear();
@@ -82,14 +73,24 @@
             await dbContext.SaveChangesAsync();
         }
 
+        public async Task CreateUserCartAsync(Guid userId)
+        {
+            Cart userCart = new Cart()
+            {
+                UserId = userId,
+            };
+            await dbContext.Carts.AddAsync(userCart);
+            await dbContext.SaveChangesAsync();
+        }
+
         public async Task<CartModel> GetUserCartByUserIdAsync(Guid userId)
         {
-            CartModel? userCart = await dbContext.Users
-                   .Where(u => u.Id == userId)
+            CartModel userCart = await dbContext.Carts
+                   .Where(c => c.UserId == userId)
                    .Select(uc => new CartModel()
                    {
-                       CartId = uc.CartId,
-                       CartProducts = uc.Cart.ProductCartEntities.Select(p => new ProductCartModel()
+                       CartId = uc.Id,
+                       CartProducts = uc.ProductCartEntities.Select(p => new ProductCartModel()
                        {
                            Id = p.ProductId,
                            CategoryName = p.Product.Category.Name,
@@ -100,7 +101,7 @@
                            Size = p.Size,
                        })
                        .ToArray(),
-                       CartShoes = uc.Cart.ShoesCartEntities.Select(sh => new ProductCartModel()
+                       CartShoes = uc.ShoesCartEntities.Select(sh => new ProductCartModel()
                        {
                            Id = sh.Shoes.Id,
                            CategoryName = sh.Shoes.Category.Name,

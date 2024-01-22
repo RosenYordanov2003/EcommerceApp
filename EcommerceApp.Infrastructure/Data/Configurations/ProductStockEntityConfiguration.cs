@@ -16,7 +16,6 @@
 
         private IEnumerable<ProductStock> GenereateProductStocks()
         {
-            Random random = new Random();
             List<ProductStock> productStocks = new List<ProductStock>();
             int key = 1;
             for (int productId = 1; productId <= 12; productId++)
@@ -28,7 +27,7 @@
                         Id = key,
                         ProductId = productId,
                         Size = sizes[productSize],
-                        Quantity = random.Next(21)
+                        Quantity = 15
                     });
                     key++;
                 }

@@ -70,13 +70,18 @@ export default function UserCartItem({ item, handleIncreaseItemPrice, handleDecr
                 ...user,
                 cart: {
                     ...user.cart,
-                    cartShoes: user.cart.cartShoes.filter((shoes) => shoes.id !== item.id && shoes.size.toString() !== item.size.toString())
+                    cartShoes: user.cart.cartShoes.filter((shoes) => {
+                        if (shoes.id === item.id && shoes.size.toString() === item.size.toString()) {
+                            return undefined;
+                        }
+                        else {
+                            return shoes;
+                        }
+                    })
                 }
             })
         }
         else {
-            console.log(item.size);
-            console.log(item.id);
             setUser({
                 ...user,
                 cart: {

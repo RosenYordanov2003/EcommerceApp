@@ -21,24 +21,32 @@
         private readonly IEmailSender emailSender;
         private readonly IOrderService orderService;
         private readonly IPromotionCodeService promotionCodeService;
+        private readonly IProductStockService productStockService;
         private readonly UserManager<User> userManager;
         public CartController(ICartService cartService, IEmailSender emailSender, 
-            UserManager<User> userManager, IOrderService orderService, IPromotionCodeService promotionCodeService)
+            UserManager<User> userManager, IOrderService orderService, IPromotionCodeService promotionCodeService
+            ,IProductStockService productStockService)
         {
             this.cartService = cartService;
             this.emailSender = emailSender;
             this.userManager = userManager;
             this.orderService = orderService;
             this.promotionCodeService = promotionCodeService;
+            this.productStockService = productStockService;
         }
 
         [HttpPost]
         [Route("AddProduct")]
         public async Task<IActionResult> AddProduct([FromBody] AddProductToCartModel addProductToCartModel)
         {
+            if (!await productStockService.CheckForProductQuantityAsync(addProductToCartModel))
+            {
+                return Ok(new { Success = false, Error = "Not available product quantity" });
+            }
             await cartService.AddProductToUserCartAsync(addProductToCartModel);
+            await productStockService.DecreaseProductStockQuantity(addProductToCartModel);
 
-            return Ok();
+            return Ok(new {Success = true});
         }
         [HttpPost]
         [Route("RemoveProduct")]

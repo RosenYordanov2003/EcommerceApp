@@ -21,7 +21,7 @@ export async function addToCartProduct(productId, userId, categoryName, quantity
     if (!request.ok) {
         throw Error(request.Error)
     }
-    return request.ok;
+    return request.json();
 
 }
 export async function removeProductFromUserCart(productObject) {

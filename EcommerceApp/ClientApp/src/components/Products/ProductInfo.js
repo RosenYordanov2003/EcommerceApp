@@ -7,6 +7,7 @@ import FeaturedProduct from "../Products/FeaturedProduct";
 import { Grid } from 'react-loader-spinner';
 import { UserContext } from "../../Contexts/UserContext";
 import { addToCartProduct } from "../../services/cartService";
+import Notification from "../Notification/Notification";
 
 export default function ProductInfo() {
 
@@ -19,6 +20,7 @@ export default function ProductInfo() {
     const [isActiveArrows, setActiveArrows] = useState(false);
     const [activeSizeItem, setActiveSizeItem] = useState(undefined);
     const [isFavorite, setIsFavorite] = useState(undefined);
+    const [notiffication, setNotification] = useState(undefined);
 
     const pathArray = window.location.pathname.split('/');
     const id = pathArray[pathArray.length - 2];
@@ -95,7 +97,6 @@ export default function ProductInfo() {
 
     let className = isActiveArrows ? "active-arrow" : "";
 
-    console.log(user);
 
     function handleAddToFavoriteProduct() {
 
@@ -120,10 +121,18 @@ export default function ProductInfo() {
         }
         setIsFavorite(favoriteResult);
     }
+    function removeNotification() {
+        setNotification(undefined);
+    }
     function handleAddToCartProduct() {
         addToCartProduct(id, user?.id, categoryName, count, activeSizeItem?.size?.toString())
-            .then(() => {
+            .then((res) => {
                 const productId = Number.parseFloat(id);
+
+                if (res.success == false) {
+                    setNotification(<Notification message={res.error} typeOfMessage="error" closeNotification={removeNotification}/>)
+                    return;
+                }
 
                 const productObject = {
                     id: productId,
@@ -194,6 +203,7 @@ export default function ProductInfo() {
         <>
 
             <div className="productinfo-card-container">
+                {notiffication}
                 <div onMouseOver={() => { setActiveArrows(true) }} onMouseOut={() => { setActiveArrows(false) }} className="productinfo-img-container">
                     <button onClick={handleimgLeftArrowClick} className={`arrow-button left-arrow-button ${className}`}>  <i className="fa-solid fa-chevron-left"></i></button>
                     <img src={activePicture?.imgUrl}></img>

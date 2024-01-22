@@ -101,6 +101,7 @@ builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddScoped<IEmailSender, EmailSender>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IPromotionCodeService, PromotionCodeService>();
+builder.Services.AddScoped<IProductStockService, ProductStockService>();
 
 var app = builder.Build();
 

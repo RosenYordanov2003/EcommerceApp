@@ -27,9 +27,11 @@ export default function UserCart() {
 
 
 
-    const items = user?.cart?.cartProducts?.map((item) => <UserCartItem handleIncreaseItemPrice={handleIncreaseItemPrice} handleDecreaseItemPrice={handleDecreaseItemPrice} item={item} key={item.id} />)
+    console.log(user);
 
-    const shoesItems = user?.cart?.cartShoes?.map((item) => <UserCartItem handleIncreaseItemPrice={handleIncreaseItemPrice} handleDecreaseItemPrice={handleDecreaseItemPrice} item={item} key={item.id} />)
+    const items = user?.cart?.cartProducts?.map((item, index) => <UserCartItem handleIncreaseItemPrice={handleIncreaseItemPrice} handleDecreaseItemPrice={handleDecreaseItemPrice} item={item} key={index} />)
+
+    const shoesItems = user?.cart?.cartShoes?.map((item, index) => <UserCartItem handleIncreaseItemPrice={handleIncreaseItemPrice} handleDecreaseItemPrice={handleDecreaseItemPrice} item={item} key={index} />)
 
 
     useEffect(() => {
@@ -64,7 +66,6 @@ export default function UserCart() {
         localStorage.setItem('checkout-info', JSON.stringify(checkOutObject));
         navigate('/Order');
     }
-    console.log(cuppon);
     function handleApplyCupponClick() {
         applyCuppon(inputObject.cuppon, user?.id)
             .then((res) => {

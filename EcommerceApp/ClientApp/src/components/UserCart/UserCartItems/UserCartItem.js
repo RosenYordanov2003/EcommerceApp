@@ -1,11 +1,13 @@
 ﻿import { useState, useContext } from "react";
 import { UserContext } from "../../../Contexts/UserContext";
 import { removeProductFromUserCart, modifyProductCartQuantity } from "../../../services/cartService";
+import Notification from "../../Notification/Notification";
 
 export default function UserCartItem({ item, handleIncreaseItemPrice, handleDecreaseItemPrice }) {
 
     const [quantity, setQuantity] = useState(item.quantity);
     const { user, setUser } = useContext(UserContext);
+    const [notification, setNotification] = useState(undefined);
 
     function handleOnDecreasingProductQuantity() {
         if (quantity == 1) {
@@ -15,7 +17,9 @@ export default function UserCartItem({ item, handleIncreaseItemPrice, handleDecr
             userId: user.id,
             productCategoryName: item.categoryName,
             productId: item.id,
-            operation: 'decrease'
+            operation: 'decrease',
+            quantity: item.quantity,
+            size: item.size,
         };
         modifyProductCartQuantity(object)
             .then(() => {
@@ -31,23 +35,34 @@ export default function UserCartItem({ item, handleIncreaseItemPrice, handleDecr
                 userId: user.id,
                 productCategoryName: item.categoryName,
                 productId: item.id,
-                operation: 'increase'
+                operation: 'increase',
+                quantity: item.quantity,
+                size: item.size,
             };
 
             modifyProductCartQuantity(object)
-                .then(() => {
+                .then((res) => {
+                    if (res.success === false) {
+                        setNotification(<Notification message={res.error} typeOfMessage="error" closeNotification={removeNotification} />);
+                        return;
+                    }
                     setQuantity(quantity + 1);
                     handleIncreaseItemPrice(item.id, item.price);
                 })
                 .catch((error) => console.error(error));
         }
     }
+    function removeNotification() {
+        setNotification(undefined);
+    }
     function handleOnRemovingItem() {
 
         const productObject = {
             userId: user.id,
             categoryName: item.categoryName,
-            productId: item.id
+            productId: item.id,
+            size: item.size.toString(),
+            quantity: item.quantity
         }
 
         if (item.categoryName === "Shoes") {
@@ -55,31 +70,37 @@ export default function UserCartItem({ item, handleIncreaseItemPrice, handleDecr
                 ...user,
                 cart: {
                     ...user.cart,
-                    cartShoes: user.cart.cartShoes.filter((shoes) => shoes.id !== item.id)
+                    cartShoes: user.cart.cartShoes.filter((shoes) => shoes.id !== item.id && shoes.size.toString() !== item.size.toString())
                 }
             })
         }
         else {
+            console.log(item.size);
+            console.log(item.id);
             setUser({
                 ...user,
                 cart: {
                     ...user.cart,
-                    cartProducts: user.cart.cartProducts.filter((product) => product.id !== item.id)
+                    cartProducts: user.cart.cartProducts.filter((product) => {
+                        if (product.id === item.id && product.size == item.size) {
+                            return undefined;
+                        }
+                        else {
+                            return product;
+                        }
+                    })
                 }
             })
         }
-
         removeProductFromUserCart(productObject)
             .then(() => {
-                console.log(true);
+                handleDecreaseItemPrice(undefined, item.price * quantity);
             })
-
-        handleDecreaseItemPrice(undefined, item.price * quantity);
-
     }
 
     return (
         <>
+            {notification }
             <section className="item-cotnainer">
                 <div className="item-info">
                     <div className="item-img-container">
@@ -91,7 +112,7 @@ export default function UserCartItem({ item, handleIncreaseItemPrice, handleDecr
                     </div>
                 </div>
                 <p className="item-price">${Number.parseFloat(item.price).toFixed(2)}</p>
-                <p className="item-price">{item.size }</p>
+                <p className="item-price">{item.size}</p>
                 <div className="quantity-buttons-container">
                     <button onClick={handleOnDecreasingProductQuantity}>-</button>
                     {quantity}

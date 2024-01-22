@@ -23,9 +23,9 @@
         private readonly IPromotionCodeService promotionCodeService;
         private readonly IProductStockService productStockService;
         private readonly UserManager<User> userManager;
-        public CartController(ICartService cartService, IEmailSender emailSender, 
+        public CartController(ICartService cartService, IEmailSender emailSender,
             UserManager<User> userManager, IOrderService orderService, IPromotionCodeService promotionCodeService
-            ,IProductStockService productStockService)
+            , IProductStockService productStockService)
         {
             this.cartService = cartService;
             this.emailSender = emailSender;
@@ -37,36 +37,49 @@
 
         [HttpPost]
         [Route("AddProduct")]
-        public async Task<IActionResult> AddProduct([FromBody] AddProductToCartModel addProductToCartModel)
+        public async Task<IActionResult> AddProduct([FromBody] AddProductToCartModel model)
         {
-            if (!await productStockService.CheckForProductQuantityAsync(addProductToCartModel))
+            if (!await productStockService.CheckForProductQuantityAsync(model.CategoryName, model.ProductId, model.Size, model.Quantity))
             {
                 return Ok(new { Success = false, Error = "Not available product quantity" });
             }
-            await cartService.AddProductToUserCartAsync(addProductToCartModel);
-            await productStockService.DecreaseProductStockQuantity(addProductToCartModel);
+            await cartService.AddProductToUserCartAsync(model);
+            await productStockService.DecreaseProductStockQuantity(model.CategoryName, model.ProductId, model.Size, model.Quantity);
 
-            return Ok(new {Success = true});
+            return Ok(new { Success = true });
         }
         [HttpPost]
         [Route("RemoveProduct")]
-        public async Task<IActionResult> RemoveProductFromUserCart([FromBody] RemoveCartProductModel removeCartProductModel)
+        public async Task<IActionResult> RemoveProductFromUserCart([FromBody] RemoveCartProductModel model)
         {
-            await cartService.RemoveProductFromUserCartAsync(removeCartProductModel);
+            await cartService.RemoveProductFromUserCartAsync(model);
+            await productStockService.IncreaseProductStockQuantity(model.CategoryName, model.ProductId, model.Size, model.Quantity);
 
             return Ok();
         }
         [HttpPost]
         [Route("ModifyProducCarttQuantity")]
-        public async Task<IActionResult> IncreaseProductQuantity([FromBody] ModifyProductCartQuantityModel modifyProductCartQuantityModel)
+        public async Task<IActionResult> IncreaseProductQuantity([FromBody] ModifyProductCartQuantityModel model)
         {
-            await cartService.IncreaseProductQuantityAsync(modifyProductCartQuantityModel);
+            if (model.Operation == "increase")
+            {
+                if (!await productStockService.CheckForProductQuantityAsync(model.ProductCategoryName, model.ProductId, model.Size, model.Quantity + 1))
+                {
+                    return Ok(new { Success = false, Error = "There is no available product quantity" });
+                }
+                await cartService.IncreaseProductCartQuantityAsync(model);
+                await productStockService.DecreaseProductStockQuantity(model.ProductCategoryName, model.ProductId, model.Size, 1);
 
-            return Ok();
+                return Ok(new { Success = true });
+            }
+            await cartService.DecreaseProductCartQuantityAsync(model);
+            await productStockService.IncreaseProductStockQuantity(model.ProductCategoryName, model.ProductId, model.Size, 1);
+
+            return Ok(new { Success = true });
         }
         [HttpPost]
         [Route("FinishOrder")]
-        public async Task<IActionResult> FinishOrder([FromBody]OrderModel orderModel)
+        public async Task<IActionResult> FinishOrder([FromBody] OrderModel orderModel)
         {
             if (!await cartService.CheckICartProductsQuantityIsAvailableAsync(orderModel.UserId))
             {

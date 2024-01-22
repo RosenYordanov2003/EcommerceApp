@@ -53,7 +53,7 @@ export async function modifyProductCartQuantity(productObject) {
     if (!request.ok) {
         throw Error(request.Error)
     }
-    return request.ok;
+    return request.json();
 }
 export async function finishOrder(orderModel) {
 

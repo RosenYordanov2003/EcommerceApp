@@ -1,11 +1,10 @@
 ﻿namespace EcommerceApp.Core.Services
 {
-    using System.Threading.Tasks;
     using Microsoft.EntityFrameworkCore;
+    using System.Threading.Tasks;
     using Contracts;
     using Data;
-    using Models.Cart;
-    using EcommerceApp.Infrastructure.Data.Models;
+    using Infrastructure.Data.Models;
 
     public class ProductStockService : IProductStockService
     {
@@ -15,40 +14,54 @@
             this.dbContext = dbContext;
         }
 
-        public async Task<bool> CheckForProductQuantityAsync(AddProductToCartModel addProductToCartModel)
+        public async Task<bool> CheckForProductQuantityAsync(string categoryName, int productId, string size, int quantity)
         {
-            if (addProductToCartModel.CategoryName.ToLower() == "shoes")
+            if (categoryName.ToLower() == "shoes")
             {
-                return await dbContext.ShoesStock.AnyAsync(sh => sh.ShoesId == addProductToCartModel.ProductId
-                && sh.Size == int.Parse(addProductToCartModel.Size) && sh.Quantity >= addProductToCartModel.Quantity);
+                return await dbContext.ShoesStock.AnyAsync(sh => sh.ShoesId == productId
+                && sh.Size == int.Parse(size) && sh.Quantity >= quantity);
             }
             return await dbContext.ProductStocks.AnyAsync
-                (ps => ps.ProductId == addProductToCartModel.ProductId
-              && ps.Size == addProductToCartModel.Size && ps.Quantity >= addProductToCartModel.Quantity);
+                (ps => ps.ProductId == productId
+              && ps.Size == size && ps.Quantity >= quantity);
         }
 
-        public async Task DecreaseProductStockQuantity(AddProductToCartModel addProductToCartModel)
+        public async Task DecreaseProductStockQuantity(string categoryName, int productId, string size, int quantity)
         {
-            if (addProductToCartModel.CategoryName.ToLower() == "shoes")
+            if (categoryName.ToLower() == "shoes")
             {
-                ShoesCartEntity shoesCartEntity = await dbContext.ShoesCartEntities.FirstAsync(sh => sh.ShoesId == addProductToCartModel.ProductId 
-                && sh.Size == int.Parse(addProductToCartModel.Size));
+                ShoesStock shoesCartEntity = await dbContext.ShoesStock.FirstAsync(sh => sh.ShoesId == productId 
+                && sh.Size == int.Parse(size));
 
-                shoesCartEntity.Quantity -= addProductToCartModel.Quantity;
+                shoesCartEntity.Quantity -= quantity;
             }
             else
             {
-                ProductCartEntity productCartEntity = await dbContext.ProductCartEntities.FirstAsync(pc => pc.Id == addProductToCartModel.ProductId
-                && pc.Size == addProductToCartModel.Size);
+                ProductStock productCartEntity = await dbContext.ProductStocks.FirstAsync(pc => pc.ProductId == productId
+                && pc.Size == size);
 
-                productCartEntity.Quantity -= addProductToCartModel.Quantity;
+                productCartEntity.Quantity -= quantity;
             }
             await dbContext.SaveChangesAsync();
         }
 
-        public Task IncreaseProductStockQuantity(AddProductToCartModel addProductToCartModel)
+        public async Task IncreaseProductStockQuantity(string categoryName, int productId, string size, int quantity)
         {
-            throw new NotImplementedException();
+            if (categoryName.ToLower() == "shoes")
+            {
+                ShoesStock shoesCartEntity = await dbContext.ShoesStock.FirstAsync(sh => sh.ShoesId == productId
+                && sh.Size == int.Parse(size));
+
+                shoesCartEntity.Quantity += quantity;
+            }
+            else
+            {
+                ProductStock productCartEntity = await dbContext.ProductStocks.FirstAsync(pc => pc.ProductId == productId
+                && pc.Size == size);
+
+                productCartEntity.Quantity += quantity;
+            }
+            await dbContext.SaveChangesAsync();
         }
     }
 }

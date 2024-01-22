@@ -3,8 +3,8 @@
     using Models.Cart;
     public interface IProductStockService
     {
-        public Task<bool> CheckForProductQuantityAsync(AddProductToCartModel addProductToCartModel);
-        public Task DecreaseProductStockQuantity(AddProductToCartModel addProductToCartModel);
-        public Task IncreaseProductStockQuantity(AddProductToCartModel addProductToCartModel);
+        public Task<bool> CheckForProductQuantityAsync(string categoryName, int productId, string size, int quantity);
+        public Task DecreaseProductStockQuantity(string categoryName, int productId, string size, int quantity);
+        public Task IncreaseProductStockQuantity(string categoryName, int productId, string size, int quantity);
     }
 }

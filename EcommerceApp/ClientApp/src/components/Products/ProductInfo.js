@@ -104,7 +104,7 @@ export default function ProductInfo() {
 
         if (favoriteResult) {
             addProductToUserFavoriteProductsList(user.id, id, categoryName, count)
-                .then(res => {
+                .then(() => {
                     const productObject = createProductObject(product.name, id, product.pictures[0].imgUrl, categoryName);
 
                     setUser({ ...user, userFavoriteProducts: [...user.userFavoriteProducts, productObject] })
@@ -113,7 +113,7 @@ export default function ProductInfo() {
         }
         else {
             removeProductFromUserFavoriteList(user.id, id, categoryName)
-                .then(res => {
+                .then(() => {
                     const products = filterUserFavoriteProducts(user.userFavoriteProducts, id, categoryName)
                     setUser({ ...user, userFavoriteProducts: products })
                 })
@@ -125,6 +125,12 @@ export default function ProductInfo() {
         setNotification(undefined);
     }
     function handleAddToCartProduct() {
+
+        if (activeSizeItem === undefined) {
+            setNotification(<Notification message={"Please, select size"} typeOfMessage="error" closeNotification={removeNotification} />)
+            return;
+        }
+
         addToCartProduct(id, user?.id, categoryName, count, activeSizeItem?.size?.toString())
             .then((res) => {
                 const productId = Number.parseFloat(id);

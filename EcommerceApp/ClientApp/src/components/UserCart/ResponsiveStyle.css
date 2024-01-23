@@ -22,11 +22,12 @@
        gap: 0.9rem;
    }
    .item-cotnainer{
-       gap: 1rem;
+       gap: 1.2rem;
        padding: 1.5rem 0.6rem;
    }
    .shopping-cart-headers{
        padding: 1.4rem 0.4rem;
+       gap: 1rem;
    }
     .shopping-cart-headers h4{
         font-size: 1rem;
@@ -35,6 +36,10 @@
     .item-price,
     .item-subtotal-price{
         font-size: 0.9rem;
+        padding-left: 0.4rem;
+    }
+    .item-name{
+        margin-left: 2rem;
     }
     .quantity-buttons-container button{
         font-size: 1rem;
@@ -44,12 +49,23 @@
     }
     .cuppon-container{
         padding: 0.2rem 0.4rem;
+        margin-bottom: 0.5rem;
     }
     .order-info-container :is(input, select){
-        width: 84%;
+        width: 80%;
+        border: 1px solid black;
     }
     .check-out-button{
         width: 270px;
+    }
+    .cart-input-container label{
+        font-size: 1rem;
+    }
+    .cart-input-container{
+        margin-bottom: 1.2rem;
+    }
+    .item-img-containe{
+        width: 0px;
     }
 }
 
@@ -57,6 +73,9 @@
     .cart-container {
         flex-direction: column;
         align-items: unset;
+    }
+    .item-name {
+        margin-left: 2rem;
     }
 
     .shopping-cart-table {
@@ -71,13 +90,21 @@
     .item-info {
         display: block;
     }
+    .item-name,
+    .item-price,
+    .item-subtotal-price {
+        padding-left: 0.7rem;
+    }
 
     .item-category {
         display: none;
     }
+    .order-info-container :is(input, select) {
+        width: 86%;
+        border: 1px solid black;
+    }
 
     .quantity-buttons-container {
-        flex-direction: column;
         justify-content: center;
         gap: 0.9rem;
     }

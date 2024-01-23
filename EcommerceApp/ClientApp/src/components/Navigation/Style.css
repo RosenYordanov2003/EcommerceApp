@@ -155,9 +155,3 @@ body:has(.fa-moon) .favorite-products-container{
 .mobile-nav{
     display: none;
 }
-.open-nav{
-    font-size: 1.5rem;
-    cursor: pointer;
-    position: absolute;
-    right: 5%;
-}

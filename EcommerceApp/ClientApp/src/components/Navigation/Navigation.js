@@ -7,6 +7,7 @@ import Style from "../Navigation/Style.css"
 import { logout } from "../../services/authService";
 import UserFavoriteProducts from "../Products/UserFavoriteProducts/UserFavoriteProducts";
 import ResponsiveStyle from "../Navigation/ResponsiveStyle.css";
+import MobileNavigation from "../Navigation/MobileNavigation/MobileNavigation";
 
 export default function Navigation() {
 
@@ -25,8 +26,7 @@ export default function Navigation() {
         else {
             setTheme('light');
         }
-
-    },[theme])
+    }, [theme])
 
 
     function handleThemeChange() {
@@ -62,15 +62,15 @@ export default function Navigation() {
                         </li>
                         :
                         <li onMouseOver={() => setFavoriteMenuActivity(true)} onMouseOut={() => setFavoriteMenuActivity(false)} className="user-favorite">
-                        <i className="fa-regular fa-heart"></i>
-                        <p className="user-favorite-count">0</p>
+                            <i className="fa-regular fa-heart"></i>
+                            <p className="user-favorite-count">0</p>
                         </li>
                 }
 
                 <li className="user-cart-container">
                     <Link to="/Cart">
-                    <i className="fa-solid fa-cart-shopping user-cart"></i>
-                    <p className="user-products-count">{context.user?.cart?.cartProducts?.length === undefined ? 0 : context.user?.cart?.cartProducts?.length +  context.user?.cart?.cartShoes?.length }</p>
+                        <i className="fa-solid fa-cart-shopping user-cart"></i>
+                        <p className="user-products-count">{context.user?.cart?.cartProducts?.length === undefined ? 0 : context.user?.cart?.cartProducts?.length + context.user?.cart?.cartShoes?.length}</p>
                     </Link>
                 </li>
                 <li className="logout" onClick={onLogout}>
@@ -101,7 +101,6 @@ export default function Navigation() {
             })
             .catch(error => console.error(error))
     }
-
     return (
         <>
             <nav className="main-nav">
@@ -123,65 +122,11 @@ export default function Navigation() {
                             Women{" "}
                         </Link>
                     </li>
-                    <li onClick={handleThemeChange} className="theme-icon"><i className={`${theme === 'light' ? "fa-regular fa-moon" : "fa-regular fa-sun"}`}></i></li>
+                    <li onClick={handleThemeChange} className="theme-icon"><i className={`${theme === 'dark' ? "fa-regular fa-moon" : "fa-regular fa-sun"}`}></i></li>
                     {listImes}
                 </ul>
             </nav>
-
-
-            <nav className="mobile-nav">
-                <i class="fa-solid fa-bars open-nav"></i>
-                <h2 className="nav-logo">Fashion Store</h2>
-                <ul>
-                    <li>
-                        <Link to="/Home">
-                            Home
-                        </Link>
-                    </li>
-                    <li>
-
-                        <Link to="/Gender/men">
-                            Men{" "}
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/Gender/women">
-                            Women{" "}
-                        </Link>
-                    </li>
-                    {useContext.user !== undefined ?
-                     <>
-                            <li>
-                                <Link to="/Gender/women">
-                                    Favorite Products
-                                </Link>
-                            </li>
-
-                            <li>
-                                <Link to="/Cart">
-                                   Cart
-                                </Link>
-                            </li>
-                            <li className="logout" onClick={onLogout}>
-                                Logout
-                            </li>
-                    </> 
-                        :
-                        <>
-                            <li>
-                                <Link to="/Register">
-                                    Register
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to="/Login">
-                                    Login
-                                </Link>
-                            </li>
-                        </>
-                    }
-                </ul>
-            </nav>
+           <MobileNavigation />
         </>
     );
 }

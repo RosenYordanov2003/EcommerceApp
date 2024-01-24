@@ -256,6 +256,47 @@
             return favoriteProducts;
         }
 
+        public async Task<IEnumerable<ShoesFeatureModel>> LoadUserFavoriteProductsAsync(Guid userId)
+        {
+           IEnumerable<ShoesFeatureModel> shoes = await applicationDbContext.UserFavoriteShoes
+                .Where(fsh => fsh.UserId == userId)
+                .Select(fsh => new ShoesFeatureModel()
+                {
+                    Id = fsh.ShoesId,
+                    Pictures = fsh.Shoes.Pictures.Select(p => new PictureModel() { ImgUrl = p.ImgUrl }).ToArray(),
+                    CategoryName = fsh.Shoes.Category.Name,
+                    IsFavorite = true,
+                    Name = fsh.Shoes.Name,
+                    Price = fsh.Shoes.Price,
+                    StarRating = fsh.Shoes.StarRating
+
+                })
+                .ToArrayAsync();
+
+
+            IEnumerable<ShoesFeatureModel> clothes = await applicationDbContext.UserFavoriteProducts
+           .Where(fsh => fsh.UserId == userId)
+           .Select(fp => new ShoesFeatureModel()
+           {
+               Id = fp.ProductId,
+               Pictures = fp.Product.Pictures.Select(p => new PictureModel() { ImgUrl = p.ImgUrl }).ToArray(),
+               CategoryName = fp.Product.Category.Name,
+               IsFavorite = true,
+               Name = fp.Product.Name,
+               Price = fp.Product.Price,
+               StarRating = fp.Product.StarRating
+
+           })
+           .ToArrayAsync();
+
+            List<ShoesFeatureModel> result = new List<ShoesFeatureModel>();
+
+            result.AddRange(clothes);
+            result.AddRange(shoes);
+
+            return result;
+        }
+
         public async Task RemoveProductFromUserFavoriteListAsync(UserFavoriteProduct userFavoriteProductmodel)
         {
             if (userFavoriteProductmodel.CategoryName.ToLower() == "shoes")

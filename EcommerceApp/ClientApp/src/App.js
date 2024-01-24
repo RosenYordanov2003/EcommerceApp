@@ -16,6 +16,7 @@ import EditReview from "../src/components/EditReviewForm/EditReview";
 import UserCart from "../src/components/UserCart/UserCart";
 import Order from "../src/components/Order/Order";
 import SuccessFullPage from "../src/components/SuccessfullPage/SuccessfullPage";
+import UserFavoriteProducts from "../src/components/UserFavoriteProducts/UserFavoriteProducts";
 
 export default function App() {
 
@@ -63,6 +64,7 @@ export default function App() {
                     <Route path="/Cart" element={<UserCart />} />
                     <Route path="/Order" element={<Order />} />
                     <Route path="/CompletedOrder" element={<SuccessFullPage />} />
+                    <Route path="/FavoriteProducts/:id" element={<UserFavoriteProducts />} />
                 </Routes>
             </UserContext.Provider>
           

@@ -5,6 +5,8 @@
     using EcommerceApp.Core.Models.Shoes;
     using EcommerceApp.Core.Models.Products;
     using Microsoft.AspNetCore.Authorization;
+    using EcommerceApp.Infrastructure.Data.Models;
+    using Microsoft.AspNetCore.Identity;
 
     [ApiController]
     [Produces("application/json")]
@@ -13,10 +15,12 @@
     {
         private readonly IShoesService shoesService;
         private readonly IProductSevice clothesService;
-        public ProductController(IShoesService shoesService, IProductSevice clothesService)
+        private readonly UserManager<User> userManager;
+        public ProductController(IShoesService shoesService, IProductSevice clothesService, UserManager<User> userManager)
         {
             this.shoesService = shoesService;
             this.clothesService = clothesService;
+            this.userManager = userManager;
         }
 
         [HttpGet("GetFeaturedShoes")]
@@ -90,6 +94,21 @@
             await clothesService.RemoveProductFromUserFavoriteListAsync(userFavoriteProductModel);
 
             return Ok();
+        }
+        [HttpGet]
+        [Route("FavoriteProducts")]
+        public async Task<IActionResult> GetUserFavoriteProducts([FromQuery]Guid userId)
+        {
+            User user = await userManager.FindByIdAsync(userId.ToString());
+
+            if (user == null)
+            {
+                return BadRequest();
+            }
+
+            IEnumerable<ShoesFeatureModel> products = await clothesService.LoadUserFavoriteProductsAsync(userId);
+
+            return Ok(new LoadUserFavoriteProductsModel() { UserName = user.UserName, Products = products });
         }
 
         private static Guid? ExtractUserId(string? userId)

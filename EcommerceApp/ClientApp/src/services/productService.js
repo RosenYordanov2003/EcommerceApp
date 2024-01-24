@@ -109,8 +109,17 @@ export function filterUserFavoriteProducts(userFavoriteProducts, productId, cate
             }
         }
     })
-    console.log(result);
     const filteredProducts = result.filter((product) => product !== undefined);
 
     return filteredProducts;
+}
+export async function getUserFavoriteProducts(userId) {
+    const request = await fetch(`${baseUrl}/FavoriteProducts?userId=${userId}`, { credentials: 'include' })
+
+    if (!request.ok) {
+        throw Error(request.Error);
+    }
+    const response = await request.json();
+
+    return response;
 }

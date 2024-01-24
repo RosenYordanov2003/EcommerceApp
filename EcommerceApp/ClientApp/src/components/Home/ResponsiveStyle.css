@@ -17,6 +17,9 @@
     .contact-form .contact-input{
         min-width: 130px;
     }
+    .featured-product-card{
+        align-items: center;
+    }
 }
 
 @media screen and (min-width: 701px) and (max-width:1300px) {

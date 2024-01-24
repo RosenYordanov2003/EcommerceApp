@@ -62,7 +62,7 @@ export default function Navigation() {
                                 <h4 className="favorite-products-title">{context.user?.userFavoriteProducts?.length} Items</h4>
                                 <hr></hr>
                             {userFavoriteProducts}
-                            {context?.user?.userFavoriteProducts?.length > 3 && <div className="view-all-wrapper"><button onClick={() => navigate(`/FavoriteProducts/${context?.user?.id}`)} className="view-all-producs">View All</button></div> }
+                            {context?.user?.userFavoriteProducts?.length > 3 && <div className="view-all-wrapper"><button onClick={() => navigate(`/FavoriteProducts/${context?.user?.id}`)} className="view-all-products">View All</button></div> }
                             </div>
                         </li>
                         :

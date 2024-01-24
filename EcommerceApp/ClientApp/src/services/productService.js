@@ -98,8 +98,6 @@ export function createProductObject(productName, productId, imgUrl, categoryName
 }
 export function filterUserFavoriteProducts(userFavoriteProducts, productId, categoryName) {
     const result = userFavoriteProducts.map((product) => {
-        console.log(`product category - ${product.categoryName}`);
-        console.log(categoryName);
         if (product.productId != productId) {
             return product;
         }

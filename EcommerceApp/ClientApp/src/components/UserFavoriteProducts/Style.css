@@ -1,0 +1,20 @@
+﻿.personal-products-title{
+    font-size: 2rem;
+    text-align: center;
+    text-transform: capitalize;
+    margin: 3rem 0rem 6rem 0rem;
+}
+.favorite-products-section{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4rem;
+    padding: 3rem 0rem;
+    margin-bottom: 3rem;
+}
+.favorite-products-section-wrapper{
+    display: flex;
+    justify-content: center;
+}
+body:has(.fa-moon) .personal-products-title {
+    color: white;
+}

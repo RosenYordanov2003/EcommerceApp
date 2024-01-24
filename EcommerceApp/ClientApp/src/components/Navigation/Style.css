@@ -77,7 +77,7 @@ body{
     align-items: center;
     justify-content: center;
 }
-.view-all-producs {
+.view-all-products {
     color: black;
     background-color: transparent;
     border: none;
@@ -164,6 +164,9 @@ body:has(.fa-moon) {
 }
 body:has(.fa-moon) .favorite-products-container{
     background-color: #343a46
+}
+body:has(.fa-moon) .view-all-products{
+    color: white;
 }
 .menu-icon{
     display: none;

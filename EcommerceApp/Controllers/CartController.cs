@@ -63,7 +63,7 @@
         {
             if (model.Operation == "increase")
             {
-                if (!await productStockService.CheckForProductQuantityAsync(model.ProductCategoryName, model.ProductId, model.Size, model.Quantity + 1))
+                if (!await productStockService.CheckForProductQuantityAsync(model.ProductCategoryName, model.ProductId, model.Size, 1))
                 {
                     return Ok(new { Success = false, Error = "There is no available product quantity" });
                 }

@@ -90,13 +90,16 @@
 
             if (model.ProductCategoryName.ToLower() != "shoes")
             {
-                ProductCartEntity productToModify = await dbContext.ProductCartEntities.FirstAsync(p => p.ProductId == model.ProductId && p.CartId == userCart.Id);
+                ProductCartEntity productToModify = await dbContext.ProductCartEntities.FirstAsync(p => p.ProductId == model.ProductId && 
+                p.CartId == userCart.Id && p.Size == model.Size);
+
                 productToModify.Quantity--;
 
             }
             else
             {
-                ShoesCartEntity productToModify = await dbContext.ShoesCartEntities.FirstAsync(sh => sh.ShoesId == model.ProductId && sh.CartId == userCart.Id);
+                ShoesCartEntity productToModify = await dbContext.ShoesCartEntities.FirstAsync(sh => sh.ShoesId == model.ProductId &&
+                sh.CartId == userCart.Id && sh.Size == int.Parse(model.Size));
                 productToModify.Quantity--;
             }
             await dbContext.SaveChangesAsync();

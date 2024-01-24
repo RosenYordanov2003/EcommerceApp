@@ -1,10 +1,10 @@
-﻿import { useState } from "react";
+﻿import { useState, useEffect } from "react";
 
 import MobileButtonStyle from "./MobileButtonStyle.css";
 
 export default function MobileNavigation() {
 
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(true);
 
 
     return (

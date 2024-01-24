@@ -7,7 +7,7 @@ import Style from "../Navigation/Style.css"
 import { logout } from "../../services/authService";
 import UserFavoriteProducts from "../Products/UserFavoriteProducts/UserFavoriteProducts";
 import ResponsiveStyle from "../Navigation/ResponsiveStyle.css";
-import MobileNavigation from "../Navigation/MobileNavigation/MobileNavigation";
+import MobileNavigation from "./MobileButtonNavigation/MobileButtonNavigation";
 
 export default function Navigation() {
 
@@ -44,9 +44,13 @@ export default function Navigation() {
 
     if (context?.user?.username) {
 
-        const userFavoriteProducts = context?.user?.userFavoriteProducts.map((product) => <UserFavoriteProducts product={product} key={product.id} />);
-
-
+        let userFavoriteProducts;
+        if (context?.user.userFavoriteProducts?.length < 3) {
+            userFavoriteProducts = context?.user?.userFavoriteProducts.map((product) => <UserFavoriteProducts product={product} key={product.id} />);
+        }
+        else {
+            userFavoriteProducts = context?.user?.userFavoriteProducts.slice(0, 3).map((product) => <UserFavoriteProducts product={product} key={product.id} />);
+        }
         listImes =
             <>
                 {
@@ -57,7 +61,8 @@ export default function Navigation() {
                             <div className={`favorite-products-container ${favoriteMenuActivity ? "active-favorite-menu" : "not-active-favorite-menu"}`}>
                                 <h4 className="favorite-products-title">{context.user?.userFavoriteProducts?.length} Items</h4>
                                 <hr></hr>
-                                {userFavoriteProducts}
+                            {userFavoriteProducts}
+                            {context?.user?.userFavoriteProducts?.length > 3 && <div className="view-all-wrapper"><button onClick={() => navigate(`/FavoriteProducts/${context?.user?.id}`)} className="view-all-producs">View All</button></div> }
                             </div>
                         </li>
                         :
@@ -104,6 +109,7 @@ export default function Navigation() {
     return (
         <>
             <nav className="main-nav">
+                <MobileNavigation/>
                 <h2 className="nav-logo">Fashion Store</h2>
                 <ul>
                     <li>
@@ -126,7 +132,6 @@ export default function Navigation() {
                     {listImes}
                 </ul>
             </nav>
-           <MobileNavigation />
         </>
     );
 }

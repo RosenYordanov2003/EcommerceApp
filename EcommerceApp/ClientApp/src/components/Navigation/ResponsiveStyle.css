@@ -1,17 +1,54 @@
 ﻿@media all and (min-width: 280px) and (max-width: 800px){
     .main-nav{
-        display: none;
+        position: relative;
+        top: 0px;
+        left: 0px;
+        overflow: hidden;
+        padding: 0rem;
     }
-    .mobile-nav{
+    .nav-logo {
+        position: absolute;
+        left: 1.5rem;
+        top: 1.5rem;
+    }
+    .main-nav ul {
+        transition: all 0.4s ease-in-out;
+        background-color: black;
+        width: 100%;
+        height: 100%;
+        position: relative;
+        top: calc(0.6rem + 50px);
+        right: 0rem;
         display: flex;
-        padding: 1rem 5%;
-        justify-content: space-between;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+        z-index: 9;
+        padding: 3rem 0.4rem;
     }
-    .mobile-nav ul{
-      list-style: none;
+    .main-nav ul li :is(a, i) {
+       color: white;
+       font-size: 1rem;
     }
-     .mobile-nav ul li a{
-        text-decoration: none;
-        color: black;
-     }
+    .main-nav ul li{
+        color: white;
+    }
+
+    .main-nav:has(.open) ul {
+        animation: hidingMenu;
+        animation-duration: 0.4s;
+        animation-fill-mode: forwards;
+        animation-timing-function: ease-in;
+    }
+
+    .main-nav:has(.closed) ul {
+        animation: slidingLeft;
+        animation-duration: 0.4s;
+        animation-fill-mode: forwards;
+        animation-timing-function: ease-in;
+    }
+   
+    .menu-icon{
+        display: block;
+    }
 }

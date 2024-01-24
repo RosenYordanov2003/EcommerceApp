@@ -55,40 +55,8 @@
     margin: 0px;
     transform: rotate(45deg) translateX(-2px);
 }
-.mobile-nav ul {
-    transition : all 0.4s ease-in-out;
-    background-color: black;
-    width: 50%;
-    height: 100%;
-    position: fixed;
-    top: calc(0.6rem + 50px);
-    right: 0rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
-    z-index: 9;
-    padding: 0.2rem 0.4rem;
+body:has(.fa-moon) .menu-icon-bar{
+    background-color: white;
 }
 
-.mobile-nav:has(.open) ul {
-    animation: hidingMenu;
-    animation-duration: 0.4s;
-    animation-fill-mode: forwards;
-    animation-timing-function: ease-in;
-}
-
-.mobile-nav:has(.closed) ul {
-    animation: slidingLeft;
-    animation-duration: 0.4s;
-    animation-fill-mode: forwards;
-    animation-timing-function: ease-in;
-}
-.mobile-nav ul li a {
-    color: white;
-    display:block;
-}
-.theme-item i{
-    color: white;
-}
 

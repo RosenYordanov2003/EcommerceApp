@@ -72,8 +72,21 @@ body{
   border-radius: 50%;
   opacity: 0.6;
 }
+.view-all-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.view-all-producs {
+    color: black;
+    background-color: transparent;
+    border: none;
+    text-decoration: underline;
+    font-weight: bolder;
+    font-size: 1.1rem;
+}
 
-.main-nav .logout{
+.main-nav .logout {
     cursor: pointer;
 }
 .arrow{
@@ -152,6 +165,6 @@ body:has(.fa-moon) {
 body:has(.fa-moon) .favorite-products-container{
     background-color: #343a46
 }
-.mobile-nav{
+.menu-icon{
     display: none;
 }

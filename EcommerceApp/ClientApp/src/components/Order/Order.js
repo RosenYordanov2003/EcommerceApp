@@ -4,6 +4,7 @@ import OrderProduct from "../Products/OrderProduct/OrderProduct";
 import OrderStyle from "../Order/OrderStyle.css";
 import { finishOrder } from "../../services/cartService";
 import { useNavigate } from "react-router-dom";
+import ResponsiveStyle from "../Order/ResponsiveStyle.css";
 
 export default function Order() {
     const { user, setUser } = useContext(UserContext);
@@ -131,7 +132,7 @@ export default function Order() {
                 <section className="order-price">
                     <div className="order-price-container">
                         <p>Shipping: {shippingObject?.method === "fast" ? "Fast Shipping" : "Standard Shipping"}</p>
-                        <p>${shippingObject?.price?.toFixed(2) ?? 0}</p>
+                        <p>${shippingObject?.price?.toFixed(2) ?? Number(0).toFixed(2)}</p>
                     </div>
                     <div className="order-price-container">
                         <p>Discount:</p>

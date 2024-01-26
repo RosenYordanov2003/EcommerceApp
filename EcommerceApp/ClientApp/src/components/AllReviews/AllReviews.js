@@ -97,7 +97,7 @@ export default function AllReviews() {
                         {notification}
                         {result}
                     </div>
-                    {reviews.length > 0 && <Pager pageNumberChange={pageNumberChange} startPage={pageObject?.startPage} endPage={pageObject?.endPage} />}
+                    {reviews.length > 0 && <Pager pageNumberChange={pageNumberChange} startPage={pageObject?.startPage} endPage={pageObject?.endPage} currentPage={pageNumber } />}
                 </>
             }
         </>

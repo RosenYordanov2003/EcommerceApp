@@ -1,6 +1,6 @@
 ﻿import PagerStyle from "../Pager/PagerStyle.css";
 
-export default function Pager({ startPage, endPage, pageNumberChange }) {
+export default function Pager({ startPage, endPage, pageNumberChange, currentPage }) {
 
     let result = []
     for (let i = startPage; i <=endPage ; i++) {
@@ -12,13 +12,13 @@ export default function Pager({ startPage, endPage, pageNumberChange }) {
 
     return (
         <div className="pager-container">
-            {startPage - 1 > 0 && <button onClick={() => handlePageNumberClick(startPage - 1)} className="previous-button">Previous</button>}
+            {currentPage - 1 >= startPage && <button onClick={() => handlePageNumberClick(currentPage - 1)} className="previous-button">Previous</button>}
 
             <ul className="pager-ul">
-                {result.map((x, index) => <li onClick={() => handlePageNumberClick(x)} key={index}>{x}</li>) }
+                {result.map((x, index) => <li className={x == currentPage ? 'active-page' : ''} onClick={() => handlePageNumberClick(x)} key={index}>{x}</li>) }
             </ul>
 
-            {startPage + 1 <= endPage && <button onClick={() => handlePageNumberClick(startPage + 1)} className="next-button">Next</button> }
+            {currentPage + 1 <= endPage && <button onClick={() => handlePageNumberClick(currentPage + 1)} className="next-button">Next</button> }
         </div>
     )
 }

@@ -1,12 +1,13 @@
 ﻿namespace EcommerceApp.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Authorization;
     using Core.Contracts;
     using Core.Models.Products;
     using Core.Models.Review;
-    using Microsoft.AspNetCore.Authorization;
-    using System.ComponentModel;
+    using Core.Models.Pager;
 
+    [Authorize]
     [ApiController]
     [Produces("application/json")]
     [Route("api/reviews")]
@@ -44,11 +45,14 @@
         [Route("AllReviews")]
         public async Task<IActionResult> AllReviews([FromQuery] int productId, [FromQuery] string productCategory)
         {
-            var reviews = await reviewService.LoadAllReviewsForParticularProductAsync(productId, productCategory);
+            int totalReviewsCount = await reviewService.GetTotalReviewsCountByProductIdAndCategoryNameAsync(productId, productCategory);
 
-            return Ok(reviews);
+            Pager pager = new Pager(totalReviewsCount, 1, 5);
+
+            var reviews = await reviewService.LoadReviewsForParticularProductAsync(productId, productCategory, pager);
+
+            return Ok(new {Reviews = reviews, StartPage = pager.StartPage, EndPage = pager.EndPage});
         }
-        [Authorize]
         [HttpGet]
         [Route("GetReviewToEdit")]
         public async Task<IActionResult> GetReviewToEdit([FromQuery] int reviewId, [FromQuery] Guid userId)
@@ -60,7 +64,6 @@
             var review = await reviewService.GetReviewToEditAsync(reviewId);
             return Ok(review);
         }
-        [Authorize]
         [HttpPost]
         [Route("EditReview")]
         public async Task<IActionResult> EditReview([FromBody] EditReviewModel editReviewModel)
@@ -77,7 +80,6 @@
 
             return Ok();
         }
-        [Authorize]
         [HttpPost]
         [Route("DeleteReview")]
         public async Task<IActionResult> DeleteReview([FromBody] int reviewId)
@@ -89,6 +91,22 @@
             await reviewService.DeleteReviewByIdAsync(reviewId);
 
             return Ok();
+        }
+        [HttpGet]
+        [Route("GetReviewsPerPage")]
+        public async Task<IActionResult> GetReviewsPerPage([FromQuery]int currentPage,[FromQuery] string categoryName, [FromQuery] int productId, [FromQuery] int pageSize)
+        {
+            int totalReviewsCount = await reviewService.GetTotalReviewsCountByProductIdAndCategoryNameAsync(productId, categoryName);
+
+            if (currentPage < 1)
+            {
+                currentPage = 1;
+            }
+            Pager pager = new Pager(totalReviewsCount, currentPage, pageSize);
+
+            var reviews = await reviewService.LoadReviewsForParticularProductAsync(productId, categoryName, pager);
+
+            return Ok(new { Reviews = reviews, StartPage = pager.StartPage, EndPage = pager.EndPage });
         }
     }
 }

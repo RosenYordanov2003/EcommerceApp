@@ -1,5 +1,6 @@
 ﻿import { useEffect, useState } from "react";
 import { loadAllReviewsAboutProduct } from "../../services/reviewService";
+import { getReviewsForParticularPage } from "../../services/reviewService";
 import ReviewCard from "../../components/ReviewCard/ReviewCard";
 import AllReviewsStyle from "../AllReviews/AllReviewsStyle.css";
 import Notification from "../Notification/Notification";
@@ -10,10 +11,10 @@ export default function AllReviews() {
 
     const [reviewsPerPage, setReviewsPerPage] = useState(5);
     const [pageNumber, setPageNumber] = useState(1);
-    const [currentPageReviews, setCurrentPageReviews] = useState([]);
     const [reviews, setReviews] = useState([]);
     const [notification, setNotification] = useState(undefined);
     const [isLoading, setIsLoading] = useState(false);
+    const [pageObject, setPageObject] = useState(undefined);
 
     const pathArray = window.location.pathname.split('/');
     const productId = pathArray[2];
@@ -22,20 +23,21 @@ export default function AllReviews() {
     useEffect(() => {
         loadAllReviewsAboutProduct(productId, productCategory)
             .then(res => {
-                setReviews(res);
-                const startIndex = (pageNumber - 1) * reviewsPerPage;
-                const endIndex = pageNumber * reviewsPerPage;
-                setCurrentPageReviews(res.slice(startIndex, endIndex));
+                setReviews(res.reviews);
+                setPageObject({ startPage: res.startPage, endPage: res.endPage });
             })
             .catch((error) => console.error(error));
     }, [])
 
     useEffect(() => {
-        const startIndex = (pageNumber - 1) * reviewsPerPage;
-        const endIndex = pageNumber * reviewsPerPage;
-        configureLoading();
-        setCurrentPageReviews(reviews.slice(startIndex, endIndex));
+        getReviewsForParticularPage(pageNumber, productCategory, productId, reviewsPerPage == 0 ? 5 : reviewsPerPage)
+            .then(res => {
+                setReviews(res.reviews);
+                setPageObject({ startPage: res.startPage, endPage: res.endPage });
+            })
+            .catch(error => console.error(error));
 
+        configureLoading();
     }, [pageNumber, reviewsPerPage])
 
     function removeReviewById(reviewId) {
@@ -63,7 +65,7 @@ export default function AllReviews() {
         }, 500)
     }
 
-    const reviewsResult = currentPageReviews?.map((review) => <ReviewCard review={review} key={review.id} removeReviewById={removeReviewById} />)
+    const reviewsResult = reviews?.map((review) => <ReviewCard review={review} key={review.id} removeReviewById={removeReviewById} />)
 
     const result = reviews?.length > 0 ? reviewsResult : <p className="no-reviews">This product has no reviews yet</p>
 
@@ -95,7 +97,7 @@ export default function AllReviews() {
                         {notification}
                         {result}
                     </div>
-                    <Pager pageNumberChange={pageNumberChange} totalReviewsLength={reviews.length} currentPage={pageNumber} endPage={Math.ceil(reviews.length / reviewsPerPage)} />
+                    {reviews.length > 0 && <Pager pageNumberChange={pageNumberChange} startPage={pageObject?.startPage} endPage={pageObject?.endPage} />}
                 </>
             }
         </>

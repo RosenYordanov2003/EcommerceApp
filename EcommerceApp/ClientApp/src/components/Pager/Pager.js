@@ -1,9 +1,9 @@
 ﻿import PagerStyle from "../Pager/PagerStyle.css";
 
-export default function Pager({ totalReviewsLength, currentPage, endPage, pageNumberChange }) {
+export default function Pager({ startPage, endPage, pageNumberChange }) {
 
     let result = []
-    for (let i = 1; i <=endPage ; i++) {
+    for (let i = startPage; i <=endPage ; i++) {
         result.push(i);
     }
     function handlePageNumberClick(pageNumber) {
@@ -12,13 +12,13 @@ export default function Pager({ totalReviewsLength, currentPage, endPage, pageNu
 
     return (
         <div className="pager-container">
-            {currentPage - 1 > 0 && <button onClick={() => handlePageNumberClick(currentPage - 1)} className="previous-button">Previous</button>}
+            {startPage - 1 > 0 && <button onClick={() => handlePageNumberClick(startPage - 1)} className="previous-button">Previous</button>}
 
             <ul className="pager-ul">
                 {result.map((x, index) => <li onClick={() => handlePageNumberClick(x)} key={index}>{x}</li>) }
             </ul>
 
-            {currentPage + 1 <= endPage && <button onClick={() => handlePageNumberClick(currentPage + 1)} className="next-button">Next</button> }
+            {startPage + 1 <= endPage && <button onClick={() => handlePageNumberClick(startPage + 1)} className="next-button">Next</button> }
         </div>
     )
 }

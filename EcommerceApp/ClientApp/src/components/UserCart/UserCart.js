@@ -28,8 +28,6 @@ export default function UserCart() {
 
 
 
-    console.log(user);
-
     const items = user?.cart?.cartProducts?.map((item, index) => <UserCartItem handleIncreaseItemPrice={handleIncreaseItemPrice} handleDecreaseItemPrice={handleDecreaseItemPrice} item={item} key={index} />)
 
     const shoesItems = user?.cart?.cartShoes?.map((item, index) => <UserCartItem handleIncreaseItemPrice={handleIncreaseItemPrice} handleDecreaseItemPrice={handleDecreaseItemPrice} item={item} key={index} />)

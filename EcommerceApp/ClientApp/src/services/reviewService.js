@@ -69,3 +69,14 @@ export async function deleteReview(reviewId) {
     }
     return request.ok;
 }
+export async function getReviewsForParticularPage(currentPage, categoryName, productId, pageSize) {
+    const request = await fetch(`${baseUrl}/GetReviewsPerPage?currentPage=${currentPage}&&categoryName=${categoryName}&&productId=${productId}&&pageSize=${pageSize}`, { credentials: 'include' })
+
+    if (!request.ok) {
+        throw Error(request.Error);
+    }
+
+    const response = request.json();
+
+    return response;
+}

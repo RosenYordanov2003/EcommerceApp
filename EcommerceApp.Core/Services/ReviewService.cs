@@ -6,6 +6,7 @@
     using Data;
     using Infrastructure.Data.Models;
     using Models.Review;
+    using Models.Pager;
 
     public class ReviewService : IReviewService
     {
@@ -56,11 +57,30 @@
                 .FirstAsync();
         }
 
-        public async Task<IEnumerable<ReviewModel>> LoadAllReviewsForParticularProductAsync(int productId, string productCategory)
+        public async Task<int> GetTotalReviewsCountByProductIdAndCategoryNameAsync(int productId, string categoryName)
         {
+            if (categoryName.ToLower() == "shoes")
+            {
+                return await dbContext.Shoes.Where(sh => sh.Id == productId)
+                    .Select(sh => sh.Reviews.Count)
+                    .FirstAsync();
+            }
+            return await dbContext.Clothes.Where(cl => cl.Id == productId)
+                  .Select(sh => sh.Reviews.Count)
+                  .FirstAsync();
+        }
+
+        public async Task<IEnumerable<ReviewModel>> LoadReviewsForParticularProductAsync(int productId, string productCategory,
+            Pager pager)
+        {
+            IQueryable<Review> reviews = dbContext.Reviews.AsQueryable();
+            int recordsToSkip = (pager.CurrentPage - 1) * pager.PageSize;
+
             if (productCategory.ToLower() == "shoes")
             {
-                return await dbContext.Reviews.Where(r => r.ShoesId == productId)
+
+                return await reviews
+                    .Where(r => r.ShoesId == productId)
                     .Select(r => new ReviewModel()
                     {
                         Id = r.Id,
@@ -70,20 +90,25 @@
                         StarEvaluation = r.StarЕvaluation,
                         Username = r.User.UserName
                     })
+                    .Skip(recordsToSkip)
+                    .Take(pager.PageSize)
                     .ToArrayAsync();
 
             }
-            return await dbContext.Reviews.Where(r => r.ProductId == productId)
-                  .Select(r => new ReviewModel()
-                  {
-                      Id = r.Id,
-                      UserId = r.UserId,
-                      Content = r.Content,
-                      CreatedOn = r.CreatedOn,
-                      StarEvaluation = r.StarЕvaluation,
-                      Username = r.User.UserName
-                  })
-                  .ToArrayAsync();
+            return await reviews
+                     .Where(r => r.ProductId == productId)
+                     .Select(r => new ReviewModel()
+                     {
+                         Id = r.Id,
+                         UserId = r.UserId,
+                         Content = r.Content,
+                         CreatedOn = r.CreatedOn,
+                         StarEvaluation = r.StarЕvaluation,
+                         Username = r.User.UserName
+                     })
+                     .Skip(recordsToSkip)
+                     .Take(pager.PageSize)
+                     .ToArrayAsync();
         }
 
         public async Task PostPoductReviewAsync(CreateReviewModel createReviewModel)

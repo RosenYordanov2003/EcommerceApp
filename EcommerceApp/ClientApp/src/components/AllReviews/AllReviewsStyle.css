@@ -32,3 +32,7 @@ body:has(.spinner) {
 body:has(.fa-moon) :where(.no-reviews){
     color: white;
 }
+body:has(.fa-moon) .edit-button:hover {
+    background-color: #149dc8;
+    opacity: 0.9;
+}

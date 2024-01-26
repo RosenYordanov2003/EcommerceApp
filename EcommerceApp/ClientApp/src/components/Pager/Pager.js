@@ -15,7 +15,7 @@ export default function Pager({ startPage, endPage, pageNumberChange, currentPag
             {currentPage - 1 >= startPage && <button onClick={() => handlePageNumberClick(currentPage - 1)} className="previous-button">Previous</button>}
 
             <ul className="pager-ul">
-                {result.map((x, index) => <li className={x == currentPage ? 'active-page' : ''} onClick={() => handlePageNumberClick(x)} key={index}>{x}</li>) }
+                {result.map((x, index) => <li className={x === currentPage ? 'active-page' : ''} onClick={() => handlePageNumberClick(x)} key={index}>{x}</li>) }
             </ul>
 
             {currentPage + 1 <= endPage && <button onClick={() => handlePageNumberClick(currentPage + 1)} className="next-button">Next</button> }

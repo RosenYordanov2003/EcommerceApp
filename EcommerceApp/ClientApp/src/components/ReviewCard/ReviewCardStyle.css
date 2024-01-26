@@ -59,3 +59,9 @@
     background-color: red;
     color: white;
 }
+body:has(.fa-moon) .review-card {
+    background-color: #343a46;
+}
+body:has(.fa-moon) :where(.review-username, .review-evaluation > p, .review-content > p){
+    color: white;
+}

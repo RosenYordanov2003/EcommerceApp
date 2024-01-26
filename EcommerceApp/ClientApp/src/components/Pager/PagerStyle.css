@@ -17,13 +17,14 @@
 
 .pager-ul li {
   border-radius: 50%;
-  background-color: black;
-  color: whitesmoke;
+  background-color: white;
+  color: black;
   font-size: 1.1rem;
   padding: 0.7rem 0.9rem;
   cursor: pointer;
   font-weight: bolder;
   transition: 0.4s ease-in;
+  border: 2px solid black;
 }
 
 .pager-ul li:hover,
@@ -42,8 +43,9 @@
   font-weight: bolder;
   transition: 0.4s ease-in;
 }
-.active-page{
-    background-color:azure gray;
+.pager-ul .active-page{
+    background-color: black;
+    color: whitesmoke;
 }
 
 

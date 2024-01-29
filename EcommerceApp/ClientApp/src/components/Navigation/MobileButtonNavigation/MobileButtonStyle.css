@@ -1,33 +1,4 @@
-﻿@keyframes slidingLeft{
-    0%{
-        transform:translateX(150%);
-    }
-    40% {
-        transform: translateX(100%);
-    }
-    70% {
-        transform: translateX(40%);
-    }
-    100% {
-        transform: translateX(0%);
-    }
-}
-@keyframes hidingMenu{
-    20%{
-        transform:translateX(10%);
-    }
-    50% {
-        transform: translateX(30%);
-    }
-    705% {
-        transform: translateX(60%);
-    }
-    100% {
-        transform: translateX(130%);
-    }
-}
-
-.menu-icon-bar {
+﻿.menu-icon-bar {
     width: 30px;
     height: 4px;
     background-color: black;

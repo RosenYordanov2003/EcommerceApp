@@ -77,10 +77,11 @@ export default function Navigation() {
                         <i className="fa-solid fa-cart-shopping user-cart"></i>
                         <p className="user-products-count">{context.user?.cart?.cartProducts?.length === undefined ? 0 : context.user?.cart?.cartProducts?.length + context.user?.cart?.cartShoes?.length}</p>
                     </Link>
-                </li>
-                <li className="logout" onClick={onLogout}>
-                    Logout
-                </li>
+            </li>
+            <li className="user-favorite-mobile"><Link to={`/FavoriteProducts/${context?.user?.id}`}>Favorite Products</Link></li>
+            <li className="user-cart-mobile"><Link to="/Cart">Cart</Link></li>
+
+                <li className="logout" onClick={onLogout}>Logout</li>
             </>
     }
     else {

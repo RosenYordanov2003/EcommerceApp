@@ -4,11 +4,26 @@ import MobileButtonStyle from "./MobileButtonStyle.css";
 
 export default function MobileNavigation() {
 
-    const [isOpen, setIsOpen] = useState(true);
+    const [status, setStatus] = useState('');
 
+    function changeStatus() {
+        if (status === 'not-visible') {
+            setStatus('closed');
+        }
+        else if (status === 'closed') {
+            setStatus('open');
+        }
+        else if(status === 'open') {
+            setStatus('closed');
+        }
+    }
+
+    useEffect(() => {
+        setStatus('not-visible');
+    },[])
 
     return (
-        <div onClick={() => setIsOpen(!isOpen)} className={`menu-icon ${isOpen === true ? 'open' : 'closed'}`}>
+        <div onClick={changeStatus} className={`menu-icon ${status}`}>
             <div className="first-bar menu-icon-bar"></div>
             <div className="second-bar menu-icon-bar"></div>
             <div className="third-bar menu-icon-bar"></div>

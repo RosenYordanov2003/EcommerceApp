@@ -24,8 +24,6 @@ export default function GenderProducts() {
             .then((result) => {
                 const filteredProducts = filter(filters.brands, filters.categories, result.products);
                 const filteredShoes = filter(filters.brands, filters.categories, result.shoes);
-
-
                 setSearchQuery("");
                 setResultObject(result);
                 setProducts(filteredProducts);
@@ -116,7 +114,6 @@ export default function GenderProducts() {
     }
 
     function handleInputChange(e) {
-
         setSearchQuery(e.target.value);
     }
 

@@ -2,6 +2,7 @@
    .order-container{
        flex-direction: column;
        align-items: center;
+       margin-top: 8rem;
    }
    .order-title{
        font-size: 2rem;

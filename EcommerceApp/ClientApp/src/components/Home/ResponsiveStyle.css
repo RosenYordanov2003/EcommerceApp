@@ -20,6 +20,9 @@
     .featured-product-card{
         align-items: center;
     }
+    .feature-title{
+        margin-top: 9rem;
+    }
 }
 
 @media screen and (min-width: 701px) and (max-width:1300px) {

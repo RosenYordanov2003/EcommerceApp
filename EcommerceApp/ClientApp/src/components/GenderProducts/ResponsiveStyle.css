@@ -68,10 +68,10 @@
         padding: min(5rem, 20vh);
         width: 100%;
         transition: all 0.4s ease-in;
-        overflow-y: scroll;
         position: absolute;
+        overflow-y:scroll;
     }
-    #filter-menu-navigation :has(.not-visible-filter-menu) :where(.not-visible-filter-menu, .filter-title){
+    #filter-menu-navigation :has(.not-visible-filter-menu) :where(ul, .filter-title){
         display: none;
     }
     #filter-menu-navigation:has(.not-visible-filter-menu){
@@ -89,7 +89,30 @@
         animation-fill-mode: forwards;
         animation-timing-function: ease-in;
     }
-    .main-container:has(.visible) :is(.products-section, .shoes-title){
+    .main-container:has(.visible) :is(.products-section){
         display: none;
+    }
+}
+@media screen and (min-width: 1252px) and (max-width: 1800px){
+    .products-section {
+        grid-template-columns:repeat(2, 1fr);
+    }
+    #filter-menu-navigation {
+       position: absolute;
+       top: 50px;
+       left: 0;
+    }
+}
+@media screen and (min-width: 1000px) and (max-width: 1250px) {
+    .products-section{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    #filter-menu-navigation {
+        position: absolute;
+        top: 50px;
+        left: 0;
     }
 }

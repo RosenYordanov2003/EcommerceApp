@@ -1,0 +1,33 @@
+﻿@media screen and (min-width: 361px) and (max-width: 700px){
+    .successfull-title {
+        font-size: 1.4rem;
+    }
+
+    .successfull-container {
+        max-width: 350px;
+    }
+    .continue-button{
+        font-size: 1rem;
+        text-align: center;
+        width: 80%;
+    }
+}
+@media screen and (min-width: 280px) and (max-width: 360px) {
+    .successfull-title {
+        font-size: 1.1rem;
+    }
+
+    .successfull-container {
+        max-width: 260px;
+    }
+
+    .continue-button {
+        font-size: 1rem;
+        text-align: center;
+        width: 90%;
+    }
+    .success-content p{
+        font-size: 1rem;
+    }
+}
+

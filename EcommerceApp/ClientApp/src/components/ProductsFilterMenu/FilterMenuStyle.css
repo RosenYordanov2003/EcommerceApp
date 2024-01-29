@@ -31,3 +31,16 @@ input.filter-input{
 hr{
     width: 80%;
 }
+.filter-button{
+    background-image:url("../../../imgs//Filter Menu Ecommerce.jpg");
+    background-position:center;
+    background-size: cover;
+    width: 40px;
+    height: 40px;
+    border: none;
+    display: none;
+    position: absolute;
+    z-index: 1001;
+    top: 10px;
+    left: 10px;
+}

@@ -57,12 +57,13 @@
         flex-direction: column;
         align-items: center;
         justify-content: space-evenly;
-        z-index: 9;
+        z-index: 2000;
         padding: min(30vh, 10rem) 2rem;
         background-color:aqua;
         background-color: hsl(0 100% 0% /0.6);
         overflow: scroll;
-        display: none
+        display: none;
+        height: 100vh;
     }
     .main-nav ul li :is(a, i) {
        color: white;

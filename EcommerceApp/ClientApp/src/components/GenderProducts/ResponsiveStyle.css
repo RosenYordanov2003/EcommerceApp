@@ -1,0 +1,95 @@
+﻿@media screen and (min-width: 280px) and (max-width: 1000px){
+
+    @keyframes slidingRight {
+        0% {
+            transform: translateX(-150%);
+        }
+
+        40% {
+            transform: translateX(-100%);
+        }
+
+        70% {
+            transform: translateX(-40%);
+        }
+
+        100% {
+            transform: translateX(0%);
+        }
+    }
+    @keyframes closing {
+        0% {
+            transform: translateX(0%);
+        }
+
+        40% {
+            transform: translateX(-30%);
+        }
+
+        70% {
+            transform: translateX(-60%);
+        }
+
+        100% {
+            transform: translateX(-150%);
+        }
+    }
+
+    #filter-menu-navigation hr{
+        display: none;
+    }
+    .products-section{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .searchForm {
+        margin-top: 5rem;
+    }
+    .search-input-container{
+        width: 100%;
+    }
+    .search-button,
+    .search{
+        height: 2.5rem;
+    }
+    .filter-button{
+        display: block;
+        margin-bottom: 1rem;
+    }
+    #filter-menu-navigation ul{
+        transition: all 0.4s ease-in;
+    }
+    #filter-menu-navigation {
+        background-color: aliceblue;
+        z-index: 1000;
+        top: 0;
+        padding: min(5rem, 20vh);
+        width: 100%;
+        transition: all 0.4s ease-in;
+        overflow-y: scroll;
+        position: absolute;
+    }
+    #filter-menu-navigation :has(.not-visible-filter-menu) :where(.not-visible-filter-menu, .filter-title){
+        display: none;
+    }
+    #filter-menu-navigation:has(.not-visible-filter-menu){
+         background-color: transparent;
+    }
+    #filter-menu-navigation:has(.visible){
+        animation: slidingRight;
+        animation-duration: 0.4s;
+        animation-fill-mode: forwards;
+        animation-timing-function: ease-in;
+    }
+    #filter-menu-navigation:has(.closed){
+        animation: closing;
+        animation-duration: 0.4s;
+        animation-fill-mode: forwards;
+        animation-timing-function: ease-in;
+    }
+    .main-container:has(.visible) :is(.products-section, .shoes-title){
+        display: none;
+    }
+}

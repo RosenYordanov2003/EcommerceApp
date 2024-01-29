@@ -6,6 +6,7 @@ import GenderProductsStyle from "../GenderProducts/GenderProductsStyle.css";
 import { Grid } from 'react-loader-spinner';
 import ContactContainer from "../ContactContainer/ContactContainer";
 import { UserContext } from "../../Contexts/UserContext";
+import ResponsiveStyle from "../GenderProducts/ResponsiveStyle.css";
 
 export default function GenderProducts() {
     const pathArray = window.location.pathname.split('/');
@@ -163,7 +164,6 @@ export default function GenderProducts() {
 
                 <div>
                     {resultContainer}
-
                 </div>
             </div>
         </>

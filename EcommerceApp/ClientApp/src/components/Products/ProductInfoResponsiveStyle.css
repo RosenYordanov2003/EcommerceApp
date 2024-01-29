@@ -1,4 +1,4 @@
-﻿@media screen and (min-width: 280px) and (max-width: 700px) {
+﻿@media screen and (min-width: 320px) and (max-width: 700px) {
     .productinfo-card-container {
         margin-top: 8rem;
         flex-direction: column;
@@ -48,7 +48,7 @@
         padding: 0;
         width: 40px;
         height: 40px;
-        padding: 0.3rem;
+        padding: 1rem;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -59,4 +59,196 @@
         align-items: center;
         justify-content: center;
     }
+    .review-title{
+        font-size: 1.3rem;
+        text-align: center;
+        margin: 2.7rem 0rem;
+    }
+    .evaluation-container{
+       justify-content: center;
+    }
+    .product-evaluation{
+        font-size: 2rem;
+    }
+    .review-button{
+       width: 90%;
+       text-align: center;
+    }
+    .write-title{
+        font-size: 1.6rem;
+        text-align: center;
+        margin: 2.2rem 0rem;
+    }
+    .write-review-star-container{
+        flex-direction: column;
+    }
+    .review-form{
+        align-items: center;
+    }
+    textarea{
+        width: 100%;
+    }
+    .write-review-wrapper{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 }
+
+
+@media screen and (min-width: 260px) and (max-width: 320px) {
+    .productinfo-card-container {
+        margin-top: 8rem;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .productinfo-img-container {
+        max-width: 250px;
+    }
+
+    .product-info-title {
+        font-size: 1.2rem;
+    }
+
+    .size-ul {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .order-count {
+        flex-direction: column;
+    }
+
+    .all-reviews-button {
+        width: 150px;
+    }
+
+    .productinfo-card-container hr {
+        width: 100%;
+    }
+
+    .product-section-header {
+        flex-direction: column-reverse;
+        justify-content: center;
+    }
+
+    .active-information {
+        margin: 0;
+    }
+
+    .related-products-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .productinfo-about-container {
+        max-width: 90%;
+    }
+
+    .add-to-cart {
+        margin-bottom: 2rem;
+    }
+
+    .size-item {
+        text-align: center;
+        padding: 0;
+        width: 40px;
+        height: 40px;
+        padding: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .product-details {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .review-title {
+        font-size: 1.3rem;
+        text-align: center;
+        margin: 2.7rem 0rem;
+    }
+
+    .evaluation-container {
+        justify-content: center;
+    }
+
+    .product-evaluation {
+        font-size: 2rem;
+    }
+
+    .review-button {
+        width: 90%;
+        text-align: center;
+    }
+
+    .write-title {
+        font-size: 1.6rem;
+        text-align: center;
+        margin: 2.2rem 0rem;
+    }
+
+    .write-review-star-container {
+        flex-direction: column;
+    }
+
+    .review-form {
+        align-items: center;
+    }
+    .review-form{
+        width: 94%;
+    }
+    .review-form input{
+        width: 100%;
+    }
+    textarea {
+        width: 100%;
+    }
+    .write-review-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .submit-review-button{
+        width: 90%;
+    }
+}
+@media screen and (min-width: 701px) and (max-width: 1000px){
+    .productinfo-card-container {
+        margin-top: 8rem;
+    }
+    .write-review-star-container{
+        flex-direction: column;
+    }
+    .write-title,
+    .review-title{
+        text-align: center;
+        margin: 2.2rem 0rem;
+    }
+    .related-products-container{
+        grid-template-columns:repeat(2, 1fr);
+    }
+    .size-ul {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .size-item {
+        text-align: center;
+        padding: 0;
+        width: 44px;
+        height: 44px;
+        padding: 1.2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+

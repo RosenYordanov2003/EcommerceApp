@@ -72,7 +72,9 @@ export default function ReviewContainer({ id, category, product, updateProduct }
                 <div className="divider">/</div>
                 <p className="reviews-count">{product.totalReviewsCount} Reviews</p>
             </div>
-            <button className="review-button">Write Review</button>
+            <div className="write-review-wrapper">
+                <button className="review-button">Write Review</button>
+            </div>
             <h2 className="write-title">Write Review</h2>
             <div className="write-review-star-container">
                 <p>Your evaluation</p>

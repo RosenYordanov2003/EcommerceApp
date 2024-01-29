@@ -36,13 +36,16 @@
         }
     }
 
-
     .main-nav {
         position: fixed;
         padding: 0rem;
         height: 5rem;
         background-color: aliceblue;
         top: 0;
+        z-index: 2000;
+    }
+    body:has(.fa-moon) .main-nav {
+        background-color: #343a46;
     }
     .nav-logo {
         position: absolute;
@@ -57,7 +60,6 @@
         flex-direction: column;
         align-items: center;
         justify-content: space-evenly;
-        z-index: 2000;
         padding: min(30vh, 10rem) 2rem;
         background-color:aqua;
         background-color: hsl(0 100% 0% /0.6);

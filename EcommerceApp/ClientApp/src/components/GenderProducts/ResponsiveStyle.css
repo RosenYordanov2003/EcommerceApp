@@ -71,7 +71,7 @@
         position: absolute;
         overflow-y:scroll;
     }
-    #filter-menu-navigation :has(.not-visible-filter-menu) :where(ul, .filter-title){
+    .main-container:has(.not-visible-filter-menu) :is(#filter-menu-navigation ul, .filter-title){
         display: none;
     }
     #filter-menu-navigation:has(.not-visible-filter-menu){
@@ -92,7 +92,11 @@
     .main-container:has(.visible) :is(.products-section){
         display: none;
     }
+    body:has(.fa-moon) #filter-menu-navigation {
+        background-color: #343a46;
+    }
 }
+
 @media screen and (min-width: 1252px) and (max-width: 1800px){
     .products-section {
         grid-template-columns:repeat(2, 1fr);

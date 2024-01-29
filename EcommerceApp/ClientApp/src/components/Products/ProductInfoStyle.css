@@ -342,15 +342,15 @@ textarea {
     position: relative;
 }
 .related-products-title::after{
-    position: absolute;
     content: "";
-    width: 30px;
-    height: 30px;
+    height: 38px;
     background-color: mediumpurple;
+    width: 38px;
+    position: absolute;
+    top: -18px;
+    left: -22px;
     border-radius: 50%;
-    top: 5px;
-    left: -2%;
-    opacity: 0.7;
+    opacity: 0.6;
 }
 .all-reviews-button {
     margin-top: 2.5rem;

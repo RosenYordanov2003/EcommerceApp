@@ -3,6 +3,7 @@ import { getUserFavoriteProducts } from "../../services/productService";
 import FeaturedProduct from "../Products/FeaturedProduct";
 import Style from "../UserFavoriteProducts/Style.css";
 import { UserContext } from "../../Contexts/UserContext";
+import ResponsiveStyle from "../UserFavoriteProducts/ResponsiveStyle.css";
 import { Grid } from 'react-loader-spinner';
 
 export default function UserFavoriteProducts() {

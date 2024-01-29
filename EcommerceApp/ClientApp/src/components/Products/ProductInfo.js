@@ -8,6 +8,7 @@ import { Grid } from 'react-loader-spinner';
 import { UserContext } from "../../Contexts/UserContext";
 import { addToCartProduct } from "../../services/cartService";
 import Notification from "../Notification/Notification";
+import ProductInfoResponsiveStyle from "../Products/ProductInfoResponsiveStyle.css";
 
 export default function ProductInfo() {
 

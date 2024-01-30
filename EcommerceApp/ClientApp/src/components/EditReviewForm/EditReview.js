@@ -3,6 +3,7 @@ import { getReviewToEdit, editReview } from "../../services/reviewService";
 import { UserContext } from "../../Contexts/UserContext";
 import EditReviewStyle from "../EditReviewForm/EditReviewStyle.css";
 import Notification from "../Notification/Notification";
+import EditReviewResponsiveStyle from "../EditReviewForm/EditReviewResponsiveStyle.css";
 
 export default function EditReview() {
 

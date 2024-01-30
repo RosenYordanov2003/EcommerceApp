@@ -1,0 +1,27 @@
+﻿@media screen and (min-width: 280px) and (max-width: 700px){
+    .review-evaluation{
+        flex-direction: column-reverse;
+    }
+    .review-username{
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+    .review-content{
+        margin: 1.1rem 0rem;
+    }
+    .pager-container{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .pager-ul{
+        flex-direction: column;
+        padding: 0;
+    }
+    .comments-per-page{
+        margin-top: 10rem;
+    }
+    .comments-per-page > h4{
+        font-size: 1.1rem;
+    }
+}

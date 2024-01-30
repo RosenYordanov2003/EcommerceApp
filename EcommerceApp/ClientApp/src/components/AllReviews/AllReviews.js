@@ -3,6 +3,7 @@ import { loadAllReviewsAboutProduct } from "../../services/reviewService";
 import { getReviewsForParticularPage } from "../../services/reviewService";
 import ReviewCard from "../../components/ReviewCard/ReviewCard";
 import AllReviewsStyle from "../AllReviews/AllReviewsStyle.css";
+import AllReviewsResponsiveStyle from "../AllReviews/AllReviewsResponsiveStyle.css";
 import Notification from "../Notification/Notification";
 import Pager from "../Pager/Pager";
 import { Grid } from 'react-loader-spinner';

@@ -75,12 +75,15 @@
 
         public async Task CreateUserCartAsync(Guid userId)
         {
-            Cart userCart = new Cart()
+            if (!await CheckIfUserCartExistAsync(userId))
             {
-                UserId = userId,
-            };
-            await dbContext.Carts.AddAsync(userCart);
-            await dbContext.SaveChangesAsync();
+                Cart userCart = new Cart()
+                {
+                    UserId = userId,
+                };
+                await dbContext.Carts.AddAsync(userCart);
+                await dbContext.SaveChangesAsync();
+            }
         }
 
         public async Task DecreaseProductCartQuantityAsync(ModifyProductCartQuantityModel model)
@@ -90,7 +93,7 @@
 
             if (model.ProductCategoryName.ToLower() != "shoes")
             {
-                ProductCartEntity productToModify = await dbContext.ProductCartEntities.FirstAsync(p => p.ProductId == model.ProductId && 
+                ProductCartEntity productToModify = await dbContext.ProductCartEntities.FirstAsync(p => p.ProductId == model.ProductId &&
                 p.CartId == userCart.Id && p.Size == model.Size);
 
                 productToModify.Quantity--;
@@ -181,6 +184,10 @@
 
             }
             await dbContext.SaveChangesAsync();
+        }
+        private async Task<bool> CheckIfUserCartExistAsync(Guid userId)
+        {
+            return await dbContext.Carts.AnyAsync(c => c.UserId == userId);
         }
     }
 }

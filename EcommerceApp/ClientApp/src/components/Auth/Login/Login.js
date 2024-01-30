@@ -28,7 +28,8 @@ export default function Login() {
                 const user = {
                     username: res.username,
                     id: res.id,
-                    userFavoriteProducts: res.userFavoriteProducts
+                    userFavoriteProducts: res.userFavoriteProducts,
+                    cart: res.cartModel
                 };
                 setUser(user);
                 navigate('/Home');

@@ -2,6 +2,7 @@ using EcommerceApp.Config;
 using EcommerceApp.Core.Contracts;
 using EcommerceApp.Core.Services;
 using EcommerceApp.Data;
+using EcommerceApp.Extensions;
 using EcommerceApp.Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -27,7 +28,7 @@ builder.Services.AddDefaultIdentity<User>(options =>
     options.Lockout.MaxFailedAccessAttempts = 5;
     options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
 })
-     .AddRoles<IdentityRole<Guid>>()
+    .AddRoles<IdentityRole<Guid>>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 
@@ -123,6 +124,8 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseCors("EcommercePolicy");
+app.SeedAdministrator("ED842FDC-C71B-4FBC-8DF5-6F97CB73D622");
+
 
 //app.MapControllerRoute(
 //    name: "default",

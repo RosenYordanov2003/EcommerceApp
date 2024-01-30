@@ -17,7 +17,7 @@
 
         public async Task<bool> CheckIfRefreshTokenIsActiveAsync(string refreshToken)
         {
-            RefreshToken refreshTokenToCheck = await applicationDbContext.RefreshTokens.FirstOrDefaultAsync(rt => rt.Token == refreshToken);
+            RefreshToken refreshTokenToCheck = await applicationDbContext.RefreshTokens.FirstAsync(rt => rt.Token == refreshToken);
 
             return refreshTokenToCheck.ExpireData > DateTime.UtcNow;
         }

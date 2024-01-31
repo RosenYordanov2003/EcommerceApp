@@ -1,10 +1,23 @@
-﻿import AsideMenuStyle from "../AsideMenu/AsideMenuStyle.css";
-import { useState } from "react";
-
+﻿import { useState, useContext } from "react";
+import { logout } from "../../../services/authService";
+import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../../Contexts/UserContext";
+import AsideMenuStyle from "../AsideMenu/AsideMenuStyle.css";
 
 export default function AsideMenu() {
 
     const [activeElementIndex, setActiveElementIndex] = useState(undefined);
+    const { user, setUser } = useContext(UserContext);
+    const navigate = useNavigate();
+
+    function handleLogout() {
+        logout()
+            .then(() => {
+                setUser(undefined);
+                navigate("/Home");
+            })
+            .catch((error) => console.error(error));
+    }
 
     return (
         <aside>
@@ -29,7 +42,7 @@ export default function AsideMenu() {
                     <p className="icon-text-content">Shoes</p>
                 </div>
                 <div onClick={() => setActiveElementIndex(3)} className={`icon-container ${activeElementIndex === 3 ? "active-icon-container" : ""}`}>
-                    <span class="material-symbols-outlined">
+                    <span className="material-symbols-outlined">
                         person
                     </span>
                     <p className="icon-text-content">Customers</p>
@@ -40,7 +53,7 @@ export default function AsideMenu() {
                     </span>
                     <p className="icon-text-content">Add Product</p>
                 </div>
-                <div className="icon-container">
+                <div onClick={handleLogout} className="icon-container">
                     <span className="material-symbols-outlined">
                         logout
                     </span>

@@ -5,12 +5,12 @@
 }
 body:has(.dashboard-container) #root{
     display: grid;
-    grid-template-columns: 22rem auto 15rem;
+    grid-template-columns: 22rem auto;
     margin: 0 auto;
     gap: 5rem;
 }
 .dashboard-container{
-    margin-top: 2rem;
+    margin: 2rem 3rem 0rem 0rem;
 }
 .statistic-container{
     margin-top: 6rem;
@@ -70,4 +70,14 @@ body:has(.dashboard-container) #root{
     display: flex;
     align-items: center;
     justify-content: center;
+}
+input[type="date"]{
+   border: none;
+   padding: 0.5rem 1rem;
+   border-radius: 0.4rem;
+   background-color: #7d8da1;
+   margin-top: 3rem;
+}
+.statistic-tripple-container {
+    grid-template-columns: repeat(3, 1fr);
 }

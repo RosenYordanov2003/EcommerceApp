@@ -56,6 +56,7 @@ export default function App() {
                 <Routes>
                     <Route path="/Dashboard" element={<Dashboard />} />
                     <Route path="/" element={<Dashboard />} />
+                    <Route path="/Home" element={<Dashboard />} />
                 </Routes>
             </>
     }

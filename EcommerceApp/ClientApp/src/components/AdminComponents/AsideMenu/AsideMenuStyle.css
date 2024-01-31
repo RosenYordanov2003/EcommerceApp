@@ -4,9 +4,10 @@
     gap: 1rem;
     margin-left: 1rem;
     padding: 0.8rem 1rem;
-    width: 50%;
+    width: 100%;
     transition: all 0.5s ease;
     cursor: pointer;
+    width: 70%;
 }
 .icon-container:not(:last-child){
     margin-bottom: 4.5rem;
@@ -19,7 +20,6 @@
 }
 .asside-wrapper{
     height: 100vh;
-    width: 30%;
     margin: 3rem 0rem;
     position: relative;
     top: 3rem;

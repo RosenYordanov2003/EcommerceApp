@@ -174,16 +174,9 @@
             byte[] key = Encoding.ASCII.GetBytes(jwtConfig.Secret);
             SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(new[]
-                {
-                    new Claim("Id", user.Id.ToString()),
-                    new Claim(JwtRegisteredClaimNames.Email, user.Email),
-                    new Claim(JwtRegisteredClaimNames.Sub, user.Email),
-                    new Claim(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString())
-                }),
+                Subject = new ClaimsIdentity(await GetAllClaims(user)),
                 Expires = DateTime.UtcNow.AddMinutes(15),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-
             };
             SecurityToken token = jwtTokenHandler.CreateToken(tokenDescriptor);
             string jwtToken = jwtTokenHandler.WriteToken(token);
@@ -199,6 +192,30 @@
                 Success = true,
 
             };
+        }
+        private async Task<List<Claim>> GetAllClaims(User user)
+        {
+            var claims = new List<Claim>()
+            {
+                  new Claim("Id", user.Id.ToString()),
+                    new Claim(JwtRegisteredClaimNames.Email, user.Email),
+                    new Claim(JwtRegisteredClaimNames.Sub, user.Email),
+                    new Claim(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString())
+            };
+
+            var userRoles = await userManager.GetRolesAsync(user);
+            var userClaims = await userManager.GetClaimsAsync(user);
+
+            claims.AddRange(userClaims);
+
+            foreach (var userRole in userRoles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, userRole));
+
+                //TODO Add ROLE CLAIMS !!
+            }
+
+            return claims;
         }
 
         private void SetRefreshToken(RefreshToken refreshToken)

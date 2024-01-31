@@ -95,7 +95,9 @@
                         await cartService.CreateUserCartAsync(user.Id);
                     }
                     var userCart = await cartService.GetUserCartByUserIdAsync(user.Id);
-                    return Ok(new LoginResponse() { Username = loginModel.Username, Id = user.Id, UserFavoriteProducts = userFavoriteProducts, CartModel = userCart });
+                    IList<string> roles = await userManager.GetRolesAsync(user);
+
+                    return Ok(new LoginResponse() { Username = loginModel.Username, Id = user.Id, UserFavoriteProducts = userFavoriteProducts, CartModel = userCart, Roles = roles.ToArray() });
                 }
             }
             return BadRequest(new { Error = "Username does not exist!" });
@@ -130,8 +132,9 @@
 
             var userFavoriteProducts = await productSevice.GetUserFavoriteProductsAsync(user.Id);
             var userCart = await cartService.GetUserCartByUserIdAsync(user.Id);
+            IList<string> roles = await userManager.GetRolesAsync(user);
 
-            return Ok(new LoginResponse() { Username = user.UserName, Id = user.Id, UserFavoriteProducts = userFavoriteProducts, CartModel = userCart });
+            return Ok(new LoginResponse() { Username = user.UserName, Id = user.Id, UserFavoriteProducts = userFavoriteProducts, CartModel = userCart, Roles = roles.ToArray()});
         }
         [HttpGet]
         [Route("Logout")]

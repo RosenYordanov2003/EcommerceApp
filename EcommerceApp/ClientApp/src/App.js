@@ -17,6 +17,8 @@ import UserCart from "../src/components/UserCart/UserCart";
 import Order from "../src/components/Order/Order";
 import SuccessFullPage from "../src/components/SuccessfullPage/SuccessfullPage";
 import UserFavoriteProducts from "../src/components/UserFavoriteProducts/UserFavoriteProducts";
+import Dashboard from "../src/components/AdminComponents/Dashboard/Dashboard";
+import AsideMenu from "../src/components/AdminComponents/AsideMenu/AsideMenu";
 
 export default function App() {
 
@@ -35,6 +37,7 @@ export default function App() {
                         id: res.id,
                         userFavoriteProducts: res.userFavoriteProducts,
                         cart: res.cartModel,
+                        roles: res.roles
                     };
                     setUser(user);
                 })
@@ -44,31 +47,49 @@ export default function App() {
         }
     }, [])
 
-   
+    let result;
+
+    if (user?.roles.includes('Administrator')) {
+        result =
+            <>
+                <AsideMenu/>
+                <Routes>
+                    <Route path="/Dashboard" element={<Dashboard />} />
+                    <Route path="/" element={<Dashboard />} />
+                </Routes>
+            </>
+    }
+    else {
+        result = <>
+            <Navigation />
+            <Routes>
+                <Route path="/Home" element={<Home categories={categories} isActive={isActive} />} />
+                <Route path="/Register" element={<Register />} />
+                <Route path="/Login" element={<Login />} />
+                <Route path="/Gender" element={<GenderProducts />}>
+                    <Route path=":gender" element={<GenderProducts />} />
+                </Route>
+                <Route path="/ProductAbout/:productid/:category" element={<ProductInfo />} />
+                <Route path="/" element={<Home categories={categories} isActive={isActive} />} />
+                <Route path="/AllReviews/:id/:category" element={<AllReviews />} />
+                <Route path="/Review/:id" element={<EditReview />} />
+                <Route path="/Cart" element={<UserCart />} />
+                <Route path="/Order" element={<Order />} />
+                <Route path="/CompletedOrder" element={<SuccessFullPage />} />
+                <Route path="/FavoriteProducts/:id" element={<UserFavoriteProducts />} />
+            </Routes>
+        </>
+    }
+
     return (
         <>
             <UserContext.Provider value={{ user, setUser }}>
-                
-                <Navigation/>
-                <RefreshToken/>
-                <Routes>
-                    <Route path="/Home" element={<Home categories={categories} isActive={isActive} />} />
-                    <Route path="/Register" element={<Register />} />
-                    <Route path="/Login" element={<Login />} />
-                    <Route path="/Gender" element={<GenderProducts/>}>
-                        <Route path=":gender" element={<GenderProducts />} />
-                    </Route>
-                    <Route path="/ProductAbout/:productid/:category" element={<ProductInfo/>}/>
-                    <Route path="/" element={<Home categories={categories} isActive={isActive} />} />
-                    <Route path="/AllReviews/:id/:category" element={<AllReviews />} />
-                    <Route path="/Review/:id" element={<EditReview />} />
-                    <Route path="/Cart" element={<UserCart />} />
-                    <Route path="/Order" element={<Order />} />
-                    <Route path="/CompletedOrder" element={<SuccessFullPage />} />
-                    <Route path="/FavoriteProducts/:id" element={<UserFavoriteProducts />} />
-                </Routes>
+
+                <RefreshToken />
+                {result}
+
             </UserContext.Provider>
-          
-       </>
+
+        </>
     )
 }

@@ -29,8 +29,10 @@ export default function Login() {
                     username: res.username,
                     id: res.id,
                     userFavoriteProducts: res.userFavoriteProducts,
-                    cart: res.cartModel
+                    cart: res.cartModel,
+                    roles: res.roles
                 };
+                console.log(res);
                 setUser(user);
                 navigate('/Home');
 

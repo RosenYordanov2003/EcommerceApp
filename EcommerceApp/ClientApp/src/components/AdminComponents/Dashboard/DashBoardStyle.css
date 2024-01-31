@@ -81,3 +81,28 @@ input[type="date"]{
 .statistic-tripple-container {
     grid-template-columns: repeat(3, 1fr);
 }
+.statistic-title{
+    font-weight: bold;
+    font-size: 2.4rem;
+    margin-bottom: 1.2rem;
+}
+.statistic-result{
+    font-weight: bolder;
+    font-size: 1.3rem;
+}
+.orders-container table {
+    border-collapse: separate;
+    margin-top: 6rem;
+    background-color: white;
+    width: 100%;
+    border-radius: 2rem;
+    padding: 1.8rem;
+    text-align: center;
+}
+.orders-container table table tr td{
+   padding: 1.8rem;
+}
+.orders-container table tbody tr:not(:last-child) td{
+    height: 2.8rem;
+    border-bottom: 1px solid black;
+}

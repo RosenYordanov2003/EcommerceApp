@@ -35,9 +35,9 @@ body:has(.auth-form) {
     overflow-x: hidden;
 }
 
-    body:has(.auth-form) .main-nav ul li a {
-        color: white;
-    }
+body:has(.auth-form) .main-nav ul li a {
+    color: white;
+}
 
 .auth-form-container {
     width: 100vw;
@@ -61,6 +61,12 @@ body:has(.auth-form) {
     animation: changingBorderColors 2s infinite;
     animation-timing-function: ease-in;
 }
+.auth-form label{
+    transition: all 0.4s ease;
+}
+.auth-form .active-label{
+     transform: translateY(-7px);
+}
 
 .input-container {
     display: flex;
@@ -80,11 +86,6 @@ body:has(.auth-form) {
 
 .auth-form input {
     padding: 0.2rem;
-}
-
-.active-label {
-    transform: translateY(-7px);
-    transition: 0.3s ease all;
 }
 
 .auth-form .submit-btn {

@@ -38,19 +38,19 @@ export default function Register() {
 
                 <section className="input-container">
                     <label htmlFor="username">Username</label>
-                    <input name="username" onBlur={onInputBlur} onFocus={onInputFouc} id="username" type="text" autoComplete="username" aria-required="true" placeholder="Enter username..." />
+                    <input id="username" onBlur={onInputBlur} onFocus={onInputFouc} id="username" type="text" autoComplete="username" aria-required="true" placeholder="Enter username..." />
                 </section>
                 <section className="input-container">
                     <label htmlFor="email">Email</label>
-                    <input name="email" onBlur={onInputBlur} onFocus={onInputFouc} id="email" type="text" autoComplete="email" aria-required="true" placeholder="Enter email..." />
+                    <input id="email" onBlur={onInputBlur} onFocus={onInputFouc} id="email" type="text" autoComplete="email" aria-required="true" placeholder="Enter email..." />
                 </section>
                 <section className="input-container">
                     <label htmlFor="password">Password</label>
-                    <input name="password" onBlur={onInputBlur} onFocus={onInputFouc} id="password" type="password" autoComplete="password" aria-required="true" placeholder="Enter password" />
+                    <input id="password" onBlur={onInputBlur} onFocus={onInputFouc} id="password" type="password" autoComplete="password" aria-required="true" placeholder="Enter password" />
                 </section>
                 <section className="input-container">
                     <label htmlFor="confirm-password">Confirm Password</label>
-                    <input name="confirm-password" onBlur={onInputBlur} onFocus={onInputFouc} id="confirm-password" type="password" placeholder="Repeat password..." aria-required="true" />
+                    <input id="confirm-password" onBlur={onInputBlur} onFocus={onInputFouc} id="confirm-password" type="password" placeholder="Repeat password..." aria-required="true" />
                 </section>
                 <button className="submit-btn" type="submit">Register</button>
             </form>

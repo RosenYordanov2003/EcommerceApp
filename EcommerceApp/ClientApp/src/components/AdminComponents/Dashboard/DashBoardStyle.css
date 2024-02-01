@@ -45,22 +45,22 @@ body:has(.dashboard-container) #root{
 .circle-container{
     position: relative;
     border-radius: 50%;
-    width: 5.76rem;
-    height: 5.76rem;
+    width: 7rem;
+    height: 7rem;
 }
 .circle-container svg{
     width: 7rem;
     height: 7rem;
 }
-.circle-container svg circle{
+.round {
+    transition: all 1s ease-in-out;
     fill: none;
     stroke: #7b81e5;
-    stroke-width: 14;
+    stroke-width: 8;
     stroke-linecap: round;
-    transform: translate(5px, 5px);
-    stroke-dasharray: 110;
-    stroke-dashoffset: 92;
+    stroke-dasharray: 0 999;
 }
+
 .statistic-percentage{
     position: absolute;
     top: 0;
@@ -101,6 +101,7 @@ input[type="date"]{
     border-radius: 2rem;
     padding: 1.8rem;
     text-align: center;
+    box-shadow: 0rem 2rem 3rem rgba(132, 139, 200, 0.18);
 }
 .orders-container table tbody tr td{
    padding: 1.8rem;
@@ -134,5 +135,19 @@ input[type="date"]{
 }
 .orders-container table tbody tr .delivered-status {
     color: #7b81e5;
+}
+.show-all-wrapper{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2.5rem 0rem;
+}
+.show-all {
+    background-color: transparent;
+    color: #7b81e5;
+    border: none;
+    font-weight: bolder;
+    font-size: 1.1rem;
 }
 

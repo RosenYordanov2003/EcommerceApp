@@ -24,13 +24,15 @@
                 .Where(order => order.FinishedOn.Month == currentMoth)
                 .SumAsync(o => o.Price);
 
-            dashboardModel.Orders =await dbContext.Orders
+            dashboardModel.Orders = await dbContext.Orders
+                .OrderByDescending(order => order.FinishedOn)
                 .Select(order => new OrderModel()
                 {
                     Id = order.Id,
-                    Status = order.FinishedOn.AddDays(order.ShippingMethod == "fast" ? 2 : 4) < DateTime.Now ? "Pending" : "Delivered",
+                    Status = order.FinishedOn.AddDays(order.ShippingMethod == "fast" ? 2 : 4) < DateTime.Now ? "Delivered" : "Pending",
                     Price = order.Price
                 })
+                .Take(7)
                 .ToListAsync();
 
             if (particularDate.HasValue)

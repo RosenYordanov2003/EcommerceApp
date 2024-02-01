@@ -90,19 +90,49 @@ input[type="date"]{
     font-weight: bolder;
     font-size: 1.3rem;
 }
+.orders-container{
+    margin-top: 5rem;
+}
 .orders-container table {
     border-collapse: separate;
-    margin-top: 6rem;
+    margin-top: 5rem;
     background-color: white;
     width: 100%;
     border-radius: 2rem;
     padding: 1.8rem;
     text-align: center;
 }
-.orders-container table table tr td{
+.orders-container table tbody tr td{
    padding: 1.8rem;
+   color: #7d8da1;
+   font-size: 1.2rem;
+}
+.orders-container table tbody tr td:last-child{
+   padding: 1.8rem;
+   color: #7b81e5;
+   font-weight: bolder;
+   text-decoration: underline;
+   font-size: 1.25rem;
+   cursor: pointer;
+   transition: all 0.4s ease;
+}
+.orders-container table tbody tr td:last-child:hover{
+    opacity: 0.8;
 }
 .orders-container table tbody tr:not(:last-child) td{
     height: 2.8rem;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #7d8da1;
 }
+.orders-title{
+    text-align: center;
+}
+.orders-container table thead tr th{
+    font-size: 1.3rem;
+}
+.orders-container table tbody tr .pending-status{
+    color: #ffbb55;
+}
+.orders-container table tbody tr .delivered-status {
+    color: #7b81e5;
+}
+

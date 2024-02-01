@@ -1,6 +1,7 @@
 ﻿import { useState, useEffect } from "react";
 import DashBoardStyle from "../Dashboard/DashBoardStyle.css";
 import { loadDashboard } from "../../../services/dashboardService";
+import OrderTableRows from "../OrderTableRows/OrderTableRows";
 
 export default function Dashboard() {
 
@@ -9,13 +10,11 @@ export default function Dashboard() {
 
     useEffect(() => {
         loadDashboard(date)
-            .then((res) => {
-                console.log(res);
-                setDashboardObject(res);
-            })
+            .then((res) => setDashboardObject(res))
             .catch((error) => console.error(error));
     }, [date])
 
+    const ordersResult = dashboardObject?.orders.map((order) => <OrderTableRows order={order} key={order.id }/>)
 
     return (
             <div className="dashboard-container">
@@ -79,24 +78,7 @@ export default function Dashboard() {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                           <td>g94gjfer</td>
-                           <td>Pending</td>
-                           <td>$100.00</td>
-                           <td>Details</td>
-                        </tr>
-                        <tr>
-                            <td>g94gjfer</td>
-                            <td>Pending</td>
-                            <td>$100.00</td>
-                            <td>Details</td>
-                        </tr>
-                        <tr>
-                            <td>g94gjfer</td>
-                            <td>Pending</td>
-                            <td>$100.00</td>
-                            <td>Details</td>
-                        </tr>
+                        {ordersResult}
                     </tbody>
                 </table>
                 </div>

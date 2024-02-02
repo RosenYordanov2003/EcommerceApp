@@ -8,7 +8,7 @@ export default function PoppupMessage({ message }) {
 
     return (
         <div className={`popup-container ${isActive == true ? "active" : ""}`}>
-            <div className="icon-container">
+            <div className="popup-icon-container">
                 <i className="fa-solid fa-check popup-icon"></i>
             </div>
             <h1>Success!</h1>

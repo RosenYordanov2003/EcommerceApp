@@ -72,3 +72,6 @@ body:has(.successfull-main-container ) {
 .continue-button:active{
     opacity: 0.5;
 }
+body:has(.fa-moon) {
+    background-color: #23272f;
+}

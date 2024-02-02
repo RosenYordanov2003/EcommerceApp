@@ -16,6 +16,7 @@ export default function Login() {
         event.target.parentElement.children[0].classList.remove("active-label");
     }
     function onFormSubmit(event) {
+
         event.preventDefault();
         const formData = new FormData(event.currentTarget);
 
@@ -23,6 +24,7 @@ export default function Login() {
             UserName: formData.get("username"),
             Password: formData.get("password"),
         }
+        console.log(userInfoObject);
         login(userInfoObject)
             .then(res => {
                 const user = {
@@ -32,7 +34,6 @@ export default function Login() {
                     cart: res.cartModel,
                     roles: res.roles
                 };
-                console.log(res);
                 setUser(user);
                 navigate('/Home');
 
@@ -48,11 +49,11 @@ export default function Login() {
 
                 <section className="input-container">
                     <label htmlFor="username">Username</label>
-                    <input id="username" onBlur={onInputBlur} onFocus={onInputFouc} id="username" type="text" autoComplete="username" aria-required="true" placeholder="Enter username..." />
+                    <input name="username" id="username" onBlur={onInputBlur} onFocus={onInputFouc} id="username" type="text" autoComplete="username" aria-required="true" placeholder="Enter username..." />
                 </section>
                 <section className="input-container">
                     <label htmlFor="password">Password</label>
-                    <input id="password" onBlur={onInputBlur} onFocus={onInputFouc} id="password" type="password" autoComplete="password" aria-required="true" placeholder="Enter password" />
+                    <input name="password" id="password" onBlur={onInputBlur} onFocus={onInputFouc} id="password" type="password" autoComplete="password" aria-required="true" placeholder="Enter password" />
                 </section>
                 <button className="submit-btn" type="submit">Login</button>
             </form>

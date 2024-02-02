@@ -1,6 +1,6 @@
 ﻿import { useState, useEffect } from "react";
 import DashBoardStyle from "../Dashboard/DashBoardStyle.css";
-import { loadDashboard } from "../../../services/dashboardService";
+import { loadDashboard, getAllOrders, getRecentOrders } from "../../../services/dashboardService";
 import OrderTableRows from "../OrderTableRows/OrderTableRows";
 import SvgCircle from "../SvgCircle/SvgCircle";
 
@@ -9,6 +9,7 @@ export default function Dashboard() {
     const [dashboardObject, setDashboardObject] = useState(undefined);
     const [date, setDate] = useState(undefined);
     const [month, setMonth] = useState(undefined);
+    const [areShowed, setAreShowed] = useState(false);
 
 
     const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
@@ -22,6 +23,25 @@ export default function Dashboard() {
 
     const ordersResult = dashboardObject?.orders.map((order) => <OrderTableRows order={order} key={order.id} />);
 
+
+    function showAllOrders() {
+        if (areShowed === false) {
+            getAllOrders()
+                .then(res => {
+                    setDashboardObject({ ...dashboardObject, orders: res });
+                    setAreShowed(!areShowed);
+                })
+                .catch((error) => console.error(error));
+        }
+        else {
+            getRecentOrders()
+                .then((res) => {
+                    setDashboardObject({ ...dashboardObject, orders: res });
+                    setAreShowed(!areShowed);
+                })
+                .catch((error) => console.error(error));
+        }
+    }
 
     return (
         <div className="dashboard-container">
@@ -106,7 +126,7 @@ export default function Dashboard() {
                     </tbody>
                 </table>
                 <div className="show-all-wrapper">
-                    <button className="show-all">Show all</button>
+                    <button onClick={showAllOrders} className="show-all">{areShowed ? "Hide" : "Show All" }</button>
                 </div>
             </div>
         </div>

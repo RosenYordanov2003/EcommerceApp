@@ -5,12 +5,27 @@
     using Microsoft.EntityFrameworkCore;
     using Models.AdminModels.Dashboard;
     using Models.AdminModels.Orders;
+    using System.Collections.Generic;
+
     public class DashboardService : IDashboardService
     {
         private readonly ApplicationDbContext dbContext;
         public DashboardService(ApplicationDbContext dbContext)
         {
             this.dbContext = dbContext;
+        }
+
+        public async Task<IEnumerable<OrderModel>> GetAllOrdersAsync()
+        {
+            return await dbContext.Orders
+                 .OrderByDescending(order => order.FinishedOn)
+                 .Select(order => new OrderModel()
+                 {
+                     Id = order.Id,
+                     Status = order.FinishedOn.AddDays(order.ShippingMethod == "fast" ? 2 : 4) < DateTime.Now ? "Delivered" : "Pending",
+                     Price = order.Price
+                 })
+                 .ToArrayAsync();
         }
 
         public async Task<DashboardModel> GetDashboardInfoAsync(DateTime? particularDate, DateTime? particularMonth)
@@ -24,16 +39,7 @@
                 .Where(order => order.FinishedOn.Month == currentMoth)
                 .SumAsync(o => o.Price);
 
-            dashboardModel.Orders = await dbContext.Orders
-                .OrderByDescending(order => order.FinishedOn)
-                .Select(order => new OrderModel()
-                {
-                    Id = order.Id,
-                    Status = order.FinishedOn.AddDays(order.ShippingMethod == "fast" ? 2 : 4) < DateTime.Now ? "Delivered" : "Pending",
-                    Price = order.Price
-                })
-                .Take(7)
-                .ToListAsync();
+            dashboardModel.Orders = await GetRecentOrdersAsync();
 
             if (particularDate.HasValue)
             {
@@ -52,6 +58,20 @@
             }
 
             return dashboardModel;
+        }
+
+        public async Task<IEnumerable<OrderModel>> GetRecentOrdersAsync()
+        {
+            return  await dbContext.Orders
+                .OrderByDescending(order => order.FinishedOn)
+                .Select(order => new OrderModel()
+                {
+                    Id = order.Id,
+                    Status = order.FinishedOn.AddDays(order.ShippingMethod == "fast" ? 2 : 4) < DateTime.Now ? "Delivered" : "Pending",
+                    Price = order.Price
+                })
+                .Take(7)
+                .ToListAsync();
         }
     }
 }

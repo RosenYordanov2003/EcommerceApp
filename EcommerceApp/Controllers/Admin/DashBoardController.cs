@@ -5,6 +5,8 @@
     using Core.Contracts;
     using Core.Models.AdminModels.Dashboard;
     using static EcommerceApp.Common.GeneralApplicationConstants;
+    using Duende.IdentityServer.Events;
+    using Core.Models.AdminModels.Orders;
 
     [Authorize(Roles = AdminRoleName)]
     [Route("api/dashboard")]
@@ -35,6 +37,22 @@
             DashboardModel dashboard = await dashboardService.GetDashboardInfoAsync(date, monthDate);
 
             return Ok(dashboard);
+        }
+        [HttpGet]
+        [Route("AllOrders")]
+        public async Task<IActionResult> GetAllOrders()
+        {
+            var allOrders = await dashboardService.GetAllOrdersAsync();
+
+            return Ok(allOrders);
+        }
+        [HttpGet]
+        [Route("RecentOrders")]
+        public async Task<IActionResult> GetRecentOrders()
+        {
+            var allOrders = await dashboardService.GetRecentOrdersAsync();
+
+            return Ok(allOrders);
         }
     }
 }

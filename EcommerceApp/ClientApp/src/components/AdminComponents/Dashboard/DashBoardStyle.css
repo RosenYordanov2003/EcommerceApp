@@ -78,9 +78,7 @@ input[type="date"]{
    background-color: #7d8da1;
    margin-top: 3rem;
 }
-.statistic-tripple-container {
-    grid-template-columns: repeat(3, 1fr);
-}
+
 .statistic-title{
     font-weight: bold;
     font-size: 2.4rem;
@@ -149,5 +147,16 @@ input[type="date"]{
     border: none;
     font-weight: bolder;
     font-size: 1.1rem;
+}
+.dates-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.date-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 4rem;
 }
 

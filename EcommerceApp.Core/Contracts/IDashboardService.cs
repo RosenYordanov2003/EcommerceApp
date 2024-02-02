@@ -3,6 +3,6 @@
     using Models.AdminModels.Dashboard;
     public interface IDashboardService
     {
-        Task<DashboardModel> GetDashboardInfoAsync(DateTime? particularDate);
+        Task<DashboardModel> GetDashboardInfoAsync(DateTime? particularDate, DateTime? particularMonth);
     }
 }

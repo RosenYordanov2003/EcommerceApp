@@ -10,6 +10,7 @@
         public decimal TotalSales { get; set; }
         public decimal TotalSalesForTheMonth { get; set; }
         public decimal TotalSalesForParticularDay { get; set; }
+        public decimal TotalSalesForParticulMonth { get; set; }
         public IEnumerable<OrderModel> Orders { get; set; }
     }
 }

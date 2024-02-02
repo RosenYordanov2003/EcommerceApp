@@ -20,14 +20,19 @@
 
         [HttpGet]
         [Route("Dashboard")]
-        public async Task<IActionResult> GetDashboardInfo([FromQuery]string? particularDay)
+        public async Task<IActionResult> GetDashboardInfo([FromQuery]string? particularDay, string?particularMonth)
         {
             DateTime? date = null;
+            DateTime? monthDate = null;
             if (!string.IsNullOrWhiteSpace(particularDay) && particularDay!="undefined")
             {
                 date = DateTime.Parse(particularDay);
             }
-            DashboardModel dashboard = await dashboardService.GetDashboardInfoAsync(date);
+            if (!string.IsNullOrWhiteSpace(particularMonth) && particularMonth != "undefined")
+            {
+                monthDate = DateTime.Parse(particularMonth);
+            }
+            DashboardModel dashboard = await dashboardService.GetDashboardInfoAsync(date, monthDate);
 
             return Ok(dashboard);
         }

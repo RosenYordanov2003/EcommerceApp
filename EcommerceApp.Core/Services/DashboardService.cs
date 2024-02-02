@@ -13,7 +13,7 @@
             this.dbContext = dbContext;
         }
 
-        public async Task<DashboardModel> GetDashboardInfoAsync(DateTime? particularDate)
+        public async Task<DashboardModel> GetDashboardInfoAsync(DateTime? particularDate, DateTime? particularMonth)
         {
             int currentMoth = DateTime.Now.Month;
 
@@ -42,6 +42,13 @@
                     && order.FinishedOn.Month == particularDate.Value.Month
                     && order.FinishedOn.Year == particularDate.Value.Year)
                     .SumAsync(order => order.Price);
+            }
+            if (particularMonth.HasValue)
+            {
+                dashboardModel.TotalSalesForParticulMonth = await dbContext.Orders
+                   .Where(order => order.FinishedOn.Month == particularMonth.Value.Month
+                   && order.FinishedOn.Year == particularMonth.Value.Year)
+                   .SumAsync(order => order.Price);
             }
 
             return dashboardModel;

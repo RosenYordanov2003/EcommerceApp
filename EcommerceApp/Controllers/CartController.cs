@@ -10,6 +10,8 @@
     using Infrastructure.Data.Models;
     using System.Text;
     using Core.Models.PromotionCodes;
+    using EcommerceApp.SignalR;
+    using Microsoft.AspNetCore.SignalR;
 
     [ApiController]
     [Authorize]
@@ -23,9 +25,10 @@
         private readonly IPromotionCodeService promotionCodeService;
         private readonly IProductStockService productStockService;
         private readonly UserManager<User> userManager;
+        private readonly IHubContext<NotificationsHub> hubContext;
         public CartController(ICartService cartService, IEmailSender emailSender,
             UserManager<User> userManager, IOrderService orderService, IPromotionCodeService promotionCodeService
-            , IProductStockService productStockService)
+            , IProductStockService productStockService, IHubContext<NotificationsHub> hubContext)
         {
             this.cartService = cartService;
             this.emailSender = emailSender;
@@ -33,6 +36,7 @@
             this.orderService = orderService;
             this.promotionCodeService = promotionCodeService;
             this.productStockService = productStockService;
+            this.hubContext = hubContext;
         }
 
         [HttpPost]
@@ -110,6 +114,9 @@
                 await emailSender.SendEmailAsync(orderModel.UserOrderInfo.Email, "Congratulations You Have Earned A Promotion Code",
                     $" <main style=\"font-family: Arial, Helvetica, sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center;\">\r\n        <h1>You Have Earned A Promotion Code</h1>\r\n        <p>Your Promotion Code:<span style=\"font-weight: bolder; font-size: 1.2rem; display: inline-block; margin-left: 0.3rem;\">{promotionCode.Id}</span> </p>\r\n        <p>Code Discount: <span style=\"font-weight: bolder; font-size: 1.1rem; display: inline-block; margin-left: 0.3rem;\">{promotionCode.DiscountPercantages:F2}%</span> </p>\r\n        <p>The Code Is Valid Till: <span style=\"font-weight: bolder; font-size: 1.1rem; display: inline-block; margin-left: 0.3rem;\">{promotionCode.ExpirationTime.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss")}/span></p>\r\n    </main>");
             }
+
+
+            await hubContext.Clients.All.SendAsync("PurchaseMade");
 
             return Ok(new { Success = true });
         }

@@ -49,7 +49,7 @@ export default function App() {
 
     let result;
 
-    if (user?.roles.includes('Administrator')) {
+    if (user?.roles?.includes('Administrator')) {
         result =
             <>
                 <AsideMenu/>

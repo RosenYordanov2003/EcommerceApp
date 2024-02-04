@@ -4,6 +4,7 @@ using EcommerceApp.Core.Services;
 using EcommerceApp.Data;
 using EcommerceApp.Extensions;
 using EcommerceApp.Infrastructure.Data.Models;
+using EcommerceApp.SignalR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -33,6 +34,10 @@ builder.Services.AddDefaultIdentity<User>(options =>
 
 
 builder.Services.Configure<JwtConfig>(builder.Configuration.GetSection("JwtConfig"));
+
+builder.Services.AddSignalR();
+
+
 
 var keyBytes = Encoding.ASCII.GetBytes(builder.Configuration["JwtConfig:Secret"]);
 
@@ -117,6 +122,8 @@ else
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
+app.MapHub<NotificationsHub>("notifications-hub");
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

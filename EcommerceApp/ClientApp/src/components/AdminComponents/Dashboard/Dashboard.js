@@ -3,6 +3,7 @@ import DashBoardStyle from "../Dashboard/DashBoardStyle.css";
 import { loadDashboard, getAllOrders, getRecentOrders } from "../../../services/dashboardService";
 import OrderTableRows from "../OrderTableRows/OrderTableRows";
 import SvgCircle from "../SvgCircle/SvgCircle";
+import { HubConnectionBuilder} from '@microsoft/signalr';
 
 export default function Dashboard() {
 
@@ -10,16 +11,40 @@ export default function Dashboard() {
     const [date, setDate] = useState(undefined);
     const [month, setMonth] = useState(undefined);
     const [areShowed, setAreShowed] = useState(false);
+    const [connection, setConnection] = useState(null);
 
 
     const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
     useEffect(() => {
+        const newConnection = new HubConnectionBuilder()
+            .withUrl('https://localhost:7122/notifications-hub')
+            .withAutomaticReconnect()
+            .build();
+        setConnection(newConnection);
+    }, [])
+
+    useEffect(() => {
         loadDashboard(date, month)
             .then((res) => setDashboardObject(res))
             .catch((error) => console.error(error));
     }, [date, month])
+
+    useEffect(() => {
+        if (connection) {
+            connection.start()
+                .then(() => {
+                    console.log('Connection started!');
+                    connection.on('PurchaseMade', () => {
+                        loadDashboard(date, month)
+                            .then((res) => setDashboardObject(res))
+                            .catch((error) => console.error(error));
+                    });
+                })
+                .catch(console.error);
+        }
+    }, [connection]);
 
     const ordersResult = dashboardObject?.orders.map((order) => <OrderTableRows order={order} key={order.id} />);
 

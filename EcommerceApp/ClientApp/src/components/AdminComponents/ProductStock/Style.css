@@ -1,0 +1,11 @@
+﻿.product-stock-admin-container{
+    display: flex;
+    align-items: flex-start;
+    justify-content:space-around;
+    gap: 3rem;
+    margin-bottom: 2rem;
+}
+.product-stock-admin-container p{
+    margin: 0;
+}
+

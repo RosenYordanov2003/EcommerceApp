@@ -35,7 +35,6 @@ export default function Dashboard() {
         if (connection) {
             connection.start()
                 .then(() => {
-                    console.log('Connection started!');
                     connection.on('PurchaseMade', () => {
                         loadDashboard(date, month)
                             .then((res) => setDashboardObject(res))

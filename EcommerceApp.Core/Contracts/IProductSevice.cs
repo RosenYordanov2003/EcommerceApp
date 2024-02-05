@@ -1,6 +1,7 @@
 ﻿namespace EcommerceApp.Core.Contracts
 {
-    using EcommerceApp.Core.Models.Shoes;
+    using Models.AdminModels.Clothes;
+    using Models.Shoes;
     using Models.Products;
 
     public interface IProductSevice
@@ -13,5 +14,6 @@
         Task RemoveProductFromUserFavoriteListAsync(UserFavoriteProduct userFavoriteProductmodel);
         Task<ICollection<GetUserFavoriteProductModel>> GetUserFavoriteProductsAsync(Guid userId);
         Task<IEnumerable<ShoesFeatureModel>> LoadUserFavoriteProductsAsync(Guid userId);
+        Task<IEnumerable<ClothesModel>> LoadAllClothesAsync();
     }
 }

@@ -18,18 +18,23 @@ export default function AsideMenu() {
             })
             .catch((error) => console.error(error));
     }
+    function setActiveIndex(index, navigationPath) {
+        console.log('in event');
+        setActiveElementIndex(index);
+        navigate(navigationPath);
+    }
 
     return (
         <aside>
             <h2 className="nav-logo aside-logo">Fashion Store</h2>
             <div className="asside-wrapper">
-                <div onClick={() => setActiveElementIndex(0)} className={`icon-container ${activeElementIndex === 0 ?"active-icon-container" : ""}`}>
+                <div onClick={() => setActiveIndex(0, '/Dashboard')} className={`icon-container ${activeElementIndex === 0 ?"active-icon-container" : ""}`}>
                     <span className="material-symbols-outlined">
                         dashboard
                     </span>
                     <p className="icon-text-content">Dashboard</p>
                 </div>
-                <div onClick={() => setActiveElementIndex(1)} className={`icon-container ${activeElementIndex === 1 ? "active-icon-container" : ""}`}>
+                <div onClick={() => setActiveIndex(1, '/Clothes')} className={`icon-container ${activeElementIndex === 1 ? "active-icon-container" : ""}`}>
                     <span className="material-symbols-outlined">
                         apparel
                     </span>

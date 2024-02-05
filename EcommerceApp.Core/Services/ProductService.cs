@@ -11,6 +11,7 @@
     using Models.ProductStocks;
     using Models.Review;
     using Infrastructure.Data.Models;
+    using EcommerceApp.Core.Models.AdminModels.Clothes;
 
     public class ProductService : IProductSevice
     {
@@ -254,6 +255,21 @@
             favoriteProducts.AddRange(getUserFavoriteShoes);
 
             return favoriteProducts;
+        }
+
+        public async Task<IEnumerable<ClothesModel>> LoadAllClothesAsync()
+        {
+            return await applicationDbContext.Clothes
+               .Select(cl => new ClothesModel()
+               {
+                   Id = cl.Id,
+                   CategoryName = cl.Category.Name,
+                   Name = cl.Name,
+                   Price = cl.Price,
+                   StarRating = cl.StarRating,
+                   ImgUrls = cl.Pictures.Select(x => new PictureModel() { ImgUrl = x.ImgUrl }).ToArray()
+               })
+               .ToArrayAsync();
         }
 
         public async Task<IEnumerable<ShoesFeatureModel>> LoadUserFavoriteProductsAsync(Guid userId)

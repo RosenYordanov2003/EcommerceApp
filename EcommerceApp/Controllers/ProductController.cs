@@ -7,6 +7,7 @@
     using Microsoft.AspNetCore.Authorization;
     using EcommerceApp.Infrastructure.Data.Models;
     using Microsoft.AspNetCore.Identity;
+    using static EcommerceApp.Common.GeneralApplicationConstants;
 
     [ApiController]
     [Produces("application/json")]
@@ -109,6 +110,14 @@
             IEnumerable<ShoesFeatureModel> products = await clothesService.LoadUserFavoriteProductsAsync(userId);
 
             return Ok(new LoadUserFavoriteProductsModel() { UserName = user.UserName, Products = products });
+        }
+        [HttpGet]
+        [Route("LoadAllClothes")]
+        [Authorize(Roles = AdminRoleName)]
+        public async Task<IActionResult> LoadAllClothes()
+        {
+            var allClothes = await clothesService.LoadAllClothesAsync();
+            return Ok(allClothes);
         }
 
         private static Guid? ExtractUserId(string? userId)

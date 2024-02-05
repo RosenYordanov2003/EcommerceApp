@@ -121,3 +121,10 @@ export async function getUserFavoriteProducts(userId) {
 
     return response;
 }
+export async function loadAllProducts() {
+    const request = await fetch(`${baseUrl}/LoadAllClothes`, { credentials: 'include' });
+
+    const response = request.json();
+
+    return response;
+}

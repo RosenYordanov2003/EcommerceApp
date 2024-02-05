@@ -20,7 +20,7 @@ import UserFavoriteProducts from "../src/components/UserFavoriteProducts/UserFav
 import Dashboard from "../src/components/AdminComponents/Dashboard/Dashboard";
 import AsideMenu from "../src/components/AdminComponents/AsideMenu/AsideMenu";
 import FeaturedProduct from './components/Products/FeaturedProduct';
-import Clothes from "../src/components/AdminComponents/Products/Clothes";
+import Clothes from "../src/components/AdminComponents/Clothes/Clothes";
 
 export default function App() {
 
@@ -54,11 +54,12 @@ export default function App() {
     if (user?.roles?.includes('Administrator')) {
         result =
             <>
-                <AsideMenu/>
+                <AsideMenu />
                 <Routes>
                     <Route path="/Dashboard" element={<Dashboard />} />
                     <Route path="/Home" element={<Dashboard />} />
                     <Route path="/Clothes" element={<Clothes />} />
+                    <Route path="/Product/:id" element={<UserFavoriteProducts />} />
                     <Route path="/" element={<Dashboard />} />
                 </Routes>
             </>

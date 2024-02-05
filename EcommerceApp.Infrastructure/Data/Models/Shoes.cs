@@ -23,6 +23,7 @@
         [Required]
         public string Color { get; set; } = null!;
         public int StarRating { get; set; }
+        public bool IsArchived { get; set; }
 
         [ForeignKey(nameof(SubCategory))]
         public int SubCategoryId { get; set; }
@@ -40,6 +41,9 @@
         public string Gender { get; set; } = null!;
         public string? Description { get; set; }
         public bool IsFeatured { get; set; }
+
+        public Guid? PromotionId { get; set; }
+        public Promotion? Promotion { get; set; }
 
         public ICollection<UserFavoriteShoes> UserFavoriteShoes { get; set; }
         public ICollection<Review> Reviews { get; set; }

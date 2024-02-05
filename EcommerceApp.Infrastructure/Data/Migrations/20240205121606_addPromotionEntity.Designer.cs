@@ -4,6 +4,7 @@ using EcommerceApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EcommerceApp.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240205121606_addPromotionEntity")]
+    partial class addPromotionEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -870,9 +872,6 @@ namespace EcommerceApp.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsArchived")
-                        .HasColumnType("bit");
-
                     b.Property<bool>("IsFeatured")
                         .HasColumnType("bit");
 
@@ -915,7 +914,6 @@ namespace EcommerceApp.Infrastructure.Migrations
                             Color = "Gray",
                             Description = "Men's Jordan NBA Long-Sleeve T-Shirt",
                             Gender = "M",
-                            IsArchived = false,
                             IsFeatured = false,
                             Name = "Chicago Bulls Essential",
                             Price = 40m,
@@ -930,7 +928,6 @@ namespace EcommerceApp.Infrastructure.Migrations
                             Color = "Black",
                             Description = "Men's Jordan NBA Long-Sleeve T-Shirt",
                             Gender = "M",
-                            IsArchived = false,
                             IsFeatured = false,
                             Name = "Chicago Bulls Essential",
                             Price = 40m,
@@ -945,7 +942,6 @@ namespace EcommerceApp.Infrastructure.Migrations
                             Color = "Black",
                             Description = "From the pitch to the streets, you can celebrate Marcus Rashford's passion for sport in comfort with this sweat-wicking tee. Soft fabric and a relaxed fit help keep you dry and comfortable, while retro branding and an \"MR\" logo add the perfect finishing touches.",
                             Gender = "M",
-                            IsArchived = false,
                             IsFeatured = false,
                             Name = "Nike Air x Marcus Rashford",
                             Price = 38m,
@@ -960,7 +956,6 @@ namespace EcommerceApp.Infrastructure.Migrations
                             Color = "White",
                             Description = "From the pitch to the streets, you can celebrate Marcus Rashford's passion for sport in comfort with this sweat-wicking tee. Soft fabric and a relaxed fit help keep you dry and comfortable, while retro branding and an \"MR\" logo add the perfect finishing touches.",
                             Gender = "M",
-                            IsArchived = false,
                             IsFeatured = false,
                             Name = "Nike Air x Marcus Rashford",
                             Price = 38m,
@@ -975,7 +970,6 @@ namespace EcommerceApp.Infrastructure.Migrations
                             Color = "White",
                             Description = "Extra-soft, stretchy ribbed fabric helps make this slim-fitting top an everyday favourite. A mock neck and long sleeves offer a tailored look while the embroidered Swoosh logo and piping details add a touch of heritage style.",
                             Gender = "W",
-                            IsArchived = false,
                             IsFeatured = false,
                             Name = "Women's Long-Sleeve Top",
                             Price = 55m,
@@ -990,7 +984,6 @@ namespace EcommerceApp.Infrastructure.Migrations
                             Color = "Black",
                             Description = "Extra-soft, stretchy ribbed fabric helps make this slim-fitting top an everyday favourite. A mock neck and long sleeves offer a tailored look while the embroidered Swoosh logo and piping details add a touch of heritage style.",
                             Gender = "W",
-                            IsArchived = false,
                             IsFeatured = true,
                             Name = "Women's Long-Sleeve Top",
                             Price = 55m,
@@ -1005,7 +998,6 @@ namespace EcommerceApp.Infrastructure.Migrations
                             Color = "Wine Red",
                             Description = "The Nike Dri-FIT One Luxe Top is designed for all the ways you work out—from yoga to HIIT to long runs. As part of the Nike Luxe line, this top defines luxury with buttery-soft and smooth fabric that breathes to keep you dry and cool. It's made from at least 75% recycled polyester fibres.",
                             Gender = "W",
-                            IsArchived = false,
                             IsFeatured = false,
                             Name = "Nike Dri-FIT UV One Luxe",
                             Price = 40m,
@@ -1020,7 +1012,6 @@ namespace EcommerceApp.Infrastructure.Migrations
                             Color = "Midnight Black",
                             Description = "Ready for cooler weather, the Nike Sportswear Tech Fleece Joggers feature an updated fit perfect for everyday wear. Roomy through the thigh, this tapered design narrows at the knee to give you a comfortable feel without losing the clean, tailored look you love. Tall ribbed cuffs complete the jogger look while a zipped pocket on the right leg provides secure small-item storage and elevates the look.",
                             Gender = "M",
-                            IsArchived = false,
                             IsFeatured = true,
                             Name = "Nike Sportswear Tech Fleece",
                             Price = 99m,
@@ -1035,7 +1026,6 @@ namespace EcommerceApp.Infrastructure.Migrations
                             Color = "Red",
                             Description = "Ready for cooler weather, the Nike Sportswear Tech Fleece Joggers feature an updated fit perfect for everyday wear. Roomy through the thigh, this tapered design narrows at the knee to give you a comfortable feel without losing the clean, tailored look you love. Tall ribbed cuffs complete the jogger look while a zipped pocket on the right leg provides secure small-item storage and elevates the look.",
                             Gender = "M",
-                            IsArchived = false,
                             IsFeatured = false,
                             Name = "Nike Sportswear Tech Fleece",
                             Price = 99m,
@@ -1050,7 +1040,6 @@ namespace EcommerceApp.Infrastructure.Migrations
                             Color = "Slate White",
                             Description = "A wardrobe staple, the Nike Sportswear Club Fleece Joggers combine a classic look with the soft comfort of fleece for an elevated, everyday look that you can wear every day.",
                             Gender = "M",
-                            IsArchived = false,
                             IsFeatured = false,
                             Name = "Nike Sportswear Club Fleece",
                             Price = 60m,
@@ -1065,7 +1054,6 @@ namespace EcommerceApp.Infrastructure.Migrations
                             Color = "Pink",
                             Description = "Rise up and transform your fleece wardrobe with strong cosy vibes. These oversized Phoenix Fleece joggers have extra room in the legs for a fit that's comfy and relaxed. The taller ribbed waistline sits higher on your hips for a stay-put, snug feel and a bold look.",
                             Gender = "W",
-                            IsArchived = false,
                             IsFeatured = false,
                             Name = "Nike Sportswear Phoenix Fleece",
                             Price = 65m,
@@ -1080,7 +1068,6 @@ namespace EcommerceApp.Infrastructure.Migrations
                             Color = "Green",
                             Description = "Rise up and transform your fleece wardrobe with strong cosy vibes. These oversized Phoenix Fleece joggers have extra room in the legs for a fit that's comfy and relaxed. The taller ribbed waistline sits higher on your hips for a stay-put, snug feel and a bold look.",
                             Gender = "W",
-                            IsArchived = false,
                             IsFeatured = true,
                             Name = "Nike Sportswear Phoenix Fleece",
                             Price = 65m,
@@ -1578,9 +1565,6 @@ namespace EcommerceApp.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("ExpireTime")
-                        .HasColumnType("datetime2");
-
                     b.Property<decimal>("PercantageDiscount")
                         .HasColumnType("decimal(18,2)");
 
@@ -1715,9 +1699,6 @@ namespace EcommerceApp.Infrastructure.Migrations
                         .HasMaxLength(5)
                         .HasColumnType("nvarchar(5)");
 
-                    b.Property<bool>("IsArchived")
-                        .HasColumnType("bit");
-
                     b.Property<bool>("IsFeatured")
                         .HasColumnType("bit");
 
@@ -1758,7 +1739,6 @@ namespace EcommerceApp.Infrastructure.Migrations
                             Color = "Black",
                             Description = "The radiance lives on in the Nike Air Force 1 '07 LV8. Crossing hardwood comfort with off-court flair, these kicks put a fresh spin on a hoops classic. Soft suede overlays pair with era-echoing '80s construction and reflective-design Swoosh logos to bring you nothing-but-net style while hidden full-length Air units add the legendary comfort you know and love.",
                             Gender = "Men",
-                            IsArchived = false,
                             IsFeatured = true,
                             Name = "Nike Air Force 1 '07 LV8",
                             Price = 130m,
@@ -1773,7 +1753,6 @@ namespace EcommerceApp.Infrastructure.Migrations
                             Color = "White",
                             Description = "The pitch is yours when you lace up in the Vapor 15 Pro AG-Pro. It's loaded with a Zoom Air unit, so you can dominate in the waning minutes of a match—when it matters most. Fast is in the Air.",
                             Gender = "Men",
-                            IsArchived = false,
                             IsFeatured = true,
                             Name = "Nike Mercurial Vapor 15 Pro",
                             Price = 160m,
@@ -1788,7 +1767,6 @@ namespace EcommerceApp.Infrastructure.Migrations
                             Color = "Black",
                             Description = "Instantly tilt the pitch in the bold design of the Superfly 9 Elite SG-Pro. We added a Zoom Air unit, made specifically for football, and grippy texture up top for exceptional touch, so you can dominate in the waning minutes of a match—when it matters most. Feel the explosive speed as you race around the pitch, making the critical plays with velocity and pace. Fast is in the Air. This version has Anti-Clog Traction on the soleplate, which helps prevent mud from sticking.",
                             Gender = "Men",
-                            IsArchived = false,
                             IsFeatured = false,
                             Name = "Nike Mercurial Superfly 9 Elite",
                             Price = 250m,
@@ -1803,7 +1781,6 @@ namespace EcommerceApp.Infrastructure.Migrations
                             Color = "Black",
                             Description = "So you're in love with the classic look of the '90s, but you've got a thing for today's fast-paced culture. Meet the Air Max TW. Inspired by the treasured franchise that brought Nike Air cushioning to the world and laid the foundation for the track-to-street aesthetic, its eye-catching design delivers a 1–2 punch of comfort and fashion. Ready to highlight any 'fit, its lightweight upper pairs angular and organic lines to create an entrancing haptic effect. The contrasting colourways make it easy to style. And if you're ready for the next step, the 5 windows underfoot deliver a modern edge to visible Air cushioning.",
                             Gender = "Men",
-                            IsArchived = false,
                             IsFeatured = false,
                             Name = "Nike Air Max TW",
                             Price = 110m,
@@ -1818,7 +1795,6 @@ namespace EcommerceApp.Infrastructure.Migrations
                             Color = "Black",
                             Description = "We looked into the future and it's gonna be comfy. Featuring a \"point-loaded\" Air unit (cushioning that forms to your every step), the Air Max Scorpion Flyknit delivers a futuristic sensation. And because looks count, we've crafted the upper from incredibly soft chenille-like fabric.",
                             Gender = "Women",
-                            IsArchived = false,
                             IsFeatured = false,
                             Name = "Nike Air Max Scorpion Flyknit",
                             Price = 160m,
@@ -1833,7 +1809,6 @@ namespace EcommerceApp.Infrastructure.Migrations
                             Color = "Blue",
                             Description = "The Nike Air VaporMax Plus looks to the past and propels you into the future. Nodding to the 1998 Air Max Plus with its floating cage, padded upper and heel logo, it adds revolutionary VaporMax Air technology to ramp up the comfort and create a modern look.",
                             Gender = "Men",
-                            IsArchived = false,
                             IsFeatured = true,
                             Name = "Nike Air VaporMax Plus",
                             Price = 180m,
@@ -1848,7 +1823,6 @@ namespace EcommerceApp.Infrastructure.Migrations
                             Color = "Dark Blue",
                             Description = "Designed for athletes who run to stay fit for their sport, these running shoes support multidirectional movements with flexible cushioning and a wide, stable platform in the forefoot and heel. They have a seamless, sock-like mesh upper with targeted areas of support and stretch for an adaptive fit.\r\nRunner type\r\nNeutral shoes for the versatile runner\r\nAdaptive fit\r\nSeamless Forgedmesh upper designed with areas of support and stretch to help ensure a custom fit that adapts to every move\r\nSpringy cushioning\r\nBounce cushioning provides enhanced comfort and flexibility\r\nReliable traction\r\nContinental™ Rubber outsole for extraordinary traction in wet and dry conditions",
                             Gender = "Men",
-                            IsArchived = false,
                             IsFeatured = false,
                             Name = "Adidas Alphabounce Beyond Team",
                             Price = 70m,
@@ -1863,7 +1837,6 @@ namespace EcommerceApp.Infrastructure.Migrations
                             Color = "Dark Red",
                             Description = "Designed for athletes who run to stay fit for their sport, these running shoes support multidirectional movements with flexible cushioning and a wide, stable platform in the forefoot and heel. They have a seamless, sock-like mesh upper with targeted areas of support and stretch for an adaptive fit.\r\nRunner type\r\nNeutral shoes for the versatile runner\r\nAdaptive fit\r\nSeamless Forgedmesh upper designed with areas of support and stretch to help ensure a custom fit that adapts to every move\r\nSpringy cushioning\r\nBounce cushioning provides enhanced comfort and flexibility\r\nReliable traction\r\nContinental™ Rubber outsole for extraordinary traction in wet and dry conditions",
                             Gender = "Men",
-                            IsArchived = false,
                             IsFeatured = false,
                             Name = "Adidas Alphabounce Beyond Team",
                             Price = 70m,
@@ -1878,7 +1851,6 @@ namespace EcommerceApp.Infrastructure.Migrations
                             Color = "Black",
                             Description = "Dominate space. Command the play. Create goal-destined shots from impossible angles. Control the game with every touch in ACE. These juniors' soccer cleats have a 3D Control Skin upper that delivers precise control with zero wear-in time. Designed to dominate on firm ground.",
                             Gender = "Men",
-                            IsArchived = false,
                             IsFeatured = false,
                             Name = "Adidas ACE 17.3 Firm Ground",
                             Price = 78.41m,
@@ -1893,7 +1865,6 @@ namespace EcommerceApp.Infrastructure.Migrations
                             Color = "White",
                             Description = "Showcase your playmaking speed in these football cleats. Designed for easy on and off, they feature a textile upper with a sock-like construction for lightweight stability and lockdown as you create havoc at the line of scrimmage. The cleated outsole provides traction for quick cuts and pivots.. These juniors' soccer cleats have a 3D Control Skin upper that delivers precise control with zero wear-in time. Designed to dominate on firm ground.",
                             Gender = "Men",
-                            IsArchived = false,
                             IsFeatured = false,
                             Name = "Adidas Adizero 8.0",
                             Price = 83.41m,
@@ -1908,7 +1879,6 @@ namespace EcommerceApp.Infrastructure.Migrations
                             Color = "Red",
                             Description = "If your command of the field leaves your rivals' tactics in tatters, you're ready to own Predators. Built for precision on firm ground, these soccer cleats have a supportive mesh upper that wraps around your foot to lock you in. This eliminates the need for laces and leaves more room for ball control. Embossing on the surface adds confidence to every touch.",
                             Gender = "Men",
-                            IsArchived = false,
                             IsFeatured = false,
                             Name = "Adidas Predator 19.3 Laceless Firm Ground",
                             Price = 83.41m,
@@ -1923,7 +1893,6 @@ namespace EcommerceApp.Infrastructure.Migrations
                             Color = "Black",
                             Description = "We’re taking Slipstream to the extreme. This disruptive new version features an iconic Slipstream leather upper with elevated details, and a edgier sole with exaggerated proportions and rugged details. This execution features a leather base with nubuck overlays, a suede Formstrip with deep debossed lines and suede details.",
                             Gender = "Men",
-                            IsArchived = false,
                             IsFeatured = false,
                             Name = "Slipstream Xtreme Sneakers",
                             Price = 140m,
@@ -1938,7 +1907,6 @@ namespace EcommerceApp.Infrastructure.Migrations
                             Color = "White",
                             Description = "Back in 1987, the PUMA Slipstream Mid entered the scene as a basketball sneaker. A high-flying, slam-dunking, statement-making basketball sneaker. Now, it’s joined by the Slipstream – a rework of the original that brings an all-new energy to the game while staying true to the OG’s sporting roots.",
                             Gender = "Women",
-                            IsArchived = false,
                             IsFeatured = true,
                             Name = "Slipstream Leather Sneakers",
                             Price = 70m,
@@ -1953,7 +1921,6 @@ namespace EcommerceApp.Infrastructure.Migrations
                             Color = "Red",
                             Description = "Back in 1987, the PUMA Slipstream Mid entered the scene as a basketball sneaker. A high-flying, slam-dunking, statement-making basketball sneaker. Now, it’s joined by the Slipstream – a rework of the original that brings an all-new energy to the game while staying true to the OG’s sporting roots.",
                             Gender = "Women",
-                            IsArchived = false,
                             IsFeatured = false,
                             Name = "Slipstream Leather Sneakers",
                             Price = 70m,
@@ -1968,7 +1935,6 @@ namespace EcommerceApp.Infrastructure.Migrations
                             Color = "Green",
                             Description = "ULTRA - Not even you knew you could be this fast. Turn seconds into records with the ULTRA ULTIMATE football boot. Lighter means quicker, so the ULTRAWEAVE upper material makes every gram and every second count. Ultra-light. Ultra-fast. ULTRA ULTIMATE.",
                             Gender = "Men",
-                            IsArchived = false,
                             IsFeatured = true,
                             Name = "ULTRA ULTIMATE MG Football Cleats Men",
                             Price = 70m,
@@ -1983,7 +1949,6 @@ namespace EcommerceApp.Infrastructure.Migrations
                             Color = "Blue",
                             Description = "ULTRA - Not even you knew you could be this fast. Turn seconds into records with the ULTRA ULTIMATE football boot. Lighter means quicker, so the ULTRAWEAVE upper material makes every gram and every second count. Ultra-light. Ultra-fast. ULTRA ULTIMATE.",
                             Gender = "Men",
-                            IsArchived = false,
                             IsFeatured = false,
                             Name = "ULTRA PLAY IT Youth Football Boots",
                             Price = 60m,
@@ -3440,15 +3405,15 @@ namespace EcommerceApp.Infrastructure.Migrations
                         {
                             Id = new Guid("ed842fdc-c71b-4fbc-8df5-6f97cb73d622"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "da1d5d17-9c86-4768-a116-2f99a0dce29d",
+                            ConcurrencyStamp = "117664a5-fa4d-4c55-bde9-c599c856707a",
                             Email = "admin123@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN123@GMAIL.COM",
                             NormalizedUserName = "АDMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKUDkaxX32GCQQItf65aXIr6o/2hYYa2xajeF/doNpitz6WywoecIwVARruzUk3YmQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGKHMvZ14apcXOSd5KT0XAZu6QCOdbRG/eWzly8cgvm7LL/jgwxeWE23kccImIS45g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "198bb212-01ac-46c6-9f3d-50604644fb21",
+                            SecurityStamp = "4631075c-987d-43ca-b591-8c152faa8e4e",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         });

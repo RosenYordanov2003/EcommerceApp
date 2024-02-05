@@ -68,6 +68,7 @@
                 .OnDelete(DeleteBehavior.NoAction);
 
 
+
             builder.ApplyConfiguration(new UserEntityConfiguration());
             builder.ApplyConfiguration(new BrandEntityConfiguration());
             builder.ApplyConfiguration(new MainCategoryEntityConfiguration());

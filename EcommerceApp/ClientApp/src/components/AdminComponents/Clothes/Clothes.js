@@ -1,5 +1,5 @@
 ﻿import { useState, useEffect } from "react";
-import { loadAllProducts } from "../../../services/productService";
+import { loadAllProducts } from "../../../adminServices/clothesService";
 import ClothesStyle from "./ClothesStyle.css";
 import ProductCard from "../Product/ProductCard/ProductCard";
 export default function Clothes() {

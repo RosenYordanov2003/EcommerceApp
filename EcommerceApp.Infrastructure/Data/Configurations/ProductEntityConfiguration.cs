@@ -3,7 +3,6 @@
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
     using Models;
-    using System;
 
     public class ProductEntityConfiguration : IEntityTypeConfiguration<Product>
     {
@@ -20,7 +19,11 @@
 
             builder.HasMany(p => p.ProductStocks)
                 .WithOne(p => p.Product)
-                .OnDelete(DeleteBehavior.NoAction); 
+                .OnDelete(DeleteBehavior.NoAction);
+
+            builder.HasOne(cl => cl.Promotion)
+               .WithMany(p => p.Clothes)
+               .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasData(GenerateClothes());
         }

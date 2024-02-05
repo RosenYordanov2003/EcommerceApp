@@ -43,6 +43,11 @@
         [Required]
         public string Gender { get; set; } = null!;
         public bool IsFeatured { get; set; }
+        public bool IsArchived { get; set; }
+
+        [ForeignKey(nameof(Promotion))]
+        public Guid? PromotionId { get; set; }
+        public Promotion? Promotion { get; set; }
         public ICollection<Picture> Pictures { get; set; }
         public ICollection<ProductStock> ProductStocks { get; set; }
         public ICollection<UserFavoriteProducts> UserFavoriteProducts { get; set; }

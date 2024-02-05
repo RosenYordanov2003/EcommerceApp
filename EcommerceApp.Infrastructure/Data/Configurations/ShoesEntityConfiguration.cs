@@ -1,8 +1,8 @@
 ﻿namespace EcommerceApp.Infrastructure.Data.Configurations
 {
-    using EcommerceApp.Infrastructure.Data.Models;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
+    using Models;
 
     public class ShoesEntityConfiguration : IEntityTypeConfiguration<Shoes>
     {
@@ -14,6 +14,10 @@
 
             builder.HasMany(sh => sh.ShoesCartEntities)
                 .WithOne(sh => sh.Shoes)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            builder.HasOne(sh => sh.Promotion)
+                .WithMany(p => p.Shoes)
                 .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasData(GenerateShoes());

@@ -11,7 +11,7 @@
     using Models.ProductStocks;
     using Models.Review;
     using Infrastructure.Data.Models;
-    using EcommerceApp.Core.Models.AdminModels.Clothes;
+    using Models.AdminModels.Clothes;
 
     public class ProductService : IProductSevice
     {
@@ -263,7 +263,6 @@
                .Select(cl => new ClothesModel()
                {
                    Id = cl.Id,
-                   CategoryName = cl.Category.Name,
                    Name = cl.Name,
                    Price = cl.Price,
                    StarRating = cl.StarRating,
@@ -330,6 +329,35 @@
                 applicationDbContext.UserFavoriteProducts.Remove(userFavoriteProductsToDelete);
             }
             await applicationDbContext.SaveChangesAsync();
+        }
+        public async Task<ModifyClothesModel> GetProductToModifyAsync(int productId)
+        {
+            Product product = await
+                 applicationDbContext
+                .Clothes
+                .Include(p => p.ProductStocks)
+                .Include(p => p.Promotion)
+                .Include(p => p.Brand)
+                .Include(p => p.Category)
+                .Include(p => p.Pictures)
+                .FirstAsync(cl => cl.Id == productId);
+
+            ModifyClothesModel productToGet = new ModifyClothesModel()
+            {
+                ProductStocks = product.ProductStocks.Select(ps => new ProductStock<string>() { Id = ps.Id, Quantity = ps.Quantity, Size = ps.Size }),
+                Brand = product.Brand.Name,
+                Description = product.Description,
+                Id = product.Id,
+                Category = product.Category.Name,
+                ImgUrls = product.Pictures.Select(p => new PictureModel() { ImgUrl = p.ImgUrl }).ToArray(),
+                isArchived = product.IsArchived,
+                Name = product.Name,
+                Price = product.Price,
+                PromotionModel = new Models.Promotion.PromotionModel() { ExpireTime = product?.Promotion?.ExpireTime, PercentageDiscount = product?.Promotion?.PercantageDiscount },
+                StarRating = product.StarRating,
+            };
+
+            return productToGet;
         }
     }
 }

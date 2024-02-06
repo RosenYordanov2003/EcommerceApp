@@ -32,5 +32,11 @@
            var product = await productSevice.GetProductToModifyAsync(productId);
            return Ok(product);
         }
+        [HttpGet]
+        [Route("EditProductInfo")]
+        public async Task<IActionResult> EditProductInfo()
+        {
+            return Ok();
+        }
     }
 }

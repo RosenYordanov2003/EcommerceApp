@@ -26,6 +26,26 @@
     gap: 0.2rem;
     margin-bottom: 0.6rem;
 }
-.product-sizes{
-    margin-top: 3rem;
+.sizes-title{
+    margin: 3rem 0rem;
+}
+.edit-product-button {
+    width: 100%;
+    font-weight: bolder;
+    border: none;
+    color: white;
+    background-color: #de605c;
+    padding: 0.4rem 0.3rem;
+    border-radius: 6px;
+    margin-top: 1rem;
+    transition: 0.3s ease;
+}
+.edit-product-button:hover{
+    opacity: 0.8;
+}
+.product-input-container :where(input, select) {
+    border: none;
+    outline: none;
+    padding: 0.3rem 0.3rem;
+    box-shadow: 0rem 2rem 3rem rgba(132, 139, 200, 0.18);
 }

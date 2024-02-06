@@ -345,10 +345,10 @@
             ModifyClothesModel productToGet = new ModifyClothesModel()
             {
                 ProductStocks = product.ProductStocks.Select(ps => new ProductStock<string>() { Id = ps.Id, Quantity = ps.Quantity, Size = ps.Size }),
-                Brand = product.Brand.Name,
+                SelectedBrandId = product.BrandId,
                 Description = product.Description,
                 Id = product.Id,
-                Category = product.Category.Name,
+                SelectedCategoryId = product.CategoryId,
                 ImgUrls = product.Pictures.Select(p => new PictureModel() { ImgUrl = p.ImgUrl }).ToArray(),
                 isArchived = product.IsArchived,
                 Name = product.Name,
@@ -356,6 +356,14 @@
                 PromotionModel = new Models.Promotion.PromotionModel() { ExpireTime = product?.Promotion?.ExpireTime, PercentageDiscount = product?.Promotion?.PercantageDiscount },
                 StarRating = product.StarRating,
             };
+
+            productToGet.Brands = await applicationDbContext.Brands
+                .Select(b => new BrandModel() { Id = b.Id, Name = b.Name })
+                .ToArrayAsync();
+
+            productToGet.Categories = await applicationDbContext
+                .Categories.Select(c => new CategoryModel() { Id = c.Id, Name = c.Name })
+                .ToArrayAsync();
 
             return productToGet;
         }

@@ -14,12 +14,10 @@ input:focus{
     outline: none;
 }
 #filter-menu-navigation {
-    position: fixed;
+    position: relative;
     left: 0px;
-    top: 200px;
-    overflow: auto;
+    top: 10px;
     height: 100vh; 
-    max-height: 100vh;
     margin-bottom: 2rem;
 }
 .spinner{

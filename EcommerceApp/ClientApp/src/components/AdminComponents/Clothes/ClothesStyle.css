@@ -1,8 +1,10 @@
-﻿#root{
+﻿body:has(.asside-wrapper) #root {
     display: grid;
     grid-template-columns: 20rem auto;
     gap: min(10vw, 10rem);
 }
+
+
 .clothes-container-admin{
     display: grid;
     grid-template-columns: repeat(3, 1fr);

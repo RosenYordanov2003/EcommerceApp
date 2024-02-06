@@ -19,16 +19,20 @@ export default function ModifyingProduct() {
                 setInputObject({
                     name: res.name,
                     starRating: res.starRating,
-                    brand: res.brand,
-                    category: res.category,
+                    brand: res.selectedBrandId,
+                    category: res.selectedCategoryId,
                     price: res.price
                 });
             })
     }, [])
 
 
+    console.log(product);
+
     const imgs = product?.imgUrls?.map((img, index) => <div className="admin-img-container"><img key={index} src={img.imgUrl} /> </div>);
-    const sizes = product?.productStocks?.map((ps) => <ProductStock productStock={ps} key={ps.id}/>)
+    const sizes = product?.productStocks?.map((ps) => <ProductStock productStock={ps} key={ps.id} />);
+    const categories = product?.categories?.map((category) => <option value={category.id}>{category.name}</option>);
+    const brands = product?.brands?.map((brand) => <option value={brand.id}>{brand.name}</option>);
 
     return (
         <div className="product-modifying-container">
@@ -43,11 +47,15 @@ export default function ModifyingProduct() {
                     </div>
                     <div className="product-input-container">
                         <label>Category</label>
-                        <input onChange={(e) => setInputObject({ ...inputObject, category: e.target.value })} value={product?.category}></input>
+                        <select value={inputObject.category}>
+                            {categories}
+                        </select>
                     </div>
                     <div className="product-input-container">
                         <label>Brand</label>
-                        <input onChange={(e) => setInputObject({ ...inputObject, brand: e.target.value })} value={product?.brand}></input>
+                        <select value={inputObject.brand}>
+                            {brands}
+                        </select>
                     </div>
                     <div className="product-input-container">
                         <label>Price</label>
@@ -57,7 +65,7 @@ export default function ModifyingProduct() {
                 </form>
                 <section className="product-sizes">
                     <h3 className="sizes-title">Sizes</h3>
-                    {sizes }
+                    {sizes}
                 </section>
             </div>
         </div>

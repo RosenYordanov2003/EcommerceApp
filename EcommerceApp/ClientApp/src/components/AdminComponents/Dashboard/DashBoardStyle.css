@@ -1,4 +1,4 @@
-﻿body {
+﻿body:has(.asside-wrapper) {
     background-color: #f6f5f8;
     width: 100vw;
     height: 100vh;

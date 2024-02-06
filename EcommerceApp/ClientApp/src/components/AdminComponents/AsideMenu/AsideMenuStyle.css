@@ -49,7 +49,7 @@
     margin: 2rem 0rem 4rem 2rem;
 }
 .icon-container:not(:last-child):hover {
-    transform: translateX(0.8rem);
+    transform: translatex(0.8rem);
 }
 .icon-container:hover :where(span, p){
    color: #7b81e5;

@@ -71,7 +71,7 @@ body:has(.dashboard-container) #root{
     align-items: center;
     justify-content: center;
 }
-input[type="date"]{
+.dashboard-container input[type="date"]{
    border: none;
    padding: 0.5rem 1rem;
    border-radius: 0.4rem;

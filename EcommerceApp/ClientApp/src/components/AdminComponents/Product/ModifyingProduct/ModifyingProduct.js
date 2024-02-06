@@ -4,6 +4,7 @@ import Style from "../ModifyingProduct/Style.css";
 import ProductStock from "../../ProductStock/ProductStock";
 import PoppupMessage from "../../../PoppupMessage/PoppupMessage";
 import SizeTable from "../../SizeTable/SizeTable";
+import PromotionSection from "../../PromotionSection/PromotionSection";
 import { HubConnectionBuilder } from '@microsoft/signalr';
 
 export default function ModifyingProduct() {
@@ -37,6 +38,8 @@ export default function ModifyingProduct() {
                 setConnection(newConnection);
             })
     }, [])
+
+    console.log(product);
 
     useEffect(() => {
         if (connection) {
@@ -126,6 +129,9 @@ export default function ModifyingProduct() {
                 <section className="product-sizes">
                     <h3 className="add-product-stock-title">Add Product Stock</h3>
                     {sizes}
+                </section>
+                <section className="promotion-section">
+                    <PromotionSection promotionModel={product?.promotionModel}/>
                 </section>
             </div>
         </div>

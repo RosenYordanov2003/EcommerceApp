@@ -78,5 +78,10 @@
             public const int CityMaxLength = 60;
             public const int CityMinLength = 4;
         }
+        public static class PromotionEntity
+        {
+            public const double PromotionMinValue = 1;
+            public const double PromotionMaxValue = 90;
+        }
     }
 }

@@ -3,6 +3,7 @@
     using Models.AdminModels.Clothes;
     using Models.Shoes;
     using Models.Products;
+    using EcommerceApp.Core.Models.AdminModels.Promotion;
 
     public interface IProductSevice
     {
@@ -17,5 +18,6 @@
         Task<IEnumerable<ClothesModel>> LoadAllClothesAsync();
         Task<ModifyClothesModel> GetProductToModifyAsync(int productId);
         Task EditProductAsync(EditProductModel model);
+        Task ApplyPromotionAsync(AddPromotionModel addPromotionModel);
     }
 }

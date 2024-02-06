@@ -4,7 +4,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Core.Contracts;
     using Core.Models.AdminModels.Dashboard;
-    using static EcommerceApp.Common.GeneralApplicationConstants;
+    using static Common.GeneralApplicationConstants;
     using Duende.IdentityServer.Events;
     using Core.Models.AdminModels.Orders;
 

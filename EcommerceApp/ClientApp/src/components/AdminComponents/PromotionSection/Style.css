@@ -1,0 +1,22 @@
+﻿.promotion-form .product-input-container{
+    margin-bottom: 2rem;
+}
+.promotion-form button {
+    font-weight: bolder;
+    font-size: 1.1rem;
+    width: 40%;
+    color: white;
+    border-radius: 6px;
+    border: none;
+    background-color: #de605c;
+    padding: 0.4rem 0.3rem;
+    transition: 0.3s ease;
+}
+.promotion-form button:hover{
+    opacity: 0.8;
+}
+.promotion-section-button-container{
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}

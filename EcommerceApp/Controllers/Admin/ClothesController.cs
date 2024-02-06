@@ -6,8 +6,9 @@
     using Core.Contracts;
     using Core.Models.AdminModels.Clothes;
     using Core.Models.AdminModels.ProductStock;
-    using static EcommerceApp.Common.GeneralApplicationConstants;
-    using EcommerceApp.SignalR;
+    using static Common.GeneralApplicationConstants;
+    using SignalR;
+    using Core.Models.AdminModels.Promotion;
 
     [ApiController]
     [Authorize(Roles = AdminRoleName)]
@@ -67,5 +68,19 @@
 
             return Ok();
         }
+        [HttpPost]
+        [Route("AddPromotion")]
+        public async Task<IActionResult> AddPromotion([FromBody] AddPromotionModel addPromotionModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+            await productSevice.ApplyPromotionAsync(addPromotionModel);
+            await hubContext.Clients.All.SendAsync("ProductUpdated");
+
+            return Ok();
+        }
+       
     }
 }

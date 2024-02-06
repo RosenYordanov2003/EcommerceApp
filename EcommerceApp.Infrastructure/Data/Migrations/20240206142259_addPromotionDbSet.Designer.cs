@@ -4,6 +4,7 @@ using EcommerceApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EcommerceApp.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240206142259_addPromotionDbSet")]
+    partial class addPromotionDbSet
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -900,9 +902,7 @@ namespace EcommerceApp.Infrastructure.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("PromotionId")
-                        .IsUnique()
-                        .HasFilter("[PromotionId] IS NOT NULL");
+                    b.HasIndex("PromotionId");
 
                     b.HasIndex("SubCategoryId");
 
@@ -1745,9 +1745,7 @@ namespace EcommerceApp.Infrastructure.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("PromotionId")
-                        .IsUnique()
-                        .HasFilter("[PromotionId] IS NOT NULL");
+                    b.HasIndex("PromotionId");
 
                     b.HasIndex("SubCategoryId");
 
@@ -3444,15 +3442,15 @@ namespace EcommerceApp.Infrastructure.Migrations
                         {
                             Id = new Guid("ed842fdc-c71b-4fbc-8df5-6f97cb73d622"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "84fb3096-eef9-4de6-80f7-ef2f1778b07c",
+                            ConcurrencyStamp = "76a9403f-0304-4e02-b736-80c0e7d8e1ba",
                             Email = "admin123@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN123@GMAIL.COM",
                             NormalizedUserName = "АDMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPmZYSklaH8klhlTdLOAAU6xsKqv5T0sDp75SeRxduMUscaPoE4fC8Dg8vbPVAV7Zg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEK09DLDSU+jTAyxRzMGQGCwrFDoA6WGlZMB+kAvaFhDc/rWnRZwfwxQKn3PfJm3qyA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "071d92e1-a394-4b7e-805f-1620127f7e50",
+                            SecurityStamp = "a76f0152-b618-40ce-ab2c-b964084d7bbf",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         });
@@ -3673,8 +3671,9 @@ namespace EcommerceApp.Infrastructure.Migrations
                         .IsRequired();
 
                     b.HasOne("EcommerceApp.Infrastructure.Data.Models.Promotion", "Promotion")
-                        .WithOne("Product")
-                        .HasForeignKey("EcommerceApp.Infrastructure.Data.Models.Product", "PromotionId");
+                        .WithMany("Clothes")
+                        .HasForeignKey("PromotionId")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("EcommerceApp.Infrastructure.Data.Models.SubCategory", "SubCategory")
                         .WithMany("Clothes")
@@ -3786,8 +3785,9 @@ namespace EcommerceApp.Infrastructure.Migrations
                         .IsRequired();
 
                     b.HasOne("EcommerceApp.Infrastructure.Data.Models.Promotion", "Promotion")
-                        .WithOne("Shoes")
-                        .HasForeignKey("EcommerceApp.Infrastructure.Data.Models.Shoes", "PromotionId");
+                        .WithMany("Shoes")
+                        .HasForeignKey("PromotionId")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("EcommerceApp.Infrastructure.Data.Models.SubCategory", "SubCategory")
                         .WithMany("Shoes")
@@ -3983,7 +3983,7 @@ namespace EcommerceApp.Infrastructure.Migrations
 
             modelBuilder.Entity("EcommerceApp.Infrastructure.Data.Models.Promotion", b =>
                 {
-                    b.Navigation("Product");
+                    b.Navigation("Clothes");
 
                     b.Navigation("Shoes");
                 });

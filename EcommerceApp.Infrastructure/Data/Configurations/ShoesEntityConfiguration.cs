@@ -16,10 +16,6 @@
                 .WithOne(sh => sh.Shoes)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            builder.HasOne(sh => sh.Promotion)
-                .WithMany(p => p.Shoes)
-                .OnDelete(DeleteBehavior.NoAction);
-
             builder.HasData(GenerateShoes());
         }
 

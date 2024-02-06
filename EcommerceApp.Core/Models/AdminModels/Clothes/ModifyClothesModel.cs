@@ -2,6 +2,7 @@
 {
     using Brands;
     using Categories;
+    using EcommerceApp.Core.Models.Promotion;
     using ProductStocks;
     using Promotion;
     public class ModifyClothesModel : ClothesModel

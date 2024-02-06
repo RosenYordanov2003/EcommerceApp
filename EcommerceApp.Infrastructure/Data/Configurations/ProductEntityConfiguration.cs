@@ -20,11 +20,6 @@
             builder.HasMany(p => p.ProductStocks)
                 .WithOne(p => p.Product)
                 .OnDelete(DeleteBehavior.NoAction);
-
-            builder.HasOne(cl => cl.Promotion)
-               .WithMany(p => p.Clothes)
-               .OnDelete(DeleteBehavior.NoAction);
-
             builder.HasData(GenerateClothes());
         }
 

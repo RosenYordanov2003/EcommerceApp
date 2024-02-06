@@ -30,8 +30,8 @@
         public DbSet<ShoesCartEntity> ShoesCartEntities { get; set; }
         public DbSet<ProductCartEntity> ProductCartEntities { get; set; }
         public DbSet<Order> Orders { get; set; }
-
         public DbSet<PromotionCode> PromotionCodes { get; set; }
+        public DbSet<Promotion> Promotions { get; set; }
        
         protected override void OnModelCreating(ModelBuilder builder)
         {

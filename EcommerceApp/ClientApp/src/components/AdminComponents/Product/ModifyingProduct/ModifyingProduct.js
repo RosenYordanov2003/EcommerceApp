@@ -29,6 +29,7 @@ export default function ModifyingProduct() {
             })
     }, [])
 
+
     const imgs = product?.imgUrls?.map((img, index) => <div className="admin-img-container"><img key={index} src={img.imgUrl} /> </div>);
     const sizes = product?.productStocks?.map((ps) => <ProductStock productStock={ps} key={ps.id} />);
     const categories = product?.categories?.map((category) => <option value={category.id}>{category.name}</option>);
@@ -66,13 +67,13 @@ export default function ModifyingProduct() {
                     </div>
                     <div className="product-input-container">
                         <label>Category</label>
-                        <select onChange={handleOnCategoryChange} value={inputObject.category}>
+                        <select onChange={handleOnCategoryChange} value={inputObject.categoryId}>
                             {categories}
                         </select>
                     </div>
                     <div className="product-input-container">
                         <label>Brand</label>
-                        <select onChange={handleOnBrandChange} value={inputObject.brand}>
+                        <select onChange={handleOnBrandChange} value={inputObject.brandId}>
                             {brands}
                         </select>
                     </div>

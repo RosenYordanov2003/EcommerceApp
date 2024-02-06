@@ -43,6 +43,9 @@
         {
             public const int SizeMinLength = 1;
             public const int SizeMaxLength = 6;
+
+            public const int QuantityMinValue = 0;
+            public const int QuantityMaxValue = 100;
         }
         public static class ShoesSizeEntity
         {

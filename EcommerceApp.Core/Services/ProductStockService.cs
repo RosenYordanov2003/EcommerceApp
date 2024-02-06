@@ -5,6 +5,7 @@
     using Contracts;
     using Data;
     using Infrastructure.Data.Models;
+    using EcommerceApp.Core.Models.AdminModels.ProductStock;
 
     public class ProductStockService : IProductStockService
     {
@@ -61,6 +62,13 @@
 
                 productCartEntity.Quantity += quantity;
             }
+            await dbContext.SaveChangesAsync();
+        }
+        public async Task IncreaseProductStockQuantity(AddProductStockModel productStockModel)
+        {
+            var stock = await dbContext.ProductStocks.FirstAsync(ps => ps.Id == productStockModel.ProductStockId);
+
+            stock.Quantity += productStockModel.ProductQuantityToAdd;
             await dbContext.SaveChangesAsync();
         }
     }

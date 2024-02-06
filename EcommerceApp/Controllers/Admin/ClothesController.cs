@@ -1,9 +1,10 @@
 ﻿namespace EcommerceApp.Controllers.Admin
 {
-    using EcommerceApp.Core.Contracts;
-    using EcommerceApp.Core.Models.AdminModels.Clothes;
-    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Authorization;
+    using Core.Contracts;
+    using Core.Models.AdminModels.Clothes;
+    using Core.Models.AdminModels.ProductStock;
     using static EcommerceApp.Common.GeneralApplicationConstants;
 
     [ApiController]
@@ -13,10 +14,12 @@
     public class ClothesController : ControllerBase
     {
         private readonly IProductSevice productSevice;
+        private readonly IProductStockService productStockService;
 
-        public ClothesController(IProductSevice productSevice)
+        public ClothesController(IProductSevice productSevice, IProductStockService productStockService)
         {
             this.productSevice = productSevice;
+            this.productStockService = productStockService;
         }
 
         [HttpGet]
@@ -43,6 +46,17 @@
             }
             await productSevice.EditProductAsync(editProductModel);
 
+            return Ok();
+        }
+        [HttpPost]
+        [Route("AddProductStock")]
+        public async Task<IActionResult> AddProductStock([FromBody] AddProductStockModel addProductStockModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+            await productStockService.IncreaseProductStockQuantity(addProductStockModel);
             return Ok();
         }
     }

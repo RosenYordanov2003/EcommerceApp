@@ -27,9 +27,23 @@ export async function editProduct(productObject) {
     if (!request.ok) {
         throw new Error(request.Error);
     }
-    //const response = request.json();
 
-    //return response;
+    return request.ok;
+}
+export async function addProductStock(productStockObject) {
+    const request = await fetch(`${baseUrl}/AddProductStock`,
+        {
+            credentials: 'include',
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(productStockObject)
+        }
+    )
 
+    if (!request.ok) {
+        throw new Error(request.Error);
+    }
     return request.ok;
 }

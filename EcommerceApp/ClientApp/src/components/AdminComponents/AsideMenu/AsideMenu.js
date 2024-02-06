@@ -19,7 +19,6 @@ export default function AsideMenu() {
             .catch((error) => console.error(error));
     }
     function setActiveIndex(index, navigationPath) {
-        console.log('in event');
         setActiveElementIndex(index);
         navigate(navigationPath);
     }

@@ -3,15 +3,18 @@ import { getProductToModify, editProduct } from "../../../../adminServices/cloth
 import Style from "../ModifyingProduct/Style.css";
 import ProductStock from "../../ProductStock/ProductStock";
 import PoppupMessage from "../../../PoppupMessage/PoppupMessage";
+import SizeTable from "../../SizeTable/SizeTable";
+import { HubConnectionBuilder } from '@microsoft/signalr';
 
 export default function ModifyingProduct() {
 
     const path = window.location.pathname.split('/');
-    const [message, setMessage] = useState(undefined);
     const productId = path[2];
 
+    const [message, setMessage] = useState(undefined);
     const [product, setProduct] = useState(undefined);
     const [inputObject, setInputObject] = useState({});
+    const [connection, setConnection] = useState(null);
 
     useEffect(() => {
         getProductToModify(productId)
@@ -26,8 +29,39 @@ export default function ModifyingProduct() {
                     description: res.description,
                     id: productId
                 });
+
+                const newConnection = new HubConnectionBuilder()
+                    .withUrl('https://localhost:7122/notifications-hub')
+                    .withAutomaticReconnect()
+                    .build();
+                setConnection(newConnection);
             })
     }, [])
+
+    useEffect(() => {
+        if (connection) {
+            connection.start()
+                .then(() => {
+                    connection.on('ProductUpdated', () => {
+                        getProductToModify(productId)
+                            .then((res) => {
+                                setProduct(res);
+                                setInputObject({
+                                    name: res.name,
+                                    starRating: res.starRating,
+                                    brandId: res.selectedBrandId,
+                                    categoryId: res.selectedCategoryId,
+                                    price: res.price,
+                                    description: res.description,
+                                    id: productId
+                                });
+                            })
+                            .catch((error) => console.error(error));
+                    });
+                })
+                .catch(console.error);
+        }
+    }, [connection]);
 
 
     const imgs = product?.imgUrls?.map((img, index) => <div className="admin-img-container"><img key={index} src={img.imgUrl} /> </div>);
@@ -51,6 +85,7 @@ export default function ModifyingProduct() {
 
         editProduct(inputObject)
             .then(() => setMessage(<PoppupMessage message="Successfully update product" removeNotification={closeNotification} />))
+            .catch((error) => console.error(error));
     }
 
     return (
@@ -87,8 +122,9 @@ export default function ModifyingProduct() {
                     </div>
                     <button className="edit-product-button" type="submit">Edit</button>
                 </form>
+                <SizeTable productStockArray={product?.productStocks}/>
                 <section className="product-sizes">
-                    <h3 className="sizes-title">Sizes</h3>
+                    <h3 className="add-product-stock-title">Add Product Stock</h3>
                     {sizes}
                 </section>
             </div>

@@ -14,6 +14,7 @@ export default function ProductStock({ productStock }) {
     }
 
     function handleOnFormSubmit(event) {
+
         event.preventDefault();
 
         const object = {
@@ -22,7 +23,10 @@ export default function ProductStock({ productStock }) {
             productQuantityToAdd : quantity
         }
         addProductStock(object)
-            .then(() => setMessage(<PoppupMessage message="Successfully add product stock" removeNotification={closeMessage} />))
+            .then(() => {
+                setQuantity(undefined);
+                setMessage(<PoppupMessage message="Successfully add product stock" removeNotification={closeMessage} />);
+            })
             .catch((error) => console.error(error));
     }
 
@@ -31,7 +35,7 @@ export default function ProductStock({ productStock }) {
             {message !== undefined && message }
             <p>{productStock.size }</p>
             <form onSubmit={handleOnFormSubmit} className="product-stock-form">
-                <input onChange={(e) => setQuantity(e.target.value)} value={quantity} name="quantity"></input>
+                <input onChange={(e) => setQuantity(e.target.value)} value={quantity === undefined ? "" : quantity} name="quantity"></input>
                 <button>Add Quantity</button>
             </form>
         </div>

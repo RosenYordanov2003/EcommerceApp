@@ -7,5 +7,9 @@
         {
             await Clients.All.SendAsync("PurchaseMade");
         }
+        public async Task ProductUpdated()
+        {
+            await Clients.All.SendAsync("ProductUpdated");
+        }
     }
 }

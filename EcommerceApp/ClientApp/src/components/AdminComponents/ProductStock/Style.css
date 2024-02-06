@@ -28,6 +28,7 @@
     border-radius: 6px;
     padding: 0.3rem 0.3rem;
 }
+
 .product-stock-form button:hover{
     opacity: 0.8;
 }

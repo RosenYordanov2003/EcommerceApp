@@ -1,0 +1,28 @@
+﻿.size-table {
+    border-collapse: separate;
+    margin-top: 2rem;
+    background-color: white;
+    width: 100%;
+    border-radius: 2rem;
+    padding: 1.8rem;
+    text-align: center;
+    box-shadow: 0rem 2rem 3rem rgba(132, 139, 200, 0.18);
+}
+.size-table tbody tr td {
+    padding: 1.6rem;
+    color: #7d8da1;
+    font-size: 1.2rem;
+}
+
+.size-table tbody tr:not(:last-child) td {
+    height: 2.8rem;
+    border-bottom: 1px solid #7d8da1;
+}
+
+.size-table thead tr th {
+    font-size: 1.1rem;
+}
+.size-table-title{
+    margin-top: 3rem;
+    text-align: center;
+}

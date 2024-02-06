@@ -2,10 +2,12 @@
 {
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.SignalR;
     using Core.Contracts;
     using Core.Models.AdminModels.Clothes;
     using Core.Models.AdminModels.ProductStock;
     using static EcommerceApp.Common.GeneralApplicationConstants;
+    using EcommerceApp.SignalR;
 
     [ApiController]
     [Authorize(Roles = AdminRoleName)]
@@ -15,11 +17,14 @@
     {
         private readonly IProductSevice productSevice;
         private readonly IProductStockService productStockService;
+        private readonly IHubContext<NotificationsHub> hubContext;
 
-        public ClothesController(IProductSevice productSevice, IProductStockService productStockService)
+        public ClothesController(IProductSevice productSevice, IProductStockService productStockService, 
+            IHubContext<NotificationsHub> hubContext)
         {
             this.productSevice = productSevice;
             this.productStockService = productStockService;
+            this.hubContext = hubContext;
         }
 
         [HttpGet]
@@ -45,6 +50,7 @@
                 return BadRequest();
             }
             await productSevice.EditProductAsync(editProductModel);
+            await hubContext.Clients.All.SendAsync("ProductUpdated");
 
             return Ok();
         }
@@ -57,6 +63,8 @@
                 return BadRequest();
             }
             await productStockService.IncreaseProductStockQuantity(addProductStockModel);
+            await hubContext.Clients.All.SendAsync("ProductUpdated");
+
             return Ok();
         }
     }

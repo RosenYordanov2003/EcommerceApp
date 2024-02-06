@@ -25,6 +25,8 @@
 
             public const int GenderMinLength = 3;
             public const int GenderMaxLength = 5;
+
+            public const int DescriptionMaxLength = 450;
         }
         public static class ShoesEntity
         {

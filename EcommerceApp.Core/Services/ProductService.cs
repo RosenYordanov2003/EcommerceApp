@@ -232,7 +232,7 @@
                  .Where(uf => uf.UserId == userId)
                  .Select(uf => new GetUserFavoriteProductModel()
                  {
-                     ImgUrl = uf.Product.Pictures.FirstOrDefault() == null ? "": uf.Product.Pictures.FirstOrDefault().ImgUrl,
+                     ImgUrl = uf.Product.Pictures.FirstOrDefault() == null ? "" : uf.Product.Pictures.FirstOrDefault().ImgUrl,
                      ProductId = uf.ProductId,
                      ProductName = uf.Product.Name,
                      CategoryName = uf.Product.Category.Name
@@ -273,20 +273,20 @@
 
         public async Task<IEnumerable<ShoesFeatureModel>> LoadUserFavoriteProductsAsync(Guid userId)
         {
-           IEnumerable<ShoesFeatureModel> shoes = await applicationDbContext.UserFavoriteShoes
-                .Where(fsh => fsh.UserId == userId)
-                .Select(fsh => new ShoesFeatureModel()
-                {
-                    Id = fsh.ShoesId,
-                    Pictures = fsh.Shoes.Pictures.Select(p => new PictureModel() { ImgUrl = p.ImgUrl }).ToArray(),
-                    CategoryName = fsh.Shoes.Category.Name,
-                    IsFavorite = true,
-                    Name = fsh.Shoes.Name,
-                    Price = fsh.Shoes.Price,
-                    StarRating = fsh.Shoes.StarRating
+            IEnumerable<ShoesFeatureModel> shoes = await applicationDbContext.UserFavoriteShoes
+                 .Where(fsh => fsh.UserId == userId)
+                 .Select(fsh => new ShoesFeatureModel()
+                 {
+                     Id = fsh.ShoesId,
+                     Pictures = fsh.Shoes.Pictures.Select(p => new PictureModel() { ImgUrl = p.ImgUrl }).ToArray(),
+                     CategoryName = fsh.Shoes.Category.Name,
+                     IsFavorite = true,
+                     Name = fsh.Shoes.Name,
+                     Price = fsh.Shoes.Price,
+                     StarRating = fsh.Shoes.StarRating
 
-                })
-                .ToArrayAsync();
+                 })
+                 .ToArrayAsync();
 
 
             IEnumerable<ShoesFeatureModel> clothes = await applicationDbContext.UserFavoriteProducts
@@ -366,6 +366,42 @@
                 .ToArrayAsync();
 
             return productToGet;
+        }
+
+        public async Task EditProductAsync(EditProductModel model)
+        {
+            Product product = await
+                applicationDbContext
+               .Clothes
+               .Include(p => p.ProductStocks)
+               .Include(p => p.Promotion)
+               .Include(p => p.Brand)
+               .Include(p => p.Category)
+               .Include(p => p.Pictures)
+               .FirstAsync(cl => cl.Id == model.Id);
+
+            if (model.CategoryId != product.CategoryId)
+            {
+                MainCategory category = await applicationDbContext
+                    .Categories.Include(c => c.Clothes).FirstAsync(c => c.Id == model.CategoryId);
+                category.Clothes.Remove(product);
+
+                product.CategoryId = model.CategoryId;
+            }
+            if (model.BrandId != product.BrandId)
+            {
+                Brand brand = await applicationDbContext
+                    .Brands.Include(c => c.Clothes).FirstAsync(c => c.Id == model.CategoryId);
+                brand.Clothes.Remove(product);
+
+                product.BrandId = model.BrandId;
+            }
+
+            product.Name = model.Name;
+            product.Description = model.Description;
+            product.Price = model.Price;
+
+            await applicationDbContext.SaveChangesAsync();
         }
     }
 }

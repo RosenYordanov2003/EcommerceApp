@@ -1,6 +1,7 @@
 ﻿namespace EcommerceApp.Controllers.Admin
 {
     using EcommerceApp.Core.Contracts;
+    using EcommerceApp.Core.Models.AdminModels.Clothes;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using static EcommerceApp.Common.GeneralApplicationConstants;
@@ -32,10 +33,16 @@
            var product = await productSevice.GetProductToModifyAsync(productId);
            return Ok(product);
         }
-        [HttpGet]
-        [Route("EditProductInfo")]
-        public async Task<IActionResult> EditProductInfo()
+        [HttpPut]
+        [Route("EditProduct")]
+        public async Task<IActionResult> EditProductInfo([FromBody] EditProductModel editProductModel)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+            await productSevice.EditProductAsync(editProductModel);
+
             return Ok();
         }
     }

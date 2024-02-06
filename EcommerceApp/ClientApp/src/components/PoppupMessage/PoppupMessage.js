@@ -1,10 +1,16 @@
 ﻿import { useState } from 'react';
 import PoppupMessageStyle from '../PoppupMessage/PoppupMessageStyle.css';
 
-export default function PoppupMessage({ message }) {
+export default function PoppupMessage({ message, removeNotification }) {
 
     const [isActive, setIsActive] = useState(true);
 
+    function handleOnCloseNotification() {
+        setIsActive(false);
+        setTimeout(() => {
+            removeNotification();
+        }, 300)
+    }
 
     return (
         <div className={`popup-container ${isActive == true ? "active" : ""}`}>
@@ -13,7 +19,7 @@ export default function PoppupMessage({ message }) {
             </div>
             <h1>Success!</h1>
             <p>{message}</p>
-            <button onClick={() => setIsActive(false)} className="close-button">Ok</button>
+            <button onClick={handleOnCloseNotification} className="close-button">Ok</button>
         </div>
     )
 }

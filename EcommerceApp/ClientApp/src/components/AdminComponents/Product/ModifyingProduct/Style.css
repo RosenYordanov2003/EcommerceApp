@@ -19,12 +19,14 @@
     align-items: flex-start;
     justify-content: space-between;
     padding: 1rem 3rem;
+    position: relative;
 }
 .product-input-container{
     display: flex;
     flex-direction: column;
     gap: 0.2rem;
     margin-bottom: 0.6rem;
+    width: 100%;
 }
 .sizes-title{
     margin: 3rem 0rem;
@@ -48,4 +50,10 @@
     outline: none;
     padding: 0.3rem 0.3rem;
     box-shadow: 0rem 2rem 3rem rgba(132, 139, 200, 0.18);
+}
+.product-modifying-container textarea{
+    padding: 0.4rem;
+    width: 100%;
+    outline: none;
+    border: none;
 }

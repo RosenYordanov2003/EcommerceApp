@@ -19,7 +19,10 @@
     opacity: 0;
     transition: opacity 300ms ease-in-out, top 1000ms ease-in-out, transform 1000ms ease-in-out;
 }
-
+body:has(.asside-wrapper) .popup-container{
+    background-color: white;
+    left: 30%;
+}
 
 
 .popup-container.active {

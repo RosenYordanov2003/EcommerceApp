@@ -16,5 +16,6 @@
         Task<IEnumerable<ShoesFeatureModel>> LoadUserFavoriteProductsAsync(Guid userId);
         Task<IEnumerable<ClothesModel>> LoadAllClothesAsync();
         Task<ModifyClothesModel> GetProductToModifyAsync(int productId);
+        Task EditProductAsync(EditProductModel model);
     }
 }

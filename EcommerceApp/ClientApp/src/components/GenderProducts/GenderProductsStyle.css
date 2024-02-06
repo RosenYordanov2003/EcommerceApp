@@ -7,16 +7,15 @@
 }
 .main-container{
    display: flex;
-   justify-content: space-around;
    position: relative;
 }
 input:focus{
     outline: none;
 }
 #filter-menu-navigation {
-    position: relative;
+    position: sticky;
     left: 0px;
-    top: 10px;
+    top: 5px;
     height: 100vh; 
     margin-bottom: 2rem;
 }

@@ -14,3 +14,22 @@ export async function getProductToModify(protductId) {
 
     return response;
 }
+export async function editProduct(productObject) {
+    const request = await fetch(`${baseUrl}/EditProduct`, {
+        credentials: 'include',
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body:JSON.stringify(productObject)
+    })
+
+    if (!request.ok) {
+        throw new Error(request.Error);
+    }
+    //const response = request.json();
+
+    //return response;
+
+    return request.ok;
+}

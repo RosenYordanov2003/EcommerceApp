@@ -12,8 +12,8 @@
     using Models.Review;
     using Infrastructure.Data.Models;
     using Models.AdminModels.Clothes;
-    using EcommerceApp.Core.Models.AdminModels.Promotion;
-    using EcommerceApp.Core.Models.Promotion;
+    using Models.AdminModels.Promotion;
+    using Models.Promotion;
 
     public class ProductService : IProductSevice
     {
@@ -352,7 +352,7 @@
                 Id = product.Id,
                 SelectedCategoryId = product.CategoryId,
                 ImgUrls = product.Pictures.Select(p => new PictureModel() { ImgUrl = p.ImgUrl }).ToArray(),
-                isArchived = product.IsArchived,
+                IsArchived = product.IsArchived,
                 Name = product.Name,
                 Price = product.Price,
                 PromotionModel = new PromotionModel() { Id = product?.Promotion?.Id ,ExpireTime = product?.Promotion?.ExpireTime, PercentageDiscount = product?.Promotion?.PercantageDiscount },
@@ -417,6 +417,14 @@
             product.Promotion = promotion;
 
             await applicationDbContext.Promotions.AddAsync(promotion);
+            await applicationDbContext.SaveChangesAsync();
+        }
+
+        public async Task ArchiveProductAsync(int productId)
+        {
+            Product product = await applicationDbContext.Clothes.FirstAsync(cl => cl.Id == productId);
+            product.IsArchived = true;
+
             await applicationDbContext.SaveChangesAsync();
         }
     }

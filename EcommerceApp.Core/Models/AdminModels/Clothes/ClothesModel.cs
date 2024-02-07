@@ -7,6 +7,7 @@
         public string Name { get; set; } = null!;
         public decimal Price { get; set; }
         public int StarRating { get; set; }
+        public bool IsArchived { get; set; }
         public IEnumerable<PictureModel> ImgUrls { get; set; } = null!; 
     }
 }

@@ -64,3 +64,20 @@ export async function addPromotion(promotionObject) {
     }
     return request.ok;
 }
+export async function archiveProduct(productId) {
+    const request = await fetch(`${baseUrl}/Archive`,
+        {
+            credentials: 'include',
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(productId)
+        }
+    )
+
+    if (!request.ok) {
+        throw new Error(request.Error);
+    }
+    return request.ok;
+}

@@ -14,7 +14,6 @@
             Brands = new List<BrandModel>();
         }
         public string? Description { get; set; }
-        public bool isArchived { get; set; }
         public PromotionModel? PromotionModel { get; set; }
         public int SelectedBrandId { get; set; }
         public int SelectedCategoryId { get; set; }

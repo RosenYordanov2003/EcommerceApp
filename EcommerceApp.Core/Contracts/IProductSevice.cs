@@ -19,5 +19,6 @@
         Task<ModifyClothesModel> GetProductToModifyAsync(int productId);
         Task EditProductAsync(EditProductModel model);
         Task ApplyPromotionAsync(AddPromotionModel addPromotionModel);
+        Task ArchiveProductAsync(int productId);
     }
 }

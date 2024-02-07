@@ -81,6 +81,19 @@
 
             return Ok();
         }
+        [HttpPost]
+        [Route("Archive")]
+        public async Task<IActionResult> Archive([FromBody] int productId)
+        {
+            if (!await productSevice.CheckIfProductExistsByIdAsync(productId))
+            {
+                return BadRequest();
+            }
+            await productSevice.ArchiveProductAsync(productId);
+            await hubContext.Clients.All.SendAsync("ProductUpdated");
+
+            return Ok();
+        }
        
     }
 }

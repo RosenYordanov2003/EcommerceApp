@@ -1,5 +1,5 @@
 ﻿import { useEffect, useState } from "react";
-import { getProductToModify, editProduct } from "../../../../adminServices/clothesService";
+import { getProductToModify, editProduct, archiveProduct } from "../../../../adminServices/clothesService";
 import Style from "../ModifyingProduct/Style.css";
 import ProductStock from "../../ProductStock/ProductStock";
 import PoppupMessage from "../../../PoppupMessage/PoppupMessage";
@@ -90,12 +90,20 @@ export default function ModifyingProduct() {
             .then(() => setMessage(<PoppupMessage message="Successfully update product" removeNotification={closeNotification} />))
             .catch((error) => console.error(error));
     }
+    function handleOnArchiveClickToggle() {
+        if (!product?.isArchived) {
+            archiveProduct(productId)
+                .then(() => setMessage(<PoppupMessage message="Successfylly Archive Product" closeNotification={closeNotification} />))
+                .catch((error) => console.error(error));
+        }
+    }
 
     return (
         <div className="product-modifying-container">
             {message !== undefined && message}
             <div className="imgs-container">
                 {imgs}
+                <div onClick={handleOnArchiveClickToggle} className="archive-container"><button>{product?.isArchived ? "Restore" : "Archive"}</button></div>
             </div>
             <div className="product-modifying-content">
                 <form onSubmit={handleFormSubmit}>

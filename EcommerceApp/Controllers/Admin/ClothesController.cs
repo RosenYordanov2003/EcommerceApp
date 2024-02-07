@@ -94,6 +94,19 @@
 
             return Ok();
         }
+        [HttpPost]
+        [Route("Restore")]
+        public async Task<IActionResult> Restore([FromBody] int productId)
+        {
+            if (!await productSevice.CheckIfProductExistsByIdAsync(productId))
+            {
+                return BadRequest();
+            }
+            await productSevice.RestoreProductAsync(productId);
+            await hubContext.Clients.All.SendAsync("ProductUpdated");
+
+            return Ok();
+        }
        
     }
 }

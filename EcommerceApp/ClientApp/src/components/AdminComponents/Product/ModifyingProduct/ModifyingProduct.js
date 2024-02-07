@@ -1,5 +1,5 @@
 ﻿import { useEffect, useState } from "react";
-import { getProductToModify, editProduct, archiveProduct } from "../../../../adminServices/clothesService";
+import { getProductToModify, editProduct, archiveProduct, restoreProduct } from "../../../../adminServices/clothesService";
 import Style from "../ModifyingProduct/Style.css";
 import ProductStock from "../../ProductStock/ProductStock";
 import PoppupMessage from "../../../PoppupMessage/PoppupMessage";
@@ -39,7 +39,6 @@ export default function ModifyingProduct() {
             })
     }, [])
 
-    console.log(product);
 
     useEffect(() => {
         if (connection) {
@@ -93,7 +92,12 @@ export default function ModifyingProduct() {
     function handleOnArchiveClickToggle() {
         if (!product?.isArchived) {
             archiveProduct(productId)
-                .then(() => setMessage(<PoppupMessage message="Successfylly Archive Product" closeNotification={closeNotification} />))
+                .then(() => setMessage(<PoppupMessage message="Successfylly Archive Product" removeNotification={closeNotification} />))
+                .catch((error) => console.error(error));
+        }
+        else {
+            restoreProduct(productId)
+                .then(() => setMessage(<PoppupMessage message="Successfylly Restore Product" removeNotification={closeNotification} />))
                 .catch((error) => console.error(error));
         }
     }
@@ -104,6 +108,7 @@ export default function ModifyingProduct() {
             <div className="imgs-container">
                 {imgs}
                 <div onClick={handleOnArchiveClickToggle} className="archive-container"><button>{product?.isArchived ? "Restore" : "Archive"}</button></div>
+                <div className="add-img-container"><button>Upload Img</button></div>
             </div>
             <div className="product-modifying-content">
                 <form onSubmit={handleFormSubmit}>

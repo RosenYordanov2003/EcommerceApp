@@ -21,8 +21,8 @@
 }
 body:has(.asside-wrapper) .popup-container{
     background-color: white;
-    left: 30%;
-    top: 40%;
+    left: 40%;
+    top: 51%;
 }
 
 

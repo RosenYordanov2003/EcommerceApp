@@ -427,5 +427,13 @@
 
             await applicationDbContext.SaveChangesAsync();
         }
+
+        public async Task RestoreProductAsync(int productId)
+        {
+            Product product = await applicationDbContext.Clothes.FirstAsync(cl => cl.Id == productId);
+            product.IsArchived = false;
+
+            await applicationDbContext.SaveChangesAsync();
+        }
     }
 }

@@ -25,15 +25,10 @@
         public int StarRating { get; set; }
         public bool IsArchived { get; set; }
 
-        [ForeignKey(nameof(SubCategory))]
-        public int SubCategoryId { get; set; }
-        [Required]
-        public SubCategory SubCategory { get; set; } = null!;
-
         [ForeignKey(nameof(Category))]
         public int CategoryId { get; set; }
         [Required]
-        public MainCategory Category { get; set; } = null!;
+        public Category Category { get; set; } = null!;
         public ICollection<Picture> Pictures { get; set; }
 
         [Required]

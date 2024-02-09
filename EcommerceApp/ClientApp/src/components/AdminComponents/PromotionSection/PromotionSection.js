@@ -55,7 +55,6 @@ export default function PromotionSection({ promotionModel }) {
             .then(() => console.log(true))
             .catch((error) => console.error(error));
     }
-    console.log(promotionModel);
     function handleOnPromotionDelete() {
         removePromotion(promotionModel?.id)
             .then(() => setInputObject(undefined))

@@ -12,7 +12,7 @@
         {
 
         }
-        public DbSet<MainCategory> Categories { get; set; }
+        public DbSet<Category> Categories { get; set; }
         public DbSet<Shoes> Shoes { get; set; }
         public DbSet<Product> Clothes { get; set; }
         public DbSet<Brand> Brands { get; set; }
@@ -72,7 +72,6 @@
             builder.ApplyConfiguration(new UserEntityConfiguration());
             builder.ApplyConfiguration(new BrandEntityConfiguration());
             builder.ApplyConfiguration(new MainCategoryEntityConfiguration());
-            builder.ApplyConfiguration(new SubCategoryEntityConfiguration());
             builder.ApplyConfiguration(new ShoesEntityConfiguration());
             builder.ApplyConfiguration(new ProductEntityConfiguration());
             builder.ApplyConfiguration(new PictureEntityConfiguration());

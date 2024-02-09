@@ -23,7 +23,6 @@
                   {
                       Id = c.Id,
                       Name = c.Name,
-                      SubCategories = c.SubCategories.Select(sc => new CategoryModel() { Id = sc.Id, Name = sc.Name})
                   })
                   .ToArrayAsync();
 

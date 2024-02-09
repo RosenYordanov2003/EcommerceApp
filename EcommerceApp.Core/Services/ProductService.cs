@@ -97,7 +97,6 @@
                       CategoryName = cl.Category.Name,
                       Brand = cl.Brand.Name,
                       IsFavorite = userId.HasValue ? cl.UserFavoriteProducts.Any(ufcl => ufcl.UserId == userId && ufcl.ProductId == cl.Id) : false,
-                      SubCategories = cl.Category.SubCategories.Select(subc => subc.Name).ToList()
                   })
                   .ToListAsync();
 
@@ -110,7 +109,6 @@
                     Pictures = sh.Pictures.Select(p => new PictureModel() { ImgUrl = p.ImgUrl }).Take(2),
                     StarRating = sh.StarRating,
                     Price = sh.Price,
-                    SubCategory = sh.SubCategory.Name,
                     CategoryName = sh.Category.Name,
                     Brand = sh.Brand.Name,
                     IsFavorite = userId.HasValue ? sh.UserFavoriteShoes.Any(ufsh => ufsh.UserId == userId && ufsh.ShoesId == sh.Id) : false,
@@ -132,7 +130,6 @@
                  {
                      Id = c.Id,
                      Name = c.Name,
-                     SubCategories = c.SubCategories.Select(sc => new CategoryModel() { Id = sc.Id, Name = sc.Name })
                  })
                  .ToListAsync();
 
@@ -384,7 +381,7 @@
 
             if (model.CategoryId != product.CategoryId)
             {
-                MainCategory category = await applicationDbContext
+                Category category = await applicationDbContext
                     .Categories.Include(c => c.Clothes).FirstAsync(c => c.Id == model.CategoryId);
                 category.Clothes.Remove(product);
 

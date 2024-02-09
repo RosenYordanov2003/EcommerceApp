@@ -34,7 +34,6 @@
                     Name = "Chicago Bulls Essential",
                     Description = "Men's Jordan NBA Long-Sleeve T-Shirt",
                     CategoryId = 1,
-                    SubCategoryId = 6,
                     Gender = "M",
                     Color = "Gray",
                     Price = 40,
@@ -47,7 +46,6 @@
                     Name = "Chicago Bulls Essential",
                     Description = "Men's Jordan NBA Long-Sleeve T-Shirt",
                     CategoryId = 1,
-                    SubCategoryId = 6,
                     Gender = "M",
                     Color = "Black",
                     Price = 40,
@@ -63,7 +61,6 @@
                     Color = "Black",
                     CategoryId = 1,
                     Gender = "M",
-                    SubCategoryId = 7,
                     Description = "From the pitch to the streets, you can celebrate Marcus Rashford's passion for sport in comfort with this sweat-wicking tee. Soft fabric and a relaxed fit help keep you dry and comfortable, while retro branding and an \"MR\" logo add the perfect finishing touches."
                 },
                 new Product()
@@ -76,7 +73,6 @@
                     Color = "White",
                     CategoryId = 1,
                     Gender = "M",
-                    SubCategoryId = 7,
                     Description = "From the pitch to the streets, you can celebrate Marcus Rashford's passion for sport in comfort with this sweat-wicking tee. Soft fabric and a relaxed fit help keep you dry and comfortable, while retro branding and an \"MR\" logo add the perfect finishing touches."
                 },
                 new Product()
@@ -89,7 +85,6 @@
                     Color = "White",
                     CategoryId = 1,
                     Gender = "W",
-                    SubCategoryId = 6,
                     Description = "Extra-soft, stretchy ribbed fabric helps make this slim-fitting top an everyday favourite. A mock neck and long sleeves offer a tailored look while the embroidered Swoosh logo and piping details add a touch of heritage style."
                 },
                 new Product()
@@ -102,7 +97,6 @@
                     Color = "Black",
                     CategoryId = 1,
                     Gender = "W",
-                    SubCategoryId = 6,
                     IsFeatured = true,
                     Description = "Extra-soft, stretchy ribbed fabric helps make this slim-fitting top an everyday favourite. A mock neck and long sleeves offer a tailored look while the embroidered Swoosh logo and piping details add a touch of heritage style."
                 },
@@ -113,7 +107,6 @@
                     Name = "Nike Dri-FIT UV One Luxe",
                     Price = 40,
                     CategoryId = 1,
-                    SubCategoryId = 7,
                     Gender = "W",
                     Color = "Wine Red",
                     Description = "The Nike Dri-FIT One Luxe Top is designed for all the ways you work out—from yoga to HIIT to long runs. As part of the Nike Luxe line, this top defines luxury with buttery-soft and smooth fabric that breathes to keep you dry and cool. It's made from at least 75% recycled polyester fibres."
@@ -129,7 +122,6 @@
                     Price = 99,
                     StarRating = 5,
                     IsFeatured = true,
-                    SubCategoryId = 5,
                     Description = "Ready for cooler weather, the Nike Sportswear Tech Fleece Joggers feature an updated fit perfect for everyday wear. Roomy through the thigh, this tapered design narrows at the knee to give you a comfortable feel without losing the clean, tailored look you love. Tall ribbed cuffs complete the jogger look while a zipped pocket on the right leg provides secure small-item storage and elevates the look."
                 },
                 new Product()
@@ -142,7 +134,6 @@
                     Color = "Red",
                     Price = 99,
                     StarRating = 5,
-                    SubCategoryId = 5,
                     Description = "Ready for cooler weather, the Nike Sportswear Tech Fleece Joggers feature an updated fit perfect for everyday wear. Roomy through the thigh, this tapered design narrows at the knee to give you a comfortable feel without losing the clean, tailored look you love. Tall ribbed cuffs complete the jogger look while a zipped pocket on the right leg provides secure small-item storage and elevates the look."
                 },
                 new Product()
@@ -155,7 +146,6 @@
                     Color = "Slate White",
                     Price = 60,
                     StarRating = 4,
-                    SubCategoryId = 5,
                     Description = "A wardrobe staple, the Nike Sportswear Club Fleece Joggers combine a classic look with the soft comfort of fleece for an elevated, everyday look that you can wear every day."
                 },
                 new Product()
@@ -163,7 +153,6 @@
                     Id = 11,
                     BrandId = 1,
                     CategoryId = 5,
-                    SubCategoryId = 5,
                     Gender = "W",
                     Name = "Nike Sportswear Phoenix Fleece",
                     Color = "Pink",
@@ -176,7 +165,6 @@
                     Id = 12,
                     BrandId = 1,
                     CategoryId = 5,
-                    SubCategoryId = 5,
                     Gender = "W",
                     Name = "Nike Sportswear Phoenix Fleece",
                     Color = "Green",

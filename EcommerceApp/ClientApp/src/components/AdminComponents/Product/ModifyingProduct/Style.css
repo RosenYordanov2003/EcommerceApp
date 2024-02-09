@@ -78,8 +78,18 @@
 .add-img-container button {
     border: 2px dashed #7b81e5;
 }
-.add-img-container button:hover{
+.add-img-container{
+    position: relative;
+}
+
+.add-img-container:hover button {
     background-color: #7b81e5;
     color: white;
-    border: none;
+    border: 1px solid #7b81e5;
+}
+input[type='file']{
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
 }

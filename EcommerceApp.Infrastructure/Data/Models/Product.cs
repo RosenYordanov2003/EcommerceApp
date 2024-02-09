@@ -23,11 +23,7 @@
         [ForeignKey(nameof(Category))]
         public int CategoryId { get; set; }
         [Required]
-        public MainCategory Category { get; set; } = null!;
-        [ForeignKey(nameof(SubCategory))]
-        public int? SubCategoryId { get; set; }
-        [Required]
-        public SubCategory? SubCategory { get; set; }
+        public Category Category { get; set; } = null!;
         public decimal Price { get; set; }
         [Required]
         [MaxLength(ColorMaxLength)]

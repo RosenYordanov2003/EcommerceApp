@@ -1,5 +1,5 @@
 ﻿import { useEffect, useState } from "react";
-import { getProductToModify, editProduct, archiveProduct, restoreProduct } from "../../../../adminServices/clothesService";
+import { getProductToModify, editProduct, archiveProduct, restoreProduct, uploadImg } from "../../../../adminServices/clothesService";
 import Style from "../ModifyingProduct/Style.css";
 import ProductStock from "../../ProductStock/ProductStock";
 import PoppupMessage from "../../../PoppupMessage/PoppupMessage";
@@ -16,6 +16,7 @@ export default function ModifyingProduct() {
     const [product, setProduct] = useState(undefined);
     const [inputObject, setInputObject] = useState({});
     const [connection, setConnection] = useState(null);
+    const [fileInputObject, setFileInput] = useState(undefined);
 
     useEffect(() => {
         getProductToModify(productId)
@@ -101,6 +102,23 @@ export default function ModifyingProduct() {
                 .catch((error) => console.error(error));
         }
     }
+    function handleOnImgUpload() {
+
+        const formData = new FormData();
+        formData.append("productId", productId);
+        formData.append("productCategory", "clothes");
+        formData.append("pictureFile", fileInputObject);
+
+
+        uploadImg(formData)
+            .then(() => console.log(true))
+            .catch((error) => console.error(error));
+
+    }
+    function handleOnFileChange(e) {
+        setFileInput(e.target.files[0]);
+    }
+
 
     return (
         <div className="product-modifying-container">
@@ -108,7 +126,11 @@ export default function ModifyingProduct() {
             <div className="imgs-container">
                 {imgs}
                 <div onClick={handleOnArchiveClickToggle} className="archive-container"><button>{product?.isArchived ? "Restore" : "Archive"}</button></div>
-                <div className="add-img-container"><button>Upload Img</button></div>
+                <div className="add-img-container">
+                    <input onChange={(handleOnFileChange)} type="file"></input>
+                    <button>Upload Img</button>
+                </div>
+                <button onClick={handleOnImgUpload}>Upload</button>
             </div>
             <div className="product-modifying-content">
                 <form onSubmit={handleFormSubmit}>

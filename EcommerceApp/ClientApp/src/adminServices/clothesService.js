@@ -98,3 +98,16 @@ export async function restoreProduct(productId) {
     }
     return request.ok;
 }
+export async function uploadImg(object) {
+    const request = await fetch(`${baseUrl}/UploadImg`, {
+        credentials: 'include',
+        method: 'POST',
+        body: object,
+    })
+
+    if (!request.ok) {
+        throw new Error(request.Error);
+    }
+
+    return request.ok;
+}

@@ -32,6 +32,7 @@
         public DbSet<Order> Orders { get; set; }
         public DbSet<PromotionCode> PromotionCodes { get; set; }
         public DbSet<Promotion> Promotions { get; set; }
+        public DbSet<Picture> Pictures { get; set; }
        
         protected override void OnModelCreating(ModelBuilder builder)
         {

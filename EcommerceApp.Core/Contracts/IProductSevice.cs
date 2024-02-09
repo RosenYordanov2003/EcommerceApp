@@ -21,5 +21,6 @@
         Task ApplyPromotionAsync(AddPromotionModel addPromotionModel);
         Task ArchiveProductAsync(int productId);
         Task RestoreProductAsync(int productId);
+        Task UploadImgAsync(UploadProductImgModel uploadProductImgModel, string path);
     }
 }

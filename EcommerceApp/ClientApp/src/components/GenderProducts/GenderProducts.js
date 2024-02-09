@@ -158,10 +158,9 @@ export default function GenderProducts() {
                 </div>
 
             </form>
-            <div className="main-container">
+            <div className={`main-container`}>
 
                 {resultObject && <FilterMenu result={resultObject} onCheckInput={filterProducts} />}
-
                 <div>
                     {resultContainer}
                 </div>

@@ -66,7 +66,6 @@ export default function ModifyingProduct() {
         }
     }, [connection]);
 
-
     const imgs = product?.imgUrls?.map((img, index) => <div className="admin-img-container"><img key={index} src={img.imgUrl} /> </div>);
     const sizes = product?.productStocks?.map((ps) => <ProductStock productStock={ps} key={ps.id} />);
     const categories = product?.categories?.map((category) => <option value={category.id}>{category.name}</option>);
@@ -123,14 +122,21 @@ export default function ModifyingProduct() {
     return (
         <div className="product-modifying-container">
             {message !== undefined && message}
-            <div className="imgs-container">
-                {imgs}
-                <div onClick={handleOnArchiveClickToggle} className="archive-container"><button>{product?.isArchived ? "Restore" : "Archive"}</button></div>
-                <div className="add-img-container">
-                    <input onChange={(handleOnFileChange)} type="file"></input>
-                    <button>Upload Img</button>
+            <div className="imgs-container-product">
+                <div className="imgs-container">
+                    {imgs}
                 </div>
-                <button onClick={handleOnImgUpload}>Upload</button>
+                <div className="product-buttons-container">
+                    <section className="add-img-container-section">
+                        <div className="add-img-container">
+                            <input onChange={(handleOnFileChange)} type="file"></input>
+                            <button>Add Img</button>
+                        </div>
+                        <button className="upload-img" onClick={handleOnImgUpload}>Upload</button>
+                    </section>
+                    <div onClick={handleOnArchiveClickToggle} className="archive-container"><button>{product?.isArchived ? "Restore" : "Archive"}</button></div>
+                </div>
+
             </div>
             <div className="product-modifying-content">
                 <form onSubmit={handleFormSubmit}>
@@ -160,13 +166,13 @@ export default function ModifyingProduct() {
                     </div>
                     <button className="edit-product-button" type="submit">Edit</button>
                 </form>
-                <SizeTable productStockArray={product?.productStocks}/>
+                <SizeTable productStockArray={product?.productStocks} />
                 <section className="product-sizes">
                     <h3 className="add-product-stock-title">Add Product Stock</h3>
                     {sizes}
                 </section>
                 <section className="promotion-section">
-                    <PromotionSection promotionModel={product?.promotionModel}/>
+                    <PromotionSection promotionModel={product?.promotionModel} />
                 </section>
             </div>
         </div>

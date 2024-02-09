@@ -432,5 +432,27 @@
 
             await applicationDbContext.SaveChangesAsync();
         }
+
+        public async Task UploadImgAsync(UploadProductImgModel uploadProductImgModel, string path)
+        {
+            string fileName = string.Format($"{uploadProductImgModel.ProductId}_{uploadProductImgModel.PictureFile.FileName}");
+            string filePath = Path.Combine(path, fileName);
+
+
+            using (FileStream stream = new FileStream(Path.Combine(filePath), FileMode.Create))
+            {
+                await uploadProductImgModel.PictureFile.CopyToAsync(stream);
+            }
+
+            Picture picture = new Picture()
+            {
+                ClothId = uploadProductImgModel.ProductId,
+                ImgUrl = $"https://localhost:7122/clothes/{fileName}",
+            };
+
+            await applicationDbContext.Pictures.AddAsync(picture);
+
+            await applicationDbContext.SaveChangesAsync();
+        }
     }
 }

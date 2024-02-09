@@ -10,6 +10,7 @@
     using static Common.GeneralApplicationConstants;
     using SignalR;
     using Core.Models.AdminModels.Promotion;
+    using EcommerceApp.Infrastructure.Data.Models;
 
     [ApiController]
     [Authorize(Roles = AdminRoleName)]
@@ -117,21 +118,15 @@
 
             try
             {
-                string path = @"C:\\Users\\Home\\Desktop\\Ecomemrce App Remote\\EcommerceApp\\EcommerceApp\\ClientApp\\imgs\\clothes";
+                string path = Path.Combine(webHostEnvironment.WebRootPath,"clothes");
 
-                string fileName = string.Format($"{uploadProductImgModel.ProductId}_{uploadProductImgModel.PictureFile.FileName}");
-                string filePath = Path.Combine(path, fileName);
-
-                using (Stream stream = new FileStream(path, FileMode.Create ,FileAccess.ReadWrite))
-                {
-                    await uploadProductImgModel.PictureFile.CopyToAsync(stream);
-                }
+                await productSevice.UploadImgAsync(uploadProductImgModel, path);
             }
             catch (Exception)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
-
+            await hubContext.Clients.All.SendAsync("ProductUpdated");
             return Ok();
         }
     }

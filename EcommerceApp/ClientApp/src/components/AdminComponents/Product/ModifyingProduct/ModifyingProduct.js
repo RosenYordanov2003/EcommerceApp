@@ -11,6 +11,7 @@ export default function ModifyingProduct() {
 
     const path = window.location.pathname.split('/');
     const productId = path[2];
+    const category = path[3];
 
     const [message, setMessage] = useState(undefined);
     const [product, setProduct] = useState(undefined);
@@ -19,25 +20,51 @@ export default function ModifyingProduct() {
     const [fileInputObject, setFileInput] = useState(undefined);
 
     useEffect(() => {
-        getProductToModify(productId)
-            .then((res) => {
-                setProduct(res);
-                setInputObject({
-                    name: res.name,
-                    starRating: res.starRating,
-                    brandId: res.selectedBrandId,
-                    categoryId: res.selectedCategoryId,
-                    price: res.price,
-                    description: res.description,
-                    id: productId
-                });
 
-                const newConnection = new HubConnectionBuilder()
-                    .withUrl('https://localhost:7122/notifications-hub')
-                    .withAutomaticReconnect()
-                    .build();
-                setConnection(newConnection);
-            })
+        if (category !== "Shoes") {
+            getProductToModify(productId)
+                .then((res) => {
+                    setProduct(res);
+                    setInputObject({
+                        name: res.name,
+                        starRating: res.starRating,
+                        brandId: res.selectedBrandId,
+                        categoryId: res.selectedCategoryId,
+                        price: res.price,
+                        description: res.description,
+                        id: productId
+                    });
+
+                    const newConnection = new HubConnectionBuilder()
+                        .withUrl('https://localhost:7122/notifications-hub')
+                        .withAutomaticReconnect()
+                        .build();
+                    setConnection(newConnection);
+                })
+        }
+        else {
+            getProductToModify(productId)
+                .then((res) => {
+                    setProduct(res);
+                    setInputObject({
+                        name: res.name,
+                        starRating: res.starRating,
+                        brandId: res.selectedBrandId,
+                        categoryId: res.selectedCategoryId,
+                        price: res.price,
+                        description: res.description,
+                        id: productId
+                    });
+
+                    const newConnection = new HubConnectionBuilder()
+                        .withUrl('https://localhost:7122/notifications-hub')
+                        .withAutomaticReconnect()
+                        .build();
+                    setConnection(newConnection);
+                })
+        }
+
+      
     }, [])
 
 

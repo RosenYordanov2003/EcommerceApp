@@ -1,10 +1,18 @@
 ﻿namespace EcommerceApp.Core.Services
 {
     using Microsoft.EntityFrameworkCore;
-    using EcommerceApp.Data;
+    using Data;
     using Contracts;
     using Models.Shoes;
     using Models.Pictures;
+    using Models.AdminModels.Clothes;
+    using Models.AdminModels.Shoes;
+    using EcommerceApp.Core.Models.Brands;
+    using EcommerceApp.Core.Models.Categories;
+    using EcommerceApp.Core.Models.ProductStocks;
+    using EcommerceApp.Core.Models.Promotion;
+    using EcommerceApp.Infrastructure.Data.Models;
+    using EcommerceApp.Core.Models.AdminModels.Pictures;
 
     public class ShoesService : IShoesService
     {
@@ -12,6 +20,26 @@
         public ShoesService(ApplicationDbContext applicationDbContext)
         {
             this.applicationDbContext = applicationDbContext;
+        }
+
+        public async Task<bool> CheckIfShoesExistsByIdAsync(int shoesId)
+        {
+            return await applicationDbContext.Shoes.AnyAsync(sh => sh.Id == shoesId);
+        }
+
+        public async Task<IEnumerable<ClothesModel>> GetAllShoesAsync()
+        {
+            return await applicationDbContext.Shoes
+                .Select(sh => new ClothesModel()
+                {
+                    Id = sh.Id,
+                    ImgUrls = sh.Pictures.Select(p => new DeletePictureModel() { ImgUrl = p.ImgUrl, Id = p.Id }).ToArray(),
+                    StarRating = sh.StarRating,
+                    IsArchived = sh.IsArchived,
+                    Name = sh.Name,
+                    Price = sh.Price
+                })
+                .ToArrayAsync();
         }
 
         public async Task<IEnumerable<ShoesFeatureModel>> GetFeaturedShoesAsync(Guid? userId)
@@ -30,6 +58,44 @@
                     Any(us => us.UserId == userId && us.ShoesId == s.Id) : false,
                 })
                 .ToArrayAsync();
+        }
+
+        public async Task<ModifyShoesModel> GetShoesToModifyAsync(int shoesId)
+        {
+            Shoes shoes = await
+                applicationDbContext
+            .Shoes
+               .Include(p => p.ShoesStocks)
+               .Include(p => p.Promotion)
+               .Include(p => p.Brand)
+               .Include(p => p.Category)
+               .Include(p => p.Pictures)
+               .FirstAsync(cl => cl.Id == shoesId);
+
+            ModifyShoesModel productToGet = new ModifyShoesModel()
+            {
+                ProductStocks = shoes.ShoesStocks.Select(ps => new ProductStock<double>() { Id = ps.Id, Quantity = ps.Quantity, Size = ps.Size }),
+                SelectedBrandId = shoes.BrandId,
+                Description = shoes.Description,
+                Id = shoes.Id,
+                SelectedCategoryId = shoes.CategoryId,
+                ImgUrls = shoes.Pictures.Select(p => new DeletePictureModel() { ImgUrl = p.ImgUrl , Id = p.Id }).ToArray(),
+                IsArchived = shoes.IsArchived,
+                Name = shoes.Name,
+                Price = shoes.Price,
+                PromotionModel = new PromotionModel() { Id = shoes?.Promotion?.Id, ExpireTime = shoes?.Promotion?.ExpireTime, PercentageDiscount = shoes?.Promotion?.PercantageDiscount },
+                StarRating = shoes.StarRating,
+            };
+
+            productToGet.Brands = await applicationDbContext.Brands
+                .Select(b => new BrandModel() { Id = b.Id, Name = b.Name })
+                .ToArrayAsync();
+
+            productToGet.Categories = await applicationDbContext
+                .Categories.Select(c => new CategoryModel() { Id = c.Id, Name = c.Name })
+                .ToArrayAsync();
+
+            return productToGet;
         }
     }
 }

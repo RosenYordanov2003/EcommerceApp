@@ -1,24 +1,12 @@
 ﻿namespace EcommerceApp.Core.Models.AdminModels.Clothes
 {
-    using Brands;
-    using Categories;
-    using EcommerceApp.Core.Models.Promotion;
     using ProductStocks;
-    using Promotion;
-    public class ModifyClothesModel : ClothesModel
+    public class ModifyClothesModel : ModifyModel
     {
         public ModifyClothesModel()
         {
             ProductStocks = new List<ProductStock<string>>();
-            Categories = new List<CategoryModel>();
-            Brands = new List<BrandModel>();
         }
-        public string? Description { get; set; }
-        public PromotionModel? PromotionModel { get; set; }
-        public int SelectedBrandId { get; set; }
-        public int SelectedCategoryId { get; set; }
         public IEnumerable<ProductStock<string>> ProductStocks { get; set; }
-        public IEnumerable<CategoryModel> Categories { get; set; }
-        public IEnumerable<BrandModel> Brands { get; set; }
     }
 }

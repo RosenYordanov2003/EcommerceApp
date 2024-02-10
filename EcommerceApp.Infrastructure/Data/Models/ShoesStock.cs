@@ -1,7 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace EcommerceApp.Infrastructure.Data.Models
+﻿namespace EcommerceApp.Infrastructure.Data.Models
 {
+    using System.ComponentModel.DataAnnotations.Schema;
     public class ShoesStock
     {
         public int Id { get; set; }

@@ -39,7 +39,7 @@ export default function AsideMenu() {
                     </span>
                     <p className="icon-text-content">Clothes</p>
                 </div>
-                <div onClick={() => setActiveElementIndex(2)} className={`icon-container ${activeElementIndex === 2 ? "active-icon-container" : ""}`}>
+                <div onClick={() => setActiveIndex(2, '/Shoes')} className={`icon-container ${activeElementIndex === 2 ? "active-icon-container" : ""}`}>
                     <span className="material-symbols-outlined">
                         podiatry
                     </span>

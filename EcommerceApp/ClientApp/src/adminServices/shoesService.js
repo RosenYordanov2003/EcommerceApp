@@ -14,3 +14,15 @@ export async function getShoesToModify(shoesId) {
 
     return response;
 }
+export async function editShoes(object) {
+    const request = await fetch(`${baseUrl}/editShoes`, {
+        credentials: 'include',
+        method: 'POST',
+        headers: {
+            'Content-Type' : 'application/json'
+        },
+        body: JSON.stringify(object)
+    });
+
+    return request.ok;
+}

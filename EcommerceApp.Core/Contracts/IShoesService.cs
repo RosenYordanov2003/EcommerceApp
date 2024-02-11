@@ -9,5 +9,6 @@
         Task<IEnumerable<ClothesModel>> GetAllShoesAsync();
         Task<ModifyShoesModel> GetShoesToModifyAsync(int shoesId);
         Task<bool> CheckIfShoesExistsByIdAsync(int shoesId);
+        Task EditShoesAsync(EditProductModel model);
     }
 }

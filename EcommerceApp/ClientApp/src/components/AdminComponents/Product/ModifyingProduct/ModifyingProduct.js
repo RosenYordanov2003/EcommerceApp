@@ -5,6 +5,8 @@ import ProductStock from "../../ProductStock/ProductStock";
 import PoppupMessage from "../../../PoppupMessage/PoppupMessage";
 import SizeTable from "../../SizeTable/SizeTable";
 import PromotionSection from "../../PromotionSection/PromotionSection";
+import { getShoesToModify } from "../../../../adminServices/shoesService";
+import { editShoes } from "../../../../adminServices/shoesService";
 import { HubConnectionBuilder } from '@microsoft/signalr';
 
 export default function ModifyingProduct() {
@@ -43,7 +45,7 @@ export default function ModifyingProduct() {
                 })
         }
         else {
-            getProductToModify(productId)
+            getShoesToModify(productId)
                 .then((res) => {
                     setProduct(res);
                     setInputObject({
@@ -73,20 +75,39 @@ export default function ModifyingProduct() {
             connection.start()
                 .then(() => {
                     connection.on('ProductUpdated', () => {
-                        getProductToModify(productId)
-                            .then((res) => {
-                                setProduct(res);
-                                setInputObject({
-                                    name: res.name,
-                                    starRating: res.starRating,
-                                    brandId: res.selectedBrandId,
-                                    categoryId: res.selectedCategoryId,
-                                    price: res.price,
-                                    description: res.description,
-                                    id: productId
-                                });
-                            })
-                            .catch((error) => console.error(error));
+                        if (category !== "Shoes") {
+                            getProductToModify(productId)
+                                .then((res) => {
+                                    setProduct(res);
+                                    setInputObject({
+                                        name: res.name,
+                                        starRating: res.starRating,
+                                        brandId: res.selectedBrandId,
+                                        categoryId: res.selectedCategoryId,
+                                        price: res.price,
+                                        description: res.description,
+                                        id: productId
+                                    });
+                                })
+                                .catch((error) => console.error(error));
+                        }
+                        else {
+                            getShoesToModify(productId)
+                                .then((res) => {
+                                    setProduct(res);
+                                    setInputObject({
+                                        name: res.name,
+                                        starRating: res.starRating,
+                                        brandId: res.selectedBrandId,
+                                        categoryId: res.selectedCategoryId,
+                                        price: res.price,
+                                        description: res.description,
+                                        id: productId
+                                    });
+                                })
+                                .catch((error) => console.error(error));
+                        }
+                       
                     });
                 })
                 .catch(console.error);
@@ -112,9 +133,17 @@ export default function ModifyingProduct() {
     function handleFormSubmit(event) {
         event.preventDefault();
 
-        editProduct(inputObject)
-            .then(() => setMessage(<PoppupMessage message="Successfully update product" removeNotification={closeNotification} />))
-            .catch((error) => console.error(error));
+        if (category !== "Shoes") {
+            editProduct(inputObject)
+                .then(() => setMessage(<PoppupMessage message="Successfully update product" removeNotification={closeNotification} />))
+                .catch((error) => console.error(error));
+        }
+        else {
+            editShoes(inputObject)
+                .then(() => setMessage(<PoppupMessage message="Successfully update product" removeNotification={closeNotification} />))
+                .catch((error) => console.error(error));
+        }
+
     }
     function handleOnArchiveClickToggle() {
         if (!product?.isArchived) {

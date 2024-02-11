@@ -7,12 +7,12 @@
     using Models.Pictures;
     using Models.AdminModels.Clothes;
     using Models.AdminModels.Shoes;
-    using EcommerceApp.Core.Models.Brands;
-    using EcommerceApp.Core.Models.Categories;
-    using EcommerceApp.Core.Models.ProductStocks;
-    using EcommerceApp.Core.Models.Promotion;
-    using EcommerceApp.Infrastructure.Data.Models;
-    using EcommerceApp.Core.Models.AdminModels.Pictures;
+    using Models.Brands;
+    using Models.Categories;
+    using Models.ProductStocks;
+    using Models.Promotion;
+    using Models.AdminModels.Pictures;
+    using Infrastructure.Data.Models;
 
     public class ShoesService : IShoesService
     {
@@ -25,6 +25,42 @@
         public async Task<bool> CheckIfShoesExistsByIdAsync(int shoesId)
         {
             return await applicationDbContext.Shoes.AnyAsync(sh => sh.Id == shoesId);
+        }
+
+        public async Task EditShoesAsync(EditProductModel model)
+        {
+            Shoes shoes = await
+               applicationDbContext
+              .Shoes
+              .Include(p => p.ShoesStocks)
+              .Include(p => p.Promotion)
+              .Include(p => p.Brand)
+              .Include(p => p.Category)
+              .Include(p => p.Pictures)
+              .FirstAsync(cl => cl.Id == model.Id);
+
+            if (model.CategoryId != shoes.CategoryId)
+            {
+                Category category = await applicationDbContext
+                    .Categories.Include(c => c.Shoes).FirstAsync(c => c.Id == model.CategoryId);
+                category.Shoes.Remove(shoes);
+
+                shoes.CategoryId = model.CategoryId;
+            }
+            if (model.BrandId != shoes.BrandId)
+            {
+                Brand brand = await applicationDbContext
+                    .Brands.Include(c => c.Shoes).FirstAsync(c => c.Id == model.CategoryId);
+                brand.Shoes.Remove(shoes);
+
+                shoes.BrandId = model.BrandId;
+            }
+
+            shoes.Name = model.Name;
+            shoes.Description = model.Description;
+            shoes.Price = model.Price;
+
+            await applicationDbContext.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<ClothesModel>> GetAllShoesAsync()

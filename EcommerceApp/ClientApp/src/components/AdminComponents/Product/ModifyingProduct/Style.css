@@ -19,6 +19,7 @@
     align-items: flex-start;
     justify-content: space-between;
     padding: 1rem 3rem;
+    gap: 5rem;
 }
 .product-input-container{
     display: flex;

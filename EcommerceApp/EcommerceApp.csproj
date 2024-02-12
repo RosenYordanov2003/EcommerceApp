@@ -43,6 +43,7 @@
   <ItemGroup>
     <Folder Include="ClientApp\imgs\clothes\" />
     <Folder Include="wwwroot\clothes\" />
+    <Folder Include="wwwroot\shoes\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

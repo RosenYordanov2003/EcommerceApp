@@ -1,5 +1,5 @@
 ﻿import { useEffect, useState } from "react";
-import { getProductToModify, editProduct, archiveProduct, restoreProduct, uploadImg } from "../../../../adminServices/clothesService";
+import { getProductToModify, editProduct, archiveProduct, restoreProduct } from "../../../../adminServices/clothesService";
 import Style from "../ModifyingProduct/Style.css";
 import ProductStock from "../../ProductStock/ProductStock";
 import PoppupMessage from "../../../PoppupMessage/PoppupMessage";
@@ -7,6 +7,7 @@ import SizeTable from "../../SizeTable/SizeTable";
 import PromotionSection from "../../PromotionSection/PromotionSection";
 import { getShoesToModify } from "../../../../adminServices/shoesService";
 import { editShoes } from "../../../../adminServices/shoesService";
+import { uploadImg } from "../../../../adminServices/pictureService";
 import { HubConnectionBuilder } from '@microsoft/signalr';
 
 export default function ModifyingProduct() {
@@ -161,12 +162,11 @@ export default function ModifyingProduct() {
 
         const formData = new FormData();
         formData.append("productId", productId);
-        formData.append("productCategory", "clothes");
+        formData.append("productCategory", category);
         formData.append("pictureFile", fileInputObject);
 
-
         uploadImg(formData)
-            .then(() => console.log(true))
+            .then(() => setMessage(<PoppupMessage message="Successfully upload an img" removeNotification={closeNotification}/>))
             .catch((error) => console.error(error));
 
     }

@@ -110,6 +110,7 @@ builder.Services.AddScoped<IPromotionCodeService, PromotionCodeService>();
 builder.Services.AddScoped<IProductStockService, ProductStockService>();
 builder.Services.AddScoped<IDashboardService, DashboardService>();
 builder.Services.AddScoped<IPromotionService, PromotionService>();
+builder.Services.AddScoped<IPictureService, PictureService>();
 
 var app = builder.Build();
 

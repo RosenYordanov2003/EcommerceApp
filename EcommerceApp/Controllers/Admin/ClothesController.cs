@@ -10,7 +10,6 @@
     using static Common.GeneralApplicationConstants;
     using SignalR;
     using Core.Models.AdminModels.Promotion;
-    using EcommerceApp.Infrastructure.Data.Models;
 
     [ApiController]
     [Authorize(Roles = AdminRoleName)]
@@ -21,15 +20,13 @@
         private readonly IProductSevice productSevice;
         private readonly IProductStockService productStockService;
         private readonly IHubContext<NotificationsHub> hubContext;
-        private readonly IWebHostEnvironment webHostEnvironment;
 
         public ClothesController(IProductSevice productSevice, IProductStockService productStockService,
-            IHubContext<NotificationsHub> hubContext, IWebHostEnvironment webHostEnvironment)
+            IHubContext<NotificationsHub> hubContext)
         {
             this.productSevice = productSevice;
             this.productStockService = productStockService;
             this.hubContext = hubContext;
-            this.webHostEnvironment = webHostEnvironment;
         }
 
         [HttpGet]
@@ -109,24 +106,6 @@
             await productSevice.RestoreProductAsync(productId);
             await hubContext.Clients.All.SendAsync("ProductUpdated");
 
-            return Ok();
-        }
-        [HttpPost]
-        [Route("UploadImg")]
-        public async Task<IActionResult> ReadGoogleDriveFiles([FromForm] UploadProductImgModel uploadProductImgModel)
-        {
-
-            try
-            {
-                string path = Path.Combine(webHostEnvironment.WebRootPath,"clothes");
-
-                await productSevice.UploadImgAsync(uploadProductImgModel, path);
-            }
-            catch (Exception)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError);
-            }
-            await hubContext.Clients.All.SendAsync("ProductUpdated");
             return Ok();
         }
     }

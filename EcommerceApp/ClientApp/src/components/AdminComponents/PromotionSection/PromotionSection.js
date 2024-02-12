@@ -1,33 +1,41 @@
 ﻿import { useEffect, useState } from "react"
 import Style from "../PromotionSection/Style.css";
-import { addPromotion } from "../../../adminServices/clothesService";
-import { removePromotion } from "../../../adminServices/promotionService";
+import PoppupMessage from "../../PoppupMessage/PoppupMessage";
+import { removePromotion, addPromotion } from "../../../adminServices/promotionService";
 
 export default function PromotionSection({ promotionModel }) {
 
     const [inputObject, setInputObject] = useState();
+    const [message, setMessage] = useState(undefined);
 
     useEffect(() => {
         setInputObject({
             percentages: promotionModel?.percentageDiscount,
             expirationTime: promotionModel?.expireTime
+           
         });
     }, [promotionModel?.percentageDiscount, promotionModel?.expireTime])
 
     const productId = window.location.pathname.split('/')[2];
+    const category = window.location.pathname.split('/')[3];
 
     function formatDateToYYYYMMDD(date) {
+
+        if (date === undefined || date === null) {
+            date = new Date();
+        }
         const year = date.getFullYear();
         const month = (date.getMonth() + 1).toString().padStart(2, '0');
         const day = date.getDate().toString().padStart(2, '0');
         return `${year}-${month}-${day}`;
     }
 
-    const inputObjectDate = new Date(inputObject?.expirationTime);
-    const promotionObjectDate = new Date(promotionModel?.expireTime);
+    const inputObjectDate = inputObject?.expirationTime !== null ? new Date(inputObject?.expirationTime) : new Date();
+    const promotionObjectDate = promotionModel?.expireTime !== undefined ? new Date(promotionModel?.expireTime) : new Date();
 
     const formattedDateInputObject = formatDateToYYYYMMDD(inputObjectDate);
     const formattedDatePromotionModel = formatDateToYYYYMMDD(promotionObjectDate);
+
 
     let buttonContent;
 
@@ -41,40 +49,52 @@ export default function PromotionSection({ promotionModel }) {
     else {
         buttonContent = "Apply Promotion";
     }
+
+    function closeNotification() {
+        setMessage(undefined);
+    }
+
     function handleOnFormSubmit(event) {
         event.preventDefault();
 
         const promotionObject = {
             expirationTime: inputObject.expirationTime,
             percentages: inputObject.percentages,
-            shoesId: null,
+            productCategory: category,
             productId: productId
         };
 
         addPromotion(promotionObject)
-            .then(() => console.log(true))
+            .then(() => setMessage(<PoppupMessage message="Successfully Apply Promotion" removeNotification={closeNotification }/>))
             .catch((error) => console.error(error));
     }
-    function handleOnPromotionDelete() {
+    function handleOnPromotionDelete(e) {
+        e.preventDefault();
+        e.stopPropagation();
         removePromotion(promotionModel?.id)
-            .then(() => setInputObject(undefined))
+            .then(() => {
+                setInputObject(undefined);
+                setMessage(<PoppupMessage message="Successfully Remove Promotion" removeNotification={closeNotification} />)
+            })
             .catch((error) => console.error(error));
     }
-
     return (
-        <form onSubmit={handleOnFormSubmit} className="promotion-form">
-            <div className="product-input-container">
-                <label htmlFor="percenteges">Promotion Percentages</label>
-                <input id="percenteges" onChange={(e) => setInputObject({ ...inputObject, percentages: e.target.value })} value={inputObject?.percentages}></input>
-            </div>
-            <div className="product-input-container">
-                <label htmlFor="promotion-date">Promotion Expire Date</label>
-                <input id="promotion-date" onChange={(e) => setInputObject({ ...inputObject, expirationTime: e.target.value })} type="date" value={formattedDateInputObject}></input>
-            </div>
-            <div className="promotion-section-button-container">
-                <button type="submit">{buttonContent}</button>
-                {buttonContent === "Current Promotion" && <button onClick={handleOnPromotionDelete}>Remove Promotion</button> }
-            </div>
-        </form>
+        <>
+            {message}
+            <form onSubmit={handleOnFormSubmit} className="promotion-form">
+                <div className="product-input-container">
+                    <label htmlFor="percenteges">Promotion Percentages</label>
+                    <input id="percenteges" onChange={(e) => setInputObject({ ...inputObject, percentages: e.target.value })} value={inputObject?.percentages === null ? Number(0).toFixed(2) : inputObject?.percentages}></input>
+                </div>
+                <div className="product-input-container">
+                    <label htmlFor="promotion-date">Promotion Expire Date</label>
+                    <input id="promotion-date" onChange={(e) => setInputObject({ ...inputObject, expirationTime: e.target.value })} type="date" value={formattedDateInputObject}></input>
+                </div>
+                <div className="promotion-section-button-container">
+                    <button type="submit">{buttonContent}</button>
+                    {buttonContent === "Current Promotion" && <button onClick={handleOnPromotionDelete}>Remove Promotion</button>}
+                </div>
+            </form>
+       </>
     )
 }

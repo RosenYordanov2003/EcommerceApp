@@ -72,19 +72,7 @@
 
             return Ok();
         }
-        [HttpPost]
-        [Route("AddPromotion")]
-        public async Task<IActionResult> AddPromotion([FromBody] AddPromotionModel addPromotionModel)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest();
-            }
-            await productSevice.ApplyPromotionAsync(addPromotionModel);
-            await hubContext.Clients.All.SendAsync("ProductUpdated");
-
-            return Ok();
-        }
+       
         [HttpPost]
         [Route("Archive")]
         public async Task<IActionResult> Archive([FromBody] ArchiveProductModel archiveProductModel)

@@ -7,7 +7,7 @@
         public DateTime ExpirationTime { get; set; }
         [Range(maximum:PromotionMaxValue, minimum:PromotionMinValue)]
         public decimal Percentages { get; set; }
-        public int? ShoesId { get; set; }
-        public int? ProductId { get; set; }
+        public string ProductCategory { get; set; } = null!;
+        public int ProductId { get; set; }
     }
 }

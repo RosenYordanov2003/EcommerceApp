@@ -404,20 +404,6 @@
             await applicationDbContext.SaveChangesAsync();
         }
 
-        public async Task ApplyPromotionAsync(AddPromotionModel addPromotionModel)
-        {
-            Promotion promotion = new Promotion()
-            {
-                ExpireTime = addPromotionModel.ExpirationTime,
-                PercantageDiscount = addPromotionModel.Percentages
-            };
-            Product product = await applicationDbContext.Clothes.FirstAsync(cl => cl.Id == addPromotionModel.ProductId);
-            product.Promotion = promotion;
-
-            await applicationDbContext.Promotions.AddAsync(promotion);
-            await applicationDbContext.SaveChangesAsync();
-        }
-
         public async Task ArchiveProductAsync(int productId)
         {
             Product product = await applicationDbContext.Clothes.FirstAsync(cl => cl.Id == productId);

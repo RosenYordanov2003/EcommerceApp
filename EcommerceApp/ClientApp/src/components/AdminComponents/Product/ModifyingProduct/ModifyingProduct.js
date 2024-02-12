@@ -71,7 +71,7 @@ export default function ModifyingProduct() {
       
     }, [])
 
-
+    console.log(product);
     useEffect(() => {
         if (connection) {
             connection.start()

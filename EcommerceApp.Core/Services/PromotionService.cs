@@ -4,6 +4,7 @@
     using Infrastructure.Data.Models;
     using Contracts;
     using Data;
+    using Models.AdminModels.Promotion;
 
     public class PromotionService : IPromotionService
     {
@@ -11,6 +12,32 @@
         public PromotionService(ApplicationDbContext dbContext)
         {
             this.dbContext = dbContext;
+        }
+
+        public async Task ApplyPromotionAsync(AddPromotionModel addPromotionModel)
+        {
+            Promotion promotion = new Promotion()
+            {
+                ExpireTime = addPromotionModel.ExpirationTime,
+                PercantageDiscount = addPromotionModel.Percentages,
+            };
+
+            promotion.ProductId = addPromotionModel.ProductCategory != "Shoes" ? addPromotionModel.ProductId : null;
+            promotion.ShoesId = addPromotionModel.ProductCategory == "Shoes" ? addPromotionModel.ProductId : null;
+
+            if (promotion.ShoesId.HasValue)
+            {
+                Shoes shoes = await dbContext.Shoes.FirstAsync(sh => sh.Id == promotion.ShoesId);
+                shoes.Promotion = promotion;
+            }
+            else
+            {
+                Product product = await dbContext.Clothes.FirstAsync(p => p.Id == promotion.ProductId);
+                product.Promotion = promotion;
+            }
+
+            await dbContext.Promotions.AddAsync(promotion);
+            await dbContext.SaveChangesAsync();
         }
 
         public async Task<bool> CheckIfPromotionExistsByIdAsync(Guid id)

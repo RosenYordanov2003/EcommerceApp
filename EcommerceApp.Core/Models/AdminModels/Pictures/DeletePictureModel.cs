@@ -1,8 +1,7 @@
 ﻿namespace EcommerceApp.Core.Models.AdminModels.Pictures
 {
-    using Models.Pictures;
-    public class DeletePictureModel : PictureModel
+    public class DeletePictureModel : AdminPictureModel
     {
-        public int Id { get; set; }
+        public string PictureProductCategory { get; set; } = null!;
     }
 }

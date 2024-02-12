@@ -77,7 +77,7 @@
                 .Select(sh => new ClothesModel()
                 {
                     Id = sh.Id,
-                    ImgUrls = sh.Pictures.Select(p => new DeletePictureModel() { ImgUrl = p.ImgUrl, Id = p.Id }).ToArray(),
+                    ImgUrls = sh.Pictures.Select(p => new AdminPictureModel() { ImgUrl = p.ImgUrl, Id = p.Id }).ToArray(),
                     StarRating = sh.StarRating,
                     IsArchived = sh.IsArchived,
                     Name = sh.Name,
@@ -123,7 +123,7 @@
                 Description = shoes.Description,
                 Id = shoes.Id,
                 SelectedCategoryId = shoes.CategoryId,
-                ImgUrls = shoes.Pictures.Select(p => new DeletePictureModel() { ImgUrl = p.ImgUrl , Id = p.Id }).ToArray(),
+                ImgUrls = shoes.Pictures.Select(p => new AdminPictureModel() { ImgUrl = p.ImgUrl , Id = p.Id }).ToArray(),
                 IsArchived = shoes.IsArchived,
                 Name = shoes.Name,
                 Price = shoes.Price,

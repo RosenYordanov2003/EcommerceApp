@@ -266,7 +266,7 @@
                    Name = cl.Name,
                    Price = cl.Price,
                    StarRating = cl.StarRating,
-                   ImgUrls = cl.Pictures.Select(x => new DeletePictureModel() { ImgUrl = x.ImgUrl, Id = x.Id }).ToArray()
+                   ImgUrls = cl.Pictures.Select(x => new AdminPictureModel() { ImgUrl = x.ImgUrl, Id = x.Id }).ToArray()
                })
                .ToArrayAsync();
         }
@@ -349,7 +349,7 @@
                 Description = product.Description,
                 Id = product.Id,
                 SelectedCategoryId = product.CategoryId,
-                ImgUrls = product.Pictures.Select(p => new DeletePictureModel() { ImgUrl = p.ImgUrl, Id = p.Id }).ToArray(),
+                ImgUrls = product.Pictures.Select(p => new AdminPictureModel() { ImgUrl = p.ImgUrl, Id = p.Id }).ToArray(),
                 IsArchived = product.IsArchived,
                 Name = product.Name,
                 Price = product.Price,

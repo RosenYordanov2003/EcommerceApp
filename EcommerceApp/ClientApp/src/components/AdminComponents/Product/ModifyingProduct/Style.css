@@ -1,8 +1,26 @@
 ﻿.admin-img-container{
     width: 250px;
     height: auto;
+    position: relative; 
 }
-.admin-img-container img{
+.delete-img-button {
+    position: absolute;
+    background-color: #e60026;
+    color: white;
+    border: none;
+    width: 100%;
+    left:  0px;
+    bottom: 0px;
+    opacity: 0;
+    transition: all 0.7s ease;
+}
+.active-delete-button {
+    opacity: 1;
+}
+.delete-img-button:hover {
+    opacity: 0.5;
+}
+.admin-img-container img {
     width: 100%;
     height: 100%;
 }

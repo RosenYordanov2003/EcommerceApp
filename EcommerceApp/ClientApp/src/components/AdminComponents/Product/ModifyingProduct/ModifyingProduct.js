@@ -9,6 +9,7 @@ import { getShoesToModify } from "../../../../adminServices/shoesService";
 import { editShoes } from "../../../../adminServices/shoesService";
 import { uploadImg } from "../../../../adminServices/pictureService";
 import ResponsiveStyle from "../ModifyingProduct/ResponsiveStyle.css";
+import ProductImg from "../../ProductImg/ProductImg";
 import { HubConnectionBuilder } from '@microsoft/signalr';
 
 export default function ModifyingProduct() {
@@ -71,7 +72,6 @@ export default function ModifyingProduct() {
       
     }, [])
 
-    console.log(product);
     useEffect(() => {
         if (connection) {
             connection.start()
@@ -116,7 +116,7 @@ export default function ModifyingProduct() {
         }
     }, [connection]);
 
-    const imgs = product?.imgUrls?.map((img, index) => <div className="admin-img-container"><img key={index} src={img.imgUrl} /> </div>);
+    const imgs = product?.imgUrls?.map((img) => <ProductImg imgUrl={img.imgUrl} id={img.id}/>);
     const sizes = product?.productStocks?.map((ps) => <ProductStock productStock={ps} key={ps.id} />);
     const categories = product?.categories?.map((category) => <option value={category.id}>{category.name}</option>);
     const brands = product?.brands?.map((brand) => <option value={brand.id}>{brand.name}</option>);

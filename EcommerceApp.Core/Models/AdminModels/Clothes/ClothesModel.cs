@@ -8,6 +8,6 @@
         public decimal Price { get; set; }
         public int StarRating { get; set; }
         public bool IsArchived { get; set; }
-        public IEnumerable<DeletePictureModel> ImgUrls { get; set; } = null!; 
+        public IEnumerable<AdminPictureModel> ImgUrls { get; set; } = null!; 
     }
 }

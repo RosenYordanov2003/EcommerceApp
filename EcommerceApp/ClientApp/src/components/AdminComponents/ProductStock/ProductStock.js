@@ -1,13 +1,15 @@
 ﻿import { useState } from "react"
 import Style from "../ProductStock/Style.css";
 import { addProductStock } from "../../../adminServices/clothesService";
+import { addShoesStcok } from "../../../adminServices/shoesService";
 import PoppupMessage from "../../PoppupMessage/PoppupMessage";
 
 export default function ProductStock({ productStock }) {
 
-
     const [message, setMessage] = useState(undefined);
     const [quantity, setQuantity] = useState(undefined);
+
+    const category = window.location.pathname.split("/")[3];
 
     function closeMessage() {
         setMessage(undefined);
@@ -19,15 +21,25 @@ export default function ProductStock({ productStock }) {
 
         const object = {
             productStockId: productStock.id,
-            size: productStock.size,
-            productQuantityToAdd : quantity
+            productCategory: category,
+            productQuantityToAdd: quantity,
         }
-        addProductStock(object)
-            .then(() => {
-                setQuantity(undefined);
-                setMessage(<PoppupMessage message="Successfully add product stock" removeNotification={closeMessage} />);
-            })
-            .catch((error) => console.error(error));
+        if (category !== "Shoes") {
+            addProductStock(object)
+                .then(() => {
+                    setQuantity(undefined);
+                    setMessage(<PoppupMessage message="Successfully add product stock" removeNotification={closeMessage} />);
+                })
+                .catch((error) => console.error(error));
+        }
+        else {
+            addShoesStcok(object)
+                .then(() => {
+                    setQuantity(undefined);
+                    setMessage(<PoppupMessage message="Successfully add product stock" removeNotification={closeMessage} />);
+                })
+                .catch((error) => console.error(error));
+        }
     }
 
     return (

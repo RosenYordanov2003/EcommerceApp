@@ -8,6 +8,7 @@ import PromotionSection from "../../PromotionSection/PromotionSection";
 import { getShoesToModify } from "../../../../adminServices/shoesService";
 import { editShoes } from "../../../../adminServices/shoesService";
 import { uploadImg } from "../../../../adminServices/pictureService";
+import ResponsiveStyle from "../ModifyingProduct/ResponsiveStyle.css";
 import { HubConnectionBuilder } from '@microsoft/signalr';
 
 export default function ModifyingProduct() {

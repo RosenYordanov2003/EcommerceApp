@@ -26,3 +26,15 @@ export async function editShoes(object) {
 
     return request.ok;
 }
+export async function addShoesStcok(object) {
+    const request = await fetch(`${baseUrl}/addStock`, {
+        credentials: 'include',
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(object)
+    });
+
+    return request.ok;
+}

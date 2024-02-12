@@ -66,9 +66,19 @@
         }
         public async Task IncreaseProductStockQuantity(AddProductStockModel productStockModel)
         {
-            var stock = await dbContext.ProductStocks.FirstAsync(ps => ps.Id == productStockModel.ProductStockId);
+            if (productStockModel.ProductCategory.ToLower() != "shoes")
+            {
+                var stock = await dbContext.ProductStocks.FirstAsync(ps => ps.Id == productStockModel.ProductStockId);
 
-            stock.Quantity += productStockModel.ProductQuantityToAdd;
+                stock.Quantity += productStockModel.ProductQuantityToAdd;
+            }
+            else
+            {
+                var stock = await dbContext.ShoesStock.FirstAsync(s => s.Id == productStockModel.ProductStockId);
+
+                stock.Quantity += productStockModel.ProductQuantityToAdd;
+            }
+
             await dbContext.SaveChangesAsync();
         }
     }

@@ -1,11 +1,12 @@
 ﻿namespace EcommerceApp.Controllers.Admin
 {
-    using EcommerceApp.Core.Contracts;
-    using EcommerceApp.Core.Models.AdminModels.Clothes;
-    using EcommerceApp.SignalR;
+    using SignalR;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.SignalR;
+    using  Core.Contracts;
+    using  Core.Models.AdminModels.Clothes;
+    using  Core.Models.AdminModels.ProductStock;
     using static Common.GeneralApplicationConstants;
 
     [Route("api/shoes")]
@@ -16,10 +17,13 @@
     {
         private readonly IShoesService shoesService;
         private readonly IHubContext<NotificationsHub> hubContext;
-        public ShoesController(IShoesService shoesService, IHubContext<NotificationsHub> hubContext)
+        private readonly IProductStockService productStockService;
+        public ShoesController(IShoesService shoesService, IHubContext<NotificationsHub> hubContext, 
+            IProductStockService productStockService)
         {
             this.shoesService = shoesService;
             this.hubContext = hubContext;
+            this.productStockService = productStockService;
         }
 
         [HttpGet]
@@ -56,6 +60,15 @@
                 return BadRequest();
             }
             await shoesService.EditShoesAsync(editProductModel);
+            await hubContext.Clients.All.SendAsync("ProductUpdated");
+
+            return Ok();
+        }
+        [HttpPost]
+        [Route("addStock")]
+        public async Task<IActionResult> AddShoesStock([FromBody] AddProductStockModel addProductStockModel)
+        {
+            await productStockService.IncreaseProductStockQuantity(addProductStockModel);
             await hubContext.Clients.All.SendAsync("ProductUpdated");
 
             return Ok();

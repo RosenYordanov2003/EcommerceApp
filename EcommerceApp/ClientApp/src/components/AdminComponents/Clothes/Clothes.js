@@ -2,6 +2,7 @@
 import { loadAllProducts } from "../../../adminServices/clothesService";
 import ClothesStyle from "./ClothesStyle.css";
 import ProductCard from "../Product/ProductCard/ProductCard";
+import ResponsiveStyle from "../Clothes/ResponsiveStyle.css";
 export default function Clothes() {
 
     const [clothes, setClothes] = useState([]);

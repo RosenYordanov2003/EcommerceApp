@@ -5,8 +5,9 @@
 }
 
 
-.clothes-container-admin{
+.clothes-container-admin {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     margin: 2.5rem 0rem;
+    gap: 1rem;
 }

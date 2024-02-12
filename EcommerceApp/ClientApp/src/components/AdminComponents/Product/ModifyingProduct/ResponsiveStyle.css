@@ -1,0 +1,92 @@
+﻿@media screen and (min-width: 280px) and (max-width: 700px){
+    .product-modifying-container{
+        flex-direction: column;
+    }
+    .imgs-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .add-img-container-section{
+        flex-direction: column;
+        gap: 1.2rem;
+    }
+    .add-img-container{
+        width: 90%;
+    }
+    .upload-img{
+        width: 90%;
+    }
+    .archive-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .archive-container button{
+        width: 90%;
+    }
+    .product-stock-admin-container{
+        flex-direction: column;
+    }
+    .product-input-container{
+        width: 80%;
+    }
+    .size-table{
+        width: 80%;
+        padding: 1.1rem;
+        overflow-x: scroll;
+    }
+    .size-table tbody tr td{
+        font-size: 1rem;
+        padding: 0.8rem;
+    }
+    .product-stock-form{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.7rem;
+        flex-direction: column;
+    }
+    .product-stock-form input{
+        width: 90%;
+    }
+    .product-stock-form button{
+        width: 90%;
+    }
+    .promotion-form button {
+        width: 90%;
+    }
+}
+@media screen and (min-width: 701px) and (max-width: 1100px){
+    .size-table {
+        width: 90%;
+        padding: 1.1rem;
+        overflow-x: scroll;
+    }
+
+    .size-table tbody tr td {
+        padding: 1.4rem;
+    }
+
+    .product-stock-form {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.7rem;
+        flex-direction: column;
+    }
+
+    .product-stock-form input {
+        width: 90%;
+    }
+
+    .product-stock-form button {
+        width: 90%;
+    }
+
+    .promotion-form button {
+        width: 90%;
+    }
+}

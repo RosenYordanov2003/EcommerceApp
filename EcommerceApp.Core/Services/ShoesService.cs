@@ -13,6 +13,7 @@
     using Models.Promotion;
     using Models.AdminModels.Pictures;
     using Infrastructure.Data.Models;
+    using EcommerceApp.Core.Models.AdminModels.ProductStock;
 
     public class ShoesService : IShoesService
     {

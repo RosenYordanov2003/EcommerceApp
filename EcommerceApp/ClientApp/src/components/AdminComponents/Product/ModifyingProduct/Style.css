@@ -33,7 +33,7 @@
     text-align: center;
 }
 .edit-product-button {
-    width: 100%;
+    width: 90%;
     font-weight: bolder;
     border: none;
     color: white;
@@ -51,10 +51,11 @@
     outline: none;
     padding: 0.3rem 0.3rem;
     box-shadow: 0rem 2rem 3rem rgba(132, 139, 200, 0.18);
+    width: 90%;
 }
 .product-modifying-container textarea{
     padding: 0.4rem;
-    width: 100%;
+    width: 90%;
     outline: none;
     border: none;
 }

@@ -10,6 +10,7 @@
     using static Common.GeneralApplicationConstants;
     using SignalR;
     using Core.Models.AdminModels.Promotion;
+    using EcommerceApp.Infrastructure.Data.Models;
 
     [ApiController]
     [Authorize(Roles = AdminRoleName)]
@@ -20,13 +21,15 @@
         private readonly IProductSevice productSevice;
         private readonly IProductStockService productStockService;
         private readonly IHubContext<NotificationsHub> hubContext;
+        private readonly IShoesService shoesService;
 
         public ClothesController(IProductSevice productSevice, IProductStockService productStockService,
-            IHubContext<NotificationsHub> hubContext)
+            IHubContext<NotificationsHub> hubContext, IShoesService shoesService)
         {
             this.productSevice = productSevice;
             this.productStockService = productStockService;
             this.hubContext = hubContext;
+            this.shoesService = shoesService;
         }
 
         [HttpGet]
@@ -84,26 +87,49 @@
         }
         [HttpPost]
         [Route("Archive")]
-        public async Task<IActionResult> Archive([FromBody] int productId)
+        public async Task<IActionResult> Archive([FromBody] ArchiveProductModel archiveProductModel)
         {
-            if (!await productSevice.CheckIfProductExistsByIdAsync(productId))
+            if (archiveProductModel.ProductCategory.ToLower() != "shoes")
             {
-                return BadRequest();
+                if (!await productSevice.CheckIfProductExistsByIdAsync(archiveProductModel.ProductId))
+                {
+                    return BadRequest();
+                }
+                await productSevice.ArchiveProductAsync(archiveProductModel.ProductId);
             }
-            await productSevice.ArchiveProductAsync(productId);
+            else
+            {
+                if (!await shoesService.CheckIfShoesExistsByIdAsync(archiveProductModel.ProductId))
+                {
+                    return BadRequest();
+                }
+                await shoesService.ArchiveShoesAsync(archiveProductModel.ProductId);
+            }
+
             await hubContext.Clients.All.SendAsync("ProductUpdated");
 
             return Ok();
         }
         [HttpPost]
         [Route("Restore")]
-        public async Task<IActionResult> Restore([FromBody] int productId)
+        public async Task<IActionResult> Restore([FromBody] ArchiveProductModel archiveProductModel)
         {
-            if (!await productSevice.CheckIfProductExistsByIdAsync(productId))
+            if (archiveProductModel.ProductCategory.ToLower() != "shoes")
             {
-                return BadRequest();
+                if (!await productSevice.CheckIfProductExistsByIdAsync(archiveProductModel.ProductId))
+                {
+                    return BadRequest();
+                }
+                await productSevice.RestoreProductAsync(archiveProductModel.ProductId);
             }
-            await productSevice.RestoreProductAsync(productId);
+            else
+            {
+                if (!await shoesService.CheckIfShoesExistsByIdAsync(archiveProductModel.ProductId))
+                {
+                    return BadRequest();
+                }
+                await shoesService.RestoreShoesAsync(archiveProductModel.ProductId);
+            }
             await hubContext.Clients.All.SendAsync("ProductUpdated");
 
             return Ok();

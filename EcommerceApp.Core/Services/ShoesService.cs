@@ -22,6 +22,13 @@
             this.applicationDbContext = applicationDbContext;
         }
 
+        public async Task ArchiveShoesAsync(int shoesId)
+        {
+            Shoes shoes = await applicationDbContext.Shoes.FirstAsync(sh => sh.Id == shoesId);
+            shoes.IsArchived = true;
+            await applicationDbContext.SaveChangesAsync();
+        }
+
         public async Task<bool> CheckIfShoesExistsByIdAsync(int shoesId)
         {
             return await applicationDbContext.Shoes.AnyAsync(sh => sh.Id == shoesId);
@@ -132,6 +139,13 @@
                 .ToArrayAsync();
 
             return productToGet;
+        }
+
+        public async Task RestoreShoesAsync(int shoesId)
+        {
+            Shoes shoes = await applicationDbContext.Shoes.FirstAsync(sh => sh.Id == shoesId);
+            shoes.IsArchived = false;
+            await applicationDbContext.SaveChangesAsync();
         }
     }
 }

@@ -64,7 +64,13 @@ export async function addPromotion(promotionObject) {
     }
     return request.ok;
 }
-export async function archiveProduct(productId) {
+export async function archiveProduct(productId, category) {
+
+    const object = {
+        productId,
+        productCategory: category
+    }
+
     const request = await fetch(`${baseUrl}/Archive`,
         {
             credentials: 'include',
@@ -72,7 +78,7 @@ export async function archiveProduct(productId) {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(productId)
+            body: JSON.stringify(object)
         }
     )
 
@@ -81,7 +87,13 @@ export async function archiveProduct(productId) {
     }
     return request.ok;
 }
-export async function restoreProduct(productId) {
+export async function restoreProduct(productId, category) {
+
+    const object = {
+        productId,
+        productCategory: category
+    }
+
     const request = await fetch(`${baseUrl}/Restore`,
         {
             credentials: 'include',
@@ -89,7 +101,7 @@ export async function restoreProduct(productId) {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(productId)
+            body: JSON.stringify(object)
         }
     )
 

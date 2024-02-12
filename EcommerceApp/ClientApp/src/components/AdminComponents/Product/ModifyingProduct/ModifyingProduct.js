@@ -148,12 +148,12 @@ export default function ModifyingProduct() {
     }
     function handleOnArchiveClickToggle() {
         if (!product?.isArchived) {
-            archiveProduct(productId)
+            archiveProduct(productId, category)
                 .then(() => setMessage(<PoppupMessage message="Successfylly Archive Product" removeNotification={closeNotification} />))
                 .catch((error) => console.error(error));
         }
         else {
-            restoreProduct(productId)
+            restoreProduct(productId, category)
                 .then(() => setMessage(<PoppupMessage message="Successfylly Restore Product" removeNotification={closeNotification} />))
                 .catch((error) => console.error(error));
         }
@@ -168,7 +168,6 @@ export default function ModifyingProduct() {
         uploadImg(formData)
             .then(() => setMessage(<PoppupMessage message="Successfully upload an img" removeNotification={closeNotification}/>))
             .catch((error) => console.error(error));
-
     }
     function handleOnFileChange(e) {
         setFileInput(e.target.files[0]);

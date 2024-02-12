@@ -10,5 +10,7 @@
         Task<ModifyShoesModel> GetShoesToModifyAsync(int shoesId);
         Task<bool> CheckIfShoesExistsByIdAsync(int shoesId);
         Task EditShoesAsync(EditProductModel model);
+        Task ArchiveShoesAsync(int shoesId);
+        Task RestoreShoesAsync(int shoesId);
     }
 }

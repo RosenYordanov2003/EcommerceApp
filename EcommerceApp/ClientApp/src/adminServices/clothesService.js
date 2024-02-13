@@ -93,3 +93,24 @@ export async function restoreProduct(productId, category) {
     }
     return request.ok;
 }
+export async function getCreateProductModel() {
+    const request = await fetch(`${baseUrl}/LoadCreateProductModel`, { credentials: 'include' });
+
+    const response = request.json();
+
+    return response;
+}
+
+export async function createProduct(formObject) {
+    const request = await fetch(`${baseUrl}/Create`, {
+        credentials: 'include',
+        method: 'POST',
+        body: formObject,
+    })
+
+    if (!request.ok) {
+        throw new Error(request.Error);
+    }
+
+    return request.ok;
+}

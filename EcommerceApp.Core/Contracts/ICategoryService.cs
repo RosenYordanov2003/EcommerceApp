@@ -4,5 +4,6 @@
     public interface ICategoryService
     {
         Task<IEnumerable<CategoryModel>> GetCategoriesByGender(string gender);
+        Task<IEnumerable<CategoryModel>> LoadAllCategoriesAsync();
     }
 }

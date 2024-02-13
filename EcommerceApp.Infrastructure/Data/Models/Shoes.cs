@@ -20,8 +20,6 @@
         public Brand Brand { get; set; } = null!;
         public string Name { get; set; } = null!;
         public decimal Price { get; set; }
-        [Required]
-        public string Color { get; set; } = null!;
         public int StarRating { get; set; }
         public bool IsArchived { get; set; }
 

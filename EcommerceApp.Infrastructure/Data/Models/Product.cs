@@ -25,9 +25,6 @@
         [Required]
         public Category Category { get; set; } = null!;
         public decimal Price { get; set; }
-        [Required]
-        [MaxLength(ColorMaxLength)]
-        public string Color { get; set; } = null!;
         public int StarRating { get; set; }
 
         [ForeignKey(nameof(Brand))]

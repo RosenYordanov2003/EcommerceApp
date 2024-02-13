@@ -419,5 +419,44 @@
 
             await applicationDbContext.SaveChangesAsync();
         }
+
+        public async Task<int> CreateProductAsync(CreateProductModel model)
+        {
+            if (model.CategoryId == 9)
+            {
+                Shoes shoes = new Shoes()
+                {
+                    BrandId = model.BrandId,
+                    CategoryId = model.CategoryId,
+                    Description = model.Description,
+                    Gender = model.Gender,
+                    IsArchived = false,
+                    IsFeatured = false,
+                    Price = model.Price,
+                    Name = model.Name,
+                    StarRating = model.StarRating,
+                };
+                await applicationDbContext.Shoes.AddAsync(shoes);
+                await applicationDbContext.SaveChangesAsync();
+
+                return shoes.Id;
+            }
+            Product product = new Product()
+            {
+                BrandId = model.BrandId,
+                CategoryId = model.CategoryId,
+                Description = model.Description == null ? "" : model.Description,
+                Gender = model.Gender,
+                IsArchived = false,
+                IsFeatured = false,
+                Price = model.Price,
+                Name = model.Name,
+                StarRating = model.StarRating,
+            };
+            await applicationDbContext.Clothes.AddAsync(product);
+            await applicationDbContext.SaveChangesAsync();
+
+            return product.Id;
+        }
     }
 }

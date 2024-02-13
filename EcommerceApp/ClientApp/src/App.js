@@ -22,6 +22,7 @@ import AsideMenu from "../src/components/AdminComponents/AsideMenu/AsideMenu";
 import Clothes from "../src/components/AdminComponents/Clothes/Clothes";
 import ModifyingProduct from "./components/AdminComponents/Product/ModifyingProduct/ModifyingProduct";
 import Shoes from "../src/components/AdminComponents/Shoes/Shoes";
+import CreateProduct from "../src/components/AdminComponents/Product/CreateProduct/CreateProduct";
 
 export default function App() {
 
@@ -61,6 +62,7 @@ export default function App() {
                     <Route path="/Home" element={<Dashboard />} />
                     <Route path="/Clothes" element={<Clothes />} />
                     <Route path="/Shoes" element={<Shoes />} />
+                    <Route path="/Create" element={<CreateProduct />} />
                     <Route path="/Product/:id/:category" element={<ModifyingProduct />} />
                     <Route path="/" element={<Dashboard />} />
                 </Routes>

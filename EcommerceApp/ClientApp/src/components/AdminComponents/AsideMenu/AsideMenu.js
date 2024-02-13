@@ -51,7 +51,7 @@ export default function AsideMenu() {
                     </span>
                     <p className="icon-text-content">Customers</p>
                 </div>
-                <div onClick={() => setActiveElementIndex(4)} className={`icon-container ${activeElementIndex === 4 ? "active-icon-container" : ""}`}>
+                <div onClick={() => setActiveIndex(4, '/Create')} className={`icon-container ${activeElementIndex === 4 ? "active-icon-container" : ""}`}>
                     <span className="material-symbols-outlined">
                         add
                     </span>

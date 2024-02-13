@@ -1,0 +1,7 @@
+﻿.create-product-buttons-container .add-img-container-section{
+    flex-direction: column;
+    margin-top: 10rem
+}
+.create-product-buttons-container :where(.add-img-container){
+    width: 300px;
+}

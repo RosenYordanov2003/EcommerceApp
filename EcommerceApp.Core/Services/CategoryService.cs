@@ -1,10 +1,10 @@
 ﻿namespace EcommerceApp.Core.Services
 {
-    using Contracts;
-    using EcommerceApp.Data;
     using Microsoft.EntityFrameworkCore;
-    using Models.Categories;
     using System.Linq;
+    using Contracts;
+    using Data;
+    using Models.Categories;
 
     public class CategoryService : ICategoryService
     {
@@ -26,6 +26,16 @@
                   })
                   .ToArrayAsync();
 
+        }
+        public async Task<IEnumerable<CategoryModel>> LoadAllCategoriesAsync()
+        {
+            return await applicationDbContext.Categories
+                .Select(c => new CategoryModel()
+                {
+                    Id = c.Id,
+                    Name = c.Name
+                })
+                .ToArrayAsync();
         }
     }
 }

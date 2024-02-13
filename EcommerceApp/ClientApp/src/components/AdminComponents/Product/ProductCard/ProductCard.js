@@ -13,7 +13,7 @@ export default function ProductCard({ product }) {
     return (
         <div onClick={() => navigate(`/Product/${product.id}/${category}`)} className="featured-product-card">
             <div className="img-container">
-                <img src={product.imgUrls[0].imgUrl} />
+                <img src={product?.imgUrls[0]?.imgUrl} />
             </div>
             <div className="product-content">
                 <div className="star-rating">{stars}</div>

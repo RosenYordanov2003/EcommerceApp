@@ -20,21 +20,19 @@
             public const int NameMinLength = 3; 
             public const int NameMaxLength = 55;
 
-            public const int ColorMinLength = 3;
-            public const int ColorMaxLength = 34;
 
             public const int GenderMinLength = 3;
             public const int GenderMaxLength = 5;
 
             public const int DescriptionMaxLength = 450;
+
+            public const int StarRatingMinValue = 0;
+            public const int StarRatingMaxValue = 5;
         }
         public static class ShoesEntity
         {
             public const int NameMinLength = 3;
             public const int NameMaxLength = 55;
-
-            public const int ColorMinLength = 3;
-            public const int ColorMaxLength = 34;
 
             public const int GenderMinLength = 3;
             public const int GenderMaxLength = 5;

@@ -20,5 +20,6 @@
         Task EditProductAsync(EditProductModel model);
         Task ArchiveProductAsync(int productId);
         Task RestoreProductAsync(int productId);
+        Task<int> CreateProductAsync(CreateProductModel model);
     }
 }

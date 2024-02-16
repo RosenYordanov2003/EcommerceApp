@@ -23,7 +23,8 @@ The application represents ecommerce app where users can buy products (clothes, 
 ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/8a890a9c-78ba-4749-b35c-155c1c77de65)
 ## Register Page
 ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/1a213cf3-a01b-4f65-a239-b199c0dc7ee4)
-
+## Authentication
+Authentication is made by using JWT token with Refresh token. On every 15 minutes client app make request to the server to get new jwt token without logout the user by using user refresh token.
 
 
 

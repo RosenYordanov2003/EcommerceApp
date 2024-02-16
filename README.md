@@ -136,7 +136,20 @@ Home page represents a page with all featured products
 
        ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/380d6b46-d97c-4751-b6a2-40f8dbc1ebd2)
 
-       ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/9fff6f33-f644-4798-a626-de3129ab1261)
+      ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/5a6c1a7c-f447-4d4e-b0e4-67a4bd167fbf)
+
+      ## The project is not finished yet!
+
+    ## Тechnologies I have used
+  - C#
+  - ASP.NET Web Api
+  - Entity Framework core
+  - Microsoft SQL Server
+  - ReactJS
+  - CSS
+  - Ajax
+  - Git
+      
 
 
 

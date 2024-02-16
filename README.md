@@ -13,7 +13,9 @@ The application represents ecommerce app where users can buy products (clothes, 
 
 ## Database diagram
 ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/b929e603-3b87-481c-9d55-e6c026cc815e)
+
 ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/7fb0281a-3912-4c64-801f-d11d2ab52492)
+
 ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/a76e5055-9e74-476a-9384-a25a6271c903)
 
 ## Functionality
@@ -29,12 +31,14 @@ Authentication is made by using JWT token with Refresh token. On every 15 minute
 ## Home page
 Home page represents a page with all featured products
 ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/8b6f2534-5fad-46cd-b744-28b4a8b6ea4b)
+
 ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/c21fd726-bdc8-4d62-9b02-e501e19363c6)
 
 ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/156a1a8e-c790-41a2-a5ec-570b7c80851b)
 
 ## Responsive pictures
 ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/9a9f485f-c947-46c4-84cd-f43a0ae5716f)
+
 ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/52884b48-22c1-47b2-92ac-9ca7e9546f1d)
 
 ### Products by gender page
@@ -43,12 +47,14 @@ Home page represents a page with all featured products
 ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/9c3ad309-2c53-412f-bfdd-6c61439e64a7)
 ## Responsive pictures
 ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/7d3448b9-7693-4725-87dc-3e2ed65d618b)
+
 ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/daadcc87-ff6d-4246-9aa5-c35226f404cc)
 
 ## Dark Mode
 - The application has dark mode which state is saved in local storage
   
   ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/879a543f-d936-40eb-bc46-23dbbbb40d64)
+  
   ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/466f2856-f7e1-4a65-99c4-f6be0f19e077)
 
 

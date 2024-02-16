@@ -116,6 +116,7 @@ Home page represents a page with all featured products
        # Admin Dashboard
        - Admin Dashboard represents a page with statistics about app income with all orders.
        - Admin user can select particular month or a day and can see income for that mont/day
+       - Admin Dashboard is updating dynamically using SignalR. When someone make an order, the dashboard will be automatically updated.
          
        ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/fcf54599-f668-489d-918b-bfa874516fe4)
        
@@ -149,6 +150,8 @@ Home page represents a page with all featured products
       - ASP.NET Web Api
       - Entity Framework core
       - Microsoft SQL Server
+      - SignalR
+      - SmtpClient
       - ReactJS
       - CSS
       - Ajax

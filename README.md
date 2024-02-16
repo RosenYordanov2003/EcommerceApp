@@ -78,10 +78,40 @@ Home page represents a page with all featured products
    - Here users can read and modify their own reviews
    - Users can choose how many reviews to be visualized per page (default number is 5)
    - There is pagination logic
-   - 
+     
      ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/4f938813-220b-4837-b8db-4bfda5ce52f7)
      
      ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/abfdd065-7518-42fe-9091-71dd5169291b)
+
+     ## User Cart
+     - User cart store all products selected by user with particular size and quantity
+     - User can increase quantity for particular product with particular size if there is any available
+     - User can decrease quantity for particular product with particular size
+     - User can apply promotion code on his order
+     - Promotion code is generated if user reach specific number of total orders and this code is sent by email
+     - After evry order user recieves an email with his order info
+
+       ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/41ea07de-a121-4a78-b169-8a67f8ce2436)
+
+       ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/bd96117e-5125-482b-9a8a-0c614cb48400)
+       
+       - If promotion code is applied notification message will come
+         
+         ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/64035b1f-e6a0-4807-8734-8035f77acaa8)
+
+       ## Order summary page
+
+       ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/6a8ca743-da8c-4e57-bbeb-4e372742300c)
+
+       ## Success Page after finish order
+
+       ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/7f35a286-d1e3-4b36-a182-be7855b7beb2)
+
+
+
+         
+
+
 
 
 

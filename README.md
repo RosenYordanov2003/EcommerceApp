@@ -110,6 +110,24 @@ Home page represents a page with all featured products
        ## Email message
        
        ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/b01e14b0-4d3f-42d7-ac19-9d3f22b3b796)
+       # Admin Dashboard
+       - Admin Dashboard represents a page with statistics about app income with all orders.
+       - Admin user can select particular month or a day and can see income for that mont/day 
+       ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/fcf54599-f668-489d-918b-bfa874516fe4)
+       
+       ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/f565d2c2-6b8e-463a-bfe0-9f42ec577e7d)
+
+       -When particular day is selected new staticstic container will be visualized
+       
+       ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/a0b4606c-8645-41f3-a445-677f7f410388)
+
+       - By default initially the selected month is the current month, but when admin change it the statistic container about the month will be updated
+      
+       ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/026e01ab-0270-4b59-b7dc-6c134ceb3d94)
+
+
+
+
 
 
 

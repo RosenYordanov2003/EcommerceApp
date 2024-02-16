@@ -27,9 +27,11 @@ The application represents ecommerce app where users can buy products (clothes, 
 ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/1a213cf3-a01b-4f65-a239-b199c0dc7ee4)
 ## Authentication
 Authentication is made by using JWT token with Refresh token. On every 15 minutes client app make request to the server to get new jwt token without logout the user by using user refresh token.
+
 ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/636b2cbb-c66f-4401-a034-ae15e7ee0aa8)
 ## Home page
 Home page represents a page with all featured products
+
 ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/8b6f2534-5fad-46cd-b744-28b4a8b6ea4b)
 
 ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/c21fd726-bdc8-4d62-9b02-e501e19363c6)
@@ -69,8 +71,9 @@ Home page represents a page with all featured products
 
   ## Products review section
   - Here authenticated users can write reviews about particular product
+
   ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/96039e0b-9bf5-455c-bc18-decc0304fc04)
- - After user successfully post a review popup message will come
+  - After user successfully post a review popup message will come
    
    ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/58c6421d-eaf7-4f8f-a3b1-0e3dfc83ab3f)
 
@@ -97,7 +100,7 @@ Home page represents a page with all featured products
        
        - If promotion code is applied notification message will come
          
-         ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/64035b1f-e6a0-4807-8734-8035f77acaa8)
+       ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/64035b1f-e6a0-4807-8734-8035f77acaa8)
 
        ## Order summary page
 
@@ -112,12 +115,13 @@ Home page represents a page with all featured products
        ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/b01e14b0-4d3f-42d7-ac19-9d3f22b3b796)
        # Admin Dashboard
        - Admin Dashboard represents a page with statistics about app income with all orders.
-       - Admin user can select particular month or a day and can see income for that mont/day 
+       - Admin user can select particular month or a day and can see income for that mont/day
+         
        ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/fcf54599-f668-489d-918b-bfa874516fe4)
        
        ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/f565d2c2-6b8e-463a-bfe0-9f42ec577e7d)
 
-       -When particular day is selected new staticstic container will be visualized
+       - When particular day is selected new staticstic container will be visualized
        
        ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/a0b4606c-8645-41f3-a445-677f7f410388)
 
@@ -134,7 +138,7 @@ Home page represents a page with all featured products
        - Admin can change product price, description, brand, category, name and can remove or upload imgs
        - Uploaded imgs go on the server
 
-       ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/380d6b46-d97c-4751-b6a2-40f8dbc1ebd2)
+      ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/380d6b46-d97c-4751-b6a2-40f8dbc1ebd2)
 
       ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/5a6c1a7c-f447-4d4e-b0e4-67a4bd167fbf)
 

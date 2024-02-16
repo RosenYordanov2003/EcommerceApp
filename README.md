@@ -25,6 +25,41 @@ The application represents ecommerce app where users can buy products (clothes, 
 ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/1a213cf3-a01b-4f65-a239-b199c0dc7ee4)
 ## Authentication
 Authentication is made by using JWT token with Refresh token. On every 15 minutes client app make request to the server to get new jwt token without logout the user by using user refresh token.
+![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/636b2cbb-c66f-4401-a034-ae15e7ee0aa8)
+## Home page
+Home page represents a page with all featured products
+![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/8b6f2534-5fad-46cd-b744-28b4a8b6ea4b)
+![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/c21fd726-bdc8-4d62-9b02-e501e19363c6)
+
+![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/156a1a8e-c790-41a2-a5ec-570b7c80851b)
+
+## Responsive pictures
+![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/9a9f485f-c947-46c4-84cd-f43a0ae5716f)
+![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/52884b48-22c1-47b2-92ac-9ca7e9546f1d)
+
+### Products by gender page
+- On this page user can filter products and can search for particular product
+  
+![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/9c3ad309-2c53-412f-bfdd-6c61439e64a7)
+## Responsive pictures
+![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/7d3448b9-7693-4725-87dc-3e2ed65d618b)
+![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/daadcc87-ff6d-4246-9aa5-c35226f404cc)
+
+## Dark Mode
+- The application has dark mode which state is saved in local storage
+  
+  ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/879a543f-d936-40eb-bc46-23dbbbb40d64)
+  ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/466f2856-f7e1-4a65-99c4-f6be0f19e077)
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -107,6 +107,11 @@ Home page represents a page with all featured products
 
        ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/7f35a286-d1e3-4b36-a182-be7855b7beb2)
 
+       ## Email message
+       
+       ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/b01e14b0-4d3f-42d7-ac19-9d3f22b3b796)
+
+
 
 
          

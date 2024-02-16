@@ -70,6 +70,21 @@ Home page represents a page with all featured products
   ## Products review section
   - Here authenticated users can write reviews about particular product
   ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/96039e0b-9bf5-455c-bc18-decc0304fc04)
+ - After user successfully post a review popup message will come
+   
+   ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/58c6421d-eaf7-4f8f-a3b1-0e3dfc83ab3f)
+
+   ## All reviews about particular product page
+   - Here users can read and modify their own reviews
+   - Users can choose how many reviews to be visualized per page (default number is 5)
+   - There is pagination logic
+   - 
+     ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/4f938813-220b-4837-b8db-4bfda5ce52f7)
+     
+     ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/abfdd065-7518-42fe-9091-71dd5169291b)
+
+
+
 
 
 

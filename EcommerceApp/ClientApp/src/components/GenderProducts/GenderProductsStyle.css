@@ -19,6 +19,7 @@ input:focus{
     top: 5px;
     height: 100vh; 
     margin-bottom: 2rem;
+    margin-right: auto;
 }
 .spinner{
     position: absolute;

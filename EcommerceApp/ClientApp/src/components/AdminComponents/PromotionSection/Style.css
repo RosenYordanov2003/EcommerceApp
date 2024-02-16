@@ -21,7 +21,8 @@
     justify-content: center;
     flex-direction: column;
     gap: 2rem;
+    width: 90%;
 }
 .promotion-section-button-container button{
-    width: 90%;
+    width: 100%;
 }

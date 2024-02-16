@@ -125,6 +125,22 @@ Home page represents a page with all featured products
       
        ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/026e01ab-0270-4b59-b7dc-6c134ceb3d94)
 
+       ## Product page
+
+       ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/664481a4-05a1-425d-96e0-97f97d5ede75)
+
+       ## Page about particular product
+       - On this page admin can modify particular product by adding product stock or a promotion
+       - Admin can change product price, description, brand, category, name and can remove or upload imgs
+       - Uploaded imgs go on the server
+
+       ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/380d6b46-d97c-4751-b6a2-40f8dbc1ebd2)
+
+       ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/9fff6f33-f644-4798-a626-de3129ab1261)
+
+
+
+
 
 
 

@@ -140,15 +140,15 @@ Home page represents a page with all featured products
 
       ## The project is not finished yet!
 
-    ## Тechnologies I have used
-  - C#
-  - ASP.NET Web Api
-  - Entity Framework core
-  - Microsoft SQL Server
-  - ReactJS
-  - CSS
-  - Ajax
-  - Git
+      ## Тechnologies I have used
+      - C#
+      - ASP.NET Web Api
+      - Entity Framework core
+      - Microsoft SQL Server
+      - ReactJS
+      - CSS
+      - Ajax
+      - Git
       
 
 

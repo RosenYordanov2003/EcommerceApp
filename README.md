@@ -57,6 +57,23 @@ Home page represents a page with all featured products
   
   ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/466f2856-f7e1-4a65-99c4-f6be0f19e077)
 
+## Product Info page
+- Here user can add product with particualr size and quantity to his user cart
+- If there is no available size which is selected for this product there is no option to be added to user cart
+- If quantity is not enough notification message will popup
+- If quantity for the selected size is enough the product goes to user cart and this quantity for this product with the selected size is reserved
+
+  ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/ac3604b6-249a-4bc0-ab98-0ac8a306ed5f)
+
+  ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/e416466f-f99f-40fe-941f-842862bf02e4)
+
+  ## Products review section
+  - Here authenticated users can write reviews about particular product
+  ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/96039e0b-9bf5-455c-bc18-decc0304fc04)
+
+
+
+
 
 
 

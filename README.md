@@ -16,5 +16,14 @@ The application represents ecommerce app where users can buy products (clothes, 
 ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/7fb0281a-3912-4c64-801f-d11d2ab52492)
 ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/a76e5055-9e74-476a-9384-a25a6271c903)
 
+## Functionality
+- Authenticated users can write and read reviews about particular product, can edit reviews, can buy products, can filter products
+- The anonymous ones can read reviews about particular product, can filter products. 
+## Login Page
+![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/8a890a9c-78ba-4749-b35c-155c1c77de65)
+## Register Page
+![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/1a213cf3-a01b-4f65-a239-b199c0dc7ee4)
+
+
 
 

@@ -14,6 +14,7 @@
         public PromotionModel? PromotionModel { get; set; }
         public int SelectedBrandId { get; set; }
         public int SelectedCategoryId { get; set; }
+        public bool IsFeatured { get; set; }
         public IEnumerable<CategoryModel> Categories { get; set; }
         public IEnumerable<BrandModel> Brands { get; set; }
     }

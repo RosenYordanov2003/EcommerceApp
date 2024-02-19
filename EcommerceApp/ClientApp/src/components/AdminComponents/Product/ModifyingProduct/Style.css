@@ -81,7 +81,8 @@
     box-shadow: 0rem 2rem 3rem rgba(132, 139, 200, 0.18);
 }
 .archive-container button, 
-.add-img-container button {
+.add-img-container button,
+.feature-container button{
   background-color: transparent;
   border: 1px solid #7b81e5;
   color: #7b81e5;
@@ -103,7 +104,8 @@
 }
 
 .add-img-container:hover button,
-.upload-img:hover{
+.upload-img:hover,
+.feature-container button:hover{
     background-color: #7b81e5;
     color: white;
     border: 1px solid #7b81e5;

@@ -73,5 +73,31 @@
 
             return Ok();
         }
+        [HttpPost]
+        [Route("SetFeature")]
+        public async Task<IActionResult> SetFeature([FromBody] int shoesId)
+        {
+            if (!await shoesService.CheckIfShoesExistsByIdAsync(shoesId))
+            {
+                return BadRequest();
+            }
+            await shoesService.SetFeatureShoesByIdAsync(shoesId);
+            await hubContext.Clients.All.SendAsync("ProductUpdated");
+
+            return Ok();
+        }
+        [HttpPost]
+        [Route("RemoveFeature")]
+        public async Task<IActionResult> RemoveFeature([FromBody] int shoesId)
+        {
+            if (!await shoesService.CheckIfShoesExistsByIdAsync(shoesId))
+            {
+                return BadRequest();
+            }
+            await shoesService.RemoveFeaturedShoesByIdAsync(shoesId);
+            await hubContext.Clients.All.SendAsync("ProductUpdated");
+
+            return Ok();
+        }
     }
 }

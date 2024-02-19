@@ -13,7 +13,6 @@
     using Models.Promotion;
     using Models.AdminModels.Pictures;
     using Infrastructure.Data.Models;
-    using EcommerceApp.Core.Models.AdminModels.ProductStock;
 
     public class ShoesService : IShoesService
     {
@@ -127,6 +126,7 @@
                 IsArchived = shoes.IsArchived,
                 Name = shoes.Name,
                 Price = shoes.Price,
+                IsFeatured = shoes.IsFeatured,
                 PromotionModel = new PromotionModel() { Id = shoes?.Promotion?.Id, ExpireTime = shoes?.Promotion?.ExpireTime, PercentageDiscount = shoes?.Promotion?.PercantageDiscount },
                 StarRating = shoes.StarRating,
             };
@@ -142,10 +142,26 @@
             return productToGet;
         }
 
+        public async Task RemoveFeaturedShoesByIdAsync(int shoesId)
+        {
+            Shoes shoes = await applicationDbContext.Shoes.FirstAsync(sh => sh.Id == shoesId);
+            shoes.IsFeatured = false;
+
+            await applicationDbContext.SaveChangesAsync();
+        }
+
         public async Task RestoreShoesAsync(int shoesId)
         {
             Shoes shoes = await applicationDbContext.Shoes.FirstAsync(sh => sh.Id == shoesId);
             shoes.IsArchived = false;
+            await applicationDbContext.SaveChangesAsync();
+        }
+
+        public async Task SetFeatureShoesByIdAsync(int shoesId)
+        {
+            Shoes shoes = await applicationDbContext.Shoes.FirstAsync(sh => sh.Id == shoesId);
+            shoes.IsFeatured = true;
+
             await applicationDbContext.SaveChangesAsync();
         }
     }

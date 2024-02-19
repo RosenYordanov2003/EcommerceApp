@@ -38,3 +38,27 @@ export async function addShoesStcok(object) {
 
     return request.ok;
 }
+export async function setShoesToBeFeatured(shoesId) {
+    const request = await fetch(`${baseUrl}/SetFeature`, {
+        credentials: 'include',
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(shoesId)
+    });
+
+    return request.ok;
+}
+export async function removeFeaturedShoes(shoesId) {
+    const request = await fetch(`${baseUrl}/RemoveFeature`, {
+        credentials: 'include',
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(shoesId)
+    });
+
+    return request.ok;
+}

@@ -6,7 +6,7 @@ import PoppupMessage from "../../../PoppupMessage/PoppupMessage";
 import SizeTable from "../../SizeTable/SizeTable";
 import PromotionSection from "../../PromotionSection/PromotionSection";
 import { getShoesToModify } from "../../../../adminServices/shoesService";
-import { editShoes } from "../../../../adminServices/shoesService";
+import { editShoes, setShoesToBeFeatured, removeFeaturedShoes } from "../../../../adminServices/shoesService";
 import { uploadImg } from "../../../../adminServices/pictureService";
 import ResponsiveStyle from "../ModifyingProduct/ResponsiveStyle.css";
 import ProductImg from "../../ProductImg/ProductImg";
@@ -173,6 +173,20 @@ export default function ModifyingProduct() {
     function handleOnFileChange(e) {
         setFileInput(e.target.files[0]);
     }
+    function handleOnFeatureClick() {
+        if (category.toLocaleLowerCase() === 'shoes') {
+            if (product?.isFeatured) {
+                removeFeaturedShoes(productId)
+                    .then(() => setMessage(<PoppupMessage message="Successfully remove product from feature product collection" removeNotification={closeNotification} />))
+                    .catch((error) => console.error(error));
+            }
+            else {
+                setShoesToBeFeatured(productId)
+                    .then(() => setMessage(<PoppupMessage message="Successfully add product to feature product collection" />))
+                    .catch((error) => console.error(error));
+            }
+        }
+    }
 
 
     return (
@@ -191,6 +205,7 @@ export default function ModifyingProduct() {
                         <button className="upload-img" onClick={handleOnImgUpload}>Upload</button>
                     </section>
                     <div onClick={handleOnArchiveClickToggle} className="archive-container"><button>{product?.isArchived ? "Restore" : "Archive"}</button></div>
+                    <div onClick={handleOnFeatureClick} className="feature-container"><button>{product?.isFeatured ? "Remove From Feature" : "Set Feature"}</button></div>
                 </div>
 
             </div>

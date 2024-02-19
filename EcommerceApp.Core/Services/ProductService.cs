@@ -355,6 +355,7 @@
                 Price = product.Price,
                 PromotionModel = new PromotionModel() { Id = product?.Promotion?.Id ,ExpireTime = product?.Promotion?.ExpireTime, PercentageDiscount = product?.Promotion?.PercantageDiscount },
                 StarRating = product.StarRating,
+                IsFeatured = product.IsFeatured
             };
 
             productToGet.Brands = await applicationDbContext.Brands

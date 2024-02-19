@@ -12,5 +12,7 @@
         Task EditShoesAsync(EditProductModel model);
         Task ArchiveShoesAsync(int shoesId);
         Task RestoreShoesAsync(int shoesId);
+        Task SetFeatureShoesByIdAsync(int shoesId);
+        Task RemoveFeaturedShoesByIdAsync(int shoesId);
     }
 }

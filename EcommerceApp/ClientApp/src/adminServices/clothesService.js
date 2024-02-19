@@ -114,3 +114,36 @@ export async function createProduct(formObject) {
 
     return request.ok;
 }
+export async function setProductToBeFeatured(productId) {
+    const request = await fetch(`${baseUrl}/SetFeature`, {
+        credentials: 'include',
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(productId),
+    })
+
+    if (!request.ok) {
+        throw new Error(request.Error);
+    }
+
+    return request.ok;
+}
+export async function removeProductToBeFeatured(productId) {
+    const request = await fetch(`${baseUrl}/RemoveFeature`, {
+        credentials: 'include',
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(productId),
+    })
+
+    if (!request.ok) {
+        throw new Error(request.Error);
+    }
+
+    return request.ok;
+}
+

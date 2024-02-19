@@ -1,5 +1,5 @@
 ﻿import { useEffect, useState } from "react";
-import { getProductToModify, editProduct, archiveProduct, restoreProduct } from "../../../../adminServices/clothesService";
+import { getProductToModify, editProduct, archiveProduct, restoreProduct, setProductToBeFeatured, removeProductToBeFeatured } from "../../../../adminServices/clothesService";
 import Style from "../ModifyingProduct/Style.css";
 import ProductStock from "../../ProductStock/ProductStock";
 import PoppupMessage from "../../../PoppupMessage/PoppupMessage";
@@ -185,6 +185,19 @@ export default function ModifyingProduct() {
                     .then(() => setMessage(<PoppupMessage message="Successfully add product to feature product collection" />))
                     .catch((error) => console.error(error));
             }
+        }
+        else {
+            if (product?.isFeatured) {
+                removeProductToBeFeatured(productId)
+                    .then(() => setMessage(<PoppupMessage message="Successfully remove product from feature product collection" removeNotification={closeNotification} />))
+                    .catch((error) => console.error(error));
+            }
+            else {
+                setProductToBeFeatured(productId)
+                    .then(() => setMessage(<PoppupMessage message="Successfully remove product from feature product collection" removeNotification={closeNotification} />))
+                    .catch((error) => console.error(error));
+            }
+           
         }
     }
 

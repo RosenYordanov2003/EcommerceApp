@@ -12,7 +12,6 @@
     using Models.Review;
     using Infrastructure.Data.Models;
     using Models.AdminModels.Clothes;
-    using Models.AdminModels.Promotion;
     using Models.Promotion;
     using Models.AdminModels.Pictures;
 
@@ -458,6 +457,20 @@
             await applicationDbContext.SaveChangesAsync();
 
             return product.Id;
+        }
+
+        public async Task SetProductToBeFeaturedByIdAsync(int productId)
+        {
+            Product product = await applicationDbContext.Clothes.FirstAsync(cl => cl.Id == productId);
+            product.IsFeatured = true;
+            await applicationDbContext.SaveChangesAsync();
+        }
+
+        public async Task RemoveProductFromBeFeaturedProductsByIdAsync(int productId)
+        {
+            Product product = await applicationDbContext.Clothes.FirstAsync(cl => cl.Id == productId);
+            product.IsFeatured = false;
+            await applicationDbContext.SaveChangesAsync();
         }
     }
 }

@@ -21,5 +21,7 @@
         Task ArchiveProductAsync(int productId);
         Task RestoreProductAsync(int productId);
         Task<int> CreateProductAsync(CreateProductModel model);
+        Task SetProductToBeFeaturedByIdAsync(int productId);
+        Task RemoveProductFromBeFeaturedProductsByIdAsync(int productId);
     }
 }

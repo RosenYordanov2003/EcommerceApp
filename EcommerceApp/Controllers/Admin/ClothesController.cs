@@ -172,5 +172,31 @@
             }
             return Ok();
         }
+        [HttpPost]
+        [Route("SetFeature")]
+        public async Task<IActionResult> SetFeature([FromBody] int productId)
+        {
+            if (!await productSevice.CheckIfProductExistsByIdAsync(productId))
+            {
+                return BadRequest();
+            }
+            await productSevice.SetProductToBeFeaturedByIdAsync(productId);
+            await hubContext.Clients.All.SendAsync("ProductUpdated");
+
+            return Ok();
+        }
+        [HttpPost]
+        [Route("RemoveFeature")]
+        public async Task<IActionResult> RemoveFeature([FromBody] int productId)
+        {
+            if (!await shoesService.CheckIfShoesExistsByIdAsync(productId))
+            {
+                return BadRequest();
+            }
+            await productSevice.RemoveProductFromBeFeaturedProductsByIdAsync(productId);
+            await hubContext.Clients.All.SendAsync("ProductUpdated");
+
+            return Ok();
+        }
     }
 }

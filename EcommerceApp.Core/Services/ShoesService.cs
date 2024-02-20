@@ -109,6 +109,7 @@
                     CategoryName = s.Category.Name,
                     IsFavorite = userId.HasValue ? applicationDbContext.UserFavoriteShoes.
                     Any(us => us.UserId == userId && us.ShoesId == s.Id) : false,
+                    DicountPercentage = s.Promotion == null ? 0 : s.Promotion.PercantageDiscount,
                 })
                 .ToArrayAsync();
         }

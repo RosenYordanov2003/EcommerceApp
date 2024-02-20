@@ -8,6 +8,7 @@ export default function FeaturedProduct({ product }) {
 
     const navigate = useNavigate();
 
+
     const { user, setUser } = useContext(UserContext);
 
     const stars = Array.from({ length: product.starRating }, (star, index) => (
@@ -53,7 +54,7 @@ export default function FeaturedProduct({ product }) {
         const favoriteResult = !isFavorite;
         if (favoriteResult) {
             addProductToUserFavoriteProductsList(user.id, product.id, product.categoryName)
-                .then(res => {
+                .then(() => {
                     const productInstance = createProductObject(product.name, product.id, product.pictures[0].imgUrl, product.categoryName);
                     setUser({ ...user, userFavoriteProducts: [...user.userFavoriteProducts, productInstance] })
                 })
@@ -61,7 +62,7 @@ export default function FeaturedProduct({ product }) {
         }
         else {
             removeProductFromUserFavoriteList(user.id, product.id, product.categoryName)
-                .then(res => {
+                .then(() => {
                     const filteredProducts = filterUserFavoriteProducts(user.userFavoriteProducts, product.id, product.categoryName);
                     setUser({ ...user, userFavoriteProducts: filteredProducts })
 
@@ -81,7 +82,14 @@ export default function FeaturedProduct({ product }) {
             <div className="product-content">
                 <div className="star-rating">{stars}</div>
                 <h2 className="name">{product.name}</h2>
+                {product.dicountPercentage !== 0 ?
+                 <section className="price-with-promotion-container">
+                    <del><p className="price">${product.price.toFixed(2)}</p></del>
+                    <p className="price-with-discount">${(product.price - (product.price * product.dicountPercentage) / 100).toFixed(2)}</p>
+                </section>
+                    :
                 <p className="price">${product.price.toFixed("2")}</p>
+                }
             </div>
         </div>
     )

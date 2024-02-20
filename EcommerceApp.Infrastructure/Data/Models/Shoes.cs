@@ -35,6 +35,7 @@
         public string? Description { get; set; }
         public bool IsFeatured { get; set; }
 
+        [ForeignKey(nameof(Promotion))]
         public Guid? PromotionId { get; set; }
         public Promotion? Promotion { get; set; }
 

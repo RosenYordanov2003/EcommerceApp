@@ -1,5 +1,6 @@
 ﻿namespace EcommerceApp.Core.Models.Shoes
 {
+    using EcommerceApp.Core.Models.Promotion;
     using Pictures;
     public class ShoesFeatureModel
     {
@@ -14,5 +15,6 @@
         public IEnumerable<PictureModel> Pictures { get; set; }
         public string CategoryName { get; set; } = null!;
         public bool IsFavorite { get; set; }
+        public decimal DicountPercentage { get; set; }
     }
 }

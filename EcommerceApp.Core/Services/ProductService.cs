@@ -73,6 +73,7 @@
                     StarRating = c.StarRating,
                     Pictures = c.Pictures.Select(p => new PictureModel() { ImgUrl = p.ImgUrl }).Take(2),
                     CategoryName = c.Category.Name,
+                    DicountPercentage = c.Promotion == null ? 0 : c.Promotion.PercantageDiscount,
                     IsFavorite = userId.HasValue ? applicationDbContext.UserFavoriteProducts.
                     Any(us => us.UserId == userId && us.ProductId == c.Id) : false,
                 })
@@ -97,6 +98,7 @@
                       StarRating = cl.StarRating,
                       CategoryName = cl.Category.Name,
                       Brand = cl.Brand.Name,
+                      DicountPercentage = cl.Promotion == null ? 0 : cl.Promotion.PercantageDiscount,
                       IsFavorite = userId.HasValue ? cl.UserFavoriteProducts.Any(ufcl => ufcl.UserId == userId && ufcl.ProductId == cl.Id) : false,
                   })
                   .ToListAsync();
@@ -112,6 +114,7 @@
                     Price = sh.Price,
                     CategoryName = sh.Category.Name,
                     Brand = sh.Brand.Name,
+                    DicountPercentage = sh.Promotion == null ? 0 : sh.Promotion.PercantageDiscount,
                     IsFavorite = userId.HasValue ? sh.UserFavoriteShoes.Any(ufsh => ufsh.UserId == userId && ufsh.ShoesId == sh.Id) : false,
                 })
                 .ToListAsync();

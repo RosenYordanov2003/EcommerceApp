@@ -37,8 +37,7 @@
     color: #313438;
     font-size: 1.5rem;
 }
-.product-content .price
-{
+.product-content :where(.price, .price-with-discount) {
     color: #d57d80;
     font-size: 1.5rem;
 }
@@ -68,4 +67,15 @@
 }
 .active-heart{
     color: deeppink;
+}
+.price-with-promotion-container{
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+}
+.price-with-promotion-container .price{
+    opacity: 0.8;
+}
+.price-with-promotion-container del{
+    color: #d57d80;
 }

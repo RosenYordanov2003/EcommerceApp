@@ -6,9 +6,9 @@
         justify-content: center;
     }
     .featured-product-card .img-container{
-        width: 180px;
+        width: 170px;
     }
-    .product-content :is(.name, .price, .star-rating){
+    .product-content :is(.name, .price, .star-rating, .price-with-discount) {
         font-size: 1rem;
     }
     .contact-container{

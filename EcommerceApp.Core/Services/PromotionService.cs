@@ -28,16 +28,40 @@
             if (promotion.ShoesId.HasValue)
             {
                 Shoes shoes = await dbContext.Shoes.FirstAsync(sh => sh.Id == promotion.ShoesId);
+                await RemoveOldPromotions(addPromotionModel);
                 shoes.Promotion = promotion;
             }
             else
             {
                 Product product = await dbContext.Clothes.FirstAsync(p => p.Id == promotion.ProductId);
+                await RemoveOldPromotions(addPromotionModel);
                 product.Promotion = promotion;
             }
 
             await dbContext.Promotions.AddAsync(promotion);
             await dbContext.SaveChangesAsync();
+        }
+
+        private async Task RemoveOldPromotions(AddPromotionModel addPromotionModel)
+        {
+            if (addPromotionModel.ProductCategory == "Shoes")
+            {
+                var promoions = await dbContext.Promotions.Where(p => p.ShoesId == addPromotionModel.ProductId).ToArrayAsync();
+                foreach (var item in promoions)
+                {
+                    dbContext.Promotions.Remove(item);
+                }
+            }
+            else
+            {
+                var promoions = await dbContext.Promotions.Where(p => p.ProductId == addPromotionModel.ProductId).ToArrayAsync();
+                foreach (var item in promoions)
+                {
+                    dbContext.Promotions.Remove(item);
+                }
+            }
+            await dbContext.SaveChangesAsync();
+             
         }
 
         public async Task<bool> CheckIfPromotionExistsByIdAsync(Guid id)
@@ -61,7 +85,7 @@
             {
                 product.Promotion = null;
             }
-            if (shoes!= null)
+            if (shoes != null)
             {
                 shoes.Promotion = null;
             }

@@ -2,7 +2,7 @@
 
 export default function Pager({ startPage, endPage, pageNumberChange, currentPage }) {
 
-    let result = []
+    let result = [];
     for (let i = startPage; i <=endPage ; i++) {
         result.push(i);
     }

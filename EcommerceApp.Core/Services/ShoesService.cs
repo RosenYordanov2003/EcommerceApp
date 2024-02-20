@@ -12,6 +12,7 @@
     using Models.ProductStocks;
     using Models.Promotion;
     using Models.AdminModels.Pictures;
+    using Models.Pager;
     using Infrastructure.Data.Models;
 
     public class ShoesService : IShoesService
@@ -70,9 +71,13 @@
             await applicationDbContext.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<ClothesModel>> GetAllShoesAsync()
+        public async Task<IEnumerable<ClothesModel>> GetAllShoesAsync(Pager pager)
         {
-            return await applicationDbContext.Shoes
+            var shoes = applicationDbContext.Shoes.AsQueryable()
+                .Skip((pager.CurrentPage - 1) * pager.PageSize)
+                .Take(pager.PageSize);
+
+            return await shoes
                 .Select(sh => new ClothesModel()
                 {
                     Id = sh.Id,
@@ -83,6 +88,11 @@
                     Price = sh.Price
                 })
                 .ToArrayAsync();
+        }
+
+        public async Task<int> GetAllShoesCountAsync()
+        {
+           return await applicationDbContext.Shoes.CountAsync();
         }
 
         public async Task<IEnumerable<ShoesFeatureModel>> GetFeaturedShoesAsync(Guid? userId)
@@ -129,6 +139,7 @@
                 IsFeatured = shoes.IsFeatured,
                 PromotionModel = new PromotionModel() { Id = shoes?.Promotion?.Id, ExpireTime = shoes?.Promotion?.ExpireTime, PercentageDiscount = shoes?.Promotion?.PercantageDiscount },
                 StarRating = shoes.StarRating,
+                Gender = shoes.Gender,
             };
 
             productToGet.Brands = await applicationDbContext.Brands

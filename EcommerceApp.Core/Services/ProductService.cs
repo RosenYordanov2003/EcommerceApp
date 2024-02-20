@@ -14,6 +14,7 @@
     using Models.AdminModels.Clothes;
     using Models.Promotion;
     using Models.AdminModels.Pictures;
+    using EcommerceApp.Core.Models.Pager;
 
     public class ProductService : IProductSevice
     {
@@ -256,9 +257,15 @@
             return favoriteProducts;
         }
 
-        public async Task<IEnumerable<ClothesModel>> LoadAllClothesAsync()
+        public async Task<IEnumerable<ClothesModel>> LoadAllClothesAsync(Pager pager)
         {
-            return await applicationDbContext.Clothes
+
+            var clothes = applicationDbContext.Clothes.
+            AsQueryable().
+            Skip((pager.CurrentPage - 1) * pager.PageSize).
+            Take(pager.PageSize);
+
+            return await clothes
                .Select(cl => new ClothesModel()
                {
                    Id = cl.Id,
@@ -352,9 +359,10 @@
                 IsArchived = product.IsArchived,
                 Name = product.Name,
                 Price = product.Price,
-                PromotionModel = new PromotionModel() { Id = product?.Promotion?.Id ,ExpireTime = product?.Promotion?.ExpireTime, PercentageDiscount = product?.Promotion?.PercantageDiscount },
+                PromotionModel = new PromotionModel() { Id = product?.Promotion?.Id, ExpireTime = product?.Promotion?.ExpireTime, PercentageDiscount = product?.Promotion?.PercantageDiscount },
                 StarRating = product.StarRating,
-                IsFeatured = product.IsFeatured
+                IsFeatured = product.IsFeatured,
+                Gender = product.Gender,
             };
 
             productToGet.Brands = await applicationDbContext.Brands
@@ -471,6 +479,11 @@
             Product product = await applicationDbContext.Clothes.FirstAsync(cl => cl.Id == productId);
             product.IsFeatured = false;
             await applicationDbContext.SaveChangesAsync();
+        }
+
+        public async Task<int> GetAllClothesCountAsync()
+        {
+            return await applicationDbContext.Clothes.CountAsync();
         }
     }
 }

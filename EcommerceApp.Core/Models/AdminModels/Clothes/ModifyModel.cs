@@ -15,6 +15,7 @@
         public int SelectedBrandId { get; set; }
         public int SelectedCategoryId { get; set; }
         public bool IsFeatured { get; set; }
+        public string Gender { get; set; } = null!;
         public IEnumerable<CategoryModel> Categories { get; set; }
         public IEnumerable<BrandModel> Brands { get; set; }
     }

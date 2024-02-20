@@ -1,7 +1,7 @@
 ﻿const baseUrl = "https://localhost:7122/api/clothes"
 
-export async function loadAllProducts() {
-    const request = await fetch(`${baseUrl}/LoadAllClothes`, { credentials: 'include' });
+export async function loadAllProducts(pageNumber) {
+    const request = await fetch(`${baseUrl}/LoadAllClothes?pageNumber=${pageNumber}`, { credentials: 'include' });
 
     const response = request.json();
 

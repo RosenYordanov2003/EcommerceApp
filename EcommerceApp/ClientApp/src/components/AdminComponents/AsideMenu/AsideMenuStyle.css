@@ -19,15 +19,15 @@
     transition: all 0.3s ease;
 }
 .asside-wrapper{
-    height: 100vh;
-    margin: 3rem 0rem;
+    height: 100%;
+    margin: 5rem 0rem;
     position: relative;
     top: 3rem;
     padding: 1rem 0rem;
 }
 .icon-container:last-child{
     position: absolute;
-    bottom: 4px;
+    bottom: 1rem;
 }
 .active-icon-container {
     transition: all 0.5s ease;
@@ -49,7 +49,7 @@
     margin: 2rem 0rem 4rem 2rem;
 }
 .icon-container:not(:last-child):hover {
-    transform: translatex(0.8rem);
+    transform: translateX(0.8rem);
 }
 .icon-container:hover :where(span, p){
    color: #7b81e5;

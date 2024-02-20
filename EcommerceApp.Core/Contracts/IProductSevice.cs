@@ -4,6 +4,7 @@
     using Models.Shoes;
     using Models.Products;
     using EcommerceApp.Core.Models.AdminModels.Promotion;
+    using EcommerceApp.Core.Models.Pager;
 
     public interface IProductSevice
     {
@@ -15,7 +16,7 @@
         Task RemoveProductFromUserFavoriteListAsync(UserFavoriteProduct userFavoriteProductmodel);
         Task<ICollection<GetUserFavoriteProductModel>> GetUserFavoriteProductsAsync(Guid userId);
         Task<IEnumerable<ShoesFeatureModel>> LoadUserFavoriteProductsAsync(Guid userId);
-        Task<IEnumerable<ClothesModel>> LoadAllClothesAsync();
+        Task<IEnumerable<ClothesModel>> LoadAllClothesAsync(Pager pager);
         Task<ModifyClothesModel> GetProductToModifyAsync(int productId);
         Task EditProductAsync(EditProductModel model);
         Task ArchiveProductAsync(int productId);
@@ -23,5 +24,6 @@
         Task<int> CreateProductAsync(CreateProductModel model);
         Task SetProductToBeFeaturedByIdAsync(int productId);
         Task RemoveProductFromBeFeaturedProductsByIdAsync(int productId);
+        Task<int> GetAllClothesCountAsync();
     }
 }

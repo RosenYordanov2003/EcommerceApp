@@ -43,13 +43,14 @@ export default function ProductStock({ productStock }) {
     }
 
     return (
-        <div className="product-stock-admin-container">
-            {message !== undefined && message }
-            <p>{productStock.size }</p>
-            <form onSubmit={handleOnFormSubmit} className="product-stock-form">
-                <input onChange={(e) => setQuantity(e.target.value)} value={quantity === undefined ? "" : quantity} name="quantity"></input>
-                <button>Add Quantity</button>
-            </form>
-        </div>
+            <div className="product-stock-admin-container">
+                {message !== undefined && message}
+                <p>{productStock.size}</p>
+                <form onSubmit={handleOnFormSubmit} className="product-stock-form">
+                    <input onChange={(e) => setQuantity(e.target.value)} value={quantity === undefined ? "" : quantity} name="quantity"></input>
+                    <button>Add Quantity</button>
+                </form>
+            </div>
+       
     )
 }

@@ -9,6 +9,7 @@
     using Core.Models.AdminModels.Clothes;
     using Core.Models.AdminModels.ProductStock;
     using static Common.GeneralApplicationConstants;
+    using EcommerceApp.Core.Models.Pager;
 
     [ApiController]
     [Authorize(Roles = AdminRoleName)]
@@ -41,10 +42,16 @@
 
         [HttpGet]
         [Route("LoadAllClothes")]
-        public async Task<IActionResult> LoadAllClothes()
+        public async Task<IActionResult> LoadAllClothes([FromQuery] int pageNumber)
         {
-            var allClothes = await productSevice.LoadAllClothesAsync();
-            return Ok(allClothes);
+            pageNumber = pageNumber < 1 ? 1 : pageNumber;
+
+            int allClothesCount = await productSevice.GetAllClothesCountAsync();
+
+            Pager pager = new Pager(allClothesCount, pageNumber, DefaultPageSize);
+
+            var clothes = await productSevice.LoadAllClothesAsync(pager);
+            return Ok(new {Clothes = clothes, PagerObject = pager});
         }
         [HttpGet]
         [Route("GetProductToModify")]

@@ -1,5 +1,5 @@
 ﻿import { useEffect, useState } from "react";
-import { getProductToModify, editProduct, archiveProduct, restoreProduct, setProductToBeFeatured, removeProductToBeFeatured } from "../../../../adminServices/clothesService";
+import { getProductToModify, editProduct } from "../../../../adminServices/clothesService";
 import Style from "../ModifyingProduct/Style.css";
 import ProductStock from "../../ProductStock/ProductStock";
 import PoppupMessage from "../../../PoppupMessage/PoppupMessage";
@@ -7,10 +7,10 @@ import SizeTable from "../../SizeTable/SizeTable";
 import PromotionSection from "../../PromotionSection/PromotionSection";
 import { getShoesToModify } from "../../../../adminServices/shoesService";
 import { editShoes, setShoesToBeFeatured, removeFeaturedShoes } from "../../../../adminServices/shoesService";
-import { uploadImg } from "../../../../adminServices/pictureService";
 import ResponsiveStyle from "../ModifyingProduct/ResponsiveStyle.css";
 import ProductImg from "../../ProductImg/ProductImg";
 import { HubConnectionBuilder } from '@microsoft/signalr';
+import ButtonsContainer from "./../ButtonsContainer/ButtonsContainer";
 
 export default function ModifyingProduct() {
 
@@ -22,7 +22,6 @@ export default function ModifyingProduct() {
     const [product, setProduct] = useState(undefined);
     const [inputObject, setInputObject] = useState({});
     const [connection, setConnection] = useState(null);
-    const [fileInputObject, setFileInput] = useState(undefined);
 
     useEffect(() => {
 
@@ -145,62 +144,10 @@ export default function ModifyingProduct() {
                 .then(() => setMessage(<PoppupMessage message="Successfully update product" removeNotification={closeNotification} />))
                 .catch((error) => console.error(error));
         }
-
     }
-    function handleOnArchiveClickToggle() {
-        if (!product?.isArchived) {
-            archiveProduct(productId, category)
-                .then(() => setMessage(<PoppupMessage message="Successfylly Archive Product" removeNotification={closeNotification} />))
-                .catch((error) => console.error(error));
-        }
-        else {
-            restoreProduct(productId, category)
-                .then(() => setMessage(<PoppupMessage message="Successfylly Restore Product" removeNotification={closeNotification} />))
-                .catch((error) => console.error(error));
-        }
+    function addPopupMessage(message) {
+        setMessage(<PoppupMessage message={message} removeNotification={closeNotification} />)
     }
-    function handleOnImgUpload() {
-
-        const formData = new FormData();
-        formData.append("productId", productId);
-        formData.append("productCategory", category);
-        formData.append("pictureFile", fileInputObject);
-
-        uploadImg(formData)
-            .then(() => setMessage(<PoppupMessage message="Successfully upload an img" removeNotification={closeNotification}/>))
-            .catch((error) => console.error(error));
-    }
-    function handleOnFileChange(e) {
-        setFileInput(e.target.files[0]);
-    }
-    function handleOnFeatureClick() {
-        if (category.toLocaleLowerCase() === 'shoes') {
-            if (product?.isFeatured) {
-                removeFeaturedShoes(productId)
-                    .then(() => setMessage(<PoppupMessage message="Successfully remove product from feature product collection" removeNotification={closeNotification} />))
-                    .catch((error) => console.error(error));
-            }
-            else {
-                setShoesToBeFeatured(productId)
-                    .then(() => setMessage(<PoppupMessage message="Successfully add product to feature product collection" />))
-                    .catch((error) => console.error(error));
-            }
-        }
-        else {
-            if (product?.isFeatured) {
-                removeProductToBeFeatured(productId)
-                    .then(() => setMessage(<PoppupMessage message="Successfully remove product from feature product collection" removeNotification={closeNotification} />))
-                    .catch((error) => console.error(error));
-            }
-            else {
-                setProductToBeFeatured(productId)
-                    .then(() => setMessage(<PoppupMessage message="Successfully remove product from feature product collection" removeNotification={closeNotification} />))
-                    .catch((error) => console.error(error));
-            }
-           
-        }
-    }
-
 
     return (
         <div className="product-modifying-container">
@@ -209,18 +156,7 @@ export default function ModifyingProduct() {
                 <div className="imgs-container">
                     {imgs}
                 </div>
-                <div className="product-buttons-container">
-                    <section className="add-img-container-section">
-                        <div className="add-img-container">
-                            <input onChange={(handleOnFileChange)} type="file"></input>
-                            <button>Add Img</button>
-                        </div>
-                        <button className="upload-img" onClick={handleOnImgUpload}>Upload</button>
-                    </section>
-                    <div onClick={handleOnArchiveClickToggle} className="archive-container"><button>{product?.isArchived ? "Restore" : "Archive"}</button></div>
-                    <div onClick={handleOnFeatureClick} className="feature-container"><button>{product?.isFeatured ? "Remove From Feature" : "Set Feature"}</button></div>
-                </div>
-
+                <ButtonsContainer isArchived={product?.isArchived} isFeatured={product?.isFeatured} productId={productId} category={category} addMessage={addPopupMessage }/>
             </div>
             <div className="product-modifying-content">
                 <form onSubmit={handleFormSubmit}>

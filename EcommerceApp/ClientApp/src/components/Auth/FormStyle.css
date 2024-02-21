@@ -71,6 +71,16 @@ body:has(.auth-form) .main-nav ul li a {
 .input-container {
     display: flex;
     flex-direction: column;
+    width: 60%;
+}
+.input-container:has(.error-validation-message) input{
+    border: 1px solid red;
+}
+.error-validation-message{
+    color: red;
+    display: block;
+    margin-top: 0.6rem;
+    font-size: 1.2rem;
 }
 
 .auth-form input {

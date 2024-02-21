@@ -13,6 +13,8 @@
     using Models.Account;
     using Models.Responses;
     using System.Linq;
+    using Humanizer;
+    using System.ComponentModel.DataAnnotations;
 
     [ApiController]
     [Route("api/account")]
@@ -41,11 +43,21 @@
         [Route("Register")]
         public async Task<IActionResult> Register([FromBody] RegisterModel registerModel)
         {
+
+
             bool isExsitsByEmail = await userManager.FindByEmailAsync(registerModel.Email) != null;
             bool isExistsByUsername = await userManager.FindByNameAsync(registerModel.UserName) != null;
-            if (!ModelState.IsValid || isExsitsByEmail || isExistsByUsername)
+            if (!ModelState.IsValid)
             {
-                return BadRequest();
+                return Ok(new { Errors = ModelState.Values.SelectMany(v => v.Errors) });
+            }
+            if (isExsitsByEmail)
+            {
+                return Ok(new { Error = "User with the same email already exists" });
+            }
+            if (isExistsByUsername)
+            {
+                return Ok(new { Error = "User with the same username already exists" });
             }
             var newUser = new User()
             {

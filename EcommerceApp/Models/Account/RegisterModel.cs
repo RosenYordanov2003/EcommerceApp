@@ -1,13 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace EcommerceApp.Models.Account
+﻿namespace EcommerceApp.Models.Account
 {
+    using System.ComponentModel.DataAnnotations;
     public class RegisterModel
     {
         [Required]
         [EmailAddress]
         public string Email { get; set; } = null!;
         [Required]
+
         public string UserName { get; set; } = null!;
         [Required]
         [DataType(DataType.Password)]

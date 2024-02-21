@@ -63,7 +63,6 @@ export default function FilterMenu({ result: {brands, categories }, onCheckInput
                 <ul className={`${status}`}>
                     {categoryElements}
                 </ul>
-                <hr></hr>
             </nav>
         </>
       

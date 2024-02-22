@@ -43,8 +43,6 @@
         [Route("Register")]
         public async Task<IActionResult> Register([FromBody] RegisterModel registerModel)
         {
-
-
             bool isExsitsByEmail = await userManager.FindByEmailAsync(registerModel.Email) != null;
             bool isExistsByUsername = await userManager.FindByNameAsync(registerModel.UserName) != null;
             if (!ModelState.IsValid)

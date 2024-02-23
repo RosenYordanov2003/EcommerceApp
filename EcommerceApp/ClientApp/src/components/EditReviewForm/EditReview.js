@@ -4,21 +4,28 @@ import { UserContext } from "../../Contexts/UserContext";
 import EditReviewStyle from "../EditReviewForm/EditReviewStyle.css";
 import Notification from "../Notification/Notification";
 import EditReviewResponsiveStyle from "../EditReviewForm/EditReviewResponsiveStyle.css";
+import Input from "../Auth/Input/Input";
+import { FormProvider, useForm } from 'react-hook-form'
+import { reviewContent, reviewSubjectInput} from "../../utilities/inputValidations";
 
 export default function EditReview() {
 
     const urlPath = window.location.pathname.split('/');
     const reviewId = urlPath[urlPath.length - 1];
 
-    const [formObject, setFormObject] = useState({});
-    const { user, setUser } = useContext(UserContext);
+    const [review, setReview] = useState(undefined);
+    const { user } = useContext(UserContext);
+    const [starEvaluation, setStarEvaluation] = useState(0);
     const [notification, setNotification] = useState(undefined);
+    const methods = useForm();
 
     useEffect(() => {
         if (user?.id) {
             getReviewToEdit(reviewId, user.id)
                 .then(res => {
-                    setFormObject({ content: res.content, starEvaluation: res.starEvaluation, id: res.id });
+                    setReview(res);
+                    setStarEvaluation(res.starEvaluation);
+                    console.log(res);
                 })
                 .catch((error) => console.error(error));
         }
@@ -26,46 +33,47 @@ export default function EditReview() {
 
 
     let stars = Array.from({ length: 5 }, (star, index) => {
-        if (index + 1 <= formObject?.starEvaluation) {
-            return <i onClick={() => setFormObject({ ...formObject, starEvaluation: index + 1 })} key={index} className="fa-solid fa-star star"></i>
+        if (index + 1 <= starEvaluation) {
+            return <i onClick={() => setStarEvaluation(index + 1)} key={index} className="fa-solid fa-star star"></i>
         }
         else {
-            return <i onClick={() => setFormObject({ ...formObject, starEvaluation: index + 1 })} key={index} className="fa-regular fa-star star"></i>
+            return <i onClick={() => setStarEvaluation(index + 1)} key={index} className="fa-regular fa-star star"></i>
         }
     })
 
-    function handleContentChange(event) {
-        setFormObject({ ...formObject, content: event.target.value });
-    }
     function clearStarResult(event) {
         event.preventDefault();
-        setFormObject({ ...formObject, starEvaluation: 0 });
+        setStarEvaluation(0);
     }
-    function handleEditReviewSubmit(event) {
+    const handleOnSubmit = methods.handleSubmit(data => {
 
-        event.preventDefault();
-        editReview(formObject)
+        const object = {
+            ...data,
+            starEvaluation,
+            id: reviewId
+        };
+        editReview(object)
             .then(() => setNotification(<Notification closeNotification={closeNotification} message="You have successfully edited your review" typeOfMessage="Success" />))
             .catch(() => setNotification(<Notification closeNotification={closeNotification} message="Invalid review-content length" typeOfMessage="Error" />));
-
-        function closeNotification() {
-            setNotification(undefined);
-        }
+    })
+    function closeNotification() {
+        setNotification(undefined);
     }
 
     return (
-        <form onSubmit={handleEditReviewSubmit} className="review-form edit-form">
-            {notification }
-            <div className="write-review-star-container">
-                <p>Your evaluation</p>
-                <div>{stars}</div>
-                <button onClick={clearStarResult} className="clear-stars-button">Clear Stars</button>
-            </div>
-            <div className="input-container">
-                <label htmlFor="review">Review</label>
-                <textarea onChange={handleContentChange} value={formObject.content} name="review" rows={10} cols={60} id="review"></textarea>
-            </div>
-            <button type="submit" className="edit-review-button">Edit Review</button>
-        </form>
+        <FormProvider {...methods}>
+            <form onSubmit={(event) => event.preventDefault} className="review-form edit-form">
+                {notification}
+                <div className="write-review-star-container">
+                    <p>Your evaluation</p>
+                    <div>{stars}</div>
+                    <button onClick={clearStarResult} className="clear-stars-button">Clear Stars</button>
+                </div>
+                <Input {...reviewSubjectInput} inputValue={review?.subject} />
+                <Input {...reviewContent} inputValue={review?.content}/>
+                <button onClick={handleOnSubmit} type="submit" className="edit-review-button">Edit Review</button>
+            </form>
+        </FormProvider>
+       
     )
 }

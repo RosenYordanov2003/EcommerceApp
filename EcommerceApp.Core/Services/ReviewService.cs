@@ -40,6 +40,7 @@
             Review reviewToEdit = await dbContext.Reviews.FirstAsync(r => r.Id == reviewId);
             reviewToEdit.Content = editReviewModel.Content;
             reviewToEdit.StarЕvaluation = editReviewModel.StarEvaluation;
+            reviewToEdit.Subject = editReviewModel.Subject;
 
             await dbContext.SaveChangesAsync();
         }
@@ -52,7 +53,8 @@
                 {
                     Id = r.Id,
                     Content = r.Content,
-                    StarEvaluation = r.StarЕvaluation
+                    StarEvaluation = r.StarЕvaluation,
+                    Subject = r.Subject,
                 })
                 .FirstAsync();
         }
@@ -88,7 +90,8 @@
                         Content = r.Content,
                         CreatedOn = r.CreatedOn,
                         StarEvaluation = r.StarЕvaluation,
-                        Username = r.User.UserName
+                        Username = r.User.UserName,
+                        Subject = r.Subject,
                     })
                     .Skip(recordsToSkip)
                     .Take(pager.PageSize)

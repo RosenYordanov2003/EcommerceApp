@@ -1,0 +1,6 @@
+﻿.input-container label{
+    transition: 0.5s ease all;
+}
+.input-container .active-label{
+    transform: translateY(-8px);
+}

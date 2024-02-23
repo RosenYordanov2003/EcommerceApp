@@ -13,13 +13,17 @@
     margin-bottom: 1.4rem;
 }
 .review-evaluation p,
-.review-content p {
+.review-content p,
+.review-subject{
     margin: 0px;
     font-weight: bolder;
     font-size: 1.1rem;
 }
 .review-evaluation .evaluation{
     font-size: 1rem;
+}
+.star-section{
+    margin-top: 1rem;
 }
 .star-section i {
     font-size: 1.2rem;

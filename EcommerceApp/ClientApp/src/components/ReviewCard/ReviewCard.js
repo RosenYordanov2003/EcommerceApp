@@ -20,14 +20,6 @@ export default function ReviewCard({ review, removeReviewById }) {
         }
     })
 
-    const reviewDate = new Date(review.createdOn);
-    const currentDate = new Date(Date.now());
-
-    const currentDateYear = currentDate.getDay();
-
-    const reviewDateYear = reviewDate.getDay();
-
-    const result = currentDateYear - reviewDateYear;
 
     let modifySectionResult = user?.id == review.userId ?
         <section className="modifyReviewSection">
@@ -55,6 +47,7 @@ export default function ReviewCard({ review, removeReviewById }) {
             <div className="review-card">
                 <div className="review-user">
                     <h5 className="review-username">{review.username}</h5>
+                    <p className="review-subject">{review.subject}</p>
                     <div className="review-evaluation">
                         <section className="star-section">
                             {stars}

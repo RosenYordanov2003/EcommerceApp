@@ -1,7 +1,7 @@
 ﻿namespace EcommerceApp.Core.Models.Review
 {
     using System.ComponentModel.DataAnnotations;
-    using static EcommerceApp.GlobalConstants.EntityValidation.ReviewEntity;
+    using static GlobalConstants.EntityValidation.ReviewEntity;
     public class EditReviewModel
     {
         public int Id { get; set; }
@@ -12,5 +12,9 @@
 
         [Range(StarEvaluationMinValue,StarEvaluationMaxValue)]
         public int StarEvaluation { get; set; }
+
+        [Required]
+        [MaxLength(SubjectMaxValue)]
+        public string Subject { get; set; } = null!;
     }
 }

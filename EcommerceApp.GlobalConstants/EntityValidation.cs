@@ -58,7 +58,7 @@
             public const int StarEvaluationMinValue = 0;
             public const int StarEvaluationMaxValue = 5;
 
-            public const int SummaryMaxValue = 30;
+            public const int SubjectMaxValue = 40;
         }
         public static class OrderEntity
         {

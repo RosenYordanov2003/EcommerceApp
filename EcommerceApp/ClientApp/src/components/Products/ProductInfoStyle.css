@@ -290,12 +290,16 @@ main {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 1.4rem;
+    gap: 3.4rem;
     width: 100%;
 }
-.review-form input{
-    width: 300px;
-    padding: 0.4rem;
+.review-form :where(input, textarea){
+    width: 100%;
+    outline: none;
+    padding: 0.8rem 0.6rem;
+}
+.review-form .input-container{
+    width: 76%;
 }
 .review-form label{
   color: black;
@@ -309,7 +313,7 @@ main {
     color: white;
     border-radius: 20px;
     text-align: center;
-    width: 100%;
+    width: 77%;
     padding: 0.7rem;
     transition: 0.5s ease-in all;
 }
@@ -319,9 +323,6 @@ main {
 }
 .submit-review-button:active {
     opacity: 0.6;
-}
-textarea {
-    outline: none;
 }
 .active-review {
     animation: showingDescription;

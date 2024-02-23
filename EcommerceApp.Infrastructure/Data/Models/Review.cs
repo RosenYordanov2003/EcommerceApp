@@ -1,8 +1,8 @@
 ﻿namespace EcommerceApp.Infrastructure.Data.Models
 {
     using System.ComponentModel.DataAnnotations;
-    using static EcommerceApp.GlobalConstants.EntityValidation.ReviewEntity;
     using System.ComponentModel.DataAnnotations.Schema;
+    using static GlobalConstants.EntityValidation.ReviewEntity;
 
     public class Review
     {
@@ -11,6 +11,8 @@
         public int StarЕvaluation { get; set; }
         [MaxLength(ContentMaxValue)]
         public string Content { get; set; } = null!;
+        [MaxLength(SubjectMaxValue)]
+        public string Subject { get; set; } = null!;
 
         [ForeignKey(nameof(User))]
         public Guid UserId { get; set; }

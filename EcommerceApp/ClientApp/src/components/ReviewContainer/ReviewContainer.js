@@ -2,13 +2,18 @@
 import { UserContext } from '../../Contexts/UserContext';
 import { postReview } from "../../services/reviewService";
 import Notification from "../Notification/Notification";
+import Input from "../Auth/Input/Input";
+import { reviewSubjectInput ,reviewContent } from "../../utilities/inputValidations";
+import { FormProvider, useForm } from 'react-hook-form'
 
 export default function ReviewContainer({ id, category, product, updateProduct }) {
 
-    const { user, setUser } = useContext(UserContext);
+    const { user } = useContext(UserContext);
     const [starIndex, setStarIndex] = useState(-1);
     const [inputObject, setInputObject] = useState({ name: undefined, summary: undefined, review: undefined });
     const [notification, setNotification] = useState(undefined);
+
+    const methods = useForm();
 
     function handleOnStarClick(idnex) {
         setStarIndex(idnex);
@@ -22,18 +27,16 @@ export default function ReviewContainer({ id, category, product, updateProduct }
             return <i onClick={() => handleOnStarClick(index)} key={index} className="fa-solid fa-star star"></i>
         }
     })
-    function handleSubmitReviewPost(event) {
-        event.preventDefault();
+
+    const handleOnSubmit = methods.handleSubmit(data => {
         const reviewObject = {
-            content: inputObject.review,
-            summary: inputObject.summary,
-            username: inputObject.name,
+            ...data,
+            username: user?.username,
             productId: id,
             productCategory: category,
             userId: user?.id,
             starRating: starIndex + 1,
         };
-
         const element = document.querySelector('.productinfo-card-container');
         postReview(reviewObject)
             .then(res => {
@@ -43,7 +46,7 @@ export default function ReviewContainer({ id, category, product, updateProduct }
                 setNotification(<Notification closeNotification={closeNotification} message="You have successfully post a review" typeOfMessage="Success" />);
                 element.scrollIntoView({ behavior: 'smooth' });
             })
-            .catch((error) => {
+            .catch(() => {
                 setNotification(<Notification closeNotification={closeNotification} message="Your review is invalid, please try again" typeOfMessage="Error" />)
                 element.scrollIntoView({ behavior: 'smooth' });
             });
@@ -51,17 +54,8 @@ export default function ReviewContainer({ id, category, product, updateProduct }
         function closeNotification() {
             setNotification(undefined);
         }
-    }
 
-    function handleOnNameChange(event) {
-        setInputObject({ ...inputObject, name: event.target.value });
-    }
-    function handleOnSummaryChange(event) {
-        setInputObject({ ...inputObject, summary: event.target.value });
-    }
-    function handleOnReviewChange(event) {
-        setInputObject({ ...inputObject, review: event.target.value });
-    }
+    })
 
     return (
         <>
@@ -80,21 +74,18 @@ export default function ReviewContainer({ id, category, product, updateProduct }
                 <p>Your evaluation</p>
                 <div>{stars}</div>
             </div>
-            <form onSubmit={handleSubmitReviewPost} className="review-form">
-                <div className="input-container">
-                    <label htmlFor="name">Name</label>
-                    <input onChange={handleOnNameChange} value={inputObject.name == undefined ? "" : inputObject.name} name="name" id="name"></input>
-                </div>
-                <div className="input-container">
-                    <label htmlFor="summary">Summary</label>
-                    <input onChange={handleOnSummaryChange} value={inputObject.summary == undefined ? "" : inputObject.summary} name="summary" id="summary"></input>
-                </div>
-                <div className="input-container">
-                    <label htmlFor="review">Review</label>
-                    <textarea onChange={handleOnReviewChange} value={inputObject.review == undefined ? "" : inputObject.review} name="review" rows={10} cols={60} id="review"></textarea>
-                </div>
-                <button className="submit-review-button">Submit Review</button>
-            </form>
+            <FormProvider {...methods}>
+                <form onSubmit={(e) => e.preventDefault()} className="review-form">
+                    <div className="input-container">
+                        <label htmlFor="name">Name</label>
+                        <input readOnly value={user?.username} name="name" id="name"></input>
+                    </div>
+                    <Input {...reviewSubjectInput}/>
+                    <Input {...reviewContent}/>
+                    <button onClick={handleOnSubmit} className="submit-review-button">Submit Review</button>
+                </form>
+            </FormProvider>
+           
         </>
     )
 }

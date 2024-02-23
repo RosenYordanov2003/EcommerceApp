@@ -119,7 +119,8 @@
                 Content = createReviewModel.Content,
                 StarЕvaluation = createReviewModel.StarRating,
                 UserId = createReviewModel.UserId,
-                CreatedOn = DateTime.Now
+                CreatedOn = DateTime.Now,
+                Subject = createReviewModel.Subject
             };
 
             if (createReviewModel.ProductCategory.ToLower() == "shoes")

@@ -119,6 +119,10 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: relative;
+}
+.cart-input-container:not(:last-child){
+    margin-bottom: 1rem;
 }
 .cart-input-container label{
     font-size: 1.1rem;

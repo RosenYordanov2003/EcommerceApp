@@ -6,6 +6,10 @@ import UserCartItem from "../UserCart/UserCartItems/UserCartItem";
 import { applyCuppon } from "../../services/cupponService";
 import PoppupMessage from "../PoppupMessage/PoppupMessage";
 import ResponsiveStyle from "../UserCart/ResponsiveStyle.css";
+import { FormProvider, useForm } from 'react-hook-form'
+import Input from "../Auth/Input/Input";
+import { cityInput, postalCodeInput } from "../../utilities/inputValidations";
+import Notification from "../Notification/Notification";
 
 export default function UserCart() {
 
@@ -13,11 +17,12 @@ export default function UserCart() {
     const { user } = useContext(UserContext);
     const [totalPrice, setTotalPrice] = useState();
     const [shippingMethod, setShippingMethod] = useState(undefined);
-    const [inputObject, setInputObject] = useState({ city: '', postalCode: '', country: 'Bulgaria', cuppon: '' });
+    const [inputObject, setInputObject] = useState({country: 'Bulgaria', cuppon: '' });
     const [isActiveCuppon, setIsActiveCuppon] = useState(false);
     const [cuppon, setCuppon] = useState(undefined);
     const [discount, setDiscount] = useState(0);
     const [poppUpMessage, setpoppUpMessage] = useState(undefined);
+    const [notification, setNotification] = useState(undefined);
 
     function handleIncreaseItemPrice(productId, price) {
         setTotalPrice(totalPrice + price);
@@ -27,10 +32,10 @@ export default function UserCart() {
     }
 
 
+    const methods = useForm();
+    const items = user?.cart?.cartProducts?.map((item, index) => <UserCartItem handleIncreaseItemPrice={handleIncreaseItemPrice} handleDecreaseItemPrice={handleDecreaseItemPrice} item={item} key={index} />);
 
-    const items = user?.cart?.cartProducts?.map((item, index) => <UserCartItem handleIncreaseItemPrice={handleIncreaseItemPrice} handleDecreaseItemPrice={handleDecreaseItemPrice} item={item} key={index} />)
-
-    const shoesItems = user?.cart?.cartShoes?.map((item, index) => <UserCartItem handleIncreaseItemPrice={handleIncreaseItemPrice} handleDecreaseItemPrice={handleDecreaseItemPrice} item={item} key={index} />)
+    const shoesItems = user?.cart?.cartShoes?.map((item, index) => <UserCartItem handleIncreaseItemPrice={handleIncreaseItemPrice} handleDecreaseItemPrice={handleDecreaseItemPrice} item={item} key={index} />);
 
 
     useEffect(() => {
@@ -45,26 +50,37 @@ export default function UserCart() {
                 sum += Number.parseFloat(user?.cart?.cartProducts[i]?.price) * user?.cart?.cartProducts[i]?.quantity;
             }
             setTotalPrice(sum);
-            setpoppUpMessage(<PoppupMessage message="You Have Successfully Applied Your Promotion Code"/>)
         }
     }, [user?.cart?.cartId])
 
 
-    function handleCheckoutClick() {
+    const handleCheckoutClick = methods.handleSubmit(data => {
+
         const checkOutObject = {
+            ...data,
             country: inputObject.country,
-            city: inputObject.city,
-            postalCode: inputObject.postalCode,
             shippingObject: shippingMethod,
             priceObject: {
                 totalPrice,
                 discount,
                 cuppon
             }
-        };
-        localStorage.setItem('checkout-info', JSON.stringify(checkOutObject));
-        navigate('/Order');
+        }
+        if (shippingMethod === undefined) {
+            setNotification(<Notification message="Please select shipping method" typeOfMessage="error" closeNotification={closeNotification}/>)
+            return;
+        }
+         localStorage.setItem('checkout-info', JSON.stringify(checkOutObject));
+         navigate('/Order');
+    })
+
+    function closeNotification() {
+        setNotification(undefined);
     }
+    function cloePopupMessage() {
+        setpoppUpMessage(undefined);
+    }
+
     function handleApplyCupponClick() {
         applyCuppon(inputObject.cuppon, user?.id)
             .then((res) => {
@@ -74,6 +90,7 @@ export default function UserCart() {
                 else {
                     setIsActiveCuppon(true);
                     setCuppon(res.cuppon);
+                    setpoppUpMessage(<PoppupMessage message="You Have Successfully Applied Your Promotion Code" removeNotification={cloePopupMessage} />)
                     setTotalPrice(totalPrice - (totalPrice * res.cuppon.discountPercantages) / 100);
                     setDiscount(totalPrice * res.cuppon.discountPercantages / 100);
                 }
@@ -83,6 +100,7 @@ export default function UserCart() {
 
     return (
         <>
+            {notification !== undefined && notification }
             <h2 className="shopping-cart-title">{items?.length + shoesItems?.length > 0 ? "Shopping Cart" : "Shopping Cart Is Empty"}</h2>
             {items?.length + shoesItems?.length > 0 &&
                 <div className="cart-container">
@@ -114,15 +132,11 @@ export default function UserCart() {
                                 <option value="Turkey">Turkey</option>
                                 <option value="United Kingdom">United Kingdom</option>
                             </select>
-                        </div>
-                        <div className="cart-input-container">
-                            <label htmlFor="city">City</label>
-                            <input onChange={(event) => setInputObject({ ...inputObject, city: event.target.value })} type="text" id="city" placeholder="Enter city"></input>
-                        </div>
-                        <div className="cart-input-container">
-                            <label htmlFor="postal-code">ZIP/POSTAL CODE</label>
-                            <input onChange={(event) => setInputObject({ ...inputObject, postalCode: event.target.value })} placeholder="Enter postal/zip code" type="text" value={inputObject.postalCode} id="postal-code"></input>
-                        </div>
+                            </div>
+                            <FormProvider {...methods}>
+                                <Input {...cityInput} className="cart-input-container"/>
+                                <Input {...postalCodeInput} className="cart-input-container"/>
+                            </FormProvider>
                         <div className="cart-shipping-container">
                             <label htmlFor="standard-shipping">Standard Shipping: $5.00</label>
                             <div className="round">
@@ -150,7 +164,7 @@ export default function UserCart() {
                             </p>
                             <div className="check-out-button-container">
                                 <button onClick={handleCheckoutClick} className="check-out-button">Checkout</button>
-                            </div>
+                           </div>
                     </div>
                 </section>
             </div>

@@ -6,7 +6,7 @@ import { findInputError } from "../../../utilities/findInputError";
 import InputError from "./../InputError/InputError";
 import InputStyle from "../Input/InputStyle.css";
 
-export default function Input({ label, type, id, placeHolder, validation, name, multiline, rows, cols, inputValue}) {
+export default function Input({ label, type, id, placeHolder, validation, name, multiline, rows, cols, inputValue, className="input-container"}) {
 
     //is used to register an input field with the library,
     //allowing it to handle validation.This function will be passed to the input element.
@@ -17,12 +17,11 @@ export default function Input({ label, type, id, placeHolder, validation, name, 
         setValue(name, inputValue);
     }
 
-
     const inputError = findInputError(errors, name)
     const isInvalid = isFormInvalid(inputError)
 
     return (
-        <section className="input-container">
+        <section className={className}>
 
             <AnimatePresence mode="wait" initial={false}>
                 {isInvalid && (

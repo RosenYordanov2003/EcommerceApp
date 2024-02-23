@@ -96,3 +96,43 @@ export const reviewContent = {
         }
     }
 }
+export const cityInput = {
+    name: 'city',
+    label: 'City',
+    type: 'text',
+    id: 'city',
+    placeHolder: 'Enter city',
+    validation: {
+        required: {
+            value: true,
+            message: 'required'
+        },
+        minLength: {
+            value: 4,
+            message: 'City name must be at least 5 characters',
+        },
+        maxLength: {
+            value: 60,
+            message: 'City name can not be more than 200 characters'
+        }
+    }
+}
+export const postalCodeInput = {
+    name: 'postalCode',
+    label: 'ZIP/POSTAL CODE',
+    type: 'text',
+    id: 'postal-code',
+    placeHolder: 'Enter POSTAL/ZIP CODE',
+    validation: {
+        required: {
+            value: true,
+            message: 'required'
+        },
+        pattern: {
+            value:
+                /^[0-9]{4,}$/,
+            message: 'Please enter a valid POSTAL CODE',
+        },
+       
+    }
+}

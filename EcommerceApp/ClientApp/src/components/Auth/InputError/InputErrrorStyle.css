@@ -3,8 +3,9 @@
     background-color: #fee2e2;
     position: absolute;
     right: 0px;
-    top: -0.8rem;
+    top: -0.3rem;
     padding: 0.3rem 0.8rem;
     border-radius: 6px;
     font-size: 1.2rem;
+    margin: 0;
 }

@@ -4,7 +4,6 @@ import { useState } from "react";
 export default function Notification({ message, typeOfMessage, closeNotification }) {
 
     const [notificationObject, setNotificationObject] = useState({ isActive: true, isInProgress: true })
-    console.log(message);
 
     let timeOutId = 0;
     let className = typeOfMessage == "Success" ? "notification-success" : "notification-error";

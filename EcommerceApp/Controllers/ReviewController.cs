@@ -42,6 +42,7 @@
             return Ok(new { Success = true, UpdatedProduct = productInfo });
         }
         [HttpGet]
+        [AllowAnonymous]
         [Route("AllReviews")]
         public async Task<IActionResult> AllReviews([FromQuery] int productId, [FromQuery] string productCategory)
         {

@@ -46,16 +46,18 @@ export default function ProductDetails({ product, id, category, updateProduct })
                     <p className= "product-description">{product.description }</p>
                 </div>
             </div>
-            <hr></hr>
-            <div className="product-reviews">
-                <div className="product-section-header">
-                    <i onClick={() => setReviewVisibility(!reviewVisibility)} className={`fa-solid ${reviewVisibility == true ? "fa-minus" : "fa-plus"}`}></i>
-                    <p>Reviews</p>
+            {user?.id && <><hr></hr>
+                <div className="product-reviews">
+                    <div className="product-section-header">
+                        <i onClick={() => setReviewVisibility(!reviewVisibility)} className={`fa-solid ${reviewVisibility == true ? "fa-minus" : "fa-plus"}`}></i>
+                        <p>Reviews</p>
+                    </div>
+                    <div className={reviewClassName}>
+                         <ReviewContainer updateProduct={updateProduct} product={product} id={id} category={category} />
+                    </div>
                 </div>
-                <div className={reviewClassName}>
-                    {user?.id && <ReviewContainer updateProduct={updateProduct} product={product} id={id} category={category} />}
-                </div>
-            </div>
+            </>}
+           
             <button onClick={handleAllReviewsClick} className="all-reviews-button">View All Reviews</button>
         </>
     )

@@ -41,15 +41,15 @@ export default function UserCart() {
     useEffect(() => {
         if (user?.cart?.cartId) {
 
-            let sum = 0;
+            let shoesSum = user?.cart?.cartShoes?.reduce((acumulator, shoes) => {
+                return acumulator + shoes.price;
+            }, 0);
 
-            for (let i = 0; i < user?.cart?.cartShoes.length; i++) {
-                sum += Number.parseFloat(user?.cart?.cartShoes[i]?.price) * user?.cart?.cartShoes[i]?.quantity;
-            }
-            for (let i = 0; i < user?.cart?.cartProducts.length; i++) {
-                sum += Number.parseFloat(user?.cart?.cartProducts[i]?.price) * user?.cart?.cartProducts[i]?.quantity;
-            }
-            setTotalPrice(sum);
+            let clothesSum = user?.cart?.cartProducts?.reduce((acumulator, product) => {
+                return acumulator + product.price;
+            }, 0);
+
+            setTotalPrice(shoesSum + clothesSum);
         }
     }, [user?.cart?.cartId])
 
@@ -153,15 +153,15 @@ export default function UserCart() {
                         </div>
                     </div>
                     <div className="finish-order">
-                        <p className="total-price order-final-details">Total
+                        <section className="total-price order-final-details">Total
                             <p>${Number.parseFloat(totalPrice).toFixed(2)}</p>
-                        </p>
-                        <p className="total-price order-final-details">Discount
+                        </section>
+                        <section className="total-price order-final-details">Discount
                             <p>${Number.parseFloat(discount).toFixed(2)}</p>
-                        </p>
-                        <p className="total-price order-final-details">Shipping
+                        </section>
+                        <section className="total-price order-final-details">Shipping
                             <p>${Number.parseFloat(shippingMethod?.price ?? 0).toFixed(2)}</p>
-                            </p>
+                        </section>
                             <div className="check-out-button-container">
                                 <button onClick={handleCheckoutClick} className="check-out-button">Checkout</button>
                            </div>

@@ -1,64 +1,53 @@
-﻿import { useContext } from 'react';
+﻿import { useContext, useState } from 'react';
 import { UserContext } from '../../../Contexts/UserContext';
 import FormStyle from "../../Auth/FormStyle.css"
 import { login } from "../../../services/authService";
 import { useNavigate } from "react-router-dom";
+import { FormProvider, useForm } from 'react-hook-form'
+import { userNameInput, registerPasswordInput } from "../../../utilities/inputValidations";
+import Input from "../Input/Input";
 
 export default function Login() {
 
     let navigate = useNavigate();
-    const { user, setUser } = useContext(UserContext);
+    const methods = useForm();
+    const { setUser } = useContext(UserContext);
+    const [errorMessage, setErrorMessage] = useState(undefined);
 
-    function onInputFouc(event) {
-        event.target.parentElement.children[0].classList.add("active-label");
-    }
-    function onInputBlur(event) {
-        event.target.parentElement.children[0].classList.remove("active-label");
-    }
-    function onFormSubmit(event) {
-
-        event.preventDefault();
-        const formData = new FormData(event.currentTarget);
-
-        const userInfoObject = {
-            UserName: formData.get("username"),
-            Password: formData.get("password"),
-        }
-        console.log(userInfoObject);
-        login(userInfoObject)
+    const handleOnLoginSubmit = methods.handleSubmit(data => {
+        
+        login(data)
             .then(res => {
-                const user = {
-                    username: res.username,
-                    id: res.id,
-                    userFavoriteProducts: res.userFavoriteProducts,
-                    cart: res.cartModel,
-                    roles: res.roles
-                };
-                setUser(user);
-                navigate('/Home');
 
+                if (res.success) {
+                    const user = {
+                        username: res.username,
+                        id: res.id,
+                        userFavoriteProducts: res.userFavoriteProducts,
+                        cart: res.cartModel,
+                        roles: res.roles
+                    };
+                    setUser(user);
+                    navigate('/Home');
+                }
+                else {
+                    setErrorMessage(res.error);
+                }
             })
             .catch(error => console.error(error));
-
-    }
+    })
 
     return (
-        <div className="auth-form-container">
-            <h1 className="auth-form-title">Login</h1>
-            <form className="auth-form" onSubmit={onFormSubmit} method="post">
-
-                <section className="input-container">
-                    <label htmlFor="username">Username</label>
-                    <input name="username" id="username" onBlur={onInputBlur} onFocus={onInputFouc} id="username" type="text" autoComplete="username" aria-required="true" placeholder="Enter username..." />
-                </section>
-                <section className="input-container">
-                    <label htmlFor="password">Password</label>
-                    <input name="password" id="password" onBlur={onInputBlur} onFocus={onInputFouc} id="password" type="password" autoComplete="password" aria-required="true" placeholder="Enter password" />
-                </section>
-                <button className="submit-btn" type="submit">Login</button>
-            </form>
-
-        </div>
-       
+        <FormProvider {...methods}>
+            <div className="auth-form-container">
+                <h1 className="auth-form-title">Login</h1>
+                <form className="auth-form" onSubmit={(event) => event.preventDefault()} method="post">
+                    <Input {...userNameInput} />
+                    <Input {...registerPasswordInput }/>
+                    <button onClick={handleOnLoginSubmit} className="submit-btn" type="submit">Login</button>
+                    {errorMessage && <span className="error-validation-message">{errorMessage}</span>}
+                </form>
+            </div>
+       </FormProvider>
     )
 }

@@ -75,14 +75,13 @@
         [HttpPost("Login")]
         public async Task<IActionResult> Login([FromBody] LoginModel loginModel)
         {
-
             var user = await userManager.FindByNameAsync(loginModel.Username);
             if (user != null)
             {
                 bool passwordResult = await userManager.CheckPasswordAsync(user, loginModel.Password);
                 if (!passwordResult)
                 {
-                    return BadRequest(new { Error = "Invalid Password!" });
+                    return Ok(new {Success = false, Error = "Invalid Password!" });
                 }
                 else
                 {
@@ -107,10 +106,10 @@
                     var userCart = await cartService.GetUserCartByUserIdAsync(user.Id);
                     IList<string> roles = await userManager.GetRolesAsync(user);
 
-                    return Ok(new LoginResponse() { Username = loginModel.Username, Id = user.Id, UserFavoriteProducts = userFavoriteProducts, CartModel = userCart, Roles = roles.ToArray() });
+                    return Ok(new LoginResponse() {Success = true, Username = loginModel.Username, Id = user.Id, UserFavoriteProducts = userFavoriteProducts, CartModel = userCart, Roles = roles.ToArray() });
                 }
             }
-            return BadRequest(new { Error = "Username does not exist!" });
+            return Ok(new { Success = false, Error = "Username does not exist!" });
 
         }
 

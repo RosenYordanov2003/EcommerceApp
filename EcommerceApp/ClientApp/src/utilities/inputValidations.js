@@ -131,7 +131,7 @@ export const postalCodeInput = {
         pattern: {
             value:
                 /^[0-9]{4,}$/,
-            message: 'Please enter a valid POSTAL CODE',
+            message: 'Please enter valid postal code',
         },
        
     }

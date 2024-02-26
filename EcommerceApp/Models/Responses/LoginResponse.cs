@@ -14,5 +14,6 @@
         public ICollection<GetUserFavoriteProductModel> UserFavoriteProducts { get; set; }
         public CartModel? CartModel { get; set; }
         public string[] Roles { get; set; }
+        public bool Success { get; set; }
     }
 }

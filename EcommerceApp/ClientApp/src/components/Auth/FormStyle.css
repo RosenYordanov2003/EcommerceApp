@@ -80,12 +80,12 @@ body:has(.auth-form) .main-nav ul li a {
 .error-validation-message{
     color: red;
     display: block;
-    margin-top: 0.6rem;
     font-size: 1.2rem;
 }
 
 .auth-form input {
     outline: none;
+    padding: 0.4rem 0.6rem
 }
 
 .auth-form label {
@@ -93,10 +93,6 @@ body:has(.auth-form) .main-nav ul li a {
     transform: translateY(0px);
     transition: 0.3s ease all;
     font-size: 1.2rem;
-}
-
-.auth-form input {
-    padding: 0.2rem;
 }
 
 .auth-form .submit-btn {

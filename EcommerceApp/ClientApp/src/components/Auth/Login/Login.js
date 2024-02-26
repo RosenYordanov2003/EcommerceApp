@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { FormProvider, useForm } from 'react-hook-form'
 import { userNameInput, registerPasswordInput } from "../../../utilities/inputValidations";
 import Input from "../Input/Input";
+import InputError from "../InputError/InputError";
 
 export default function Login() {
 
@@ -30,9 +31,7 @@ export default function Login() {
                     setUser(user);
                     navigate('/Home');
                 }
-                else {
-                    setErrorMessage(res.error);
-                }
+                setErrorMessage(res.error);
             })
             .catch(error => console.error(error));
     })
@@ -45,7 +44,7 @@ export default function Login() {
                     <Input {...userNameInput} />
                     <Input {...registerPasswordInput }/>
                     <button onClick={handleOnLoginSubmit} className="submit-btn" type="submit">Login</button>
-                    {errorMessage && <span className="error-validation-message">{errorMessage}</span>}
+                    {errorMessage && <InputError message={errorMessage} />}
                 </form>
             </div>
        </FormProvider>

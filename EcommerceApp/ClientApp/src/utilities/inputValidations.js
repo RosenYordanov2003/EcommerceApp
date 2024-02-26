@@ -59,6 +59,24 @@ export const emailInput = {
         },
     }
 }
+export const emailOrderInput = {
+    name: 'email',
+    label: 'Email',
+    type: 'email',
+    id: 'email',
+    placeHolder: '',
+    validation: {
+        required: {
+            value: true,
+            message: 'required',
+        },
+        pattern: {
+            value:
+                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+            message: 'Please enter a valid email',
+        },
+    }
+}
 export const reviewSubjectInput = {
     name: 'subject',
     label: 'Subject',
@@ -136,3 +154,108 @@ export const postalCodeInput = {
        
     }
 }
+export const firstNameInput = {
+    name: 'firstName',
+    label: 'First Name',
+    type: 'text',
+    id: 'first-name',
+    placeHolder: '',
+    validation: {
+        required: {
+            value: true,
+            message: 'required'
+        },
+        minLength: {
+            value: 3,
+            message: 'Fitst Name must be at least 3 characters',
+        },
+        maxLength: {
+            value: 30,
+            message: 'Fitst Name can not be more than 30 characters'
+        }
+    }
+}
+export const lastNameInput = {
+    name: 'lastName',
+    label: 'Last Name',
+    type: 'text',
+    id: 'last-name',
+    placeHolder: '',
+    validation: {
+        required: {
+            value: true,
+            message: 'required'
+        },
+        minLength: {
+            value: 3,
+            message: 'Fitst Name must be at least 3 characters',
+        },
+        maxLength: {
+            value: 30,
+            message: 'Fitst Name can not be more than 30 characters'
+        }
+    }
+}
+export const streetAdressInput = {
+    name: 'streetAdress',
+    label: 'Street Adress',
+    type: 'text',
+    id: 'street',
+    placeHolder: '',
+    validation: {
+        required: {
+            value: true,
+            message: 'required'
+        },
+        minLength: {
+            value: 4,
+            message: 'Adress must be at least 4 characters',
+        },
+        maxLength: {
+            value: 60,
+            message: 'Adress Name can not be more than 60 characters'
+        }
+    }
+}
+export const cityOrderInput = {
+    name: 'city',
+    label: 'City',
+    type: 'text',
+    id: 'city',
+    placeHolder: '',
+    validation: {
+        required: {
+            value: true,
+            message: 'required'
+        },
+        minLength: {
+            value: 4,
+            message: 'City must be at least 4 characters',
+        },
+        maxLength: {
+            value: 60,
+            message: 'City Name can not be more than 60 characters'
+        }
+    }
+}
+export const phoneNumberInput = {
+    name: 'phoneNumber',
+    label: 'Phone Number',
+    type: 'text',
+    id: 'phone-number',
+    placeHolder: '',
+    validation: {
+        required: {
+            value: true,
+            message: 'required'
+        },
+        pattern: {
+            value:
+                /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/,
+            message: 'Please enter valid phone number',
+        }
+       
+    }
+}
+
+

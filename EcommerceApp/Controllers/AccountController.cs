@@ -13,8 +13,6 @@
     using Models.Account;
     using Models.Responses;
     using System.Linq;
-    using Humanizer;
-    using System.ComponentModel.DataAnnotations;
 
     [ApiController]
     [Route("api/account")]
@@ -51,11 +49,11 @@
             }
             if (isExsitsByEmail)
             {
-                return Ok(new { Error = "User with the same email already exists" });
+                return Ok(new { Success = false ,ErrorMessage = "User with the same email already exists" });
             }
             if (isExistsByUsername)
             {
-                return Ok(new { Error = "User with the same username already exists" });
+                return Ok(new RegisterResponse{ Success = false, ErrorMessage = "User with the same username already exists" });
             }
             var newUser = new User()
             {
@@ -67,10 +65,10 @@
             if (!result.Succeeded)
             {
                 var errors = result.Errors.Select(e => e.Description);
-                return BadRequest(new RegisterResponse() { Erros = errors.ToList() });
+                return BadRequest(new RegisterResponse() {Success = false, Erros = errors.ToList() });
             }
             await cartService.CreateUserCartAsync(newUser.Id);
-            return Ok(new { Message = "You have successfully created an account" });
+            return Ok();
         }
         [HttpPost("Login")]
         public async Task<IActionResult> Login([FromBody] LoginModel loginModel)

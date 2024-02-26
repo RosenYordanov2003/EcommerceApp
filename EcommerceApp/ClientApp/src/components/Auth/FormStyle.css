@@ -40,9 +40,11 @@ body:has(.auth-form) .main-nav ul li a {
 }
 
 .auth-form-container {
-    width: 100vw;
-    height: 100vh;
-    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 8rem 0rem;
 }
 
 .auth-form {
@@ -54,12 +56,12 @@ body:has(.auth-form) .main-nav ul li a {
     border: var(--border-bold) solid white;
     width: 50%;
     padding: 4rem 2rem;
-    position: absolute;
-    transform: translate(-50%, -50%);
-    top: 50%;
-    left: 50%;
     animation: changingBorderColors 2s infinite;
     animation-timing-function: ease-in;
+    position: relative; 
+}
+.auth-form .input-error{
+    position: relative; 
 }
 .auth-form label{
     transition: all 0.4s ease;
@@ -74,15 +76,6 @@ body:has(.auth-form) .main-nav ul li a {
     width: 60%;
     position: relative;
 }
-.input-container:has(.error-validation-message) input{
-    border: 1px solid red;
-}
-.error-validation-message{
-    color: red;
-    display: block;
-    font-size: 1.2rem;
-}
-
 .auth-form input {
     outline: none;
     padding: 0.4rem 0.6rem

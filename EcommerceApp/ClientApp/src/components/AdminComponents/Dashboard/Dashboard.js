@@ -3,7 +3,7 @@ import DashBoardStyle from "../Dashboard/DashBoardStyle.css";
 import { loadDashboard, getAllOrders, getRecentOrders } from "../../../services/dashboardService";
 import OrderTableRows from "../OrderTableRows/OrderTableRows";
 import SvgCircle from "../SvgCircle/SvgCircle";
-import { HubConnectionBuilder} from '@microsoft/signalr';
+import { HubConnectionBuilder } from '@microsoft/signalr';
 
 export default function Dashboard() {
 

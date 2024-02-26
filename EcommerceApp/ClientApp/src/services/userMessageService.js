@@ -14,3 +14,10 @@ export async function uploadUserMessage(object) {
 
     return response;
 }
+export async function getMessageCount() {
+    const request = await fetch(`${baseUrl}GetCount`, { credentials: 'include' });
+
+    const response = await request.json();
+
+    return response;
+}

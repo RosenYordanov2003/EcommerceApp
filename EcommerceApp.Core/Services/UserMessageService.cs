@@ -1,5 +1,6 @@
 ﻿namespace EcommerceApp.Core.Services
 {
+    using Microsoft.EntityFrameworkCore;
     using Contracts;
     using Data;
     using Infrastructure.Data.Models;
@@ -11,6 +12,11 @@
         public UserMessageService(ApplicationDbContext dbContext)
         {
             this.dbContext = dbContext;
+        }
+
+        public async Task<int> GetMessageCountAsync()
+        {
+            return await dbContext.UserMessages.CountAsync();
         }
 
         public async Task UploadUserMessageAsync(UploadUserMessageModel uploadUserMessageModel)

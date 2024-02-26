@@ -1,8 +1,9 @@
 ﻿namespace EcommerceApp.Core.Contracts
 {
-    using Core.Models.UserMessage;
+    using Models.UserMessage;
     public interface IUserMessageService
     {
         Task UploadUserMessageAsync(UploadUserMessageModel uploadUserMessageModel);
+        Task<int> GetMessageCountAsync();
     }
 }

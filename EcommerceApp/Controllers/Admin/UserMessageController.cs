@@ -36,5 +36,14 @@
 
             return Ok(new {Success = true});
         }
+        [HttpGet]
+        [Route("GetCount")]
+        [Authorize(Roles = AdminRoleName)]
+        public async Task<IActionResult> GetMessageCount()
+        {
+            int messageCount = await userMessageService.GetMessageCountAsync();
+
+            return Ok(messageCount);
+        }
     }
 }

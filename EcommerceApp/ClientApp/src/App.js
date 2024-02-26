@@ -24,11 +24,10 @@ import ModifyingProduct from "./components/AdminComponents/Product/ModifyingProd
 import Shoes from "../src/components/AdminComponents/Shoes/Shoes";
 import CreateProduct from "../src/components/AdminComponents/Product/CreateProduct/CreateProduct";
 
+
 export default function App() {
 
     const navigate = useNavigate();
-    const [categories, setCategories] = useState([]);
-    const [isActive, setActivity] = useState(false);
     const [user, setUser] = useState(undefined);
 
 
@@ -55,8 +54,6 @@ export default function App() {
 
     if (user?.roles?.includes('Administrator')) {
 
-
-
         result =
             <>
                 <AsideMenu />
@@ -75,14 +72,14 @@ export default function App() {
         result = <>
             <Navigation />
             <Routes>
-                <Route path="/Home" element={<Home categories={categories} isActive={isActive} />} />
+                <Route path="/Home" element={<Home/>} />
                 <Route path="/Register" element={<Register />} />
                 <Route path="/Login" element={<Login />} />
                 <Route path="/Gender" element={<GenderProducts />}>
                     <Route path=":gender" element={<GenderProducts />} />
                 </Route>
                 <Route path="/ProductAbout/:productid/:category" element={<ProductInfo />} />
-                <Route path="/" element={<Home categories={categories} isActive={isActive} />} />
+                <Route path="/" element={<Home />} />
                 <Route path="/AllReviews/:id/:category" element={<AllReviews />} />
                 <Route path="/Review/:id" element={<EditReview />} />
                 <Route path="/Cart" element={<UserCart />} />

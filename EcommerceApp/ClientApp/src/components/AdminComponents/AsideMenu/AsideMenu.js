@@ -1,14 +1,44 @@
-﻿import { useState, useContext } from "react";
+﻿import { useState, useContext, useEffect } from "react";
 import { logout } from "../../../services/authService";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../../Contexts/UserContext";
 import AsideMenuStyle from "../AsideMenu/AsideMenuStyle.css";
+import { HubConnectionBuilder } from '@microsoft/signalr';
+import {getMessageCount} from "../../../services/userMessageService";
 
 export default function AsideMenu() {
 
+
     const [activeElementIndex, setActiveElementIndex] = useState(undefined);
-    const { user, setUser } = useContext(UserContext);
+    const [connection, setConnection] = useState(null);
+    const [messageCount, setMessageCount] = useState(0);
+    const { setUser } = useContext(UserContext);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        getMessageCount()
+            .then(res => {
+                setMessageCount(res);
+                const newConnection = new HubConnectionBuilder()
+                    .withUrl('https://localhost:7122/notifications-hub')
+                    .withAutomaticReconnect()
+                    .build();
+                setConnection(newConnection);
+            })
+    }, [])
+
+    useEffect(() => {
+        if (connection) {
+            connection.start()
+                .then(() => {
+                    connection.on('UserMessageSent', () => {
+                        getMessageCount()
+                        .then(res => setMessageCount(res))
+                    });
+                })
+                .catch(console.error);
+        }
+    }, [connection]);
 
     function handleLogout() {
         logout()
@@ -22,6 +52,7 @@ export default function AsideMenu() {
         setActiveElementIndex(index);
         navigate(navigationPath);
     }
+
 
     return (
         <aside>
@@ -61,7 +92,7 @@ export default function AsideMenu() {
                     <span class="material-symbols-outlined">
                         mail
                     </span>
-                     <p className="messages-count">99</p>
+                    <p className="messages-count">{messageCount}</p>
                      <p className="icon-text-content">Messages</p>
                 </div>
                 <div onClick={handleLogout} className="icon-container">

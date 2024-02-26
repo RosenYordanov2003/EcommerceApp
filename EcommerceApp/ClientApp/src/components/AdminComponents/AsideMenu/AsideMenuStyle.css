@@ -38,7 +38,7 @@
     background-color: #e1e2f0;
     position: relative;
 }
-.active-icon-container :is(span, p){
+.active-icon-container :is(span, .icon-text-content){
     color: #7b81e5;
 }
 .active-icon-container::before{
@@ -55,7 +55,7 @@
 .icon-container:not(:last-child):hover {
     transform: translateX(0.8rem);
 }
-.icon-container:hover :where(span, p){
+.icon-container:hover :where(span, .icon-text-content){
    color: #7b81e5;
 }
 .messages-container p{

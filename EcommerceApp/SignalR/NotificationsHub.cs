@@ -11,5 +11,9 @@
         {
             await Clients.All.SendAsync("ProductUpdated");
         }
+        public async Task NotifyClientOnUserMessageUpload()
+        {
+            await Clients.All.SendAsync("UserMessageSent");
+        }
     }
 }

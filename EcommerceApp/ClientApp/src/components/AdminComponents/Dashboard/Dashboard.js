@@ -40,6 +40,11 @@ export default function Dashboard() {
                             .then((res) => setDashboardObject(res))
                             .catch((error) => console.error(error));
                     });
+                    connection.on('UserMessageSent', () => {
+                        loadDashboard(date, month)
+                            .then((res) => setDashboardObject(res))
+                            .catch((error) => console.error(error));
+                    });
                 })
                 .catch(console.error);
         }

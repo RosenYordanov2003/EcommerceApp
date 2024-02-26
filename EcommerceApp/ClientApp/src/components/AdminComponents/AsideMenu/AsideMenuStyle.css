@@ -8,6 +8,7 @@
     transition: all 0.5s ease;
     cursor: pointer;
     width: 70%;
+    position: relative;
 }
 .icon-container:not(:last-child){
     margin-bottom: 4.5rem;
@@ -17,6 +18,9 @@
     margin: 0;
     color: #7d8da1;
     transition: all 0.3s ease;
+}
+.icon-container span{
+    font-size: 1.8rem;
 }
 .asside-wrapper{
     height: 100%;
@@ -53,4 +57,22 @@
 }
 .icon-container:hover :where(span, p){
    color: #7b81e5;
+}
+.messages-container p{
+    margin: 0;
+}
+
+.messages-count {
+    position: absolute;
+    color: white;
+    background-color: black;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    top: 0;
+    left: 0;
+    background-color: #de605c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

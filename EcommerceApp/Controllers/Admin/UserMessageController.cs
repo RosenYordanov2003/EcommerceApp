@@ -5,17 +5,21 @@
     using Core.Models.UserMessage;
     using Core.Contracts;
     using static Common.GeneralApplicationConstants;
+    using Microsoft.AspNetCore.SignalR;
+    using SignalR;
 
     [Route("api/userMessage")]
-    [Authorize(Roles = AdminRoleName)]
+    [Authorize]
     [ApiController]
     [Produces("application/json")]
     public class UserMessageController : ControllerBase
     {
         private readonly IUserMessageService userMessageService;
-        public UserMessageController(IUserMessageService userMessageService)
+        private readonly IHubContext<NotificationsHub> hubContext;
+        public UserMessageController(IUserMessageService userMessageService, IHubContext<NotificationsHub> hubContext)
         {
             this.userMessageService = userMessageService;
+            this.hubContext = hubContext;
         }
 
         [HttpPost]
@@ -27,6 +31,8 @@
                 return Ok(new { Success = false });
             }
             await userMessageService.UploadUserMessageAsync(model);
+
+            await hubContext.Clients.All.SendAsync("UserMessageSent");
 
             return Ok(new {Success = true});
         }

@@ -2,13 +2,24 @@
 import Input from "../Auth/Input/Input";
 import { FormProvider, useForm } from 'react-hook-form';
 import { userMessageInput } from "../../utilities/inputValidations";
+import { uploadUserMessage } from "../../services/userMessageService";
+import { useContext } from "react";
+import { UserContext } from "../../Contexts/UserContext";
 
 export default function ContactContainer() {
 
     const methods = useForm();
+    const { user } = useContext(UserContext);
 
     const handleOnMessageSubmit = methods.handleSubmit(data => {
-        console.log(data);
+        const object = {
+            userId: user?.id,
+            ...data,
+        }
+        uploadUserMessage(object)
+            .then(res => console.log(res))
+            .catch((error) => console.error(error));
+
     })
 
     return (

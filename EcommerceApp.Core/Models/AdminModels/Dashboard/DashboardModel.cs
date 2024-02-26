@@ -12,5 +12,6 @@
         public decimal TotalSalesForParticularDay { get; set; }
         public decimal TotalSalesForParticulMonth { get; set; }
         public IEnumerable<OrderModel> Orders { get; set; }
+        public int UserMessagesCount { get; set; }
     }
 }

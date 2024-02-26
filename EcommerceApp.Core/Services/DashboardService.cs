@@ -39,6 +39,8 @@
                 .Where(order => order.FinishedOn.Month == currentMoth)
                 .SumAsync(o => o.Price);
 
+            dashboardModel.UserMessagesCount = await dbContext.UserMessages.CountAsync();
+
             dashboardModel.Orders = await GetRecentOrdersAsync();
 
             if (particularDate.HasValue)

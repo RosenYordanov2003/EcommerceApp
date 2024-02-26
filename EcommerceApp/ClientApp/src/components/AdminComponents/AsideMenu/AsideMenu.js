@@ -57,6 +57,13 @@ export default function AsideMenu() {
                     </span>
                     <p className="icon-text-content">Add Product</p>
                 </div>
+                <div onClick={() => setActiveIndex(4, '/Create')} className={`icon-container ${activeElementIndex === 4 ? "active-icon-container" : ""}`}>
+                    <span class="material-symbols-outlined">
+                        mail
+                    </span>
+                     <p className="messages-count">99</p>
+                     <p className="icon-text-content">Messages</p>
+                </div>
                 <div onClick={handleLogout} className="icon-container">
                     <span className="material-symbols-outlined">
                         logout

@@ -3,11 +3,11 @@
     using System.Net;
     using System.Collections.Generic;
     using Microsoft.EntityFrameworkCore;
-    using Contracts;
-    using Data;
     using Infrastructure.Data.Models;
     using Models.Review;
     using Models.Pager;
+    using Contracts;
+    using Data;
 
     public class ReviewService : IReviewService
     {

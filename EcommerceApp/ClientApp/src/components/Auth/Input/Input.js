@@ -20,6 +20,19 @@ export default function Input({ label, type, id, placeHolder, validation, name, 
     const inputError = findInputError(errors, name)
     const isInvalid = isFormInvalid(inputError)
 
+    function onMouseEnter(event) {
+        if (!label) {
+            return;
+        }
+        event.target.parentElement.children[0].classList.add("active-label");
+    }
+    function onMouseLeave(event) {
+        if (!label) {
+            return;
+        }
+        event.target.parentElement.children[0].classList.remove("active-label");
+    }
+
     return (
         <section className={className}>
 
@@ -31,27 +44,27 @@ export default function Input({ label, type, id, placeHolder, validation, name, 
                     />
                 )}
             </AnimatePresence>
-            <label htmlFor={id}>{label}</label>
+            {label && <label htmlFor={id}>{label}</label> }
             {
-                multiline ? <textarea
-                    onMouseEnter={(event) => event.target.parentElement.children[0].classList.add("active-label")}
-                    onMouseLeave={(event) => event.target.parentElement.children[0].classList.remove("active-label")}
+                multiline ?
+                    <textarea
+                    onMouseEnter={onMouseEnter}
+                    onMouseLeave={onMouseLeave}
                     id={id}
                     placeholder={placeHolder} {...register(`${name}`, validation)}
                     rows={rows}
                     cols={cols}
-                />
+                 />
                     :
                     <input
-                        onMouseEnter={(event) => event.target.parentElement.children[0].classList.add("active-label")}
-                        onMouseLeave={(event) => event.target.parentElement.children[0].classList.remove("active-label")}
+                        onMouseEnter={onMouseEnter}
+                        onMouseLeave={onMouseLeave}
                         id={id}
                         type={type}
                         placeholder={placeHolder}
                         {...register(name, validation)}
                     />
              }
-           
         </section>
     )
 }

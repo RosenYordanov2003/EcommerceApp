@@ -257,5 +257,25 @@ export const phoneNumberInput = {
        
     }
 }
+export const userMessageInput = {
+    name: 'message',
+    type: 'text',
+    id: 'message',
+    placeHolder: 'Write a message...',
+    validation: {
+        required: {
+            value: true,
+            message: 'required'
+        },
+        minLength: {
+            value: 5,
+            message: 'Message must be at least 4 characters',
+        },
+        maxLength: {
+            value: 70,
+            message: 'Message Name can not be more than 70 characters'
+        }
+    }
+}
 
 

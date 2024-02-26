@@ -4,11 +4,11 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.SignalR;
-    using  Core.Contracts;
-    using  Core.Models.AdminModels.Clothes;
-    using  Core.Models.AdminModels.ProductStock;
+    using Core.Contracts;
+    using Core.Models.AdminModels.Clothes;
+    using Core.Models.AdminModels.ProductStock;
+    using Core.Models.Pager;
     using static Common.GeneralApplicationConstants;
-    using EcommerceApp.Core.Models.Pager;
 
     [Route("api/shoes")]
     [Authorize(Roles = AdminRoleName)]

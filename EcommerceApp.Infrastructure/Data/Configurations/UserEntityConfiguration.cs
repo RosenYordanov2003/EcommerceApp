@@ -9,6 +9,9 @@
         public void Configure(EntityTypeBuilder<User> builder)
         {
             IEnumerable<User> users = CreateUsers();
+            builder.HasMany(u => u.Messages)
+                .WithOne(m => m.User)
+                .OnDelete(DeleteBehavior.NoAction);
             builder.HasData(users);
         }
 
@@ -25,7 +28,7 @@
                 SecurityStamp = Guid.NewGuid().ToString(),
             };
             adminUser.PasswordHash = passwordHasher.HashPassword(adminUser, "admin12345");
-            List<User> users = new List<User>() {adminUser };
+            List<User> users = new List<User>() { adminUser };
 
             return users;
         }

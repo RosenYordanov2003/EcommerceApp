@@ -81,5 +81,10 @@
             public const double PromotionMinValue = 1;
             public const double PromotionMaxValue = 90;
         }
+        public static class UserMessage
+        {
+            public const int MinLength = 5;
+            public const int MaxLength = 70;
+        }
     }
 }

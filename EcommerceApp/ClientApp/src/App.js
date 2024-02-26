@@ -23,6 +23,7 @@ import Clothes from "../src/components/AdminComponents/Clothes/Clothes";
 import ModifyingProduct from "./components/AdminComponents/Product/ModifyingProduct/ModifyingProduct";
 import Shoes from "../src/components/AdminComponents/Shoes/Shoes";
 import CreateProduct from "../src/components/AdminComponents/Product/CreateProduct/CreateProduct";
+import AllUserMessages from "../src/components/AdminComponents/AllUserMessages/AllUserMessages";
 
 
 export default function App() {
@@ -63,6 +64,7 @@ export default function App() {
                     <Route path="/Clothes" element={<Clothes />} />
                     <Route path="/Shoes" element={<Shoes />} />
                     <Route path="/Create" element={<CreateProduct />} />
+                    <Route path="/Messages" element={<AllUserMessages />} />
                     <Route path="/Product/:id/:category" element={<ModifyingProduct />} />
                     <Route path="/" element={<Dashboard />} />
                 </Routes>

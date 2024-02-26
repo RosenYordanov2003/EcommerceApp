@@ -21,3 +21,10 @@ export async function getMessageCount() {
 
     return response;
 }
+export async function getAllMessages() {
+    const request = await fetch(`${baseUrl}GetAll`, { credentials: 'include' });
+
+    const response = await request.json();
+
+    return response;
+}

@@ -1,0 +1,32 @@
+﻿.user-message-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.user-message-card {
+    width: 60%;
+    margin-bottom: 6rem;
+    background-color: white;
+    box-shadow: 0rem 2rem 3rem rgba(132, 139, 200, 0.18);
+    padding: 3.5rem;
+    border-radius: 8px;
+}
+
+.actions-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
+.action{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.action :where(i, action-button){
+    font-size: 1.3rem;
+}
+.action-button{
+    border: none;
+    background-color: transparent;
+}

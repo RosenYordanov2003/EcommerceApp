@@ -8,7 +8,6 @@ import {getMessageCount} from "../../../services/userMessageService";
 
 export default function AsideMenu() {
 
-
     const [activeElementIndex, setActiveElementIndex] = useState(undefined);
     const [connection, setConnection] = useState(null);
     const [messageCount, setMessageCount] = useState(0);
@@ -53,7 +52,6 @@ export default function AsideMenu() {
         navigate(navigationPath);
     }
 
-
     return (
         <aside>
             <h2 className="nav-logo aside-logo">Fashion Store</h2>
@@ -88,7 +86,7 @@ export default function AsideMenu() {
                     </span>
                     <p className="icon-text-content">Add Product</p>
                 </div>
-                <div onClick={() => setActiveIndex(4, '/Create')} className={`icon-container ${activeElementIndex === 4 ? "active-icon-container" : ""}`}>
+                <div onClick={() => setActiveIndex(5, '/Messages')} className={`icon-container ${activeElementIndex === 5 ? "active-icon-container" : ""}`}>
                     <span class="material-symbols-outlined">
                         mail
                     </span>

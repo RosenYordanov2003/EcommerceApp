@@ -7,6 +7,7 @@
     using static Common.GeneralApplicationConstants;
     using Microsoft.AspNetCore.SignalR;
     using SignalR;
+    using EcommerceApp.Core.Models.AdminModels.UserMessages;
 
     [Route("api/userMessage")]
     [Authorize]
@@ -44,6 +45,15 @@
             int messageCount = await userMessageService.GetMessageCountAsync();
 
             return Ok(messageCount);
+        }
+        [HttpGet]
+        [Route("GetAll")]
+        [Authorize(Roles = AdminRoleName)]
+        public async Task<IActionResult> GetAllMessages()
+        {
+            IEnumerable<UserMessageCardModel> messages = await userMessageService.GetUserMessagesAsync();
+
+            return Ok(messages);
         }
     }
 }

@@ -85,7 +85,7 @@ export default function Order() {
                         
                         <div className="order-input-container">
                             <label htmlFor="country">Country</label>
-                            <select onChange={(event) => setInputObject({ ...inputObject, country: event.target.vaalue })} id="country" inputValue={inputObject.country}>
+                            <select onChange={(event) => setInputObject({ ...inputObject, country: event.target.vaalue })} id="country" value={inputObject.country}>
                                 <option value="Bulgaria">Bulgaria</option>
                                 <option value="Greece">Greece</option>
                                 <option value="Turkey">Turkey</option>

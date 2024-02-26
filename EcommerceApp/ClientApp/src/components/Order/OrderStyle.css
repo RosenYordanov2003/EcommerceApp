@@ -15,6 +15,11 @@
     justify-content: center;
     align-items: flex-start;
     margin-bottom: 2rem;
+    padding: 0.6rem 0.3rem;
+    position: relative; 
+}
+.order-input-container input{
+    padding: inherit;
 }
 .order-container form{
     text-align: center;
@@ -32,7 +37,7 @@
 .order-details-container :where(input, select){
     outline: none;
     border: none;
-    width: 80%;
+    width: 90%;
     padding: 0.3rem 0.2rem;
 }
 .order-price-container{

@@ -13,6 +13,7 @@
     using Models.Account;
     using Models.Responses;
     using System.Linq;
+    using System.Net;
 
     [ApiController]
     [Route("api/account")]
@@ -57,8 +58,8 @@
             }
             var newUser = new User()
             {
-                Email = registerModel.Email,
-                UserName = registerModel.UserName,
+                Email = WebUtility.HtmlEncode(registerModel.Email),
+                UserName = WebUtility.HtmlEncode(registerModel.UserName)
             };
             var result = await userManager.CreateAsync(newUser, registerModel.Password);
 

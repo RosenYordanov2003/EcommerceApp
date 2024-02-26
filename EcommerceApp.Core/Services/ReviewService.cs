@@ -1,5 +1,6 @@
 ﻿namespace EcommerceApp.Core.Services
 {
+    using System.Net;
     using System.Collections.Generic;
     using Microsoft.EntityFrameworkCore;
     using Contracts;
@@ -38,9 +39,9 @@
         public async Task EditReviewAsync(int reviewId, EditReviewModel editReviewModel)
         {
             Review reviewToEdit = await dbContext.Reviews.FirstAsync(r => r.Id == reviewId);
-            reviewToEdit.Content = editReviewModel.Content;
+            reviewToEdit.Content = WebUtility.HtmlEncode(editReviewModel.Content);
             reviewToEdit.StarЕvaluation = editReviewModel.StarEvaluation;
-            reviewToEdit.Subject = editReviewModel.Subject;
+            reviewToEdit.Subject = WebUtility.HtmlEncode(editReviewModel.Subject);
 
             await dbContext.SaveChangesAsync();
         }
@@ -119,21 +120,14 @@
 
             Review review = new Review()
             {
-                Content = createReviewModel.Content,
+                Content = WebUtility.HtmlEncode(createReviewModel.Content),
                 StarЕvaluation = createReviewModel.StarRating,
                 UserId = createReviewModel.UserId,
                 CreatedOn = DateTime.Now,
-                Subject = createReviewModel.Subject
+                Subject = WebUtility.HtmlEncode(createReviewModel.Subject)
             };
-
-            if (createReviewModel.ProductCategory.ToLower() == "shoes")
-            {
-                review.ShoesId = createReviewModel.ProductId;
-            }
-            else
-            {
-                review.ProductId = createReviewModel.ProductId;
-            }
+            review.ShoesId = createReviewModel.ProductCategory == "shoes" ? createReviewModel.ProductId : null;
+            review.ProductId = createReviewModel.ProductCategory != "shoes" ? createReviewModel.ProductId : null;
 
             await dbContext.Reviews.AddAsync(review);
             await dbContext.SaveChangesAsync();

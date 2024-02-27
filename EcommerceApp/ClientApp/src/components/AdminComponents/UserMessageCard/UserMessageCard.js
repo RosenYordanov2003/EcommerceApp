@@ -1,10 +1,12 @@
-﻿import { useState } from "react";
+﻿import { useState, useContext } from "react";
 import Style from "../UserMessageCard/Style.css";
 import PopupTextArea from "../UserMessageCard/PopupTextArea/PopupTextArea";
-
+import { UserContext } from "../../../Contexts/UserContext";
+import { responToUserMessage } from "../../../services/userMessageService";
 export default function UserMessageCard({ userMessage }) {
 
     const [popupTextArea, setPopupTextArea] = useState(undefined);
+    const { user } = useContext(UserContext);
 
     function closePopupTextArea() {
         setTimeout(() => {
@@ -12,7 +14,18 @@ export default function UserMessageCard({ userMessage }) {
         }, 470)
     }
     function sendMessage(message) {
-        console.log(message);
+        const object = {
+            message: userMessage.message,
+            messageId: userMessage.id,
+            responseMessage: message,
+            userId: user.id
+        };
+        responToUserMessage(object)
+            .then(() => {
+                closePopupTextArea();
+            })
+            .catch((error) => console.error(error));
+        
     }
 
 

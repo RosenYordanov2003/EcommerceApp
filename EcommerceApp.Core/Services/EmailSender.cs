@@ -27,7 +27,7 @@
 
             try
             {
-                smtpClient.Send(message);
+                await smtpClient.SendMailAsync(message);
             }
             catch (Exception)
             {

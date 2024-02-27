@@ -7,5 +7,6 @@
         Task UploadUserMessageAsync(UploadUserMessageModel uploadUserMessageModel);
         Task<int> GetMessageCountAsync();
         Task<IEnumerable<UserMessageCardModel>> GetUserMessagesAsync();
+        Task<string> GetUserEmailByMessageIdAsync(Guid id);
     }
 }

@@ -13,15 +13,22 @@ export default function PopupTextArea({ handleOnCloseFunction, handleOnSendFunct
     }, [])
     function handleOnCloseNotification() {
         setIsActive(false);
-        handleOnCloseFunction()
+        handleOnCloseFunction();
     }
+    function handleOnSendClick() {
+        handleOnSendFunction(message);
+        setTimeout(() => {
+            handleOnCloseNotification();
+        }, 500)
+    }
+   
 
     return (
         <section className={`popup-text-area-container ${isActive === true ? 'active-text-area' : ''}`}>
             <h2 className="username-response-title">Reply to: {username}</h2>
             <i onClick={handleOnCloseNotification} className="fa-solid fa-xmark close-text-area"></i>
             <textarea onChange={(e) => setMessage(e.target.value)}></textarea>
-            <button className="send-message-to-user" onClick={() => handleOnSendFunction(message)}>Send</button>
+            <button className="send-message-to-user" onClick={handleOnSendClick}>Send</button>
         </section>
     )
 }

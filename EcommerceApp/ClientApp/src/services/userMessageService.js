@@ -28,3 +28,15 @@ export async function getAllMessages() {
 
     return response;
 }
+export async function responToUserMessage(object) {
+    const request = await fetch(`${baseUrl}Respond`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+        body: JSON.stringify(object)
+    });
+
+    return request.ok;
+}

@@ -2,11 +2,11 @@
 {
     using Microsoft.EntityFrameworkCore;
     using Contracts;
+    using System.Collections.Generic;
     using Data;
     using Infrastructure.Data.Models;
     using Models.UserMessage;
-    using System.Collections.Generic;
-    using EcommerceApp.Core.Models.AdminModels.UserMessages;
+    using Models.AdminModels.UserMessages;
 
     public class UserMessageService : IUserMessageService
     {
@@ -19,6 +19,14 @@
         public async Task<int> GetMessageCountAsync()
         {
             return await dbContext.UserMessages.CountAsync();
+        }
+
+        public async Task<string> GetUserEmailByMessageIdAsync(Guid id)
+        {
+           return await dbContext.UserMessages
+               .Where(m => m.Id == id)
+               .Select(m => m.User.Email)
+               .FirstAsync();
         }
 
         public async Task<IEnumerable<UserMessageCardModel>> GetUserMessagesAsync()

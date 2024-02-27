@@ -22,11 +22,24 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    padding: 0.4rem 0.6rem;
+    transition: 0.4s ease-in-out all;
+    border-radius: 6px;
 }
-.action :where(i, action-button){
+.action :where(i, .action-button){
     font-size: 1.3rem;
 }
 .action-button{
     border: none;
     background-color: transparent;
 }
+.action:first-child:hover {
+    background-color: #318CE7;
+}
+.action:hover:not(:first-child) {
+    background-color: red;
+}
+.action:hover :where(i, .action-button) {
+    color: white;
+}
+

@@ -1,3 +1,7 @@
 ﻿.user-messages{
     margin-top: 8rem;
+    position: relative;
+}
+body:has(.active-text-area) .user-message-card{
+    filter:blur(10px);
 }

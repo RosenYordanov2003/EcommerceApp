@@ -19,7 +19,8 @@
     opacity: 0;
     transition: opacity 300ms ease-in-out, top 1000ms ease-in-out, transform 1000ms ease-in-out;
 }
-body:has(.asside-wrapper) .popup-container{
+
+body:has(.asside-wrapper) .popup-container {
     background-color: white;
     left: 40%;
     top: 51%;
@@ -30,8 +31,9 @@ body:has(.asside-wrapper) .popup-container{
     top: 30%;
     transform: scale(1);
     opacity: 1;
-    transition: transform 300ms cubic-bezier(1.18, 0.89, 0.43, 1.19);
+    transition: transform 300ms ease-in-out;
 }
+
 
 .popup-icon {
     font-size: 30px;

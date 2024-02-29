@@ -42,4 +42,14 @@
 .action:hover :where(i, .action-button) {
     color: white;
 }
+body:has(.loading-spinner) :where(.user-message-card, aside) {
+    opacity: 0.3;
+}
+body:has(.user-messages) .popup-container {
+    top: 36%;
+    left: 30%;
+}
+.user-messages:has(.popup-container) .user-message-card{
+    opacity: 0.4;
+}
 

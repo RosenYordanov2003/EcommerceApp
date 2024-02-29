@@ -16,10 +16,8 @@ export default function PopupTextArea({ handleOnCloseFunction, handleOnSendFunct
         handleOnCloseFunction();
     }
     function handleOnSendClick() {
+        handleOnCloseNotification();
         handleOnSendFunction(message);
-        setTimeout(() => {
-            handleOnCloseNotification();
-        }, 500)
     }
    
 

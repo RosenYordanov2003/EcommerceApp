@@ -5,5 +5,6 @@
         public Guid Id { get; set; }
         public string Username { get; set; } = null!;
         public string Message { get; set; } = null!;
+        public bool IsResponded { get; set; }
     }
 }

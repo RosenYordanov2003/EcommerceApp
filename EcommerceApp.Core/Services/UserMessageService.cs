@@ -50,9 +50,18 @@
                 {
                     Message = m.Message,
                     Username = m.User.UserName,
-                    Id = m.Id
+                    Id = m.Id,
+                    IsResponded = m.IsResponded
                 })
+                .OrderBy(m => m.IsResponded)
                 .ToArrayAsync();
+        }
+
+        public async Task MarkMessageAsRespondedByIdAsync(Guid id)
+        {
+            UserMessage userMessage = await dbContext.UserMessages.FirstAsync(m => m.Id == id);
+            userMessage.IsResponded = true;
+            await dbContext.SaveChangesAsync();
         }
 
         public async Task UploadUserMessageAsync(UploadUserMessageModel uploadUserMessageModel)
@@ -60,7 +69,8 @@
             UserMessage userMessage = new UserMessage()
             {
                 UserId = uploadUserMessageModel.UserId,
-                Message = uploadUserMessageModel.Message
+                Message = uploadUserMessageModel.Message,
+                CreatedOn = DateTime.UtcNow,
             };
             await dbContext.UserMessages.AddAsync(userMessage);
             await dbContext.SaveChangesAsync();

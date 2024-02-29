@@ -23,10 +23,10 @@ export default function AllUserMessages() {
     }, [])
 
     useEffect(() => {
-        if (connection && connection?.state === "Disconnected") {
+        if (connection) {
             connection.start()
                 .then(() => {
-                    connection.on('UserMessageSent', () => {
+                    connection.on('UserMessagesModification', () => {
                         getAllMessages()
                             .then((res) => setMessages(res))
                             .catch((error) => console.error(error));

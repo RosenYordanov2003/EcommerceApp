@@ -17,7 +17,7 @@ export default function ContactContainer() {
             ...data,
         }
         uploadUserMessage(object)
-            .then(res => console.log(res))
+            .then(() => methods.reset())
             .catch((error) => console.error(error));
 
     })

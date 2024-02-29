@@ -27,10 +27,10 @@ export default function AsideMenu() {
     }, [])
 
     useEffect(() => {
-        if (connection && connection?.state === "Disconnected") {
+        if (connection) {
             connection.start()
                 .then(() => {
-                    connection.on('UserMessageSent', () => {
+                    connection.on('UserMessagesModification', () => {
                         getMessageCount()
                         .then(res => setMessageCount(res))
                     });

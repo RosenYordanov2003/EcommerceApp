@@ -47,14 +47,14 @@ export default function UserMessageCard({ userMessage }) {
                 setSpinner(undefined);
                 setPopupMessage(<PoppupMessage message="Your have successfully deleted a message" removeNotification={() => setPopupMessage(undefined)} />);
             })
-            .catch((error) => console.error(error));
+        .catch((error) => console.error(error));
     }
 
     return (
         <>
             {spinner !== undefined && spinner}
             {popupMessage !== undefined ? popupMessage : ''}
-            <article className="user-message-card">
+            <article className={`user-message-card ${userMessage.isResponded && "responded"}`}>
                 <div className="user-message-header">
                     <h3>{userMessage.username}</h3>
                     <p>3h ago</p>

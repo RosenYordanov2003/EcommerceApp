@@ -10,5 +10,6 @@
         Task<string> GetUserEmailByMessageIdAsync(Guid id);
         Task <bool> CheckIfMessageExistsByIdAsync(Guid id);
         Task DeleteMessageAsync(Guid id);
+        Task MarkMessageAsRespondedByIdAsync(Guid id);
     }
 }

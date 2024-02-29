@@ -26,6 +26,9 @@
     transition: 0.4s ease-in-out all;
     border-radius: 6px;
 }
+.responded {
+    border: 2px solid #32cd32;
+}
 .action :where(i, .action-button){
     font-size: 1.3rem;
 }

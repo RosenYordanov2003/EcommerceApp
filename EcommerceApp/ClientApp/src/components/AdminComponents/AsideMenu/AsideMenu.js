@@ -27,7 +27,7 @@ export default function AsideMenu() {
     }, [])
 
     useEffect(() => {
-        if (connection) {
+        if (connection && connection?.state === "Disconnected") {
             connection.start()
                 .then(() => {
                     connection.on('UserMessageSent', () => {
@@ -87,7 +87,7 @@ export default function AsideMenu() {
                     <p className="icon-text-content">Add Product</p>
                 </div>
                 <div onClick={() => setActiveIndex(5, '/Messages')} className={`icon-container ${activeElementIndex === 5 ? "active-icon-container" : ""}`}>
-                    <span class="material-symbols-outlined">
+                    <span className="material-symbols-outlined">
                         mail
                     </span>
                     <p className="messages-count">{messageCount}</p>

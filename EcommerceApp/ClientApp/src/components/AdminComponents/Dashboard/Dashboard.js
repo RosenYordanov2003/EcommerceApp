@@ -32,7 +32,7 @@ export default function Dashboard() {
     }, [date, month])
 
     useEffect(() => {
-        if (connection) {
+        if (connection && connection?.state === "Disconnected") {
             connection.start()
                 .then(() => {
                     connection.on('PurchaseMade', () => {

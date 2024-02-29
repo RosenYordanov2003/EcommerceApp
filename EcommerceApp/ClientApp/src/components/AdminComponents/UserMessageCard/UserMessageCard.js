@@ -2,7 +2,7 @@
 import Style from "../UserMessageCard/Style.css";
 import PopupTextArea from "../UserMessageCard/PopupTextArea/PopupTextArea";
 import { UserContext } from "../../../Contexts/UserContext";
-import { responToUserMessage } from "../../../services/userMessageService";
+import { responToUserMessage, deleteUserMessage } from "../../../services/userMessageService";
 import CircleSpinner from "../../CircleSpinner/CircleSpinner";
 import PoppupMessage from "../../PoppupMessage/PoppupMessage";
 import DialogContainer from "../../DialogContainer/DialogContainer";
@@ -12,7 +12,7 @@ export default function UserMessageCard({ userMessage }) {
     const [spinner, setSpinner] = useState(undefined);
     const { user } = useContext(UserContext);
 
-    function closePopupTextArea() {
+    function closePopupMessage() {
         setTimeout(() => {
             setPopupMessage(undefined);
         }, 500)
@@ -32,6 +32,23 @@ export default function UserMessageCard({ userMessage }) {
             })
             .catch((error) => console.error(error));
     }
+    function handleOnDeleteAgreement() {
+        setTimeout(() => {
+            setPopupMessage(undefined);
+            deleteMessageRequest();
+        }, 500)
+
+    }
+    function deleteMessageRequest() {
+        setSpinner(<CircleSpinner />);
+        const id = userMessage.id;
+        deleteUserMessage(id)
+            .then(() => {
+                setSpinner(undefined);
+                setPopupMessage(<PoppupMessage message="Your have successfully deleted a message" removeNotification={() => setPopupMessage(undefined)} />);
+            })
+            .catch((error) => console.error(error));
+    }
 
     return (
         <>
@@ -44,13 +61,13 @@ export default function UserMessageCard({ userMessage }) {
                 </div>
                 <p className="user-message-content">{userMessage.message}</p>
                 <section className="actions-container">
-                    <div onClick={() => setPopupMessage(<PopupTextArea handleOnCloseFunction={closePopupTextArea} handleOnSendFunction={sendMessage} username={userMessage.username} />)} className="action">
+                    <div onClick={() => setPopupMessage(<PopupTextArea handleOnCloseFunction={closePopupMessage} handleOnSendFunction={sendMessage} username={userMessage.username} />)} className="action">
                         <i className="fa-solid fa-reply"></i>
                         <button className="action-button">Reply</button>
                     </div>
-                    <div className="action">
+                    <div onClick={() => setPopupMessage(<DialogContainer onCancel={closePopupMessage} onAgreement={handleOnDeleteAgreement} />)} className="action">
                         <i className="fa-solid fa-trash"></i>
-                        <button onClick={() => setPopupMessage(<DialogContainer/>)} className="action-button">Delete</button>
+                        <button className="action-button">Delete</button>
                     </div>
                 </section>
             </article>

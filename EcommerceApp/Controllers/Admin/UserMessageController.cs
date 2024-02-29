@@ -77,5 +77,18 @@
 
             return Ok();
         }
+        [HttpDelete]
+        [Route("Delete")]
+        [Authorize(Roles = AdminRoleName)]
+        public async Task<IActionResult> DeleteUserMessage([FromBody] Guid id)
+        {
+            if(!await userMessageService.CheckIfMessageExistsByIdAsync(id))
+            {
+                return BadRequest();
+            }
+            await userMessageService.DeleteMessageAsync(id);
+
+            return Ok();
+        }
     }
 }

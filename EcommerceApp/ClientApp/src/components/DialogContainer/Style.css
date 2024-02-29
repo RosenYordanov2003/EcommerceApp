@@ -1,14 +1,16 @@
-﻿.dialog-container{
+﻿.dialog-container {
     width: 50%;
     height: auto;
     background-color: white;
     padding: 4rem;
     border-radius: 6px;
     position: absolute;
-    transform:translate(-50%, -50%) scale(0);
+    transform: translate(-50%, -50%) scale(0);
     top: 30%;
     left: 36%;
     transition: 0.3s ease-in-out all;
+    z-index: 3;
+    box-shadow: 0rem 2rem 3rem rgba(132, 139, 200, 0.18);
 }
 .dialog-actions {
     display: flex;

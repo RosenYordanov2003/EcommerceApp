@@ -8,5 +8,7 @@
         Task<int> GetMessageCountAsync();
         Task<IEnumerable<UserMessageCardModel>> GetUserMessagesAsync();
         Task<string> GetUserEmailByMessageIdAsync(Guid id);
+        Task <bool> CheckIfMessageExistsByIdAsync(Guid id);
+        Task DeleteMessageAsync(Guid id);
     }
 }

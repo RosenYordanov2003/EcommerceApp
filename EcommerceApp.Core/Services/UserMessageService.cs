@@ -16,6 +16,18 @@
             this.dbContext = dbContext;
         }
 
+        public Task<bool> CheckIfMessageExistsByIdAsync(Guid id)
+        {
+            return dbContext.UserMessages.AnyAsync(m => m.Id == id);
+        }
+
+        public async Task DeleteMessageAsync(Guid id)
+        {
+            UserMessage userMessageToDelete = await dbContext.UserMessages.FirstAsync(m => m.Id == id);
+            dbContext.UserMessages.Remove(userMessageToDelete);
+            await dbContext.SaveChangesAsync();
+        }
+
         public async Task<int> GetMessageCountAsync()
         {
             return await dbContext.UserMessages.CountAsync();

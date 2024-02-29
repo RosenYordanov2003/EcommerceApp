@@ -40,3 +40,15 @@ export async function responToUserMessage(object) {
 
     return request.ok;
 }
+export async function deleteUserMessage(id) {
+    const request = await fetch(`${baseUrl}Delete`, {
+        credentials: 'include',
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(id)
+    });
+
+    return request.ok;
+}

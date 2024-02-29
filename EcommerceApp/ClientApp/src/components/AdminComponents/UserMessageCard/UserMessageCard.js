@@ -5,8 +5,9 @@ import { UserContext } from "../../../Contexts/UserContext";
 import { responToUserMessage } from "../../../services/userMessageService";
 import CircleSpinner from "../../CircleSpinner/CircleSpinner";
 import PoppupMessage from "../../PoppupMessage/PoppupMessage";
-export default function UserMessageCard({ userMessage }) {
+import DialogContainer from "../../DialogContainer/DialogContainer";
 
+export default function UserMessageCard({ userMessage }) {
     const [popupMessage, setPopupMessage] = useState(undefined);
     const [spinner, setSpinner] = useState(undefined);
     const { user } = useContext(UserContext);
@@ -49,11 +50,10 @@ export default function UserMessageCard({ userMessage }) {
                     </div>
                     <div className="action">
                         <i className="fa-solid fa-trash"></i>
-                        <button className="action-button">Delete</button>
+                        <button onClick={() => setPopupMessage(<DialogContainer/>)} className="action-button">Delete</button>
                     </div>
                 </section>
             </article>
         </>
-
     )
 }

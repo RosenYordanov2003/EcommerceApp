@@ -1,0 +1,39 @@
+﻿.dialog-container{
+    width: 50%;
+    height: auto;
+    background-color: white;
+    padding: 4rem;
+    border-radius: 6px;
+    position: absolute;
+    transform:translate(-50%, -50%) scale(0);
+    top: 30%;
+    left: 36%;
+    transition: 0.3s ease-in-out all;
+}
+.dialog-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 3rem;
+}
+.active-dialog-container {
+    transform: translate(-50%, -50%) scale(1);
+}
+.dialog-button {
+    border-radius: 6px;
+    border: none;
+    font-weight: bolder;
+    width: 44%;
+    padding: 0.4rem 0.2rem;
+    color: white;
+    transition: 0.4s ease-in-out all;
+}
+.dialog-actions :last-child {
+    background-color: #007FFF;
+}
+.dialog-actions :first-child {
+    background-color: #DA291C;
+}
+.dialog-button:hover{
+    opacity: 0.6;
+}

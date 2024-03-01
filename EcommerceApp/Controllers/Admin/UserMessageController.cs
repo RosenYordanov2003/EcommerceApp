@@ -11,6 +11,7 @@
     using Core.Models.AdminModels.UserMessages;
     using Infrastructure.Data.Models;
     using static Common.GeneralApplicationConstants;
+    using EcommerceApp.Core.Models.Pager;
 
     [Route("api/userMessage")]
     [Authorize]
@@ -57,11 +58,18 @@
         [HttpGet]
         [Route("GetAll")]
         [Authorize(Roles = AdminRoleName)]
-        public async Task<IActionResult> GetAllMessages()
+        public async Task<IActionResult> GetAllMessages([FromQuery] int currentPage)
         {
-            IEnumerable<UserMessageCardModel> messages = await userMessageService.GetUserMessagesAsync();
+            if (currentPage < 0) 
+            {
+                currentPage = 1;
+            }
+            int totalUserMessages = await userMessageService.GetMessageCountAsync();
+            Pager pager = new Pager(totalUserMessages, currentPage, DefaultUserMessagesPageSize);
 
-            return Ok(messages);
+            IEnumerable<UserMessageCardModel> messages = await userMessageService.GetUserMessagesAsync(pager);
+
+            return Ok(new {Messages = messages, PagerObject = pager});
         }
         [HttpPost]
         [Route("Respond")]

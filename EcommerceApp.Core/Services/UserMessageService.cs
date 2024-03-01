@@ -1,12 +1,13 @@
 ﻿namespace EcommerceApp.Core.Services
 {
     using Microsoft.EntityFrameworkCore;
-    using Contracts;
     using System.Collections.Generic;
+    using Contracts;
     using Data;
     using Infrastructure.Data.Models;
     using Models.UserMessage;
     using Models.AdminModels.UserMessages;
+    using Models.Pager;
 
     public class UserMessageService : IUserMessageService
     {
@@ -35,17 +36,19 @@
 
         public async Task<string> GetUserEmailByMessageIdAsync(Guid id)
         {
-           return await dbContext.UserMessages
-               .Where(m => m.Id == id)
-               .Select(m => m.User.Email)
-               .FirstAsync();
+            return await dbContext.UserMessages
+                .Where(m => m.Id == id)
+                .Select(m => m.User.Email)
+                .FirstAsync();
         }
 
-        public async Task<IEnumerable<UserMessageCardModel>> GetUserMessagesAsync()
+        public async Task<IEnumerable<UserMessageCardModel>> GetUserMessagesAsync(Pager pager)
         {
-            return await
-                 dbContext
-                .UserMessages
+            var userMessages = dbContext.UserMessages.AsQueryable().OrderBy(m => m.IsResponded);
+
+            return await userMessages
+                .Skip((pager.CurrentPage - 1) * pager.PageSize)
+                .Take(pager.PageSize)
                 .Select(m => new UserMessageCardModel()
                 {
                     Message = m.Message,
@@ -53,7 +56,6 @@
                     Id = m.Id,
                     IsResponded = m.IsResponded
                 })
-                .OrderBy(m => m.IsResponded)
                 .ToArrayAsync();
         }
 

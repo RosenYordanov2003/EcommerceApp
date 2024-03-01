@@ -21,8 +21,8 @@ export async function getMessageCount() {
 
     return response;
 }
-export async function getAllMessages() {
-    const request = await fetch(`${baseUrl}GetAll`, { credentials: 'include' });
+export async function getAllMessages(currentPage) {
+    const request = await fetch(`${baseUrl}GetAll?currentPage=${currentPage}`, { credentials: 'include' });
 
     const response = await request.json();
 

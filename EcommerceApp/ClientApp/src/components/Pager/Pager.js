@@ -1,14 +1,15 @@
 ﻿import PagerStyle from "../Pager/PagerStyle.css";
 
-export default function Pager({ startPage, endPage, pageNumberChange, currentPage }) {
+export default function Pager({ startPage, endPage, onPageNumberChange, currentPage }) {
 
     let result = [];
-    for (let i = startPage; i <=endPage ; i++) {
+    for (let i = startPage; i <= endPage ; i++) {
         result.push(i);
     }
     function handlePageNumberClick(pageNumber) {
-        pageNumberChange(pageNumber);
+        onPageNumberChange(pageNumber);
     }
+
 
     return (
         <div className="pager-container">

@@ -34,6 +34,8 @@
         public DbSet<Promotion> Promotions { get; set; }
         public DbSet<Picture> Pictures { get; set; }
         public DbSet<UserMessage> UserMessages { get; set; }
+        public DbSet<ShoesOrderEntity> ShoesOrderEntities { get; set; }
+        public DbSet<ProductOrderEntity> ProductOrderEntities { get; set; }
        
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -68,7 +70,6 @@
                 .HasOne(c => c.User)
                 .WithOne(u => u.Cart)
                 .OnDelete(DeleteBehavior.NoAction);
-
 
 
             builder.ApplyConfiguration(new UserEntityConfiguration());

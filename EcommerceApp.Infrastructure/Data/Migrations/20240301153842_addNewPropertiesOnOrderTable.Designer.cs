@@ -4,6 +4,7 @@ using EcommerceApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EcommerceApp.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240301153842_addNewPropertiesOnOrderTable")]
+    partial class addNewPropertiesOnOrderTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -189,6 +191,21 @@ namespace EcommerceApp.Infrastructure.Migrations
                             Gender = "W M",
                             Name = "Sweatshirts"
                         });
+                });
+
+            modelBuilder.Entity("EcommerceApp.Infrastructure.Data.Models.ClothesOrder", b =>
+                {
+                    b.Property<int>("ProductOrderEntityId")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("OrderId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("ProductOrderEntityId", "OrderId");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("ClothesOrders");
                 });
 
             modelBuilder.Entity("EcommerceApp.Infrastructure.Data.Models.Order", b =>
@@ -1092,7 +1109,7 @@ namespace EcommerceApp.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<Guid>("OrderId")
+                    b.Property<Guid?>("OrderId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("ProductId")
@@ -1985,6 +2002,21 @@ namespace EcommerceApp.Infrastructure.Migrations
                     b.ToTable("ShoesCartEntities");
                 });
 
+            modelBuilder.Entity("EcommerceApp.Infrastructure.Data.Models.ShoesOrder", b =>
+                {
+                    b.Property<int>("ShoesOrderEntityId")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("OrderId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("ShoesOrderEntityId", "OrderId");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("ShoesOrders");
+                });
+
             modelBuilder.Entity("EcommerceApp.Infrastructure.Data.Models.ShoesOrderEntity", b =>
                 {
                     b.Property<int>("Id")
@@ -1992,9 +2024,6 @@ namespace EcommerceApp.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<Guid>("OrderId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
@@ -2006,8 +2035,6 @@ namespace EcommerceApp.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("OrderId");
 
                     b.HasIndex("ShoesId");
 
@@ -3236,15 +3263,15 @@ namespace EcommerceApp.Infrastructure.Migrations
                         {
                             Id = new Guid("ed842fdc-c71b-4fbc-8df5-6f97cb73d622"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "12aacfe0-36b6-4fea-9299-dc277753b8d9",
+                            ConcurrencyStamp = "4be742eb-1832-4253-b181-f175dc5d18b2",
                             Email = "admin123@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN123@GMAIL.COM",
                             NormalizedUserName = "АDMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAECC1+RKeiWvqXPRQdF3yGzR528/Jvqh1d4+DNmi4CxQ+lrNhNnGrgosWDvZ5TOdGBA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMNdZM6yKAOMOuSTvNS5D2AkwwYXCHTa8przyLbSvFCiD6bWM3HFyUr1b6r50iFSOQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "01169d71-b00d-46ff-8737-80072c6f25d5",
+                            SecurityStamp = "ef747ab3-dd4d-4082-ad7c-25ed1d72c381",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         });
@@ -3452,6 +3479,25 @@ namespace EcommerceApp.Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("EcommerceApp.Infrastructure.Data.Models.ClothesOrder", b =>
+                {
+                    b.HasOne("EcommerceApp.Infrastructure.Data.Models.Order", "Order")
+                        .WithMany()
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EcommerceApp.Infrastructure.Data.Models.ProductOrderEntity", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductOrderEntityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Order");
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("EcommerceApp.Infrastructure.Data.Models.Order", b =>
                 {
                     b.HasOne("EcommerceApp.Infrastructure.Data.Models.User", null)
@@ -3523,19 +3569,15 @@ namespace EcommerceApp.Infrastructure.Migrations
 
             modelBuilder.Entity("EcommerceApp.Infrastructure.Data.Models.ProductOrderEntity", b =>
                 {
-                    b.HasOne("EcommerceApp.Infrastructure.Data.Models.Order", "Order")
+                    b.HasOne("EcommerceApp.Infrastructure.Data.Models.Order", null)
                         .WithMany("ProductCartEntities")
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("OrderId");
 
                     b.HasOne("EcommerceApp.Infrastructure.Data.Models.Product", "Product")
                         .WithMany("ProductOrderEntities")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Order");
 
                     b.Navigation("Product");
                 });
@@ -3656,7 +3698,7 @@ namespace EcommerceApp.Infrastructure.Migrations
                     b.Navigation("Shoes");
                 });
 
-            modelBuilder.Entity("EcommerceApp.Infrastructure.Data.Models.ShoesOrderEntity", b =>
+            modelBuilder.Entity("EcommerceApp.Infrastructure.Data.Models.ShoesOrder", b =>
                 {
                     b.HasOne("EcommerceApp.Infrastructure.Data.Models.Order", "Order")
                         .WithMany("ShoesCartEntities")
@@ -3664,13 +3706,24 @@ namespace EcommerceApp.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("EcommerceApp.Infrastructure.Data.Models.ShoesOrderEntity", "ShoesOrderEntity")
+                        .WithMany("ShoesOrders")
+                        .HasForeignKey("ShoesOrderEntityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Order");
+
+                    b.Navigation("ShoesOrderEntity");
+                });
+
+            modelBuilder.Entity("EcommerceApp.Infrastructure.Data.Models.ShoesOrderEntity", b =>
+                {
                     b.HasOne("EcommerceApp.Infrastructure.Data.Models.Shoes", "Shoes")
                         .WithMany("ShoesOrders")
                         .HasForeignKey("ShoesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Order");
 
                     b.Navigation("Shoes");
                 });
@@ -3842,6 +3895,11 @@ namespace EcommerceApp.Infrastructure.Migrations
                     b.Navigation("ShoesStocks");
 
                     b.Navigation("UserFavoriteShoes");
+                });
+
+            modelBuilder.Entity("EcommerceApp.Infrastructure.Data.Models.ShoesOrderEntity", b =>
+                {
+                    b.Navigation("ShoesOrders");
                 });
 
             modelBuilder.Entity("EcommerceApp.Infrastructure.Data.Models.User", b =>

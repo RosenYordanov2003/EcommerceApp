@@ -24,6 +24,7 @@ import ModifyingProduct from "./components/AdminComponents/Product/ModifyingProd
 import Shoes from "../src/components/AdminComponents/Shoes/Shoes";
 import CreateProduct from "../src/components/AdminComponents/Product/CreateProduct/CreateProduct";
 import AllUserMessages from "../src/components/AdminComponents/AllUserMessages/AllUserMessages";
+import OrderDetails from "../src/components/Order/OrderDetails/OrderDetails";
 
 
 export default function App() {
@@ -66,6 +67,7 @@ export default function App() {
                     <Route path="/Create" element={<CreateProduct />} />
                     <Route path="/Messages" element={<AllUserMessages />} />
                     <Route path="/Product/:id/:category" element={<ModifyingProduct />} />
+                    <Route path="/OrderDetails/:id" element={<OrderDetails />} />
                     <Route path="/" element={<Dashboard />} />
                 </Routes>
             </>

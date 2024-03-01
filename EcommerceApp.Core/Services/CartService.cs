@@ -65,11 +65,27 @@
         public async Task ClearUserCartAsyncAfterFinishingOrder(Guid userId)
         {
 
-            Cart userCart = await dbContext.Carts.Include(c => c.ProductCartEntities).Include(c => c.ShoesCartEntities).Where(c => c.UserId == userId).FirstAsync();
+            Cart userCart = await dbContext.Carts
+                .Include(c => c.ProductCartEntities)
+                .Include(c => c.ShoesCartEntities)
+                .Where(c => c.UserId == userId).FirstAsync();
 
             userCart.ShoesCartEntities.Clear();
             userCart.ProductCartEntities.Clear();
 
+            await dbContext.SaveChangesAsync();
+
+            var productCartEntites = await dbContext.ProductCartEntities.Where(p => p.CartId == userCart.Id).ToArrayAsync();
+            var shoesCartEntites = await dbContext.ShoesCartEntities.Where(p => p.CartId == userCart.Id).ToArrayAsync();
+
+            foreach (var item in productCartEntites)
+            {
+                dbContext.ProductCartEntities.Remove(item);
+            }
+            foreach (var item in shoesCartEntites)
+            {
+                dbContext.ShoesCartEntities.Remove(item);
+            }
             await dbContext.SaveChangesAsync();
         }
 

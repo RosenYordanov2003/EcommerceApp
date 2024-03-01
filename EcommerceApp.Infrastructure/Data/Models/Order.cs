@@ -1,18 +1,18 @@
 ﻿namespace EcommerceApp.Infrastructure.Data.Models
 {
     using System.ComponentModel.DataAnnotations;
-    using static EcommerceApp.GlobalConstants.EntityValidation.OrderEntity;
+    using static GlobalConstants.EntityValidation.OrderEntity;
     public class Order
     {
         public Order()
         {
-            ProductCartEntities = new List<ProductCartEntity>();
-            ShoesCartEntities = new List<ShoesCartEntity>();
+            ProductCartEntities = new List<ProductOrderEntity>();
+            ShoesCartEntities = new List<ShoesOrderEntity>();
         }
         public Guid Id { get; set; }
         public Guid UserId { get; set; }
-        public ICollection<ProductCartEntity> ProductCartEntities { get; set; }
-        public ICollection<ShoesCartEntity> ShoesCartEntities { get; set; }
+        public ICollection<ProductOrderEntity> ProductCartEntities { get; set; }
+        public ICollection<ShoesOrderEntity> ShoesCartEntities { get; set; }
         public DateTime FinishedOn { get; set; }
         public decimal Price { get; set; }
         public decimal Discount { get; set; }
@@ -38,6 +38,5 @@
         [Required]
         [MaxLength(CityMaxLength)]
         public string City { get; set; } = null!;
-
     }
 }

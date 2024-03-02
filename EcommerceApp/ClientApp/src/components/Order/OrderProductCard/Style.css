@@ -1,0 +1,30 @@
+﻿.order-product-recap {
+    display: flex;
+    align-items: center;
+    padding: 3rem;
+    max-width: 60%;
+    gap: 2.5rem;
+    background-color: white;
+    border-radius: 6px;
+    box-shadow: 0rem 2rem 3rem rgba(132, 139, 200, 0.18);
+}
+.recap-product-img-container{
+    max-width: 200px;
+}
+.recap-product-img-container img{
+    width: 100%;
+    height: auto;
+}
+.about-order-details-product{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+}
+.product-order-section-details{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: 90%;
+}

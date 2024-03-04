@@ -55,9 +55,9 @@ Home page represents a page with all featured products
 ## Dark Mode
 - The application has dark mode which state is saved in local storage
   
-  ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/879a543f-d936-40eb-bc46-23dbbbb40d64)
+![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/879a543f-d936-40eb-bc46-23dbbbb40d64)
   
-  ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/466f2856-f7e1-4a65-99c4-f6be0f19e077)
+![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/466f2856-f7e1-4a65-99c4-f6be0f19e077)
 
 ## Product Info page
 - Here user can add product with particualr size and quantity to his user cart
@@ -65,97 +65,97 @@ Home page represents a page with all featured products
 - If quantity is not enough notification message will popup
 - If quantity for the selected size is enough the product goes to user cart and this quantity for this product with the selected size is reserved
 
-  ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/ac3604b6-249a-4bc0-ab98-0ac8a306ed5f)
+![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/ac3604b6-249a-4bc0-ab98-0ac8a306ed5f)
 
-  ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/e416466f-f99f-40fe-941f-842862bf02e4)
+![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/e416466f-f99f-40fe-941f-842862bf02e4)
 
-  ## Products review section
-  - Here authenticated users can write reviews about particular product
+## Products review section
+- Here authenticated users can write reviews about particular product
 
   ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/96039e0b-9bf5-455c-bc18-decc0304fc04)
-  - After user successfully post a review popup message will come
+- After user successfully post a review popup message will come
    
-   ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/58c6421d-eaf7-4f8f-a3b1-0e3dfc83ab3f)
+![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/58c6421d-eaf7-4f8f-a3b1-0e3dfc83ab3f)
 
-   ## All reviews about particular product page
-   - Here users can read and modify their own reviews
-   - Users can choose how many reviews to be visualized per page (default number is 5)
-   - There is pagination logic
+## All reviews about particular product page
+- Here users can read and modify their own reviews
+- Users can choose how many reviews to be visualized per page (default number is 5)
+- There is pagination logic
      
-     ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/4f938813-220b-4837-b8db-4bfda5ce52f7)
+![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/4f938813-220b-4837-b8db-4bfda5ce52f7)
      
-     ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/abfdd065-7518-42fe-9091-71dd5169291b)
+![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/abfdd065-7518-42fe-9091-71dd5169291b)
 
-     ## User Cart
-     - User cart store all products selected by user with particular size and quantity
-     - User can increase quantity for particular product with particular size if there is any available
-     - User can decrease quantity for particular product with particular size
-     - User can apply promotion code on his order
-     - Promotion code is generated if user reach specific number of total orders and this code is sent by email
-     - After evry order user recieves an email with his order info
+## User Cart
+- User cart store all products selected by user with particular size and quantity
+- User can increase quantity for particular product with particular size if there is any available
+- User can decrease quantity for particular product with particular size
+- User can apply promotion code on his order
+- Promotion code is generated if user reach specific number of total orders and this code is sent by email
+- After evry order user recieves an email with his order info
 
-       ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/41ea07de-a121-4a78-b169-8a67f8ce2436)
+![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/41ea07de-a121-4a78-b169-8a67f8ce2436)
 
-       ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/bd96117e-5125-482b-9a8a-0c614cb48400)
+![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/bd96117e-5125-482b-9a8a-0c614cb48400)
        
-       - If promotion code is applied notification message will come
+- If promotion code is applied notification message will come
          
-       ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/64035b1f-e6a0-4807-8734-8035f77acaa8)
+![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/64035b1f-e6a0-4807-8734-8035f77acaa8)
 
-       ## Order summary page
+## Order summary page
 
-       ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/6a8ca743-da8c-4e57-bbeb-4e372742300c)
+![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/6a8ca743-da8c-4e57-bbeb-4e372742300c)
 
-       ## Success Page after finish order
+## Success Page after finish order
 
-       ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/7f35a286-d1e3-4b36-a182-be7855b7beb2)
+![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/7f35a286-d1e3-4b36-a182-be7855b7beb2)
 
-       ## Email message
+## Email message
        
-       ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/b01e14b0-4d3f-42d7-ac19-9d3f22b3b796)
-       # Admin Dashboard
-       - Admin Dashboard represents a page with statistics about app income with all orders.
-       - Admin user can select particular month or a day and can see income for that mont/day
-       - Admin Dashboard is updating dynamically using SignalR. When someone make an order, the dashboard will be automatically updated.
+![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/b01e14b0-4d3f-42d7-ac19-9d3f22b3b796)
+# Admin Dashboard
+- Admin Dashboard represents a page with statistics about app income with all orders.
+- Admin user can select particular month or a day and can see income for that mont/day
+- Admin Dashboard is updating dynamically using SignalR. When someone make an order, the dashboard will be automatically updated.
          
-       ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/fcf54599-f668-489d-918b-bfa874516fe4)
+![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/fcf54599-f668-489d-918b-bfa874516fe4)
        
-       ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/f565d2c2-6b8e-463a-bfe0-9f42ec577e7d)
+ ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/f565d2c2-6b8e-463a-bfe0-9f42ec577e7d)
 
-       - When particular day is selected new staticstic container will be visualized
+- When particular day is selected new staticstic container will be visualized
        
-       ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/a0b4606c-8645-41f3-a445-677f7f410388)
+![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/a0b4606c-8645-41f3-a445-677f7f410388)
 
-       - By default initially the selected month is the current month, but when admin change it the statistic container about the month will be updated
+- By default initially the selected month is the current month, but when admin change it the statistic container about the month will be updated
       
-       ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/026e01ab-0270-4b59-b7dc-6c134ceb3d94)
+![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/026e01ab-0270-4b59-b7dc-6c134ceb3d94)
 
-       ## Product page
+## Product page
 
-       ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/664481a4-05a1-425d-96e0-97f97d5ede75)
+![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/664481a4-05a1-425d-96e0-97f97d5ede75)
 
-       ## Page about particular product
-       - On this page admin can modify particular product by adding product stock or a promotion
-       - Admin can change product price, description, brand, category, name and can remove or upload imgs
-       - Uploaded imgs go on the server
+## Page about particular product
+- On this page admin can modify particular product by adding product stock or a promotion
+- Admin can change product price, description, brand, category, name and can remove or upload imgs
+- Uploaded imgs go on the server
 
-      ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/380d6b46-d97c-4751-b6a2-40f8dbc1ebd2)
+![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/380d6b46-d97c-4751-b6a2-40f8dbc1ebd2)
 
-      ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/5a6c1a7c-f447-4d4e-b0e4-67a4bd167fbf)
+![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/5a6c1a7c-f447-4d4e-b0e4-67a4bd167fbf)
 
-      ## The project is not finished yet!
+## The project is not finished yet!
 
-      ## Тechnologies I have used
-      - C#
-      - ASP.NET Web Api
-      - Entity Framework core
-      - Microsoft SQL Server
-      - SignalR
-      - SmtpClient
-      - ReactJS
-      - CSS
-      - Ajax
-      - Git
+## Тechnologies I have used
+- C#
+- ASP.NET Web Api
+- Entity Framework core
+- Microsoft SQL Server
+- SignalR
+- SmtpClient
+- ReactJS
+- CSS
+- Ajax
+- Git
       
 
 

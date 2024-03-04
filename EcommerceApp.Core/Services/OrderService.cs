@@ -67,6 +67,8 @@
                     ShippingAddress = o.Adress,
                     ShippingMethod = o.ShippingMethod,
                     TotalPrice = o.Price,
+                    OrderStatus = o.FinishedOn.AddDays(o.ShippingMethod == "fast" ? 2 : 4) < DateTime.Now ? "Delivered" : "Pending",
+                    Country = o.Country,
                 })
                 .FirstAsync();
 

@@ -1,7 +1,6 @@
 ﻿import Style from "../OrderProductCard/Style.css";
 
 export default function OrderProductCard({ product }) {
-    console.log(product);
     return (
         <article className="order-product-recap">
             <div className="recap-product-img-container">

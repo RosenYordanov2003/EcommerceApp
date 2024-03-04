@@ -42,7 +42,6 @@
     else {
         result = `${seconds} ${seconds > 1 ? "seconds" : "second"} ago`;
     }
-
     return result;
 
     function calculateTimeValue(seconds, timeParameter) {

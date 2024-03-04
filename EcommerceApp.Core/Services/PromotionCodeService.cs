@@ -5,6 +5,7 @@
     using Contracts;
     using Infrastructure.Data.Models;
     using Models.PromotionCodes;
+    using EcommerceApp.Core.Models.Discount;
 
     public class PromotionCodeService : IPromotionCodeService
     {
@@ -31,31 +32,29 @@
             return  await dbContext.PromotionCodes.AnyAsync(c => c.Id == cupponId && c.UserId == userId);
         }
 
-        public async Task<bool> CheckWheterUserReachOrdersCountAsync(Guid userId)
+        public async Task<decimal> CheckWheterUserReachesDiscount(Guid userId)
         {
             int userOrdersCount = await GetUserOrdersCount(userId);
 
-            return userOrdersCount % 10 == 0 || userOrdersCount % 20 == 0;
+            TwentyPercentageDiscountHandler discountHandler = new TwentyPercentageDiscountHandler();
+
+            discountHandler.SetNextDiscountHandler(new TenPercentageDiscountHandler());
+
+            decimal promotion = discountHandler.GetDiscount(userOrdersCount);
+
+            return promotion;
         }
 
-        public async Task<PromotionCodeModel> GeneratePromotionCodeForUserAsync(Guid userId)
+        public async Task<PromotionCodeModel> GeneratePromotionCodeForUserAsync(Guid userId, decimal discount)
         {
-            int userOrdersCount = await GetUserOrdersCount(userId);
 
             PromotionCode promotionCode = new PromotionCode()
             {
                 UserId = userId,
                 ExpirationTime = DateTime.UtcNow.AddMonths(1),
+                PromotionPercentages = discount
             };
 
-            if (userOrdersCount % 20 == 0)
-            {
-                promotionCode.PromotionPercentages = 25;
-            }
-            else
-            {
-                promotionCode.PromotionPercentages = 15;
-            }
             await dbContext.AddAsync(promotionCode);
             await dbContext.SaveChangesAsync();
 

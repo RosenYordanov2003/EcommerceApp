@@ -3,9 +3,9 @@
     using Models.PromotionCodes;
     public interface IPromotionCodeService
     {
-        Task<bool> CheckWheterUserReachOrdersCountAsync(Guid userId);
+        Task<decimal> CheckWheterUserReachesDiscount(Guid userId);
 
-        Task<PromotionCodeModel> GeneratePromotionCodeForUserAsync(Guid userId);
+        Task<PromotionCodeModel> GeneratePromotionCodeForUserAsync(Guid userId, decimal discount);
         Task<bool> CheckIfPromotionCodeExistByIdAsync(Guid cupponId);
         Task<bool> CheckIfPromotionCodeIsRelatedWithParticularUserAsync(Guid userId, Guid cupponId);
         Task<PromotionCodeModel> GetPromotionCodeByIdAsync(Guid id);

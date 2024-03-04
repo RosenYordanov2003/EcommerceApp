@@ -54,7 +54,8 @@
                     Message = m.Message,
                     Username = m.User.UserName,
                     Id = m.Id,
-                    IsResponded = m.IsResponded
+                    IsResponded = m.IsResponded,
+                    CreatedOn = m.CreatedOn
                 })
                 .ToArrayAsync();
         }
@@ -72,7 +73,7 @@
             {
                 UserId = uploadUserMessageModel.UserId,
                 Message = uploadUserMessageModel.Message,
-                CreatedOn = DateTime.UtcNow,
+                CreatedOn = DateTime.Now,
             };
             await dbContext.UserMessages.AddAsync(userMessage);
             await dbContext.SaveChangesAsync();

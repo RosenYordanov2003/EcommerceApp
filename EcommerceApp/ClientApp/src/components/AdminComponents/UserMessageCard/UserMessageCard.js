@@ -6,6 +6,7 @@ import { responToUserMessage, deleteUserMessage } from "../../../services/userMe
 import CircleSpinner from "../../CircleSpinner/CircleSpinner";
 import PoppupMessage from "../../PoppupMessage/PoppupMessage";
 import DialogContainer from "../../DialogContainer/DialogContainer";
+import { getTimeDifference} from "../../../utilities/timeDifference";
 
 export default function UserMessageCard({ userMessage }) {
     const [popupMessage, setPopupMessage] = useState(undefined);
@@ -17,6 +18,9 @@ export default function UserMessageCard({ userMessage }) {
             setPopupMessage(undefined);
         }, 500)
     }
+
+    const result = getTimeDifference(userMessage.createdOn);
+ 
     function sendMessage(message) {
         const object = {
             message: userMessage.message,
@@ -47,7 +51,7 @@ export default function UserMessageCard({ userMessage }) {
                 setSpinner(undefined);
                 setPopupMessage(<PoppupMessage message="Your have successfully deleted a message" removeNotification={() => setPopupMessage(undefined)} />);
             })
-        .catch((error) => console.error(error));
+            .catch((error) => console.error(error));
     }
 
     return (
@@ -57,7 +61,7 @@ export default function UserMessageCard({ userMessage }) {
             <article className={`user-message-card ${userMessage.isResponded && "responded"}`}>
                 <div className="user-message-header">
                     <h3>{userMessage.username}</h3>
-                    <p>3h ago</p>
+                    <p>{result}</p>
                 </div>
                 <p className="user-message-content">{userMessage.message}</p>
                 <section className="actions-container">

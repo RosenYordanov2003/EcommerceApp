@@ -44,6 +44,7 @@
 
             await hubContext.Clients.All.SendAsync("UserMessagesModification");
 
+
             return Ok(new {Success = true});
         }
         [HttpGet]

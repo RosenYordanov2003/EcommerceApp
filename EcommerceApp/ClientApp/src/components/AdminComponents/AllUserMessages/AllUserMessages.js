@@ -14,16 +14,20 @@ export default function AllUserMessages() {
     const [isLoading, setIsLoading] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
 
+
+    useEffect(() => {
+        const newConnection = new HubConnectionBuilder()
+            .withUrl('https://localhost:7122/notifications-hub')
+            .withAutomaticReconnect()
+            .build();
+        setConnection(newConnection);
+    }, [])
+
     useEffect(() => {
         getAllMessages(currentPage)
             .then(res => {
                 setMessages(res.messages);
                 setPageObject(res.pagerObject)
-                const newConnection = new HubConnectionBuilder()
-                    .withUrl('https://localhost:7122/notifications-hub')
-                    .withAutomaticReconnect()
-                    .build();
-                setConnection(newConnection);
             })
             .catch(error => console.error(error));
     }, [currentPage])
@@ -37,6 +41,7 @@ export default function AllUserMessages() {
                             .then((res) => {
                                 setMessages(res.messages);
                                 setPageObject(res.pagerObject);
+                                setCurrentPage(1);
                             })
                             .catch((error) => console.error(error));
                     });

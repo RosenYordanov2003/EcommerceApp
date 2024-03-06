@@ -43,6 +43,7 @@
             await userMessageService.UploadUserMessageAsync(model);
 
             await hubContext.Clients.All.SendAsync("UserMessagesModification");
+            await hubContext.Clients.All.SendAsync("UserMessageCountChanged");
 
 
             return Ok(new {Success = true});
@@ -101,6 +102,7 @@
                 return BadRequest();
             }
             await userMessageService.DeleteMessageAsync(id);
+            await hubContext.Clients.All.SendAsync("UserMessageCountChanged");
 
             return Ok();
         }

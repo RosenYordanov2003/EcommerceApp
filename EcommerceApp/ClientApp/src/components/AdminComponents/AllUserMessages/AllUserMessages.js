@@ -15,6 +15,16 @@ export default function AllUserMessages() {
     const [currentPage, setCurrentPage] = useState(1);
 
 
+    function loadMessagesObject(page) {
+        getAllMessages(page)
+            .then(res => {
+                setMessages(res.messages);
+                setPageObject(res.pagerObject);
+                setCurrentPage(res.pagerObject.currentPage);
+            })
+            .catch(error => console.error(error));
+    }
+
     useEffect(() => {
         const newConnection = new HubConnectionBuilder()
             .withUrl('https://localhost:7122/notifications-hub')
@@ -24,12 +34,7 @@ export default function AllUserMessages() {
     }, [])
 
     useEffect(() => {
-        getAllMessages(currentPage)
-            .then(res => {
-                setMessages(res.messages);
-                setPageObject(res.pagerObject)
-            })
-            .catch(error => console.error(error));
+        loadMessagesObject(currentPage);
     }, [currentPage])
 
 
@@ -38,28 +43,35 @@ export default function AllUserMessages() {
             connection.start()
                 .then(() => {
                     connection.on('UserMessagesModification', () => {
-                        getAllMessages(currentPage)
-                            .then((res) => {
-                                setMessages(res.messages);
-                                setPageObject(res.pagerObject);
-                            })
-                            .catch((error) => console.error(error));
+                        loadMessagesObject(currentPage);
                     });
                 })
                 .catch(console.error);
         }
     }, [connection]);
+    const messageResult = messages.map((m) => <UserMessageCard handleOnMessageResponse={handleOnMessageResponse} handleOnDeleteMessage={handleOnDeleteMessage} key={m?.id} userMessage={m} />);
 
-    const messagesResult = messages.map((m) => <UserMessageCard handleOnDeleteMessage={handleOnDeleteMessage} key={m.id} userMessage={m} />);
 
     function handleOnDeleteMessage(messageId) {
         const filteredMessages = messages.filter((message) => message.id !== messageId);
         setMessages(filteredMessages);
-        if (filteredMessages.length == 0 && currentPage - 1 > 0) {
-            setCurrentPage(currentPage - 1);
+        if (filteredMessages.length == 0) {
+            if (currentPage - 1 > 0) {
+                setCurrentPage(currentPage - 1);
+            }
+            else if (currentPage + 1 <= pageObject.endPage) {
+                loadMessagesObject(1);
+            }
         }
     }
-
+    function handleOnMessageResponse(messageId) {
+        setMessages(messages.map((message) => {
+            if (message.id === messageId) {
+                message.isResponded = true;
+            }
+            return message;
+        }))
+    }
     function handleOnPageNumberChange(newPageNumber) {
         setCurrentPage(newPageNumber);
         configureLoading();
@@ -85,12 +97,12 @@ export default function AllUserMessages() {
                     className="spinner-loading"
                     visible={true} /> :
                     <section className="user-messages">
-                        {messagesResult}
+                        {messageResult}
                         <Pager startPage={pageObject?.startPage} endPage={pageObject?.endPage} currentPage={currentPage} onPageNumberChange={handleOnPageNumberChange} />
                     </section>
             }
-            
-       </>
-       
+
+        </>
+
     )
 }

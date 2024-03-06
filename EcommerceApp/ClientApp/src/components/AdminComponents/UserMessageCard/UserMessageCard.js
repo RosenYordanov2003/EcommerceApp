@@ -8,7 +8,7 @@ import PoppupMessage from "../../PoppupMessage/PoppupMessage";
 import DialogContainer from "../../DialogContainer/DialogContainer";
 import { getTimeDifference} from "../../../utilities/timeDifference";
 
-export default function UserMessageCard({ userMessage, handleOnDeleteMessage }) {
+export default function UserMessageCard({ userMessage, handleOnDeleteMessage, handleOnMessageResponse }) {
     const [popupMessage, setPopupMessage] = useState(undefined);
     const [spinner, setSpinner] = useState(undefined);
     const { user } = useContext(UserContext);
@@ -32,7 +32,11 @@ export default function UserMessageCard({ userMessage, handleOnDeleteMessage }) 
         responToUserMessage(object)
             .then(() => {
                 setSpinner(undefined);
-                setPopupMessage(<PoppupMessage message="Your respond has been successfully sent" removeNotification={() => setPopupMessage(undefined)} />);
+                setPopupMessage(<PoppupMessage message="Your respond has been successfully sent" removeNotification={() => {
+                    setPopupMessage(undefined);
+                    handleOnMessageResponse(userMessage.id)
+                }}
+                />);
             })
             .catch((error) => console.error(error));
     }

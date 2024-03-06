@@ -15,5 +15,9 @@
         {
             await Clients.All.SendAsync("UserMessagesModification");
         }
+        public async Task NotifyClientOnUserMessageCountChange()
+        {
+            await Clients.All.SendAsync("UserMessageCountChanged");
+        }
     }
 }

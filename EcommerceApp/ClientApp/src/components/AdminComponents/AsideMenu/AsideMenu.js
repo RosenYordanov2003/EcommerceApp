@@ -30,7 +30,7 @@ export default function AsideMenu() {
         if (connection) {
             connection.start()
                 .then(() => {
-                    connection.on('UserMessagesModification', () => {
+                    connection.on('UserMessageCountChanged', () => {
                         getMessageCount()
                         .then(res => setMessageCount(res))
                     });

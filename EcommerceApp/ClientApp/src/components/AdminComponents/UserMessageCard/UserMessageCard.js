@@ -8,7 +8,7 @@ import PoppupMessage from "../../PoppupMessage/PoppupMessage";
 import DialogContainer from "../../DialogContainer/DialogContainer";
 import { getTimeDifference} from "../../../utilities/timeDifference";
 
-export default function UserMessageCard({ userMessage }) {
+export default function UserMessageCard({ userMessage, handleOnDeleteMessage }) {
     const [popupMessage, setPopupMessage] = useState(undefined);
     const [spinner, setSpinner] = useState(undefined);
     const { user } = useContext(UserContext);
@@ -49,7 +49,10 @@ export default function UserMessageCard({ userMessage }) {
         deleteUserMessage(id)
             .then(() => {
                 setSpinner(undefined);
-                setPopupMessage(<PoppupMessage message="Your have successfully deleted a message" removeNotification={() => setPopupMessage(undefined)} />);
+                setPopupMessage(<PoppupMessage message="Your have successfully deleted a message" removeNotification={() => {
+                    setPopupMessage(undefined);
+                    handleOnDeleteMessage(id);
+                }} />);
             })
             .catch((error) => console.error(error));
     }

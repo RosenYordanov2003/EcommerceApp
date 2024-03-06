@@ -49,7 +49,7 @@ export default function Clothes() {
                     <div className="clothes-container-admin">
                         {clothesResult}
                     </div>
-                    <Pager startPage={pageObject?.startPage} endPage={pageObject?.endPage} pageNumberChange={handlePageNumberChange} currentPage={pageNumber} />
+                    <Pager startPage={pageObject?.startPage} endPage={pageObject?.endPage} onPageNumberChange={handlePageNumberChange} currentPage={pageNumber} />
                 </section>
             }
        </>

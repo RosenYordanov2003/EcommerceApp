@@ -50,7 +50,7 @@ export default function Shoes() {
                         <div className="clothes-container-admin">
                             {shoesResult}
                         </div>
-                        <Pager startPage={pageObject?.startPage} currentPage={pageNumber} endPage={pageObject?.endPage} pageNumberChange={handleOnPageNumberChange} />
+                        <Pager startPage={pageObject?.startPage} currentPage={pageNumber} endPage={pageObject?.endPage} onPageNumberChange={handleOnPageNumberChange} />
                     </section>
             }
         </>

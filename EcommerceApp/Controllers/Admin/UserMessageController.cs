@@ -88,7 +88,6 @@
             await userMessageService.MarkMessageAsRespondedByIdAsync(model.MessageId);
             string email = await userMessageService.GetUserEmailByMessageIdAsync(model.MessageId);
             await emailSender.SendEmailAsync(email, "Response to your question" , messageRespond);
-            await hubContext.Clients.All.SendAsync("UserMessagesModification");
 
             return Ok();
         }
@@ -102,7 +101,6 @@
                 return BadRequest();
             }
             await userMessageService.DeleteMessageAsync(id);
-            await hubContext.Clients.All.SendAsync("UserMessagesModification");
 
             return Ok();
         }

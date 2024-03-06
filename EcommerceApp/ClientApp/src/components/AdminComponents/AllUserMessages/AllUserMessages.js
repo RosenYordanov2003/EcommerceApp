@@ -32,6 +32,7 @@ export default function AllUserMessages() {
             .catch(error => console.error(error));
     }, [currentPage])
 
+
     useEffect(() => {
         if (connection) {
             connection.start()
@@ -41,7 +42,6 @@ export default function AllUserMessages() {
                             .then((res) => {
                                 setMessages(res.messages);
                                 setPageObject(res.pagerObject);
-                                setCurrentPage(1);
                             })
                             .catch((error) => console.error(error));
                     });
@@ -50,7 +50,15 @@ export default function AllUserMessages() {
         }
     }, [connection]);
 
-    const messagesResult = messages.map((m) => <UserMessageCard key={m.id} userMessage={m} />);
+    const messagesResult = messages.map((m) => <UserMessageCard handleOnDeleteMessage={handleOnDeleteMessage} key={m.id} userMessage={m} />);
+
+    function handleOnDeleteMessage(messageId) {
+        const filteredMessages = messages.filter((message) => message.id !== messageId);
+        setMessages(filteredMessages);
+        if (filteredMessages.length == 0 && currentPage - 1 > 0) {
+            setCurrentPage(currentPage - 1);
+        }
+    }
 
     function handleOnPageNumberChange(newPageNumber) {
         setCurrentPage(newPageNumber);

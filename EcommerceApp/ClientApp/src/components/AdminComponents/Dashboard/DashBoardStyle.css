@@ -3,12 +3,7 @@
     width: 100vw;
     height: 100vh;
 }
-body:has(.dashboard-container) #root{
-    display: grid;
-    grid-template-columns: 22rem auto;
-    margin: 0 auto;
-    gap: 5rem;
-}
+
 .dashboard-container{
     margin: 2rem 3rem 0rem 0rem;
 }

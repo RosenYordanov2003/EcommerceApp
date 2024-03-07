@@ -1,8 +1,8 @@
 ﻿import { useState, useEffect } from "react";
 import { loadAllProducts } from "../../../adminServices/clothesService";
-import ClothesStyle from "./ClothesStyle.css";
+import './Clothes.css'
 import ProductCard from "../Product/ProductCard/ProductCard";
-import ResponsiveStyle from "../Clothes/ResponsiveStyle.css";
+import "../Clothes/ResponsiveStyle.css";
 import Pager from "../../Pager/Pager";
 import { Grid } from 'react-loader-spinner';
 export default function Clothes() {

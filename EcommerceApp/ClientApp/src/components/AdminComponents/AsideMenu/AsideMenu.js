@@ -2,7 +2,7 @@
 import { logout } from "../../../services/authService";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../../Contexts/UserContext";
-import AsideMenuStyle from "../AsideMenu/AsideMenuStyle.css";
+import "../AsideMenu/AsideMenuStyle.css";
 import { HubConnectionBuilder } from '@microsoft/signalr';
 import {getMessageCount} from "../../../services/userMessageService";
 

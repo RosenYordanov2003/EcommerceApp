@@ -4,6 +4,7 @@ import { loadDashboard, getAllOrders, getRecentOrders } from "../../../services/
 import OrderTableRows from "../OrderTableRows/OrderTableRows";
 import SvgCircle from "../SvgCircle/SvgCircle";
 import { HubConnectionBuilder } from '@microsoft/signalr';
+import ResponsiveStyle from "../Dashboard/ResponsiveStyle.css"
 
 export default function Dashboard() {
 

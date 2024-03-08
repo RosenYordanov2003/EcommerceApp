@@ -36,6 +36,11 @@
     top: 3rem;
     padding: 1rem 0rem;
 }
+.menu-icon{
+    right: unset;
+    display: none;
+}
+
 .icon-container:last-child{
     position: absolute;
     bottom: 1rem;

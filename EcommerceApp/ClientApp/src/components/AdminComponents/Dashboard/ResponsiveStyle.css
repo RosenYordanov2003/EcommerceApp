@@ -1,13 +1,10 @@
-﻿@media screen and (min-width: 700px) and (max-width: 1200px){
+﻿@media screen and (min-width: 701px) and (max-width: 1200px){
    body:has(.asside-wrapper) #root{
        grid-template-columns: 7rem auto !important;
    }
    .icon-text-content,
    .aside-logo{
        display: none;
-   }
-   .asside-wrapper {
-       margin: 1rem 0rem;
    }
    .statistic-container{
        display: flex;
@@ -39,4 +36,12 @@
     .orders-container table tbody tr td:last-child{
         font-size: 1rem;
     }
+}
+
+@media screen and (max-width: 700px){
+    body:has(.asside-wrapper) #root {
+        width: 100%;
+        grid-auto-columns: 0rem auto;
+    }
+   
 }

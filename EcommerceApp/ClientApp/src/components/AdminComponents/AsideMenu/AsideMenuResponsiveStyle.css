@@ -1,0 +1,30 @@
+﻿@media screen and (max-width: 701px){
+    .icon-container:last-child {
+        position: relative;
+        bottom: unset;
+    }
+    .admin-aside {
+        position: fixed;
+        z-index: 4;
+        background-color: white;
+        transform: translateX(-200%);
+        transition: all 0.3s ease-in-out;
+        width: 50%;
+        height: 100%;
+    }
+
+    .aside-logo {
+        display: none;
+    }
+
+    .menu-icon {
+        display: block;
+        right: unset;
+        top: 2rem;
+        left: 0;
+    }
+
+    body:has(.closed) .admin-aside {
+        transform: translateX(0);
+    }
+}

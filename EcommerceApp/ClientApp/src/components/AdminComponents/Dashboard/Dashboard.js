@@ -1,10 +1,10 @@
 ﻿import { useState, useEffect } from "react";
-import DashBoardStyle from "../Dashboard/DashBoardStyle.css";
+import  "../Dashboard/DashBoardStyle.css";
 import { loadDashboard, getAllOrders, getRecentOrders } from "../../../services/dashboardService";
 import OrderTableRows from "../OrderTableRows/OrderTableRows";
 import SvgCircle from "../SvgCircle/SvgCircle";
 import { HubConnectionBuilder } from '@microsoft/signalr';
-import ResponsiveStyle from "../Dashboard/ResponsiveStyle.css"
+import "../Dashboard/ResponsiveStyle.css"
 
 export default function Dashboard() {
 

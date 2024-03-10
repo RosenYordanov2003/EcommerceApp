@@ -1,5 +1,5 @@
 ﻿import { useEffect, useState } from "react"
-import Style from "../PromotionSection/Style.css";
+import "../PromotionSection/Style.css";
 import PoppupMessage from "../../PoppupMessage/PoppupMessage";
 import { removePromotion, addPromotion } from "../../../adminServices/promotionService";
 

@@ -13,6 +13,9 @@
        align-items: center;
        width: 90%;
    }
+    .statistic-title {
+        font-size: 1.8rem;
+    }
    .statistic-section{
        width: 100%;
    }
@@ -36,12 +39,58 @@
     .orders-container table tbody tr td:last-child{
         font-size: 1rem;
     }
+    .dashboard-title {
+        text-align: center;
+    }
 }
 
 @media screen and (max-width: 700px){
     body:has(.asside-wrapper) #root {
         width: 100%;
-        grid-auto-columns: 0rem auto;
+        grid-auto-columns: 20rem auto;
     }
+    .dates-container{
+       flex-direction: column;
+    }
+    .statistic-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 90%;
+    }
+    .orders-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .orders-container table {
+        width: 80%;
+        overflow-x: scroll;
+    }
+
+   .orders-container table tbody tr td {
+       font-size: 1rem;
+       padding: 0.4rem;
+   }
+
+   .orders-container table tbody tr th {
+       font-size: 1.1rem;
+   }
+
+   .orders-container table tbody tr td:last-child {
+       font-size: 1rem;
+       padding: 0.4rem;
+   }
+   .statistic-title{
+       font-size: 1.4rem;
+   }
+   .dashboard-title{
+       text-align: center;
+   }
+   .dashboard-container{
+       width: 100%;
+   }
    
 }

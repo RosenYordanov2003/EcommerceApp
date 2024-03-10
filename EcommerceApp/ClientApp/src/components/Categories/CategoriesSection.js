@@ -1,4 +1,4 @@
-﻿import Style from "../Categories/Styles/Style.css";
+﻿import "../Categories/Styles/Style.css";
 import { useState,useEffect } from "react";
 
 export default function CategoriesSection({ categories, isActive }) {

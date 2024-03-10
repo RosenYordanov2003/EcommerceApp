@@ -1,4 +1,4 @@
-﻿import Style from "../CircleSpinner/Style.css";
+﻿import "../CircleSpinner/Style.css";
 
 export default function CircleSpinner() {
     return (

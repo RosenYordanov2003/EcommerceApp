@@ -1,5 +1,5 @@
-﻿import SuccessPageStyle from "../SuccessfullPage/SuccessPageStyle.css";
-import ResponsiveStyle from "../SuccessfullPage/ResponsiveStyle.css";
+﻿import "../SuccessfullPage/SuccessPageStyle.css";
+import"../SuccessfullPage/ResponsiveStyle.css";
 import { useNavigate } from "react-router-dom";
 
 export default function SuccessFullPage() {

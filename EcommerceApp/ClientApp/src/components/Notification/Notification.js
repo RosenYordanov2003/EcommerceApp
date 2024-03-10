@@ -1,4 +1,4 @@
-﻿import NotificationStyle from "../Notification/NotificationStyle.css";
+﻿import "../Notification/NotificationStyle.css";
 import { useState } from "react";
 
 export default function Notification({ message, typeOfMessage, closeNotification }) {

@@ -1,9 +1,9 @@
 ﻿import { useState, useEffect, useContext } from "react";
 import { getReviewToEdit, editReview } from "../../services/reviewService";
 import { UserContext } from "../../Contexts/UserContext";
-import EditReviewStyle from "../EditReviewForm/EditReviewStyle.css";
+import "../EditReviewForm/EditReviewStyle.css";
 import Notification from "../Notification/Notification";
-import EditReviewResponsiveStyle from "../EditReviewForm/EditReviewResponsiveStyle.css";
+import "../EditReviewForm/EditReviewResponsiveStyle.css";
 import Input from "../Auth/Input/Input";
 import { FormProvider, useForm } from 'react-hook-form'
 import { reviewContent, reviewSubjectInput} from "../../utilities/inputValidations";

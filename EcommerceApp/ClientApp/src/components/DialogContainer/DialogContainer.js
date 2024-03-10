@@ -1,4 +1,4 @@
-﻿import Style from "../DialogContainer/Style.css";
+﻿import "../DialogContainer/Style.css";
 import { useEffect, useState } from "react";
 
 export default function DialogContainer({onAgreement, onCancel }) {

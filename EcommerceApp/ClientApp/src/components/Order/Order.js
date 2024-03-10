@@ -1,10 +1,10 @@
 ﻿import { useState, useEffect, useContext } from "react";
 import { UserContext } from "../../Contexts/UserContext";
 import OrderProduct from "../Products/OrderProduct/OrderProduct";
-import OrderStyle from "../Order/OrderStyle.css";
+import "../Order/OrderStyle.css";
 import { finishOrder } from "../../services/cartService";
 import { useNavigate } from "react-router-dom";
-import ResponsiveStyle from "../Order/ResponsiveStyle.css";
+import "../Order/ResponsiveStyle.css";
 import Input from "../Auth/Input/Input";
 import { FormProvider, useForm } from 'react-hook-form'
 import { postalCodeInput, firstNameInput, lastNameInput, streetAdressInput, cityOrderInput, emailOrderInput, phoneNumberInput } from "../../utilities/inputValidations";

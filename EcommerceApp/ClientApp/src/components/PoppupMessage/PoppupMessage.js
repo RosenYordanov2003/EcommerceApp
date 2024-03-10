@@ -1,5 +1,5 @@
 ﻿import { useState } from 'react';
-import PoppupMessageStyle from '../PoppupMessage/PoppupMessageStyle.css';
+import '../PoppupMessage/PoppupMessageStyle.css';
 
 export default function PoppupMessage({ message, removeNotification }) {
 

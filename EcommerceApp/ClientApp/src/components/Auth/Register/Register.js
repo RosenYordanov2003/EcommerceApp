@@ -1,4 +1,4 @@
-﻿import FormStyle from "../../Auth/FormStyle.css"
+﻿import "../../Auth/FormStyle.css"
 import { register } from "../../../services/authService";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";

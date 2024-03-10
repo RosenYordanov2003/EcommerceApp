@@ -1,8 +1,7 @@
 ﻿import { useState, useEffect } from "react";
 import { getOrderById } from "../../../services/orderService";
 import OrderProductCard from "../OrderProductCard/OrderProductCard";
-
-import Style from "../OrderDetails/Style.css";
+import "../OrderDetails/Style.css";
 
 export default function () {
 

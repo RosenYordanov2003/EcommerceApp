@@ -1,4 +1,4 @@
-﻿import ContactContainerStyle from "../ContactContainer/ContactContainerStyle.css";
+﻿import "../ContactContainer/ContactContainerStyle.css";
 import Input from "../Auth/Input/Input";
 import { FormProvider, useForm } from 'react-hook-form';
 import { userMessageInput } from "../../utilities/inputValidations";

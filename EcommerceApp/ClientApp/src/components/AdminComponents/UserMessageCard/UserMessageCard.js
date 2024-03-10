@@ -1,5 +1,5 @@
 ﻿import { useState, useContext } from "react";
-import Style from "../UserMessageCard/Style.css";
+import "../UserMessageCard/Style.css";
 import PopupTextArea from "../UserMessageCard/PopupTextArea/PopupTextArea";
 import { UserContext } from "../../../Contexts/UserContext";
 import { responToUserMessage, deleteUserMessage } from "../../../services/userMessageService";

@@ -3,10 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { useContext } from 'react';
 import { UserContext } from "../../Contexts/UserContext";
 import { Link } from "react-router-dom";
-import Style from "../Navigation/Style.css"
+import "../Navigation/Style.css"
 import { logout } from "../../services/authService";
 import UserFavoriteProducts from "../Products/UserFavoriteProducts/UserFavoriteProducts";
-import ResponsiveStyle from "../Navigation/ResponsiveStyle.css";
+import "../Navigation/ResponsiveStyle.css";
 import MobileNavigation from "./MobileButtonNavigation/MobileButtonNavigation";
 
 export default function Navigation() {

@@ -2,6 +2,7 @@
     display: grid;
     grid-template-columns: 20rem auto;
     gap: min(10vw, 10rem);
+    position: relative;
 }
 
 

@@ -1,13 +1,13 @@
 ﻿import { useEffect, useState } from "react";
 import { getProductToModify, editProduct } from "../../../../adminServices/clothesService";
-import Style from "../ModifyingProduct/Style.css";
+import "../ModifyingProduct/Style.css";
 import ProductStock from "../../ProductStock/ProductStock";
 import PoppupMessage from "../../../PoppupMessage/PoppupMessage";
 import SizeTable from "../../SizeTable/SizeTable";
 import PromotionSection from "../../PromotionSection/PromotionSection";
 import { getShoesToModify } from "../../../../adminServices/shoesService";
 import { editShoes, setShoesToBeFeatured, removeFeaturedShoes } from "../../../../adminServices/shoesService";
-import ResponsiveStyle from "../ModifyingProduct/ResponsiveStyle.css";
+import "../ModifyingProduct/ResponsiveStyle.css";
 import ProductImg from "../../ProductImg/ProductImg";
 import { HubConnectionBuilder } from '@microsoft/signalr';
 import ButtonsContainer from "./../ButtonsContainer/ButtonsContainer";

@@ -1,5 +1,5 @@
 ﻿import FilterItem from "../FilterItem/FilterItem";
-import FilterMenuStyle from "../ProductsFilterMenu/FilterMenuStyle.css";
+import "../ProductsFilterMenu/FilterMenuStyle.css";
 import { useState, useEffect } from "react";
 
 export default function FilterMenu({ result: {brands, categories }, onCheckInput }) {

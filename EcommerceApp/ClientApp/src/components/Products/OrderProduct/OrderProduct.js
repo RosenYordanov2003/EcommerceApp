@@ -1,4 +1,4 @@
-﻿import OrderProductStyle from "../OrderProduct/OrderProductStyle.css";
+﻿import "../OrderProduct/OrderProductStyle.css";
 
 export default function OrderProduct({ product }) {
     return (

@@ -2,17 +2,17 @@
 import { loadProductsByGender } from "../../services/productService";
 import FeaturedProduct from "../Products/FeaturedProduct";
 import FilterMenu from "../ProductsFilterMenu/FilterMenu";
-import GenderProductsStyle from "../GenderProducts/GenderProductsStyle.css";
+import "../GenderProducts/GenderProductsStyle.css";
 import { Grid } from 'react-loader-spinner';
 import ContactContainer from "../ContactContainer/ContactContainer";
 import { UserContext } from "../../Contexts/UserContext";
-import ResponsiveStyle from "../GenderProducts/ResponsiveStyle.css";
+import "../GenderProducts/ResponsiveStyle.css";
 
 export default function GenderProducts() {
     const pathArray = window.location.pathname.split('/');
     const gender = pathArray[pathArray.length - 1];
 
-    const { user, setUser } = useContext(UserContext);
+    const { user } = useContext(UserContext);
     const [resultObject, setResultObject] = useState(undefined);
     const [products, setProducts] = useState([]);
     const [shoes, setShoes] = useState([]);

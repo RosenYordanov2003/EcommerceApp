@@ -1,7 +1,7 @@
 ﻿import { useState, useEffect } from "react";
 import { getCreateProductModel } from "../../../../adminServices/clothesService";
 import { createProduct } from "../../../../adminServices/clothesService";
-import Style from "../CreateProduct/Style.css";
+import "../CreateProduct/Style.css";
 
 export default function CreateProduct() {
     const [inputObject, setInputObject] = useState({

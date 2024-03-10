@@ -1,5 +1,5 @@
 ﻿import { useState } from "react"
-import Style from "../ProductStock/Style.css";
+import "../ProductStock/Style.css";
 import { addProductStock } from "../../../adminServices/clothesService";
 import { addShoesStcok } from "../../../adminServices/shoesService";
 import PoppupMessage from "../../PoppupMessage/PoppupMessage";

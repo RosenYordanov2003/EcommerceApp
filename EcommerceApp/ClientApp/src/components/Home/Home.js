@@ -3,8 +3,8 @@ import { useState, useEffect, useContext } from "react";
 import { loadFeaturedShoes } from "../../services/productService";
 import FeaturedProduct from "../Products/FeaturedProduct";
 import { loadFeaturedClothes } from "../../services/productService";
-import HomeStyle from "../Home/HomeStyle.css";
-import ResponsiveStyle from "../Home/ResponsiveStyle.css";
+import "../Home/HomeStyle.css";
+import "../Home/ResponsiveStyle.css";
 import ContactContainer from "../ContactContainer/ContactContainer";
 import { UserContext } from "../../Contexts/UserContext";
 

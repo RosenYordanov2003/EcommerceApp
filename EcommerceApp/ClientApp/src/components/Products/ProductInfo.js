@@ -1,14 +1,13 @@
 ﻿import { useEffect, useState, useContext } from "react";
 import { loadProductById, addProductToUserFavoriteProductsList, removeProductFromUserFavoriteList, createProductObject, filterUserFavoriteProducts } from "../../services/productService";
-import ProductInfoStyle from "../Products/ProductInfoStyle.css";
+import "../Products/ProductInfoStyle.css";
 import SizeItem from "../SizeMenu/SizeMenu";
 import ProductDetails from "../Products/ProductDetails/ProductDetails";
 import FeaturedProduct from "../Products/FeaturedProduct";
-import { Grid } from 'react-loader-spinner';
 import { UserContext } from "../../Contexts/UserContext";
 import { addToCartProduct } from "../../services/cartService";
 import Notification from "../Notification/Notification";
-import ProductInfoResponsiveStyle from "../Products/ProductInfoResponsiveStyle.css";
+import "../Products/ProductInfoResponsiveStyle.css";
 
 export default function ProductInfo() {
 

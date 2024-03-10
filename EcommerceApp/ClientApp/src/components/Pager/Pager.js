@@ -1,4 +1,4 @@
-﻿import PagerStyle from "../Pager/PagerStyle.css";
+﻿import "../Pager/PagerStyle.css";
 
 export default function Pager({ startPage, endPage, onPageNumberChange, currentPage }) {
 

@@ -1,4 +1,4 @@
-﻿import Style from "../SizeTable/Style.css";
+﻿import "../SizeTable/Style.css";
 
 export default function SizeTable({ productStockArray }) {
 

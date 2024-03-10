@@ -1,6 +1,6 @@
 ﻿import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import FeaturedProductStyle from "../Products/FeaturedProductStyle.css";
+import "../Products/FeaturedProductStyle.css";
 import { UserContext } from "../../Contexts/UserContext";
 import { addProductToUserFavoriteProductsList, removeProductFromUserFavoriteList, createProductObject, filterUserFavoriteProducts } from "../../services/productService";
 

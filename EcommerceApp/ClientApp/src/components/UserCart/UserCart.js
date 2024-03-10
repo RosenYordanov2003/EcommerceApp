@@ -1,11 +1,11 @@
 ﻿import { useEffect, useState, useContext } from "react";
 import { UserContext } from "../../Contexts/UserContext";
 import { useNavigate } from "react-router-dom";
-import ShoppingCartStyle from "../UserCart/ShoppingCartStyle.css";
+import "../UserCart/ShoppingCartStyle.css";
 import UserCartItem from "../UserCart/UserCartItems/UserCartItem";
 import { applyCuppon } from "../../services/cupponService";
 import PoppupMessage from "../PoppupMessage/PoppupMessage";
-import ResponsiveStyle from "../UserCart/ResponsiveStyle.css";
+import "../UserCart/ResponsiveStyle.css";
 import { FormProvider, useForm } from 'react-hook-form'
 import Input from "../Auth/Input/Input";
 import { cityInput, postalCodeInput } from "../../utilities/inputValidations";

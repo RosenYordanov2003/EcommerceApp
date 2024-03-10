@@ -1,9 +1,10 @@
-﻿body:has(.dashboard-container) #root {
+﻿#root:has(.asside-wrapper) {
     display: grid;
     grid-template-columns: 22rem auto;
     margin: 0 auto;
     gap: 5rem;
 }
+
 
 .icon-container{
     display: flex;

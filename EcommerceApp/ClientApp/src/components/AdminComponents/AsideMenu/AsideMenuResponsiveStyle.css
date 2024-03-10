@@ -33,3 +33,8 @@
         transform: translateX(0);
     }
 }
+@media screen and (min-width: 701px) and (max-width: 1000px){
+    #root:has(.asside-wrapper) {
+        grid-template-columns: 12rem auto;
+    }
+}

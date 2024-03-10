@@ -1,7 +1,4 @@
 ﻿@media screen and (min-width: 701px) and (max-width: 1200px){
-   body:has(.asside-wrapper) #root{
-       grid-template-columns: 7rem auto !important;
-   }
    .icon-text-content,
    .aside-logo{
        display: none;
@@ -45,10 +42,6 @@
 }
 
 @media screen and (max-width: 700px){
-    body:has(.asside-wrapper) #root {
-        width: 100%;
-        grid-auto-columns: 20rem auto;
-    }
     .dates-container{
        flex-direction: column;
     }
@@ -91,6 +84,6 @@
    }
    .dashboard-container{
        width: 100%;
+       transform:translateX(12%);
    }
-   
 }

@@ -1,7 +1,8 @@
 ﻿import { useState, useEffect } from "react";
 import { getAllMessages } from "../../../services/userMessageService";
 import UserMessageCard from "../UserMessageCard/UserMessageCard";
-import Style from "../AllUserMessages/Style.css";
+import "../AllUserMessages/Style.css";
+import "../AllUserMessages/ResponsiveStyle.css";
 import Pager from "../../Pager/Pager";
 import { Grid } from 'react-loader-spinner';
 import { HubConnectionBuilder } from '@microsoft/signalr';

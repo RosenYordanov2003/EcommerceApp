@@ -1,12 +1,4 @@
-﻿body:has(.asside-wrapper) #root {
-    display: grid;
-    grid-template-columns: 20rem auto;
-    gap: min(10vw, 10rem);
-    position: relative;
-}
-
-
-.clothes-container-admin {
+﻿.clothes-container-admin {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     margin: 14.5rem 0rem;

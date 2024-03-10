@@ -277,5 +277,58 @@ export const userMessageInput = {
         }
     }
 }
+export const productNameInput = {
+    name: 'name',
+    type: 'text',
+    label: 'Name',
+    id: 'name',
+    validation: {
+        required: {
+            value: true,
+            message: 'required'
+        },
+        minLength: {
+            value: 3,
+            message: 'Product name must be at least 3 characters',
+        },
+        maxLength: {
+            value: 55,
+            message: 'Product name can not be more than 55 characters'
+        }
+    }
+}
+export const productDescriptionInput = {
+    name: 'description',
+    id: 'description',
+    type: 'text',
+    label: 'Description',
+    validation: {
+        required: {
+            value: true,
+            message: 'required'
+        },
+       
+        maxLength: {
+            value: 450,
+            message: 'Product description can not be more than 55 characters'
+        }
+    }
+}
+export const productPriceInput = {
+    name: 'price',
+    label: 'Price',
+    type: 'text',
+    validation: {
+        required: {
+            value: true,
+            message: 'required'
+        },
+        pattern: {
+            value:
+                /^[0-9]+$/,
+            message: 'Please enter valid price',
+        },
+    }
+}
 
 

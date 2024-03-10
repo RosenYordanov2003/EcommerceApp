@@ -11,6 +11,10 @@ import "../ModifyingProduct/ResponsiveStyle.css";
 import ProductImg from "../../ProductImg/ProductImg";
 import { HubConnectionBuilder } from '@microsoft/signalr';
 import ButtonsContainer from "./../ButtonsContainer/ButtonsContainer";
+import { productNameInput, productDescriptionInput, productPriceInput } from "../../../../utilities/inputValidations";
+import Input from "../../../Auth/Input/Input";
+import InputError from "../../../Auth/InputError/InputError";
+import { FormProvider, useForm } from 'react-hook-form'
 
 export default function ModifyingProduct() {
 
@@ -22,6 +26,7 @@ export default function ModifyingProduct() {
     const [product, setProduct] = useState(undefined);
     const [inputObject, setInputObject] = useState({});
     const [connection, setConnection] = useState(null);
+    const methods = useForm();
 
     useEffect(() => {
 
@@ -38,12 +43,6 @@ export default function ModifyingProduct() {
                         description: res.description,
                         id: productId
                     });
-
-                    const newConnection = new HubConnectionBuilder()
-                        .withUrl('https://localhost:7122/notifications-hub')
-                        .withAutomaticReconnect()
-                        .build();
-                    setConnection(newConnection);
                 })
         }
         else {
@@ -59,15 +58,13 @@ export default function ModifyingProduct() {
                         description: res.description,
                         id: productId
                     });
-
-                    const newConnection = new HubConnectionBuilder()
-                        .withUrl('https://localhost:7122/notifications-hub')
-                        .withAutomaticReconnect()
-                        .build();
-                    setConnection(newConnection);
                 })
         }
-
+        const newConnection = new HubConnectionBuilder()
+            .withUrl('https://localhost:7122/notifications-hub')
+            .withAutomaticReconnect()
+            .build();
+        setConnection(newConnection);
       
     }, [])
 
@@ -131,20 +128,27 @@ export default function ModifyingProduct() {
     function closeNotification() {
         setMessage(undefined);
     }
-    function handleFormSubmit(event) {
-        event.preventDefault();
+    const handleFormSubmit = methods.handleSubmit(data => {
+
+        const object = {
+            ...data,
+            brandId: inputObject.brandId,
+            categoryId: inputObject.categoryId,
+            id: inputObject.id
+        }
 
         if (category !== "Shoes") {
-            editProduct(inputObject)
+            editProduct(object)
                 .then(() => setMessage(<PoppupMessage message="Successfully update product" removeNotification={closeNotification} />))
                 .catch((error) => console.error(error));
         }
         else {
-            editShoes(inputObject)
+            editShoes(object)
                 .then(() => setMessage(<PoppupMessage message="Successfully update product" removeNotification={closeNotification} />))
                 .catch((error) => console.error(error));
         }
-    }
+    })
+
     function addPopupMessage(message) {
         setMessage(<PoppupMessage message={message} removeNotification={closeNotification} />)
     }
@@ -159,33 +163,27 @@ export default function ModifyingProduct() {
                 <ButtonsContainer isArchived={product?.isArchived} isFeatured={product?.isFeatured} productId={productId} category={category} addMessage={addPopupMessage }/>
             </div>
             <div className="product-modifying-content">
-                <form onSubmit={handleFormSubmit}>
-                    <div className="product-input-container">
-                        <label htmlFor="name">Name</label>
-                        <input id="name" onChange={(e) => setInputObject({ ...inputObject, name: e.target.value })} value={inputObject.name}></input>
-                    </div>
-                    <div className="product-input-container">
-                        <label>Category</label>
-                        <select onChange={handleOnCategoryChange} value={inputObject.categoryId}>
-                            {categories}
-                        </select>
-                    </div>
-                    <div className="product-input-container">
-                        <label>Brand</label>
-                        <select onChange={handleOnBrandChange} value={inputObject.brandId}>
-                            {brands}
-                        </select>
-                    </div>
-                    <div className="product-input-container">
-                        <label htmlFor="price">Price</label>
-                        <input id="price" onChange={(e) => setInputObject({ ...inputObject, price: e.target.value })} value={inputObject.price}></input>
-                    </div>
-                    <div className="product-input-container">
-                        <label htmlFor="description">Description</label>
-                        <textarea id="description" onChange={(e) => setInputObject({ ...inputObject, description: e.target.value })} rows={10} cols={24} value={inputObject.description}></textarea>
-                    </div>
-                    <button className="edit-product-button" type="submit">Edit</button>
-                </form>
+                <FormProvider {...methods}>
+                    <form onSubmit={(e) => e.preventDefault()}>
+                        <Input {...productNameInput} inputValue={inputObject.name} classNameValue="product-input-container"/>
+                        <div className="product-input-container">
+                            <label>Category</label>
+                            <select onChange={handleOnCategoryChange} value={inputObject.categoryId}>
+                                {categories}
+                            </select>
+                        </div>
+                        <div className="product-input-container">
+                            <label>Brand</label>
+                            <select onChange={handleOnBrandChange} value={inputObject.brandId}>
+                                {brands}
+                            </select>
+                        </div>
+                        <Input {...productPriceInput} classNameValue="product-input-container" inputValue={inputObject.price}/>
+                        <Input {...productDescriptionInput} classNameValue="product-input-container" inputValue={inputObject.description}/>
+                        <button onClick={handleFormSubmit} className="edit-product-button" type="submit">Edit</button>
+                    </form>
+                </FormProvider>
+               
                 <SizeTable productStockArray={product?.productStocks} />
                 <section className="product-sizes">
                     <h3 className="add-product-stock-title">Add Product Stock</h3>

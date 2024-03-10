@@ -4,9 +4,9 @@ import { MdError } from 'react-icons/md'
 import { isFormInvalid } from "../../../utilities/isFormInvalid";
 import { findInputError } from "../../../utilities/findInputError";
 import InputError from "./../InputError/InputError";
-import InputStyle from "../Input/InputStyle.css";
+import "../Input/InputStyle.css";
 
-export default function Input({ label, type, id, placeHolder, validation, name, multiline, rows, cols, inputValue, className="input-container"}) {
+export default function Input({ label, type, id, placeHolder, validation, name, multiline, rows, cols, inputValue, classNameValue="input-container"}) {
 
     //is used to register an input field with the library,
     //allowing it to handle validation.This function will be passed to the input element.
@@ -16,6 +16,7 @@ export default function Input({ label, type, id, placeHolder, validation, name, 
     if (inputValue) {
         setValue(name, inputValue);
     }
+    console.log(classNameValue);
 
     const inputError = findInputError(errors, name)
     const isInvalid = isFormInvalid(inputError)
@@ -34,7 +35,7 @@ export default function Input({ label, type, id, placeHolder, validation, name, 
     }
 
     return (
-        <section className={className}>
+        <section className={classNameValue}>
 
             <AnimatePresence mode="wait" initial={false}>
                 {isInvalid && (

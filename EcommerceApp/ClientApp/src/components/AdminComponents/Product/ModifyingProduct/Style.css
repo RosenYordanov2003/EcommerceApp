@@ -45,6 +45,10 @@
     gap: 0.2rem;
     margin-bottom: 0.6rem;
     width: 100%;
+    position: relative;
+}
+.product-input-container:not(:last-child){
+    margin-bottom: 1.8rem;
 }
 .add-product-stock-title {
     margin: 3rem 0rem;

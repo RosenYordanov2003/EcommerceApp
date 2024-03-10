@@ -23,8 +23,6 @@ export default function CreateProduct() {
             })
     }, [])
 
-    console.log(inputObject);
-
     const [files, setFiles] = useState([]);
 
     const categories = inputObject.categories.map((category) => <option value={category.id}>{category.name}</option>);

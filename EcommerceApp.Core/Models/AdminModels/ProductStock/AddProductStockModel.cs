@@ -6,7 +6,7 @@
     {
         public int ProductStockId { get; set; }
         [Range(QuantityMinValue, QuantityMaxValue)]
-        public int ProductQuantityToAdd { get; set; }
+        public int Quantity { get; set; }
         public string ProductCategory { get; set; } = null!;
     }
 }

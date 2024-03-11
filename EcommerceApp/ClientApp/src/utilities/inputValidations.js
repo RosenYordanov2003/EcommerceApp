@@ -330,5 +330,20 @@ export const productPriceInput = {
         },
     }
 }
+export const productStockQuantityInput = {
+    name: 'quantity',
+    type: 'text',
+    validation: {
+        required: {
+            value: true,
+            message: 'required'
+        },
+        pattern: {
+            value:
+                /^[0-9]+$/,
+            message: 'Please enter valid quantity',
+        },
+    }
+}
 
 

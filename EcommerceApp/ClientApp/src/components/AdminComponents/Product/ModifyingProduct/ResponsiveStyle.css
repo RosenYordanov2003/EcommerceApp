@@ -1,7 +1,7 @@
 ﻿@media screen and (max-width: 700px){
     .product-modifying-container{
         flex-direction: column;
-        transform:translateX(8%);
+        align-items: center;
     }
     .imgs-container{
         display: flex;
@@ -52,11 +52,25 @@
     .product-stock-form input,
     .promotion-form,
     .product-stock-form button,
-    .promotion-form button{
+    .promotion-form button,
+    .add-product-stock-input{
         width: 100%;
     }
+    .product-stock-form .input-error {
+        font-size: 1rem;
+    }
 }
-@media screen and (min-width: 701px) and (max-width: 1100px){
+@media screen and (min-width: 701px) and (max-width: 1300px){
+    .product-modifying-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .imgs-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
     .size-table {
         width: 90%;
         padding: 1.1rem;
@@ -79,10 +93,10 @@
     }
 
     .product-stock-form :where(input, button){
-        width: 90%;
+        width: 100%;
     }
 
     .promotion-form button {
-        width: 90%;
+        width: 100%;
     }
 }

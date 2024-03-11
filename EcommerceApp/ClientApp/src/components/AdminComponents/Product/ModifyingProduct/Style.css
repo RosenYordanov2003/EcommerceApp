@@ -47,8 +47,13 @@
     width: 100%;
     position: relative;
 }
+.product-input-container .input-error{
+    width: auto;
+    top: 100%;
+    right: unset;
+}
 .product-input-container:not(:last-child){
-    margin-bottom: 1.8rem;
+    margin-bottom: 2.8rem;
 }
 .add-product-stock-title {
     margin: 3rem 0rem;

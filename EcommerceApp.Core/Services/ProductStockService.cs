@@ -70,13 +70,13 @@
             {
                 var stock = await dbContext.ProductStocks.FirstAsync(ps => ps.Id == productStockModel.ProductStockId);
 
-                stock.Quantity += productStockModel.ProductQuantityToAdd;
+                stock.Quantity += productStockModel.Quantity;
             }
             else
             {
                 var stock = await dbContext.ShoesStock.FirstAsync(s => s.Id == productStockModel.ProductStockId);
 
-                stock.Quantity += productStockModel.ProductQuantityToAdd;
+                stock.Quantity += productStockModel.Quantity;
             }
 
             await dbContext.SaveChangesAsync();

@@ -2,7 +2,7 @@
     display: flex;
     align-items: flex-start;
     justify-content:space-around;
-    margin-bottom: 2rem;
+    margin-bottom: 2.8rem;
 }
 .product-stock-admin-container p{
     margin: 0;
@@ -31,5 +31,20 @@
 
 .product-stock-form button:hover{
     opacity: 0.8;
+}
+.product-stock-form{
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.product-stock-form .input-error{
+    top: 102%;
+    width: auto;
+    font-size: 1rem;
+    right: unset;
+    left: 0;
+    text-align: center;
+    padding: 0.4rem 1rem;
 }
 

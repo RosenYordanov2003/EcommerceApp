@@ -13,7 +13,6 @@ import { HubConnectionBuilder } from '@microsoft/signalr';
 import ButtonsContainer from "./../ButtonsContainer/ButtonsContainer";
 import { productNameInput, productDescriptionInput, productPriceInput } from "../../../../utilities/inputValidations";
 import Input from "../../../Auth/Input/Input";
-import InputError from "../../../Auth/InputError/InputError";
 import { FormProvider, useForm } from 'react-hook-form'
 
 export default function ModifyingProduct() {
@@ -30,36 +29,22 @@ export default function ModifyingProduct() {
 
     useEffect(() => {
 
-        if (category !== "Shoes") {
-            getProductToModify(productId)
-                .then((res) => {
-                    setProduct(res);
-                    setInputObject({
-                        name: res.name,
-                        starRating: res.starRating,
-                        brandId: res.selectedBrandId,
-                        categoryId: res.selectedCategoryId,
-                        price: res.price,
-                        description: res.description,
-                        id: productId
-                    });
-                })
-        }
-        else {
-            getShoesToModify(productId)
-                .then((res) => {
-                    setProduct(res);
-                    setInputObject({
-                        name: res.name,
-                        starRating: res.starRating,
-                        brandId: res.selectedBrandId,
-                        categoryId: res.selectedCategoryId,
-                        price: res.price,
-                        description: res.description,
-                        id: productId
-                    });
-                })
-        }
+        const productLoadFunction = category !== "Shoes" ? getProductToModify : getShoesToModify;
+
+        productLoadFunction(productId)
+            .then((res) => {
+                setProduct(res);
+                setInputObject({
+                    name: res.name,
+                    starRating: res.starRating,
+                    brandId: res.selectedBrandId,
+                    categoryId: res.selectedCategoryId,
+                    price: res.price,
+                    description: res.description,
+                    id: productId
+                });
+            })
+
         const newConnection = new HubConnectionBuilder()
             .withUrl('https://localhost:7122/notifications-hub')
             .withAutomaticReconnect()

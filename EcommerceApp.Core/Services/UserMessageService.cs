@@ -8,6 +8,8 @@
     using Models.UserMessage;
     using Models.AdminModels.UserMessages;
     using Models.Pager;
+    using EcommerceApp.Core.Models.TimeDifference;
+    using EcommerceApp.Core.Models.Discount;
 
     public class UserMessageService : IUserMessageService
     {
@@ -46,7 +48,7 @@
         {
             var userMessages = dbContext.UserMessages.AsQueryable().OrderBy(m => m.IsResponded);
 
-            return await userMessages
+            var messages = await userMessages
                 .Skip((pager.CurrentPage - 1) * pager.PageSize)
                 .Take(pager.PageSize)
                 .Select(m => new UserMessageCardModel()
@@ -58,6 +60,13 @@
                     CreatedOn = m.CreatedOn
                 })
                 .ToArrayAsync();
+
+            foreach (var message in messages)
+            {
+                message.ElapsedTime = CalculateTimeDifference(message.CreatedOn);
+            }
+
+            return messages;
         }
 
         public async Task MarkMessageAsRespondedByIdAsync(Guid id)
@@ -73,10 +82,28 @@
             {
                 UserId = uploadUserMessageModel.UserId,
                 Message = uploadUserMessageModel.Message,
-                CreatedOn = DateTime.Now,
+                CreatedOn = DateTime.UtcNow,
             };
             await dbContext.UserMessages.AddAsync(userMessage);
             await dbContext.SaveChangesAsync();
+        }
+        private string CalculateTimeDifference(DateTime date)
+        {
+            YearTimeCalculator yearTimeCalculator = new YearTimeCalculator();
+            MonthTimeCalculator monthTimeCalculator = new MonthTimeCalculator();
+            WeekTimeCalculator weekTimeCalculator = new WeekTimeCalculator();
+            DayTimeCalculator dayTimeCalculator = new DayTimeCalculator();
+            HourTimeCalculator hourTimeCalculator = new HourTimeCalculator();
+            MinutesTimeCalculator minutesTimeCalculator = new MinutesTimeCalculator();
+
+            yearTimeCalculator.SetNextDateTimeCalculator(monthTimeCalculator);
+            monthTimeCalculator.SetNextDateTimeCalculator(weekTimeCalculator);
+            weekTimeCalculator.SetNextDateTimeCalculator(dayTimeCalculator);
+            dayTimeCalculator.SetNextDateTimeCalculator(hourTimeCalculator);
+            hourTimeCalculator.SetNextDateTimeCalculator(minutesTimeCalculator);
+            minutesTimeCalculator.SetNextDateTimeCalculator(new SecondsTimeCalculator());
+
+            return yearTimeCalculator.CalculateTimeDifeerence(date);
         }
     }
 }

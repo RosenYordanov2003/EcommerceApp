@@ -19,7 +19,7 @@ export default function UserMessageCard({ userMessage, handleOnDeleteMessage, ha
         }, 500)
     }
 
-    const result = getTimeDifference(userMessage.createdOn);
+   /* const result = getTimeDifference(userMessage.createdOn);*/
  
     function sendMessage(message) {
         const object = {
@@ -68,7 +68,7 @@ export default function UserMessageCard({ userMessage, handleOnDeleteMessage, ha
             <article className={`user-message-card ${userMessage.isResponded && "responded"}`}>
                 <div className="user-message-header">
                     <h3>{userMessage.username}</h3>
-                    <p>{result}</p>
+                    <p>{userMessage.elapsedTime}</p>
                 </div>
                 <p className="user-message-content">{userMessage.message}</p>
                 <section className="actions-container">

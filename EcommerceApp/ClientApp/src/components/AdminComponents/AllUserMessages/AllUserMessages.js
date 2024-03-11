@@ -22,6 +22,7 @@ export default function AllUserMessages() {
                 setMessages(res.messages);
                 setPageObject(res.pagerObject);
                 setCurrentPage(res.pagerObject.currentPage);
+                console.log(res);
             })
             .catch(error => console.error(error));
     }

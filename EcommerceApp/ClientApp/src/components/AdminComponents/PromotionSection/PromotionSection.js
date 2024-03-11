@@ -12,7 +12,6 @@ export default function PromotionSection({ promotionModel }) {
         setInputObject({
             percentages: promotionModel?.percentageDiscount,
             expirationTime: promotionModel?.expireTime
-           
         });
     }, [promotionModel?.percentageDiscount, promotionModel?.expireTime])
 
@@ -65,7 +64,10 @@ export default function PromotionSection({ promotionModel }) {
         };
 
         addPromotion(promotionObject)
-            .then(() => setMessage(<PoppupMessage message="Successfully Apply Promotion" removeNotification={closeNotification }/>))
+            .then(() => {
+                setMessage(<PoppupMessage message="Successfully Apply Promotion" removeNotification={closeNotification} />);
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            })
             .catch((error) => console.error(error));
     }
     function handleOnPromotionDelete(e) {
@@ -74,7 +76,8 @@ export default function PromotionSection({ promotionModel }) {
         removePromotion(promotionModel?.id)
             .then(() => {
                 setInputObject(undefined);
-                setMessage(<PoppupMessage message="Successfully Remove Promotion" removeNotification={closeNotification} />)
+                setMessage(<PoppupMessage message="Successfully Remove Promotion" removeNotification={closeNotification} />);
+                window.scrollTo({ top: 0, behavior: "smooth" });
             })
             .catch((error) => console.error(error));
     }

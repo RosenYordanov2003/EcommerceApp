@@ -7,5 +7,6 @@
         public string Message { get; set; } = null!;
         public bool IsResponded { get; set; }
         public DateTime CreatedOn { get; set; }
+        public string? ElapsedTime { get; set; }
     }
 }

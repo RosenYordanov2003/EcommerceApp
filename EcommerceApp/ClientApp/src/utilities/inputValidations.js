@@ -302,6 +302,9 @@ export const productDescriptionInput = {
     id: 'description',
     type: 'text',
     label: 'Description',
+    multiline: true,
+    rows: 10,
+    cols: 60,
     validation: {
         required: {
             value: true,

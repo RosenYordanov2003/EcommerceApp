@@ -2,6 +2,7 @@
     .product-modifying-container{
         flex-direction: column;
         align-items: center;
+        width: 90%;
     }
     .imgs-container{
         display: flex;

@@ -25,6 +25,7 @@ export default function ProductStock({ productStock }) {
            .then(() => {
                setMessage(<PoppupMessage message="Successfully add product stock" removeNotification={() => setMessage(undefined)} />);
                methods.reset();
+               window.scrollTo({ top: 0, behavior: "smooth" });
            })
            .catch((error) => console.error(error));
    })

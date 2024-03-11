@@ -9,7 +9,7 @@
             TimeSpan result = todayDate - date;
             int seconds = (int)Math.Floor(result.TotalSeconds);
 
-            if (seconds / SecondsInMinute > 1)
+            if (seconds / SecondsInMinute >= 1)
             {
                 string timeResultUnit = seconds / SecondsInMinute > 1 ? "minutes ago" : "minute ago";
                 return $"{seconds / SecondsInMinute} {timeResultUnit}";

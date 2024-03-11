@@ -9,7 +9,7 @@
             TimeSpan result = todayDate - date;
             int seconds = (int)Math.Floor(result.TotalSeconds);
 
-            if(seconds / SecondsInYear > 1)
+            if(seconds / SecondsInYear >= 1)
             {
                 string timeResultUnit = seconds / SecondsInYear > 1 ? "years ago" : "year ago";
                 return $"{seconds / SecondsInYear} {timeResultUnit}";

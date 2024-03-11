@@ -9,7 +9,7 @@
             TimeSpan result = todayDate - date;
             int seconds = (int)Math.Floor(result.TotalSeconds);
 
-            if (seconds / SecondsInMonth > 1)
+            if (seconds / SecondsInMonth >= 1)
             {
                 string timeResultUnit = seconds / SecondsInMonth > 1 ? "months ago" : "month ago";
                 return $"{seconds / SecondsInMonth} {timeResultUnit}";

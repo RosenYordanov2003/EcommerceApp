@@ -10,7 +10,7 @@
             TimeSpan result = todayDate - date;
             int seconds = (int)Math.Floor(result.TotalSeconds);
 
-            if (seconds / SecondsInWeek > 1)
+            if (seconds / SecondsInWeek >= 1)
             {
                 string timeResultUnit = seconds / SecondsInWeek > 1 ? "weeks ago" : "week ago";
                 return $"{seconds / SecondsInWeek} {timeResultUnit}";

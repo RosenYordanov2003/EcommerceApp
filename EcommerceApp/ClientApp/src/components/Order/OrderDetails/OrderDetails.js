@@ -2,6 +2,7 @@
 import { getOrderById } from "../../../services/orderService";
 import OrderProductCard from "../OrderProductCard/OrderProductCard";
 import "../OrderDetails/Style.css";
+import "../OrderDetails/ResponsiveStyle.css";
 
 export default function () {
 
@@ -18,10 +19,9 @@ export default function () {
 
     const orderProducts = orderObject?.products.map((product, index) => <OrderProductCard product={product} key={index} />);
 
-    console.log(orderObject);
 
     return (
-        <div>
+        <div className="user-order-details">
             <h1 className="order-detials-title">Your Order with id: 03945885</h1>
             <section className="order-details-section">
                 <h4 className="recap-title">Recap</h4>

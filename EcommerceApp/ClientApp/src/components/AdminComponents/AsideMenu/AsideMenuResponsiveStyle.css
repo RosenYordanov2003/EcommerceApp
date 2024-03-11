@@ -32,6 +32,9 @@
     body:has(.closed) .admin-aside {
         transform: translateX(0);
     }
+    #root:has(.asside-wrapper) {
+        grid-template-columns: unset;
+    }
 }
 @media screen and (min-width: 701px) and (max-width: 1000px){
     #root:has(.asside-wrapper) {

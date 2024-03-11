@@ -84,6 +84,8 @@
    }
    .dashboard-container{
        width: 100%;
-       transform:translateX(12%);
+   }
+   .statistic-section{
+       width: 90%;
    }
 }

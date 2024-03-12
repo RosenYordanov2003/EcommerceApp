@@ -8,6 +8,7 @@ import { UserContext } from "../../Contexts/UserContext";
 import { addToCartProduct } from "../../services/cartService";
 import Notification from "../Notification/Notification";
 import "../Products/ProductInfoResponsiveStyle.css";
+import TimerCountDown from "../TimerCountDown/TimerCountDown";
 
 export default function ProductInfo() {
 
@@ -22,6 +23,7 @@ export default function ProductInfo() {
     const [isFavorite, setIsFavorite] = useState(undefined);
     const [notiffication, setNotification] = useState(undefined);
 
+    console.log(product);
     const pathArray = window.location.pathname.split('/');
     const id = pathArray[pathArray.length - 2];
     const categoryName = pathArray[pathArray.length - 1];
@@ -219,7 +221,18 @@ export default function ProductInfo() {
                     <h2 className="product-info-title">{product.name}</h2>
                     <p className={`product-stock ${stockObject.class}`}>
                         {stockObject.content}</p>
-                    <p className="product-price">${Number.parseFloat(product?.price).toFixed(2)}</p>
+                    {
+                        product?.dicountPercentage === 0 ? <p className="product-price">${Number.parseFloat(product?.price).toFixed(2)}</p>
+                            :
+                            <section className="price-section"> 
+                                <del><p className="product-price">${Number.parseFloat(product?.price).toFixed(2)}</p></del>
+                                <p className="product-price">${Number.parseFloat(product?.price - ((product?.price * product?.dicountPercentage) / 100)).toFixed(2)}</p>
+                                <div className="timer-container">
+                                    <TimerCountDown miliseconds={product?.totalMilisecondsDifference}/>
+                                </div>
+                            </section>
+                    }
+                  
                     <h4>Size</h4>
                     <ul className="size-ul">
                         {sizeItmes}

@@ -4,10 +4,11 @@
     using Models.AdminModels.Clothes;
     using Models.Shoes;
     using Models.Pager;
+    using EcommerceApp.Core.Models.Products;
 
     public interface IShoesService
     {
-        Task<IEnumerable<ShoesFeatureModel>> GetFeaturedShoesAsync(Guid? userId);
+        Task<IEnumerable<ProductFeatureModel>> GetFeaturedShoesAsync(Guid? userId);
         Task<IEnumerable<ClothesModel>> GetAllShoesAsync(Pager pager);
         Task<ModifyShoesModel> GetShoesToModifyAsync(int shoesId);
         Task<bool> CheckIfShoesExistsByIdAsync(int shoesId);

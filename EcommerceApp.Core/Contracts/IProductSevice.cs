@@ -15,7 +15,7 @@
         Task AddProductToUserFavoritesListAsync(UserFavoriteProduct userFavoriteProductmodel);
         Task RemoveProductFromUserFavoriteListAsync(UserFavoriteProduct userFavoriteProductmodel);
         Task<ICollection<GetUserFavoriteProductModel>> GetUserFavoriteProductsAsync(Guid userId);
-        Task<IEnumerable<ShoesFeatureModel>> LoadUserFavoriteProductsAsync(Guid userId);
+        Task<IEnumerable<ProductFeatureModel>> LoadUserFavoriteProductsAsync(Guid userId);
         Task<IEnumerable<ClothesModel>> LoadAllClothesAsync(Pager pager);
         Task<ModifyClothesModel> GetProductToModifyAsync(int productId);
         Task EditProductAsync(EditProductModel model);

@@ -2,7 +2,6 @@
 {
     using Microsoft.AspNetCore.Mvc;
     using EcommerceApp.Core.Contracts;
-    using EcommerceApp.Core.Models.Shoes;
     using EcommerceApp.Core.Models.Products;
     using Microsoft.AspNetCore.Authorization;
     using EcommerceApp.Infrastructure.Data.Models;
@@ -29,7 +28,7 @@
         {
             Guid? userIdResult = ExtractUserId(userId);
 
-            IEnumerable<ShoesFeatureModel> featuredShoes = await shoesService.GetFeaturedShoesAsync(userIdResult);
+            IEnumerable<ProductFeatureModel> featuredShoes = await shoesService.GetFeaturedShoesAsync(userIdResult);
 
             return Ok(featuredShoes);
         }
@@ -107,7 +106,7 @@
                 return BadRequest();
             }
 
-            IEnumerable<ShoesFeatureModel> products = await clothesService.LoadUserFavoriteProductsAsync(userId);
+            IEnumerable<ProductFeatureModel> products = await clothesService.LoadUserFavoriteProductsAsync(userId);
 
             return Ok(new LoadUserFavoriteProductsModel() { UserName = user.UserName, Products = products });
         }

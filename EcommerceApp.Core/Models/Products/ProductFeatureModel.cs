@@ -1,10 +1,9 @@
-﻿namespace EcommerceApp.Core.Models.Shoes
+﻿namespace EcommerceApp.Core.Models.Products
 {
-    using EcommerceApp.Core.Models.Promotion;
     using Pictures;
-    public class ShoesFeatureModel
+    public class ProductFeatureModel
     {
-        public ShoesFeatureModel()
+        public ProductFeatureModel()
         {
             Pictures = new List<PictureModel>();
         }
@@ -16,5 +15,6 @@
         public string CategoryName { get; set; } = null!;
         public bool IsFavorite { get; set; }
         public decimal DicountPercentage { get; set; }
+        public int TotalMilisecondsDifference { get; set; }
     }
 }

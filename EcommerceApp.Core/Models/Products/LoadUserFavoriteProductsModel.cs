@@ -5,10 +5,10 @@
     {
         public LoadUserFavoriteProductsModel()
         {
-            Products = new List<ShoesFeatureModel>();
+            Products = new List<ProductFeatureModel>();
         }
         public string UserName { get; set; } = null!;
 
-        public IEnumerable<ShoesFeatureModel> Products { get; set; }
+        public IEnumerable<ProductFeatureModel> Products { get; set; }
     }
 }

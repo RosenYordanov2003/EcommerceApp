@@ -14,6 +14,7 @@
     using Models.AdminModels.Pictures;
     using Models.Pager;
     using Infrastructure.Data.Models;
+    using EcommerceApp.Core.Models.Products;
 
     public class ShoesService : IShoesService
     {
@@ -95,11 +96,11 @@
            return await applicationDbContext.Shoes.CountAsync();
         }
 
-        public async Task<IEnumerable<ShoesFeatureModel>> GetFeaturedShoesAsync(Guid? userId)
+        public async Task<IEnumerable<ProductFeatureModel>> GetFeaturedShoesAsync(Guid? userId)
         {
             return await applicationDbContext.Shoes
                 .Where(s => s.IsFeatured)
-                .Select(s => new ShoesFeatureModel()
+                .Select(s => new ProductFeatureModel()
                 {
                     Id = s.Id,
                     Name = s.Name,

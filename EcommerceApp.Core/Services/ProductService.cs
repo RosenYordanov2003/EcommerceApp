@@ -14,7 +14,7 @@
     using Models.AdminModels.Clothes;
     using Models.Promotion;
     using Models.AdminModels.Pictures;
-    using EcommerceApp.Core.Models.Pager;
+    using Core.Models.Pager;
 
     public class ProductService : IProductSevice
     {
@@ -49,11 +49,8 @@
 
         public async Task<bool> CheckIfProductExistsByIdAsync(int productId)
         {
-            if (await applicationDbContext.Clothes.AnyAsync(cl => cl.Id == productId))
-            {
-                return true;
-            }
-            if (await applicationDbContext.Shoes.AnyAsync(sh => sh.Id == productId))
+            if (await applicationDbContext.Clothes.AnyAsync(cl => cl.Id == productId) || await applicationDbContext.Shoes
+                .AnyAsync(sh => sh.Id == productId))
             {
                 return true;
             }
@@ -160,7 +157,9 @@
                     ProductStocks = cl.ProductStocks.Select(ps => new ProductStock<T>() { Size = (T)(object)ps.Size, Quantity = ps.Quantity, Id = ps.Id }).ToArray(),
                     Reviews = cl.Reviews.Select(r => new ReviewModel() { Content = r.Content, StarEvaluation = r.StarЕvaluation }),
                     IsFavorite = userId.HasValue ? cl.UserFavoriteProducts.Any(uf => uf.ProductId == productId && uf.UserId == userId) : false,
-                    IsAvalilable = cl.ProductStocks.Any(ps => ps.Quantity > 0)
+                    IsAvalilable = cl.ProductStocks.Any(ps => ps.Quantity > 0),
+                    DicountPercentage = cl.Promotion == null ? 0 : cl.Promotion.PercantageDiscount,
+                    TotalMilisecondsDifference = cl.Promotion == null ? 0 : (int)(cl.Promotion.ExpireTime - DateTime.UtcNow).TotalMilliseconds
                 })
                  .FirstAsync();
 
@@ -186,7 +185,8 @@
             }
             else
             {
-                var productInfo = await applicationDbContext.Shoes.Where(shoes => shoes.Id == productId).Select(shoes => new ProductInfo<T>()
+                var productInfo = await applicationDbContext.Shoes.Where(shoes => shoes.Id == productId)
+                    .Select(shoes => new ProductInfo<T>()
                 {
                     Id = shoes.Id,
                     Description = shoes.Description,
@@ -200,7 +200,9 @@
                     ProductStocks = shoes.ShoesStocks.Select(ps => new ProductStock<T> { Size = (T)(object)ps.Size, Quantity = ps.Quantity, Id = ps.Id }).ToArray(),
                     Reviews = shoes.Reviews.Select(r => new ReviewModel() { Content = r.Content, StarEvaluation = r.StarЕvaluation }),
                     IsFavorite = userId.HasValue ? shoes.UserFavoriteShoes.Any(uf => uf.ShoesId == productId && uf.UserId == userId) : false,
-                    IsAvalilable = shoes.ShoesStocks.Any(ps => ps.Quantity > 0)
+                    IsAvalilable = shoes.ShoesStocks.Any(ps => ps.Quantity > 0),
+                    DicountPercentage = shoes.Promotion == null ? 0 : shoes.Promotion.PercantageDiscount,
+                    TotalMilisecondsDifference = shoes.Promotion == null ? 0 : (int)(shoes.Promotion.ExpireTime - DateTime.UtcNow).TotalMilliseconds
 
                 })
                 .FirstAsync();
@@ -280,11 +282,11 @@
                .ToArrayAsync();
         }
 
-        public async Task<IEnumerable<ShoesFeatureModel>> LoadUserFavoriteProductsAsync(Guid userId)
+        public async Task<IEnumerable<ProductFeatureModel>> LoadUserFavoriteProductsAsync(Guid userId)
         {
-            IEnumerable<ShoesFeatureModel> shoes = await applicationDbContext.UserFavoriteShoes
+            IEnumerable<ProductFeatureModel> shoes = await applicationDbContext.UserFavoriteShoes
                  .Where(fsh => fsh.UserId == userId)
-                 .Select(fsh => new ShoesFeatureModel()
+                 .Select(fsh => new ProductFeatureModel()
                  {
                      Id = fsh.ShoesId,
                      Pictures = fsh.Shoes.Pictures.Select(p => new PictureModel() { ImgUrl = p.ImgUrl }).ToArray(),
@@ -298,9 +300,9 @@
                  .ToArrayAsync();
 
 
-            IEnumerable<ShoesFeatureModel> clothes = await applicationDbContext.UserFavoriteProducts
+            IEnumerable<ProductFeatureModel> clothes = await applicationDbContext.UserFavoriteProducts
            .Where(fsh => fsh.UserId == userId)
-           .Select(fp => new ShoesFeatureModel()
+           .Select(fp => new ProductFeatureModel()
            {
                Id = fp.ProductId,
                Pictures = fp.Product.Pictures.Select(p => new PictureModel() { ImgUrl = p.ImgUrl }).ToArray(),
@@ -313,7 +315,7 @@
            })
            .ToArrayAsync();
 
-            List<ShoesFeatureModel> result = new List<ShoesFeatureModel>();
+            List<ProductFeatureModel> result = new List<ProductFeatureModel>();
 
             result.AddRange(clothes);
             result.AddRange(shoes);

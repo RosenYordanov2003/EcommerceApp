@@ -1,7 +1,7 @@
 ﻿namespace EcommerceApp.Core.Models.Products
 {
     using Shoes;
-    public class ProductModel : ShoesFeatureModel
+    public class ProductModel : ProductFeatureModel
     {
         public string? Description { get; set; }
     }

@@ -1,11 +1,9 @@
-using EcommerceApp.Tests;
-
-namespace EcommerceApp.Test
+namespace EcommerceApp.Tests.UnitTests
 {
     using Microsoft.EntityFrameworkCore;
     using Core.Contracts;
     using Data;
-    using static DatabaseSeeder;
+    using static Tests.DatabaseSeeder;
     using Core.Services;
     using System.Linq;
 
@@ -24,7 +22,7 @@ namespace EcommerceApp.Test
                .Options;
             applicationDbContext = new ApplicationDbContext(dbContextOptions, true);
             SeedDatabase(applicationDbContext);
-            this.brandService = new BrandService(applicationDbContext);
+            brandService = new BrandService(applicationDbContext);
         }
 
         [Test]
@@ -40,7 +38,6 @@ namespace EcommerceApp.Test
         public void TearDown()
         {
             applicationDbContext.Database.EnsureDeleted();
-            applicationDbContext.Dispose();
         }
     }
 }

@@ -3,7 +3,6 @@
     using Microsoft.EntityFrameworkCore;
     using Data;
     using Contracts;
-    using Models.Shoes;
     using Models.Pictures;
     using Models.AdminModels.Clothes;
     using Models.AdminModels.Shoes;
@@ -14,7 +13,7 @@
     using Models.AdminModels.Pictures;
     using Models.Pager;
     using Infrastructure.Data.Models;
-    using EcommerceApp.Core.Models.Products;
+    using Core.Models.Products;
 
     public class ShoesService : IShoesService
     {

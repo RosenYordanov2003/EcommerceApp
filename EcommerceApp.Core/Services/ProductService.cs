@@ -159,7 +159,7 @@
                     IsFavorite = userId.HasValue ? cl.UserFavoriteProducts.Any(uf => uf.ProductId == productId && uf.UserId == userId) : false,
                     IsAvalilable = cl.ProductStocks.Any(ps => ps.Quantity > 0),
                     DicountPercentage = cl.Promotion == null ? 0 : cl.Promotion.PercantageDiscount,
-                    TotalMilisecondsDifference = cl.Promotion == null ? 0 : (int)(cl.Promotion.ExpireTime - DateTime.UtcNow).TotalMilliseconds
+                    TotalMilisecondsDifference = cl.Promotion == null ? 0 : (long)(cl.Promotion.ExpireTime - DateTime.UtcNow).TotalMilliseconds
                 })
                  .FirstAsync();
 
@@ -202,7 +202,7 @@
                     IsFavorite = userId.HasValue ? shoes.UserFavoriteShoes.Any(uf => uf.ShoesId == productId && uf.UserId == userId) : false,
                     IsAvalilable = shoes.ShoesStocks.Any(ps => ps.Quantity > 0),
                     DicountPercentage = shoes.Promotion == null ? 0 : shoes.Promotion.PercantageDiscount,
-                    TotalMilisecondsDifference = shoes.Promotion == null ? 0 : (int)(shoes.Promotion.ExpireTime - DateTime.UtcNow).TotalMilliseconds
+                    TotalMilisecondsDifference = shoes.Promotion == null ? 0 : (long)(shoes.Promotion.ExpireTime - DateTime.UtcNow).TotalMilliseconds
 
                 })
                 .FirstAsync();

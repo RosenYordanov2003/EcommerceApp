@@ -23,7 +23,6 @@ export default function ProductInfo() {
     const [isFavorite, setIsFavorite] = useState(undefined);
     const [notiffication, setNotification] = useState(undefined);
 
-    console.log(product);
     const pathArray = window.location.pathname.split('/');
     const id = pathArray[pathArray.length - 2];
     const categoryName = pathArray[pathArray.length - 1];
@@ -217,7 +216,7 @@ export default function ProductInfo() {
                     <img src={activePicture?.imgUrl}></img>
                     <button onClick={handleimgRightArrowClick} className={`arrow-button right-arrow-button ${className}`}> <i className="fa-solid fa-chevron-right"></i></button>
                 </div>
-                <div className="productinfo-about-container">
+                <div  className="productinfo-about-container">
                     <h2 className="product-info-title">{product.name}</h2>
                     <p className={`product-stock ${stockObject.class}`}>
                         {stockObject.content}</p>
@@ -227,9 +226,10 @@ export default function ProductInfo() {
                             <section className="price-section"> 
                                 <del><p className="product-price">${Number.parseFloat(product?.price).toFixed(2)}</p></del>
                                 <p className="product-price">${Number.parseFloat(product?.price - ((product?.price * product?.dicountPercentage) / 100)).toFixed(2)}</p>
-                                <div className="timer-container">
-                                    <TimerCountDown miliseconds={product?.totalMilisecondsDifference}/>
-                                </div>
+                                {
+                                    product?.totalMilisecondsDifference !== undefined &&
+                                    <TimerCountDown key={`${id} - ${categoryName}`} miliseconds={product?.totalMilisecondsDifference}/>
+                                }
                             </section>
                     }
                   

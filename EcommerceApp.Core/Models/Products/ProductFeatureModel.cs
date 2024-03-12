@@ -15,6 +15,5 @@
         public string CategoryName { get; set; } = null!;
         public bool IsFavorite { get; set; }
         public decimal DicountPercentage { get; set; }
-        public int TotalMilisecondsDifference { get; set; }
     }
 }

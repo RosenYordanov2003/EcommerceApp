@@ -7,7 +7,8 @@
     using Infrastructure.Data.Configurations;
     public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
     {
-        public ApplicationDbContext(DbContextOptions options)
+        private readonly bool seedDb;
+        public ApplicationDbContext(DbContextOptions options, bool seedDb = false)
             : base(options)
         {
 
@@ -71,15 +72,18 @@
                 .WithOne(u => u.Cart)
                 .OnDelete(DeleteBehavior.NoAction);
 
+            if (!this.seedDb)
+            {
+                builder.ApplyConfiguration(new UserEntityConfiguration());
+                builder.ApplyConfiguration(new BrandEntityConfiguration());
+                builder.ApplyConfiguration(new MainCategoryEntityConfiguration());
+                builder.ApplyConfiguration(new ShoesEntityConfiguration());
+                builder.ApplyConfiguration(new ProductEntityConfiguration());
+                builder.ApplyConfiguration(new PictureEntityConfiguration());
+                builder.ApplyConfiguration(new ShoesStockEntityConfiguration());
+                builder.ApplyConfiguration(new ProductStockEntityConfiguration());
+            }
 
-            builder.ApplyConfiguration(new UserEntityConfiguration());
-            builder.ApplyConfiguration(new BrandEntityConfiguration());
-            builder.ApplyConfiguration(new MainCategoryEntityConfiguration());
-            builder.ApplyConfiguration(new ShoesEntityConfiguration());
-            builder.ApplyConfiguration(new ProductEntityConfiguration());
-            builder.ApplyConfiguration(new PictureEntityConfiguration());
-            builder.ApplyConfiguration(new ShoesStockEntityConfiguration());
-            builder.ApplyConfiguration(new ProductStockEntityConfiguration());
         }
     }
 }

@@ -1,13 +1,15 @@
 ﻿import { useState, useEffect } from "react";
 
-export default function TimerCountDown({ miliseconds }) {
+export default function TimerCountDown({ miliseconds}) {
 
-    const [duration, setDuration] = useState(Number.parseInt(miliseconds));
+    const [duration, setDuration] = useState(miliseconds);
 
     useEffect(() => {
         setTimeout(() => {
-            const newDuration = Number.parseInt(duration) - 1000;
-            setDuration(newDuration);
+            if (duration !== undefined) {
+                const newDuration = duration - 1000;
+                setDuration(newDuration);
+            }
         }, 1000)
     }, [duration])
 
@@ -17,20 +19,24 @@ export default function TimerCountDown({ miliseconds }) {
         const totalHours = Number.parseInt(totalMinutes / 60);
         const totalDays = Number.parseInt(totalHours / 24);
 
-        let seconds = totalSeconds % 60;
-        let minutes = totalMinutes % 60;
-        let hours = totalHours % 24;
 
-        let formatedSseconds = seconds < 10 ? `0${seconds}` : seconds;
-        let formatedMinutes = minutes < 10 ? `0${minutes}` : minutes;
-        let formatedHours = hours < 10 ? `0${hours}` : hours;
+        const seconds = totalSeconds % 60;
+        const minutes = totalMinutes % 60;
+        const hours = totalHours % 24;
 
-        return `${totalDays}:${formatedHours}:${formatedMinutes}:${formatedSseconds}`;
+
+        const formattedSseconds = seconds < 10 ? `0${seconds}` : seconds;
+        const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
+        const formattedHours = hours < 10 ? `0${hours}` : hours;
+        const formattedDays = totalDays < 10 ? `0${totalDays}` : totalDays
+
+
+        return `${formattedDays}:${formattedHours}:${formattedMinutes}:${formattedSseconds}`;
     }
 
     return (
-        <>
-            {formatTime(duration)}
-        </>
+        <div className="timer-container">
+            {duration !== undefined && formatTime(duration)}
+        </div>
     )
 }

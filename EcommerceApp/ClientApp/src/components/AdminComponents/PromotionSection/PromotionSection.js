@@ -81,6 +81,8 @@ export default function PromotionSection({ promotionModel }) {
             })
             .catch((error) => console.error(error));
     }
+    const date = new Date();
+    date.setFullYear(date.getFullYear() + 1);
     return (
         <>
             {message}
@@ -91,7 +93,8 @@ export default function PromotionSection({ promotionModel }) {
                 </div>
                 <div className="product-input-container">
                     <label htmlFor="promotion-date">Promotion Expire Date</label>
-                    <input id="promotion-date" onChange={(e) => setInputObject({ ...inputObject, expirationTime: e.target.value })} type="date" value={formattedDateInputObject}></input>
+                    <input id="promotion-date" onChange={(e) => setInputObject({ ...inputObject, expirationTime: e.target.value })} type="date"
+                        max={`${date.getFullYear()}-12-31`} value={formattedDateInputObject}></input>
                 </div>
                 <div className="promotion-section-button-container">
                     <button type="submit">{buttonContent}</button>

@@ -37,7 +37,7 @@
     top: 3rem;
     padding: 1rem 0rem;
 }
-.menu-icon{
+#root :has(.asside-wrapper) .menu-icon{
     right: unset;
     display: none;
 }

@@ -19,7 +19,7 @@
         display: none;
     }
 
-    .menu-icon {
+    #root:has(.admin-aside) .menu-icon {
         display: block;
         right: unset;
         top: 2rem;

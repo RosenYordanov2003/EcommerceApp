@@ -366,10 +366,24 @@ main {
 }.all-reviews-button:hover{
      opacity: 0.7;
  }
+.price-section{
+    display: flex;
+    align-items: center;
+    gap: 1.8rem;
+}
+.price-section .product-price:first-child{
+    opacity: 0.8;
+}
+.price-section del{
+   color: #d57d80;
+}
+.timer-container{
+    font-size: 1.4rem;
+    font-weight: bolder;
+}
 
 
-body:has(.fa-moon) :where(.product-info-title, h4, h3, .product-title, .wishlist-container p, .favorite-heart, .fa-plus, .fa-minus, hr, .related-products-title, label, 
-.order-number, .product-description, .product-evaluation, .reviews-count, .write-review-star-container p, .product-section-header p) {
+body:has(.fa-moon) :where(.product-info-title, h4, h3, .product-title, .wishlist-container p, .favorite-heart, .fa-plus, .fa-minus, hr, .related-products-title, label, .order-number, .product-description, .product-evaluation, .reviews-count, .write-review-star-container p, .product-section-header p) {
     color: white;
 }
 

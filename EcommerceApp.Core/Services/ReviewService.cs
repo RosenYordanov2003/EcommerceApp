@@ -8,6 +8,8 @@
     using Models.Pager;
     using Contracts;
     using Data;
+    using System.Collections;
+    using EcommerceApp.Core.Models.Utilities;
 
     public class ReviewService : IReviewService
     {
@@ -89,10 +91,10 @@
                         Id = r.Id,
                         UserId = r.UserId,
                         Content = r.Content,
-                        CreatedOn = r.CreatedOn,
                         StarEvaluation = r.StarЕvaluation,
                         Username = r.User.UserName,
                         Subject = r.Subject,
+                        TimeDifferenceFormat = GetTimeDifference.GetTimeFormat(r.CreatedOn)
                     })
                     .Skip(recordsToSkip)
                     .Take(pager.PageSize)
@@ -100,19 +102,21 @@
 
             }
             return await reviews
-                     .Where(r => r.ProductId == productId)
-                     .Select(r => new ReviewModel()
-                     {
-                         Id = r.Id,
-                         UserId = r.UserId,
-                         Content = r.Content,
-                         CreatedOn = r.CreatedOn,
-                         StarEvaluation = r.StarЕvaluation,
-                         Username = r.User.UserName
-                     })
-                     .Skip(recordsToSkip)
-                     .Take(pager.PageSize)
-                     .ToArrayAsync();
+                .Where(r => r.ProductId == productId)
+                .Select(r => new ReviewModel()
+                {
+                    Id = r.Id,
+                    UserId = r.UserId,
+                    Content = r.Content,
+                    StarEvaluation = r.StarЕvaluation,
+                    Username = r.User.UserName,
+                    TimeDifferenceFormat = GetTimeDifference.GetTimeFormat(r.CreatedOn)
+
+                })
+                .Skip(recordsToSkip)
+                .Take(pager.PageSize)
+                .ToArrayAsync();
+
         }
 
         public async Task PostPoductReviewAsync(CreateReviewModel createReviewModel)
@@ -123,11 +127,11 @@
                 Content = WebUtility.HtmlEncode(createReviewModel.Content),
                 StarЕvaluation = createReviewModel.StarRating,
                 UserId = createReviewModel.UserId,
-                CreatedOn = DateTime.Now,
+                CreatedOn = DateTime.UtcNow,
                 Subject = WebUtility.HtmlEncode(createReviewModel.Subject)
             };
-            review.ShoesId = createReviewModel.ProductCategory == "shoes" ? createReviewModel.ProductId : null;
-            review.ProductId = createReviewModel.ProductCategory != "shoes" ? createReviewModel.ProductId : null;
+            review.ShoesId = createReviewModel.ProductCategory.ToLower() == "shoes" ? createReviewModel.ProductId : null;
+            review.ProductId = createReviewModel.ProductCategory.ToLower() != "shoes" ? createReviewModel.ProductId : null;
 
             await dbContext.Reviews.AddAsync(review);
             await dbContext.SaveChangesAsync();

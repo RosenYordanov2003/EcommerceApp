@@ -80,11 +80,10 @@
         public async Task<AllProductsModel> GetProductByGender(string gender, Guid? userId)
         {
             gender = gender.ToLower();
-            string genderLetter = gender[0].ToString().ToLower();
             AllProductsModel productModel = new AllProductsModel();
 
             productModel.Products = await applicationDbContext.Clothes
-                  .Where(cl => cl.Gender.ToLower() == genderLetter)
+                  .Where(cl => (cl.Gender.ToLower() == gender) || (cl.Gender == "Unisex"))
                   .Select(cl => new FilterProductModel()
                   {
                       Id = cl.Id,
@@ -101,7 +100,7 @@
                   .ToListAsync();
 
             productModel.Shoes = await applicationDbContext.Shoes
-                .Where(sh => sh.Gender.ToLower() == gender)
+                .Where(sh => (sh.Gender.ToLower() == gender) || (sh.Gender == "Unisex"))
                 .Select(sh => new ShoesFilterModel()
                 {
                     Id = sh.Id,
@@ -123,17 +122,14 @@
             })
             .ToListAsync();
 
-            string letter = gender[0].ToString();
-
             productModel.Categories = await applicationDbContext.Categories
-                 .Where(c => c.Gender.ToLower().IndexOf(letter) > -1)
+                 .Where(c => (c.Gender.ToLower() == gender) || (c.Gender == "Unisex"))
                  .Select(c => new CategoryModel()
                  {
                      Id = c.Id,
                      Name = c.Name,
                  })
                  .ToListAsync();
-
 
             return productModel;
         }

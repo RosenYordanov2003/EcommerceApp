@@ -1,4 +1,5 @@
 ﻿import { useState, useEffect } from "react";
+import "../TimerCountDown/TimerCountDownStyle.css";
 
 export default function TimerCountDown({ miliseconds}) {
 

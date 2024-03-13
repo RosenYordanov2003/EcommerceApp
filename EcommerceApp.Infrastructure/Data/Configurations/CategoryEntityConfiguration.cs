@@ -28,61 +28,61 @@
                {
                    Id = 1,
                    Name = "T-Shirts",
-                   Gender = "W M"
+                   Gender = "Unisex"
                },
                new Category()
                {
                    Id = 2,
                    Name = "Jeans",
-                   Gender = "W M"
+                   Gender = "Unisex"
                },
                new Category()
                {
                    Id = 3,
                    Name = "Jackets",
-                   Gender = "W M"
+                   Gender = "Unisex"
                },
                new Category()
                {
                    Id = 4,
                    Name = "Coats",
-                   Gender = "W M"
+                   Gender = "Unisex"
                },
                new Category()
                {
                    Id = 5,
                    Name = "Trousers",
-                   Gender = "W М"
+                   Gender = "Unisex"
                },
                new Category()
                {
                    Id = 6,
                    Name = "Skirts",
-                   Gender = "W"
+                   Gender = "Women"
                },
                new Category()
                {
                    Id = 7,
                    Name = "Shorts",
-                   Gender = "W M"
+                   Gender = "Unisex"
                },
                new Category()
                {
                    Id = 8,
                    Name = "Shirts",
-                   Gender = "W M"
+                   Gender = "Unisex"
                },
                new Category()
                {
                    Id = 9,
                    Name = "Shoes",
-                   Gender = "W M"
+                   Gender = "Unisex"
                },
                new Category()
                {
                    Id = 10,
                    Name = "Sweatshirts",
-                   Gender = "W M"
+                   Gender = "Unisex"
                },
            };
         }

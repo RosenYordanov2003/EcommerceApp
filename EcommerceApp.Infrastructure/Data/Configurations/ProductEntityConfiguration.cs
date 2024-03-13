@@ -34,7 +34,7 @@
                     Name = "Chicago Bulls Essential",
                     Description = "Men's Jordan NBA Long-Sleeve T-Shirt",
                     CategoryId = 1,
-                    Gender = "M",
+                    Gender = "Men",
                     Price = 40,
                     StarRating = 4
                 },
@@ -45,7 +45,7 @@
                     Name = "Chicago Bulls Essential",
                     Description = "Men's Jordan NBA Long-Sleeve T-Shirt",
                     CategoryId = 1,
-                    Gender = "M",
+                    Gender = "Men",
                     Price = 40,
                     StarRating = 4
                 },
@@ -57,7 +57,7 @@
                     Price = 38,
                     StarRating = 5,
                     CategoryId = 1,
-                    Gender = "M",
+                    Gender = "Men",
                     Description = "From the pitch to the streets, you can celebrate Marcus Rashford's passion for sport in comfort with this sweat-wicking tee. Soft fabric and a relaxed fit help keep you dry and comfortable, while retro branding and an \"MR\" logo add the perfect finishing touches."
                 },
                 new Product()
@@ -68,7 +68,7 @@
                     Price = 38,
                     StarRating = 5,
                     CategoryId = 1,
-                    Gender = "M",
+                    Gender = "Men",
                     Description = "From the pitch to the streets, you can celebrate Marcus Rashford's passion for sport in comfort with this sweat-wicking tee. Soft fabric and a relaxed fit help keep you dry and comfortable, while retro branding and an \"MR\" logo add the perfect finishing touches."
                 },
                 new Product()
@@ -79,7 +79,7 @@
                     Price = 55,
                     StarRating = 5,
                     CategoryId = 1,
-                    Gender = "W",
+                    Gender = "Women",
                     Description = "Extra-soft, stretchy ribbed fabric helps make this slim-fitting top an everyday favourite. A mock neck and long sleeves offer a tailored look while the embroidered Swoosh logo and piping details add a touch of heritage style."
                 },
                 new Product()
@@ -90,7 +90,7 @@
                     Price = 55,
                     StarRating = 5,
                     CategoryId = 1,
-                    Gender = "W",
+                    Gender = "Women",
                     IsFeatured = true,
                     Description = "Extra-soft, stretchy ribbed fabric helps make this slim-fitting top an everyday favourite. A mock neck and long sleeves offer a tailored look while the embroidered Swoosh logo and piping details add a touch of heritage style."
                 },
@@ -101,7 +101,7 @@
                     Name = "Nike Dri-FIT UV One Luxe",
                     Price = 40,
                     CategoryId = 1,
-                    Gender = "W",
+                    Gender = "Women",
                     Description = "The Nike Dri-FIT One Luxe Top is designed for all the ways you work out—from yoga to HIIT to long runs. As part of the Nike Luxe line, this top defines luxury with buttery-soft and smooth fabric that breathes to keep you dry and cool. It's made from at least 75% recycled polyester fibres."
                 },
                 new Product()
@@ -109,7 +109,7 @@
                     Id = 8,
                     BrandId = 1,
                     CategoryId = 5,
-                    Gender = "M",
+                    Gender = "Men",
                     Name = "Nike Sportswear Tech Fleece",
                     Price = 99,
                     StarRating = 5,
@@ -121,7 +121,7 @@
                     Id = 9,
                     BrandId = 1,
                     CategoryId = 5,
-                    Gender = "M",
+                    Gender = "Men",
                     Name = "Nike Sportswear Tech Fleece",
                     Price = 99,
                     StarRating = 5,
@@ -132,7 +132,7 @@
                     Id = 10,
                     BrandId = 1,
                     CategoryId = 5,
-                    Gender = "M",
+                    Gender = "Men",
                     Name = "Nike Sportswear Club Fleece",
                     Price = 60,
                     StarRating = 4,
@@ -143,7 +143,7 @@
                     Id = 11,
                     BrandId = 1,
                     CategoryId = 5,
-                    Gender = "W",
+                    Gender = "Women",
                     Name = "Nike Sportswear Phoenix Fleece",
                     Price = 65,
                     StarRating = 4,
@@ -154,7 +154,7 @@
                     Id = 12,
                     BrandId = 1,
                     CategoryId = 5,
-                    Gender = "W",
+                    Gender = "Women",
                     Name = "Nike Sportswear Phoenix Fleece",
                     Price = 65,
                     StarRating = 4,

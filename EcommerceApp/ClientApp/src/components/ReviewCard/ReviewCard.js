@@ -53,7 +53,7 @@ export default function ReviewCard({ review, removeReviewById }) {
                             {stars}
                         </section>
                         <p className="evaluation">{Number.parseFloat(review.starEvaluation).toFixed(2)}</p>
-                        <p>{review.createdOn}</p>
+                        <p>{review.timeDifferenceFormat}</p>
                     </div>
                 </div>
                 <section className="review-content">

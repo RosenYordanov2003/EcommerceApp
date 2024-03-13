@@ -4,7 +4,6 @@ import FeaturedProduct from "../Products/FeaturedProduct";
 import FilterMenu from "../ProductsFilterMenu/FilterMenu";
 import "../GenderProducts/GenderProductsStyle.css";
 import { Grid } from 'react-loader-spinner';
-import ContactContainer from "../ContactContainer/ContactContainer";
 import { UserContext } from "../../Contexts/UserContext";
 import "../GenderProducts/ResponsiveStyle.css";
 

@@ -1,4 +1,4 @@
-﻿@media screen and (min-width: 320px) and (max-width: 700px) {
+﻿@media screen and (max-width: 700px) {
     .productinfo-card-container {
         margin-top: 8rem;
         flex-direction: column;
@@ -38,7 +38,8 @@
         justify-content: center;
     }
     .productinfo-about-container{
-        max-width: 90%;
+        max-width: unset;
+        width: 98%;
     }
     .add-to-cart{
         margin-bottom: 2rem;
@@ -221,9 +222,12 @@
         width: 90%;
     }
 }
-@media screen and (min-width: 701px) and (max-width: 1000px){
+@media screen and (min-width: 701px) and (max-width: 1100px){
     .productinfo-card-container {
         margin-top: 8rem;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
     .write-review-star-container{
         flex-direction: column;
@@ -250,5 +254,16 @@
         align-items: center;
         justify-content: center;
     }
+    .productinfo-about-container {
+        max-width: unset;
+        width: 90%;
+    }
+    .review-form{
+        align-items: center;
+    }
+    .product-details {
+        text-align: center;
+    }
+
 }
 

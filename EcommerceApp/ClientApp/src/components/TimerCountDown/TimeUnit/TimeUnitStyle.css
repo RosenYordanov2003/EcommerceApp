@@ -3,7 +3,7 @@
 .flip-card::after {
     box-sizing: border-box;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 2rem;
+    font-size: 2.6rem;
 }
 
 
@@ -16,15 +16,21 @@
 
 .top,
 .bottom,
-.flip-card.flip .next-unit{
+.flip-card.flip .next-unit,
+.top-next-unit{
     height: .5em;
     line-height: 1;
     padding: .5em;
     overflow: hidden;
 }
+body:has(.fa-moon) :where(.top, .bottom, .unit-time-title, .dot-separator) {
+   color: black;
+}
+
 
 .bottom,
-.flip-card.flip .next-unit{
+.flip-card.flip .next-unit
+{
     display: flex;
     align-items: flex-end;
     background-color: white;
@@ -32,17 +38,19 @@
     border-bottom-right-radius: 4px;
 }
 
-.top {
+.top,
+.top-next-unit {
     background-color: #f7f7f7;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
     border-bottom: 1px solid rgba(0,0,0, 0.2);
 }
-.flip-card.flip .next-unit {
+.flip-card.flip .top-next-unit {
     position: absolute;
     width: 100%;
-    animation: flip-up ease-in 1500mss;
+    animation: flip-up ease-in-out 400ms;
     transform-origin: bottom;
+    color: black;
 }
 
 .flip-card.flip .next-unit {
@@ -50,8 +58,9 @@
     bottom: 0;
     width: 100%;
     transform: rotateX(90deg);
-    animation: flip-down ease-in 2800ms;
+    animation: flip-down ease-in-out 400ms;
     transform-origin: top;
+    color: black;
 }
 
 @keyframes flip-up {

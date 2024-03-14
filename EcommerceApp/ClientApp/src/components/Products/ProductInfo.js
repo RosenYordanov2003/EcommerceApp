@@ -208,7 +208,6 @@ export default function ProductInfo() {
     }
     return (
         <>
-
             <div key={id} className="productinfo-card-container">
                 {notiffication}
                 <div onMouseOver={() => { setActiveArrows(true) }} onMouseOut={() => { setActiveArrows(false) }} className="productinfo-img-container">
@@ -228,11 +227,14 @@ export default function ProductInfo() {
                                 <p className="product-price">${Number.parseFloat(product?.price - ((product?.price * product?.dicountPercentage) / 100)).toFixed(2)}</p>
                                 {
                                     product?.totalMilisecondsDifference !== undefined &&
-                                    <TimerCountDown key={product?.totalMilisecondsDifference} miliseconds={product?.totalMilisecondsDifference}/>
+                                    <div className="product-promotion-section">
+                                           <h3>Promotion Ends In</h3>
+                                          <TimerCountDown key={product?.totalMilisecondsDifference} miliseconds={product?.totalMilisecondsDifference} />
+                                    </div>
+                                    
                                 }
                             </section>
                     }
-                  
                     <h4>Size</h4>
                     <ul className="size-ul">
                         {sizeItmes}

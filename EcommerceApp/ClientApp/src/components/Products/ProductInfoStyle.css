@@ -356,20 +356,29 @@ main {
 .all-reviews-button {
     margin-top: 2.5rem;
     border: none;
-    border-radius: 8px;
     padding: 0.5rem 1rem;
     font-weight: bolder;
     background-color: #3a334c;
     color: white;
-    max-width: 200px;
+    width: 77%;
+    padding: 0.7rem;
+    border-radius: 20px;
     transition: all 0.3s ease-in;
-}.all-reviews-button:hover{
+}
+
+.review-form :where(input, textarea) {
+    border: 1px solid black;
+}
+.all-reviews-button:hover{
      opacity: 0.7;
  }
 .price-section{
     display: flex;
-    align-items: center;
+    flex-direction: column;
     gap: 1.8rem;
+}
+.price-section .product-price{
+    font-size: 1.5rem;
 }
 .price-section .product-price:first-child{
     opacity: 0.8;

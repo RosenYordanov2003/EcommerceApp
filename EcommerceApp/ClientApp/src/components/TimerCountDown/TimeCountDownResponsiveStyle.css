@@ -1,0 +1,47 @@
+﻿@media screen and (max-width: 500px){
+    .unit-time-title{
+        font-size: 1rem;
+        margin-bottom: 1.2rem;
+    }
+    .timer-container{
+        gap: 1rem;
+        padding: 2rem 0.7rem;
+        flex-direction: column;
+    }
+    .dot-separator{
+        display: none;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+    .unit-time{
+        display: block;
+    }
+    .unit-time-section{
+        text-align: center;
+    }
+}
+@media screen and (min-width: 501px) and (max-width: 700px) {
+    .unit-time-title {
+        font-size: 1.2rem;
+        margin-bottom: 1.2rem;
+    }
+
+    .timer-container {
+        gap: 1rem;
+        padding: 2rem 0.7rem;
+    }
+
+}
+@media screen and (min-width: 751px) and (max-width: 1250px) {
+    .unit-time-title {
+        font-size: 1.4rem;
+        margin-bottom: 1.2rem;
+    }
+
+    .timer-container {
+        gap: 1.2rem;
+        padding: 2rem 1rem;
+        justify-content: center;
+    }
+}

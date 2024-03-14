@@ -1,5 +1,5 @@
-﻿import { useEffect } from "react";
-import "../TimeUnit/TimeUnitStyle.css";
+﻿import "../TimeUnit/TimeUnitStyle.css";
+import "../TimeUnit/TimeUnitResponsiveStyle.css";
 
 export default function TimeUnit({ unit }) {
 
@@ -7,7 +7,8 @@ export default function TimeUnit({ unit }) {
         <section className="flip-card flip">
             <div className="top">{unit }</div>
             <div className="bottom">{unit}</div>
-            {unit - 1 > 0 && <p className="next-unit">{unit - 1}</p> }
+            <div className="next-unit">{unit}</div>
+            <div className="top-next-unit">{unit}</div>
         </section>
     )
 }

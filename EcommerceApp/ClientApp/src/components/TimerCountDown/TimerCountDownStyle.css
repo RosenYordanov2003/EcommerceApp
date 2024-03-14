@@ -1,7 +1,22 @@
 ﻿.timer-container {
     font-size: 1.4rem;
     font-weight: bolder;
+    background-color: #f2f1ed;
+    padding: 2rem;
+    display: flex;
+    gap: 1.4rem;
+    align-items: center;
 }
 body:has(.fa-moon) .timer-container{
     color: white;
+}
+.unit-time{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.unit-time-title{
+    font-size: 1.2rem;
+    font-weight: bolder;
+    margin-bottom: 0.5rem;
 }

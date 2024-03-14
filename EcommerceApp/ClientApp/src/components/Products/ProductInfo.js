@@ -9,6 +9,7 @@ import { addToCartProduct } from "../../services/cartService";
 import Notification from "../Notification/Notification";
 import "../Products/ProductInfoResponsiveStyle.css";
 import TimerCountDown from "../TimerCountDown/TimerCountDown";
+import ProductPromotionPriceSection from "../Products/ProductPromotionPriceSection/ProductPromotionPriceSection";
 
 export default function ProductInfo() {
 
@@ -97,7 +98,6 @@ export default function ProductInfo() {
     }
 
     let className = isActiveArrows ? "active-arrow" : "";
-
 
     function handleAddToFavoriteProduct() {
 
@@ -222,18 +222,7 @@ export default function ProductInfo() {
                     {
                         product?.dicountPercentage === 0 ? <p className="product-price">${Number.parseFloat(product?.price).toFixed(2)}</p>
                             :
-                            <section className="price-section"> 
-                                <del><p className="product-price">${Number.parseFloat(product?.price).toFixed(2)}</p></del>
-                                <p className="product-price">${Number.parseFloat(product?.price - ((product?.price * product?.dicountPercentage) / 100)).toFixed(2)}</p>
-                                {
-                                    product?.totalMilisecondsDifference !== undefined &&
-                                    <div className="product-promotion-section">
-                                           <h3>Promotion Ends In</h3>
-                                          <TimerCountDown key={product?.totalMilisecondsDifference} miliseconds={product?.totalMilisecondsDifference} />
-                                    </div>
-                                    
-                                }
-                            </section>
+                            <ProductPromotionPriceSection product={product}/>
                     }
                     <h4>Size</h4>
                     <ul className="size-ul">

@@ -42,11 +42,11 @@ export default function UserCart() {
         if (user?.cart?.cartId) {
 
             let shoesSum = user?.cart?.cartShoes?.reduce((acumulator, shoes) => {
-                return acumulator + shoes.price;
+                return acumulator + shoes.price * shoes.quantity;
             }, 0);
 
             let clothesSum = user?.cart?.cartProducts?.reduce((acumulator, product) => {
-                return acumulator + product.price;
+                return acumulator + product.price * product.quantity;
             }, 0);
 
             setTotalPrice(shoesSum + clothesSum);
@@ -134,8 +134,8 @@ export default function UserCart() {
                             </select>
                             </div>
                             <FormProvider {...methods}>
-                                <Input {...cityInput} className="cart-input-container"/>
-                                <Input {...postalCodeInput} className="cart-input-container"/>
+                                <Input {...cityInput} classNameValue="cart-input-container"/>
+                                <Input {...postalCodeInput} classNameValue="cart-input-container"/>
                             </FormProvider>
                         <div className="cart-shipping-container">
                             <label htmlFor="standard-shipping">Standard Shipping: $5.00</label>

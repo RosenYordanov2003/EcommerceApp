@@ -11,7 +11,6 @@ export default function ProductPromotionPriceSection({ product }) {
                     <h3>Promotion Ends In</h3>
                     <TimerCountDown key={product?.totalMilisecondsDifference} miliseconds={product?.totalMilisecondsDifference} />
                 </div>
-
             }
         </section>
     )

@@ -22,41 +22,11 @@ export default function ProductOrderSection({ activeSizeItem, categoryName, coun
 
         addToCartProduct(id, user?.id, categoryName, count, activeSizeItem?.size?.toString())
             .then((res) => {
-                const productId = Number.parseFloat(id);
-
                 if (res.success == false) {
                     setNotification(<Notification message={res.error} typeOfMessage="error" closeNotification={removeNotification} />)
                     return;
                 }
-
-                const productObject = {
-                    id: productId,
-                    name: product.name,
-                    categoryName,
-                    price: product.price,
-                    imgUrl: product.pictures[0].imgUrl,
-                    quantity: count,
-                    size: activeSizeItem?.size?.toString()
-                };
-
-                if (categoryName.toLocaleLowerCase() === 'shoes') {
-                    setUser({
-                        ...user,
-                        cart: {
-                            ...user.cart,
-                            cartShoes: [...user.cart.cartShoes, productObject]
-                        }
-                    })
-                }
-                else {
-                    setUser({
-                        ...user,
-                        cart: {
-                            ...user.cart,
-                            cartProducts: [...user.cart.cartProducts, productObject]
-                        }
-                    })
-                }
+                setUser({ ...user, cart: res.cart });
             })
             .catch((error) => console.error(error))
     }

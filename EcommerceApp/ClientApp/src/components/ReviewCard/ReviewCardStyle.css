@@ -1,5 +1,6 @@
 ﻿.review-card{
     padding: 1rem;
+    position: relative;
 }
 .review-evaluation{
     display: flex;
@@ -18,6 +19,11 @@
     margin: 0px;
     font-weight: bolder;
     font-size: 1.1rem;
+}
+.review-time{
+    position: absolute;
+    right: 0.8rem;
+    top: 1rem;
 }
 .review-evaluation .evaluation{
     font-size: 1rem;

@@ -38,34 +38,39 @@ export default function TimerCountDown({ miliseconds}) {
     const timeObject = formatTime(duration);
 
     return (
-        <div className="timer-container">
-            <section className="unit-time-section">
-                <h3 className="unit-time-title">Days</h3>
-                <div className="unit-time">
-                    <TimeUnit key={timeObject.days} unit={timeObject.days} />
-                    <p className="dot-separator">:</p>
-                </div>
-            </section>
-            <section className="unit-time-section">
-                <h3 className="unit-time-title">Hours</h3>
-                <div className="unit-time">
-                    <TimeUnit key={timeObject.hours} unit={timeObject.hours} />
-                    <p className="dot-separator">:</p>
-                </div>
-            </section>
-            <section className="unit-time-section">
-                <h3 className="unit-time-title">Minutes</h3>
-                <div className="unit-time">
-                    <TimeUnit key={timeObject.minutes} unit={timeObject.minutes} />
-                    <p className="dot-separator">:</p>
-                </div>
-            </section>
-            <section className="unit-time-section">
-                <h3 className="unit-time-title">Seconds</h3>
-                <div className="unit-time">
-                    <TimeUnit key={timeObject.seconds} unit={timeObject.seconds} />
-                </div>
-            </section>
-        </div>
+        <>
+            {duration > 0 && <div className="timer-container">
+                <section className="unit-time-section">
+                    <h3 className="unit-time-title">Days</h3>
+                    <div className="unit-time">
+                        <TimeUnit key={timeObject.days} unit={timeObject.days} />
+                        <p className="dot-separator">:</p>
+                    </div>
+                </section>
+                <section className="unit-time-section">
+                    <h3 className="unit-time-title">Hours</h3>
+                    <div className="unit-time">
+                        <TimeUnit key={timeObject.hours} unit={timeObject.hours} />
+                        <p className="dot-separator">:</p>
+                    </div>
+                </section>
+                <section className="unit-time-section">
+                    <h3 className="unit-time-title">Minutes</h3>
+                    <div className="unit-time">
+                        <TimeUnit key={timeObject.minutes} unit={timeObject.minutes} />
+                        <p className="dot-separator">:</p>
+                    </div>
+                </section>
+                <section className="unit-time-section">
+                    <h3 className="unit-time-title">Seconds</h3>
+                    <div className="unit-time">
+                        <TimeUnit key={timeObject.seconds} unit={timeObject.seconds} />
+                    </div>
+                </section>
+            </div>
+            }
+          
+         </>
+      
     )
 }

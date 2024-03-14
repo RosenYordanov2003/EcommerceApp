@@ -1,16 +1,13 @@
 ﻿import { useEffect, useState, useContext } from "react";
 import { loadProductById, addProductToUserFavoriteProductsList, removeProductFromUserFavoriteList, createProductObject, filterUserFavoriteProducts } from "../../services/productService";
 import "../Products/ProductInfoStyle.css";
+import "../Products/ProductInfoResponsiveStyle.css";
 import SizeItem from "../SizeMenu/SizeMenu";
 import ProductDetails from "../Products/ProductDetails/ProductDetails";
-import FeaturedProduct from "../Products/FeaturedProduct";
 import { UserContext } from "../../Contexts/UserContext";
 import ProductOrderSection from "../Products/ProductOrderSection/ProductOrderSection";
-import { addToCartProduct } from "../../services/cartService";
-import Notification from "../Notification/Notification";
-import "../Products/ProductInfoResponsiveStyle.css";
-import TimerCountDown from "../TimerCountDown/TimerCountDown";
 import ProductPromotionPriceSection from "../Products/ProductPromotionPriceSection/ProductPromotionPriceSection";
+import RelatedProductsSection from "../Products/RelatedProductsSection/RelatedProductsSection";
 
 export default function ProductInfo() {
 
@@ -23,7 +20,6 @@ export default function ProductInfo() {
     const [isActiveArrows, setActiveArrows] = useState(false);
     const [activeSizeItem, setActiveSizeItem] = useState(undefined);
     const [isFavorite, setIsFavorite] = useState(undefined);
-    const [notiffication, setNotification] = useState(undefined);
 
     const pathArray = window.location.pathname.split('/');
     const id = pathArray[pathArray.length - 2];
@@ -64,7 +60,6 @@ export default function ProductInfo() {
     }
     const productDetails = <ProductDetails updateProduct={UpdateProductInfo} product={product} id={id} category={categoryName} />
 
-    const relatedProducts = product?.relatedProducts?.map((product) => <FeaturedProduct key={product.id} product={product} />)
 
 
     function handleimgRightArrowClick() {
@@ -149,7 +144,6 @@ export default function ProductInfo() {
     return (
         <>
             <div key={id} className="productinfo-card-container">
-                {notiffication}
                 <div onMouseOver={() => { setActiveArrows(true) }} onMouseOut={() => { setActiveArrows(false) }} className="productinfo-img-container">
                     <button onClick={handleimgLeftArrowClick} className={`arrow-button left-arrow-button ${className}`}>  <i className="fa-solid fa-chevron-left"></i></button>
                     <img src={activePicture?.imgUrl}></img>
@@ -181,15 +175,7 @@ export default function ProductInfo() {
                     </section>
                 </div>
             </div>
-            {product?.id && relatedProducts?.length > 0 &&
-                <section className="related-products-section">
-                    <h2 className="related-products-title">Related Products</h2>
-                    <hr></hr>
-                    <div className="related-products-container">
-                        {relatedProducts}
-                    </div>
-                </section>
-            }
+            {product?.id && product.relatedProducts?.length > 0 && <RelatedProductsSection product={product}/>}
         </>
     )
 }

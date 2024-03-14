@@ -21,12 +21,33 @@
             if (addProductToCartModel.CategoryName.ToLower() != "shoes")
             {
                 Product productToAdd = await dbContext.Clothes.FirstAsync(p => p.Id == addProductToCartModel.ProductId);
-                userCart.ProductCartEntities.Add(new ProductCartEntity() { ProductId = addProductToCartModel.ProductId, CartId = userCart.Id, Quantity = addProductToCartModel.Quantity, Size = addProductToCartModel.Size });
+                if (await CheckIfProductCartModelAlreadyExists(addProductToCartModel.ProductId, addProductToCartModel.CategoryName, userCart.Id, addProductToCartModel.Size))
+                {
+                    ProductCartEntity entity = await dbContext.ProductCartEntities
+                        .FirstAsync(p => p.CartId == userCart.Id && p.ProductId == addProductToCartModel.ProductId && p.Size == addProductToCartModel.Size);
+                    entity.Quantity += addProductToCartModel.Quantity;
+                }
+                else
+                {
+                    userCart.ProductCartEntities.Add(new ProductCartEntity() 
+                    { ProductId = addProductToCartModel.ProductId, CartId = userCart.Id, Quantity = addProductToCartModel.Quantity, Size = addProductToCartModel.Size });
+                }
+
             }
             else
             {
-                Shoes shoesToAdd = await dbContext.Shoes.FirstAsync(sh => sh.Id == addProductToCartModel.ProductId);
-                userCart.ShoesCartEntities.Add(new ShoesCartEntity() { ShoesId = addProductToCartModel.ProductId, CartId = userCart.Id, Quantity = addProductToCartModel.Quantity, Size = int.Parse(addProductToCartModel.Size) });
+                if (await CheckIfProductCartModelAlreadyExists(addProductToCartModel.ProductId, addProductToCartModel.CategoryName, userCart.Id, addProductToCartModel.Size))
+                {
+                    ShoesCartEntity entity = await dbContext.ShoesCartEntities
+                        .FirstAsync(sh => sh.CartId == userCart.Id && sh.ShoesId == addProductToCartModel.ProductId && sh.Size.ToString() == addProductToCartModel.Size);
+                    entity.Quantity += addProductToCartModel.Quantity;
+                }
+                else
+                {
+                    Shoes shoesToAdd = await dbContext.Shoes.FirstAsync(sh => sh.Id == addProductToCartModel.ProductId);
+                    userCart.ShoesCartEntities.Add(new ShoesCartEntity() 
+                    { ShoesId = addProductToCartModel.ProductId, CartId = userCart.Id, Quantity = addProductToCartModel.Quantity, Size = int.Parse(addProductToCartModel.Size) });
+                }
             }
             await dbContext.SaveChangesAsync();
         }
@@ -204,6 +225,14 @@
         private async Task<bool> CheckIfUserCartExistAsync(Guid userId)
         {
             return await dbContext.Carts.AnyAsync(c => c.UserId == userId);
+        }
+        private async Task<bool> CheckIfProductCartModelAlreadyExists(int productId, string categoryName, Guid userCartId, string size)
+        {
+            if (categoryName.ToLower() == "shoes")
+            {
+                return await dbContext.ShoesCartEntities.AnyAsync(sh => sh.ShoesId == productId && sh.CartId == userCartId && sh.Size.ToString() == size);
+            }
+            return await dbContext.ProductCartEntities.AnyAsync(p => p.ProductId == productId && p.CartId == userCartId && p.Size == size);
         }
     }
 }

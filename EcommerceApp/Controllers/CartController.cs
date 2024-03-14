@@ -50,7 +50,9 @@
             await cartService.AddProductToUserCartAsync(model);
             await productStockService.DecreaseProductStockQuantity(model.CategoryName, model.ProductId, model.Size, model.Quantity);
 
-            return Ok(new { Success = true });
+            var userCart = await cartService.GetUserCartByUserIdAsync(model.UserId);
+
+            return Ok(new { Success = true, Cart = userCart });
         }
         [HttpPost]
         [Route("RemoveProduct")]

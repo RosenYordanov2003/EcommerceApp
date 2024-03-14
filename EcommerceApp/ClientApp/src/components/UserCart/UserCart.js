@@ -45,6 +45,7 @@ export default function UserCart() {
                 return acumulator + shoes.price * shoes.quantity;
             }, 0);
 
+
             let clothesSum = user?.cart?.cartProducts?.reduce((acumulator, product) => {
                 return acumulator + product.price * product.quantity;
             }, 0);

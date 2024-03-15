@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "../Products/FeaturedProductStyle.css";
 import { UserContext } from "../../Contexts/UserContext";
 import { addProductToUserFavoriteProductsList, removeProductFromUserFavoriteList, createProductObject, filterUserFavoriteProducts } from "../../services/productService";
+import {addShoesToUserFavoriteProducts, removeShoesFromUserFavorite} from "../../services/shoesService";
 
 export default function FeaturedProduct({ product }) {
 
@@ -51,21 +52,23 @@ export default function FeaturedProduct({ product }) {
     }
 
     function handleUserFavoriteProduct() {
+
         const favoriteResult = !isFavorite;
         if (favoriteResult) {
-            addProductToUserFavoriteProductsList(user.id, product.id, product.categoryName)
+            const functionToInvoke = product.categoryName.toLowerCase() === 'shoes' ? addShoesToUserFavoriteProducts : addProductToUserFavoriteProductsList;
+            functionToInvoke(user.id, product.id)
                 .then(() => {
                     const productInstance = createProductObject(product.name, product.id, product.pictures[0].imgUrl, product.categoryName);
-                    setUser({ ...user, userFavoriteProducts: [...user.userFavoriteProducts, productInstance] })
+                    setUser({ ...user, userFavoriteProducts: [...user.userFavoriteProducts, productInstance] });
                 })
                 .catch((error) => console.error(error));
         }
         else {
-            removeProductFromUserFavoriteList(user.id, product.id, product.categoryName)
+            const functionToInvoke = product.categoryName.toLowerCase() === 'shoes' ? removeShoesFromUserFavorite : removeProductFromUserFavoriteList;
+            functionToInvoke(user.id, product.id)
                 .then(() => {
                     const filteredProducts = filterUserFavoriteProducts(user.userFavoriteProducts, product.id, product.categoryName);
-                    setUser({ ...user, userFavoriteProducts: filteredProducts })
-
+                    setUser({ ...user, userFavoriteProducts: filteredProducts });
                 })
                 .catch((error) => console.error(error));
         }

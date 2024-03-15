@@ -26,26 +26,16 @@
 
         public async Task AddProductToUserFavoritesListAsync(UserFavoriteProduct userFavoriteProductmodel)
         {
-            if (userFavoriteProductmodel.CategoryName.ToLower() == "shoes")
+            UserFavoriteProducts userFavoriteProducts = new UserFavoriteProducts()
             {
-                UserFavoriteShoes userFavoriteShoes = new UserFavoriteShoes()
-                {
-                    UserId = userFavoriteProductmodel.UserId,
-                    ShoesId = userFavoriteProductmodel.ProductId
-                };
-                await applicationDbContext.UserFavoriteShoes.AddAsync(userFavoriteShoes);
-            }
-            else
-            {
-                UserFavoriteProducts userFavoriteProducts = new UserFavoriteProducts()
-                {
-                    UserId = userFavoriteProductmodel.UserId,
-                    ProductId = userFavoriteProductmodel.ProductId
-                };
-                await applicationDbContext.UserFavoriteProducts.AddAsync(userFavoriteProducts);
-            }
+                UserId = userFavoriteProductmodel.UserId,
+                ProductId = userFavoriteProductmodel.ProductId
+            };
+            await applicationDbContext.UserFavoriteProducts.AddAsync(userFavoriteProducts);
+
             await applicationDbContext.SaveChangesAsync();
         }
+        //TODO:
 
         public async Task<bool> CheckIfProductExistsByIdAsync(int productId)
         {
@@ -183,24 +173,24 @@
             {
                 var productInfo = await applicationDbContext.Shoes.Where(shoes => shoes.Id == productId)
                     .Select(shoes => new ProductInfo<T>()
-                {
-                    Id = shoes.Id,
-                    Description = shoes.Description,
-                    Name = shoes.Name,
-                    Price = shoes.Price,
-                    StarRating = shoes.StarRating,
-                    Brand = shoes.Brand.Name,
-                    CategoryName = shoes.Category.Name,
-                    Gender = shoes.Gender,
-                    Pictures = shoes.Pictures.Select(p => new PictureModel() { ImgUrl = p.ImgUrl }).ToArray(),
-                    ProductStocks = shoes.ShoesStocks.Select(ps => new ProductStock<T> { Size = (T)(object)ps.Size, Quantity = ps.Quantity, Id = ps.Id }).ToArray(),
-                    Reviews = shoes.Reviews.Select(r => new ReviewModel() { Content = r.Content, StarEvaluation = r.StarЕvaluation }),
-                    IsFavorite = userId.HasValue ? shoes.UserFavoriteShoes.Any(uf => uf.ShoesId == productId && uf.UserId == userId) : false,
-                    IsAvalilable = shoes.ShoesStocks.Any(ps => ps.Quantity > 0),
-                    DicountPercentage = shoes.Promotion == null ? 0 : shoes.Promotion.PercantageDiscount,
-                    TotalMilisecondsDifference = shoes.Promotion == null ? 0 : (long)(shoes.Promotion.ExpireTime - DateTime.UtcNow).TotalMilliseconds
+                    {
+                        Id = shoes.Id,
+                        Description = shoes.Description,
+                        Name = shoes.Name,
+                        Price = shoes.Price,
+                        StarRating = shoes.StarRating,
+                        Brand = shoes.Brand.Name,
+                        CategoryName = shoes.Category.Name,
+                        Gender = shoes.Gender,
+                        Pictures = shoes.Pictures.Select(p => new PictureModel() { ImgUrl = p.ImgUrl }).ToArray(),
+                        ProductStocks = shoes.ShoesStocks.Select(ps => new ProductStock<T> { Size = (T)(object)ps.Size, Quantity = ps.Quantity, Id = ps.Id }).ToArray(),
+                        Reviews = shoes.Reviews.Select(r => new ReviewModel() { Content = r.Content, StarEvaluation = r.StarЕvaluation }),
+                        IsFavorite = userId.HasValue ? shoes.UserFavoriteShoes.Any(uf => uf.ShoesId == productId && uf.UserId == userId) : false,
+                        IsAvalilable = shoes.ShoesStocks.Any(ps => ps.Quantity > 0),
+                        DicountPercentage = shoes.Promotion == null ? 0 : shoes.Promotion.PercantageDiscount,
+                        TotalMilisecondsDifference = shoes.Promotion == null ? 0 : (long)(shoes.Promotion.ExpireTime - DateTime.UtcNow).TotalMilliseconds
 
-                })
+                    })
                 .FirstAsync();
 
                 productInfo.RelatedProducts = await applicationDbContext.Shoes
@@ -319,22 +309,13 @@
             return result;
         }
 
-        public async Task RemoveProductFromUserFavoriteListAsync(UserFavoriteProduct userFavoriteProductmodel)
+        public async Task RemoveProductFromUserFavoriteListAsync(UserFavoriteProduct userFavoriteProductModel)
         {
-            if (userFavoriteProductmodel.CategoryName.ToLower() == "shoes")
-            {
-                UserFavoriteShoes userFavoriteShoesToDelete = await applicationDbContext
-                    .UserFavoriteShoes.FirstAsync(ufs => ufs.UserId == userFavoriteProductmodel.UserId && ufs.ShoesId == userFavoriteProductmodel.ProductId);
 
-                applicationDbContext.UserFavoriteShoes.Remove(userFavoriteShoesToDelete);
-            }
-            else
-            {
-                UserFavoriteProducts userFavoriteProductsToDelete = await applicationDbContext
-                  .UserFavoriteProducts.FirstAsync(ufs => ufs.UserId == userFavoriteProductmodel.UserId && ufs.ProductId == userFavoriteProductmodel.ProductId);
+            UserFavoriteProducts userFavoriteProductsToDelete = await applicationDbContext
+              .UserFavoriteProducts.FirstAsync(ufs => ufs.UserId == userFavoriteProductModel.UserId && ufs.ProductId == userFavoriteProductModel.ProductId);
 
-                applicationDbContext.UserFavoriteProducts.Remove(userFavoriteProductsToDelete);
-            }
+            applicationDbContext.UserFavoriteProducts.Remove(userFavoriteProductsToDelete);
             await applicationDbContext.SaveChangesAsync();
         }
         public async Task<ModifyClothesModel> GetProductToModifyAsync(int productId)

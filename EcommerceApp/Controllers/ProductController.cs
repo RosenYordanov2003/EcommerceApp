@@ -1,12 +1,11 @@
 ﻿namespace EcommerceApp.Controllers
 {
-    using Microsoft.AspNetCore.Mvc;
-    using EcommerceApp.Core.Contracts;
-    using EcommerceApp.Core.Models.Products;
-    using Microsoft.AspNetCore.Authorization;
-    using EcommerceApp.Infrastructure.Data.Models;
     using Microsoft.AspNetCore.Identity;
-    using static EcommerceApp.Common.GeneralApplicationConstants;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Authorization;
+    using Core.Contracts;
+    using Core.Models.Products;
+    using Infrastructure.Data.Models;
 
     [ApiController]
     [Produces("application/json")]
@@ -14,30 +13,21 @@
     public class ProductController : ControllerBase
     {
         private readonly IShoesService shoesService;
-        private readonly IProductSevice clothesService;
+        private readonly IProductSevice productService;
         private readonly UserManager<User> userManager;
         public ProductController(IShoesService shoesService, IProductSevice clothesService, UserManager<User> userManager)
         {
             this.shoesService = shoesService;
-            this.clothesService = clothesService;
+            this.productService = clothesService;
             this.userManager = userManager;
         }
 
-        [HttpGet("GetFeaturedShoes")]
-        public async Task<IActionResult> GetFeaturedShoes([FromQuery] string? userId)
-        {
-            Guid? userIdResult = ExtractUserId(userId);
-
-            IEnumerable<ProductFeatureModel> featuredShoes = await shoesService.GetFeaturedShoesAsync(userIdResult);
-
-            return Ok(featuredShoes);
-        }
         [HttpGet("GetFeaturedClothes")]
         public async Task<IActionResult> GetFeaturedClothes([FromQuery] string? userId)
         {
             Guid? userIdResult = ExtractUserId(userId);
 
-            IEnumerable<ProductModel> featuredProducts = await clothesService.GetFeaturedClothesAsync(userIdResult);
+            IEnumerable<ProductModel> featuredProducts = await productService.GetFeaturedClothesAsync(userIdResult);
 
             return Ok(featuredProducts);
         }
@@ -45,7 +35,7 @@
         public async Task<IActionResult> GetProductsByGender([FromQuery] string gender, [FromQuery]string? userId)
         {
             Guid? userIdResult = ExtractUserId(userId);
-            var result = await this.clothesService.GetProductByGender(gender, userIdResult);
+            var result = await this.productService.GetProductByGender(gender, userIdResult);
 
             return Ok(result);
         }
@@ -55,18 +45,18 @@
         {
             Guid? userIdResult = ExtractUserId(userId);
 
-            if (!await clothesService.CheckIfProductExistsByIdAsync(productId))
+            if (!await productService.CheckIfProductExistsByIdAsync(productId))
             {
                 return BadRequest(new { Error = "Product with such an id does not exist" });
             }
             if (categoryName.ToLower() == "shoes")
             {
-                ProductInfo<double> shoesproductInfo = await clothesService.GetProductByIdAsync<double>(productId, categoryName, userIdResult);
+                ProductInfo<double> shoesproductInfo = await productService.GetProductByIdAsync<double>(productId, categoryName, userIdResult);
 
                 return Ok(shoesproductInfo);
             }
 
-            ProductInfo<string> productInfo = await clothesService.GetProductByIdAsync<string>(productId, categoryName, userIdResult);
+            ProductInfo<string> productInfo = await productService.GetProductByIdAsync<string>(productId, categoryName, userIdResult);
 
             return Ok(productInfo);
         }
@@ -75,11 +65,11 @@
         [Route("AddToFavoriteProducts")]
         public async Task<IActionResult> AddToFavoriteProducts([FromBody] UserFavoriteProduct userFavoriteProductModel)
         {
-            if (!await clothesService.CheckIfProductExistsByIdAsync(userFavoriteProductModel.ProductId))
+            if (!await productService.CheckIfProductExistsByIdAsync(userFavoriteProductModel.ProductId))
             {
                 return BadRequest(new { Error = "Product with such an id does not exist" });
             }
-            await clothesService.AddProductToUserFavoritesListAsync(userFavoriteProductModel);
+            await productService.AddProductToUserFavoritesListAsync(userFavoriteProductModel);
 
             return Ok();
         }
@@ -87,11 +77,11 @@
         [Route("RemoveFromUserFavoriteLists")]
         public async Task<IActionResult> RemoveFromUserFavoriteLists([FromBody] UserFavoriteProduct userFavoriteProductModel)
         {
-            if (!await clothesService.CheckIfProductExistsByIdAsync(userFavoriteProductModel.ProductId))
+            if (!await productService.CheckIfProductExistsByIdAsync(userFavoriteProductModel.ProductId))
             {
                 return BadRequest(new { Error = "Product with such an id does not exist" });
             }
-            await clothesService.RemoveProductFromUserFavoriteListAsync(userFavoriteProductModel);
+            await productService.RemoveProductFromUserFavoriteListAsync(userFavoriteProductModel);
 
             return Ok();
         }
@@ -106,7 +96,7 @@
                 return BadRequest();
             }
 
-            IEnumerable<ProductFeatureModel> products = await clothesService.LoadUserFavoriteProductsAsync(userId);
+            IEnumerable<ProductFeatureModel> products = await productService.LoadUserFavoriteProductsAsync(userId);
 
             return Ok(new LoadUserFavoriteProductsModel() { UserName = user.UserName, Products = products });
         }

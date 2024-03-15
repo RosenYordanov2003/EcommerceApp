@@ -23,6 +23,17 @@
             this.applicationDbContext = applicationDbContext;
         }
 
+        public async Task AddShoesToUserFavoriteProductsAsync(UserFavoriteProduct userFavoriteProductModel)
+        {
+            UserFavoriteShoes userFavoriteProducts = new UserFavoriteShoes()
+            {
+                UserId = userFavoriteProductModel.UserId,
+                ShoesId = userFavoriteProductModel.ProductId
+            };
+            await applicationDbContext.UserFavoriteShoes.AddAsync(userFavoriteProducts);
+            await applicationDbContext.SaveChangesAsync();
+        }
+
         public async Task ArchiveShoesAsync(int shoesId)
         {
             Shoes shoes = await applicationDbContext.Shoes.FirstAsync(sh => sh.Id == shoesId);
@@ -159,6 +170,15 @@
             Shoes shoes = await applicationDbContext.Shoes.FirstAsync(sh => sh.Id == shoesId);
             shoes.IsFeatured = false;
 
+            await applicationDbContext.SaveChangesAsync();
+        }
+
+        public async Task RemoveShoesToUserFavoriteProductsAsync(UserFavoriteProduct userFavoriteProductModel)
+        {
+            UserFavoriteShoes userFavoriteShoesToDelete = await applicationDbContext
+                   .UserFavoriteShoes.FirstAsync(ufs => ufs.UserId == userFavoriteProductModel.UserId && ufs.ShoesId == userFavoriteProductModel.ProductId);
+
+            applicationDbContext.UserFavoriteShoes.Remove(userFavoriteShoesToDelete);
             await applicationDbContext.SaveChangesAsync();
         }
 

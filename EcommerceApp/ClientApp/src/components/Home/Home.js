@@ -1,6 +1,5 @@
-import CategoriesSection from "../Categories/CategoriesSection"
 import { useState, useEffect, useContext } from "react";
-import { loadFeaturedShoes } from "../../services/productService";
+import { loadFeaturedShoes } from "../../services/shoesService";
 import FeaturedProduct from "../Products/FeaturedProduct";
 import { loadFeaturedClothes } from "../../services/productService";
 import "../Home/HomeStyle.css";
@@ -12,8 +11,6 @@ import { UserContext } from "../../Contexts/UserContext";
 export default function Home({ categories, isActive }) {
     const [featuredShoes, setFeaturedShoes] = useState([]);
     const [featuredClothes, setFeaturedClothes] = useState([]);
-
-
 
     const { user} = useContext(UserContext);
 

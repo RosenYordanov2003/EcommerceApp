@@ -2,9 +2,8 @@
 {
     using Models.AdminModels.Shoes;
     using Models.AdminModels.Clothes;
-    using Models.Shoes;
     using Models.Pager;
-    using EcommerceApp.Core.Models.Products;
+    using Core.Models.Products;
 
     public interface IShoesService
     {
@@ -18,5 +17,7 @@
         Task SetFeatureShoesByIdAsync(int shoesId);
         Task RemoveFeaturedShoesByIdAsync(int shoesId);
         Task<int> GetAllShoesCountAsync();
+        Task AddShoesToUserFavoriteProductsAsync(UserFavoriteProduct userFavoriteProductModel);
+        Task RemoveShoesToUserFavoriteProductsAsync(UserFavoriteProduct userFavoriteProductModel);
     }
 }

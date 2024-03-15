@@ -20,19 +20,19 @@
                {
                    Id = 1,
                    ShoesId = 1,
-                   ImgUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/b3546974-0d23-4657-a8a7-8d6abc9fc5e8/air-force-1-07-lv8-shoes-p2p25V.png"
+                   ImgUrl = "https://www.jdsports.cy/2680033-product_horizontal/nike-af1-jd-blk-blk-crim.jpg"
                },
                new Picture()
                {
                    Id = 2,
                    ShoesId = 1,
-                   ImgUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/0bab9b0c-3598-4b1f-b3eb-acd64788a258/air-force-1-07-lv8-shoes-p2p25V.png"
+                   ImgUrl = "https://d2sw2hhlzkf9db.cloudfront.net/uploads/2022/11/Nike-Air-Force-1-07-LV8-DZ4514-001-5.jpg"
                },
                new Picture()
                {
                    Id = 3,
                    ShoesId = 1,
-                   ImgUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/67701610-e9ef-4dbf-9a3b-df35affa59cb/air-force-1-07-lv8-shoes-p2p25V.png"
+                   ImgUrl = "https://static.glami.ro/img/800x800bt/404805616-nike-air-force-1-lv8-gs-jdc-fb8036-001.jpg"
                },
                new Picture()
                {

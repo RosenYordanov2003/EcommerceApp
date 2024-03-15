@@ -6,7 +6,7 @@ export default function ProductPromotionPriceSection({ product }) {
             <del><p className="product-price">${Number.parseFloat(product?.price).toFixed(2)}</p></del>
             <p className="product-price">${Number.parseFloat(product?.price - ((product?.price * product?.dicountPercentage) / 100)).toFixed(2)}</p>
             {
-                product?.totalMilisecondsDifference !== undefined &&
+                (product?.totalMilisecondsDifference !== undefined && product?.totalMilisecondsDifference > 0) &&
                 <div className="product-promotion-section">
                     <h3>Promotion Ends In</h3>
                     <TimerCountDown key={product?.totalMilisecondsDifference} miliseconds={product?.totalMilisecondsDifference} />

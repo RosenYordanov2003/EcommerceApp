@@ -20,7 +20,7 @@ namespace EcommerceApp.Tests.UnitTests
             dbContextOptions = new DbContextOptionsBuilder<ApplicationDbContext>()
                .UseInMemoryDatabase("EcommerceAppInMemoryDatabase" + Guid.NewGuid().ToString())
                .Options;
-            applicationDbContext = new ApplicationDbContext(dbContextOptions, true);
+            applicationDbContext = new ApplicationDbContext(dbContextOptions, false);
             SeedDatabase(applicationDbContext);
             brandService = new BrandService(applicationDbContext);
         }

@@ -19,7 +19,7 @@
             dbContextOptions = new DbContextOptionsBuilder<ApplicationDbContext>()
               .UseInMemoryDatabase("EcommerceAppInMemoryDatabase" + Guid.NewGuid().ToString())
               .Options;
-            dbContext = new ApplicationDbContext(dbContextOptions, true);
+            dbContext = new ApplicationDbContext(dbContextOptions, false);
             SeedDatabase(dbContext);
             categoryService = new CategoryService(dbContext);
         }

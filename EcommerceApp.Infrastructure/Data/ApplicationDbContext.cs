@@ -8,7 +8,7 @@
     public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
     {
         private readonly bool seedDb;
-        public ApplicationDbContext(DbContextOptions options, bool seedDb = false)
+        public ApplicationDbContext(DbContextOptions options, bool seedDb = true)
             : base(options)
         {
 
@@ -72,7 +72,7 @@
                 .WithOne(u => u.Cart)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            if (!this.seedDb)
+            if (this.seedDb)
             {
                 builder.ApplyConfiguration(new UserEntityConfiguration());
                 builder.ApplyConfiguration(new BrandEntityConfiguration());

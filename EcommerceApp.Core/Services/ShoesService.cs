@@ -14,7 +14,7 @@
     using Models.Pager;
     using Infrastructure.Data.Models;
     using Core.Models.Products;
-    using EcommerceApp.Core.Models.Review;
+    using Core.Models.Review;
 
     public class ShoesService : IShoesService
     {

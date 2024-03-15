@@ -37,7 +37,6 @@
             await applicationDbContext.SaveChangesAsync();
         }
         //TODO:
-
         public async Task<bool> CheckIfProductExistsByIdAsync(int productId)
         {
             if (await applicationDbContext.Clothes.AnyAsync(cl => cl.Id == productId) || await applicationDbContext.Shoes

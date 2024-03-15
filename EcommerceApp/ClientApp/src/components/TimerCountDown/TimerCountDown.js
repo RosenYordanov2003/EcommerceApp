@@ -69,8 +69,6 @@ export default function TimerCountDown({ miliseconds}) {
                 </section>
             </div>
             }
-          
          </>
-      
     )
 }

@@ -5,6 +5,7 @@
     using Core.Services;
     using Data;
     using static Tests.DatabaseSeeder;
+    using EcommerceApp.Core.Models.AdminModels.Clothes;
 
     [TestFixture]
     public class ShoesServiceTests
@@ -20,7 +21,8 @@
             dbContextOptions = new DbContextOptionsBuilder<ApplicationDbContext>()
               .UseInMemoryDatabase("EcommerceAppInMemoryDatabase" + Guid.NewGuid().ToString())
               .Options;
-            dbContext = new ApplicationDbContext(dbContextOptions, true);
+            dbContext = new ApplicationDbContext(dbContextOptions, false);
+            dbContext.Database.EnsureCreated();
             SeedDatabase(dbContext);
             shoesService = new ShoesService(dbContext);
         }
@@ -68,10 +70,86 @@
         {
             Assert.IsFalse(await shoesService.CheckIfShoesExistsByIdAsync(-1));
         }
+        [Test]
+        public async Task TestCheckIfShoesExistsByIdAsyncMethodShouldReturnTrue1()
+        {
+            Assert.IsTrue(await shoesService.CheckIfShoesExistsByIdAsync(1));
+        }
+        [Test]
+        public async Task TestCheckIfShoesExistsByIdAsyncMethodShouldReturnTrue2()
+        {
+            Assert.IsTrue(await shoesService.CheckIfShoesExistsByIdAsync(2));
+        }
+        [Test]
+        public async Task TestCheckIfShoesExistsByIdAsyncMethodShouldReturnFalse1()
+        {
+            Assert.IsFalse(await shoesService.CheckIfShoesExistsByIdAsync(-1));
+        }
+        [Test]
+        public async Task TestCheckIfShoesExistsByIdAsyncMethodShouldReturnFalse2()
+        {
+            Assert.IsFalse(await shoesService.CheckIfShoesExistsByIdAsync(99));
+        }
+        [Test]
+        public async Task TestEditShoesAsyncShouldEditTheShoesProperlyTest1()
+        {
+            EditProductModel editProductModel = new EditProductModel()
+            {
+                CategoryId = 2,
+                BrandId = 2,
+                Description = "Test Description",
+                Name = "Test 1234",
+                Price = 250,
+                Id = shoes1.Id
+            };
+
+            string expectedDescription = "Test Description";
+            int expectedCategoryId = 2;
+            int expectedBrandId = 2;
+            string expectedName = "Test 1234";
+            decimal expectedPrice = 250;
+
+            await shoesService.EditShoesAsync(editProductModel);
+
+            Assert.That(shoes1.Description, Is.EqualTo(expectedDescription));
+            Assert.That(shoes1.Price, Is.EqualTo(expectedPrice));
+            Assert.That(shoes1.CategoryId, Is.EqualTo(expectedCategoryId));
+            Assert.That(shoes1.BrandId, Is.EqualTo(expectedBrandId));
+            Assert.That(shoes1.Name, Is.EqualTo(expectedName));
+        }
+        [Test]
+        public async Task TestEditShoesAsyncShouldEditTheShoesProperlyTest2()
+        {
+            EditProductModel editProductModel = new EditProductModel()
+            {
+                BrandId = shoes1.BrandId,
+                CategoryId = shoes1.CategoryId,
+                Description = "Test Description",
+                Name = "Test 1234",
+                Price = 350,
+                Id = 1
+            };
+
+            string expectedDescription = "Test Description";
+            int expectedCategoryId = shoes1.CategoryId;
+            int expectedBrandId = shoes1.BrandId;
+            string expectedName = "Test 1234";
+            decimal expectedPrice = 350;
+
+            await shoesService.EditShoesAsync(editProductModel);
+
+            Assert.That(shoes1.Description, Is.EqualTo(expectedDescription));
+            Assert.That(shoes1.Price, Is.EqualTo(expectedPrice));
+            Assert.That(shoes1.CategoryId, Is.EqualTo(expectedCategoryId));
+            Assert.That(shoes1.BrandId, Is.EqualTo(expectedBrandId));
+            Assert.That(shoes1.Name, Is.EqualTo(expectedName));
+        }
+
         [TearDown]
         public void TearDown()
         {
-            dbContext.Database.EnsureDeleted();
+           dbContext.Database.EnsureDeleted();
+           dbContext.Dispose();
         }
     }
 }

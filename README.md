@@ -71,10 +71,14 @@ Home page represents a page with all featured products
 - If there is no available size which is selected for this product there is no option to be added to user cart
 - If quantity is not enough notification message will popup
 - If quantity for the selected size is enough the product goes to user cart and this quantity for this product with the selected size is reserved
+- If the product has a promotion, promotion section will be displayed with 3D Timer 
 
 ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/ac3604b6-249a-4bc0-ab98-0ac8a306ed5f)
 
 ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/e416466f-f99f-40fe-941f-842862bf02e4)
+
+![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/af413403-906a-46a4-a04f-acae99f29e41)
+
 
 ## Products review section
 - Here authenticated users can write reviews about particular product
@@ -149,6 +153,21 @@ Home page represents a page with all featured products
 ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/380d6b46-d97c-4751-b6a2-40f8dbc1ebd2)
 
 ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/5a6c1a7c-f447-4d4e-b0e4-67a4bd167fbf)
+
+# User-messages page in admin pannel
+- On this page admin can read and reply to messages
+- The messages are loaded dynamically by using SignalR. Every time user sends a message, the message will be displayed immediately, also message count will be updated
+- Мessages with green border have been answered
+![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/515de6e5-4e37-4d81-83cd-6b4bce5fb7fb)
+![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/59b4986b-1771-4d08-8056-e69335617ed1)
+![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/8630a491-a4fb-48a8-a3c0-fb8d3bfce817)
+![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/de49fc22-d967-401a-8b36-48cbc668cddb)
+![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/678f24d1-401c-47a1-a276-c1b90ccb5733)
+
+
+
+
+
 
 ## The project is not finished yet!
 

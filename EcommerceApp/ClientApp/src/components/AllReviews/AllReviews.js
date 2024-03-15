@@ -21,6 +21,16 @@ export default function AllReviews() {
     const productId = pathArray[2];
     const productCategory = pathArray[3];
 
+    function loadReviewsPerPage(page) {
+        getReviewsForParticularPage(page, productCategory, productId, reviewsPerPage == 0 ? 5 : reviewsPerPage)
+            .then(res => {
+                console.log(res);
+                setReviews(res.reviews);
+                setPageObject({ startPage: res.startPage, endPage: res.endPage });
+            })
+            .catch(error => console.error(error));
+    }
+
     useEffect(() => {
         loadAllReviewsAboutProduct(productId, productCategory)
             .then(res => {
@@ -31,20 +41,29 @@ export default function AllReviews() {
     }, [])
 
     useEffect(() => {
-        getReviewsForParticularPage(pageNumber, productCategory, productId, reviewsPerPage == 0 ? 5 : reviewsPerPage)
-            .then(res => {
-                setReviews(res.reviews);
-                setPageObject({ startPage: res.startPage, endPage: res.endPage });
-            })
-            .catch(error => console.error(error));
-
+        loadReviewsPerPage(pageNumber);
         configureLoading();
     }, [pageNumber, reviewsPerPage])
 
     function removeReviewById(reviewId) {
         const filteredReviews = reviews.filter((review) => review.id !== reviewId);
-        setReviews(filteredReviews);
+
+        window.scrollTo({ top: 0, behavior: "smooth" })
         setNotification(<Notification closeNotification={closeNotification} message="You have successfully deleted your review" typeOfMessage="Success" />);
+
+        if (filteredReviews.length === 0) {
+            if (pageNumber - 1 > 0) {
+                loadAllReviewsAboutProduct(pageNumber - 1);
+                setPageNumber(pageNumber - 1);
+                return;
+            }
+        }
+        if (filteredReviews.length !== reviewsPerPage) {
+            loadReviewsPerPage(pageNumber);
+            return;
+        }
+
+        setReviews(filteredReviews);
     }
     function closeNotification() {
         setNotification(undefined);

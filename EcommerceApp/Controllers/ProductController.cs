@@ -35,13 +35,13 @@
         public async Task<IActionResult> GetProductsByGender([FromQuery] string gender, [FromQuery]string? userId)
         {
             Guid? userIdResult = ExtractUserId(userId);
-            var result = await this.productService.GetProductByGender(gender, userIdResult);
+            var result = await productService.GetProductByGender(gender, userIdResult);
 
             return Ok(result);
         }
 
-        [HttpGet("AboutProduct")]
-        public async Task<IActionResult> GetProductById([FromQuery] int productId, [FromQuery] string categoryName, [FromQuery] string? userId)
+        [HttpGet("About")]
+        public async Task<IActionResult> GetProductById([FromQuery] int productId, [FromQuery] string? userId)
         {
             Guid? userIdResult = ExtractUserId(userId);
 
@@ -49,14 +49,8 @@
             {
                 return BadRequest(new { Error = "Product with such an id does not exist" });
             }
-            if (categoryName.ToLower() == "shoes")
-            {
-                ProductInfo<double> shoesproductInfo = await productService.GetProductByIdAsync<double>(productId, categoryName, userIdResult);
 
-                return Ok(shoesproductInfo);
-            }
-
-            ProductInfo<string> productInfo = await productService.GetProductByIdAsync<string>(productId, categoryName, userIdResult);
+            ProductInfo<string> productInfo = await productService.GetProductByIdAsync(productId, userIdResult);
 
             return Ok(productInfo);
         }

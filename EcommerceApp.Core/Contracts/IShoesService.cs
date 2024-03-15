@@ -8,6 +8,7 @@
     public interface IShoesService
     {
         Task<IEnumerable<ProductFeatureModel>> GetFeaturedShoesAsync(Guid? userId);
+        Task<ProductInfo<double>> GetProductByIdAsync(int productId, Guid? userId);
         Task<IEnumerable<ClothesModel>> GetAllShoesAsync(Pager pager);
         Task<ModifyShoesModel> GetShoesToModifyAsync(int shoesId);
         Task<bool> CheckIfShoesExistsByIdAsync(int shoesId);

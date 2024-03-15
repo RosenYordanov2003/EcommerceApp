@@ -1,10 +1,10 @@
 ﻿namespace EcommerceApp.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Authorization;
     using Core.Contracts;
     using Core.Models.Products;
     using EcommerceApp.Core.Services;
-    using Microsoft.AspNetCore.Authorization;
 
     [Route("shoes")]
     [ApiController]
@@ -49,6 +49,20 @@
             await shoesService.RemoveShoesToUserFavoriteProductsAsync(userFavoriteProductModel);
 
             return Ok();
+        }
+        [HttpGet("About")]
+        public async Task<IActionResult> GetProductById([FromQuery] int productId,[FromQuery] string? userId)
+        {
+            Guid? userIdResult = ExtractUserId(userId);
+
+            if (!await shoesService.CheckIfShoesExistsByIdAsync(productId))
+            {
+                return BadRequest(new { Error = "Product with such an id does not exist" });
+            }
+
+            ProductInfo<double> productInfo = await shoesService.GetProductByIdAsync(productId, userIdResult);
+
+            return Ok(productInfo);
         }
 
         private static Guid? ExtractUserId(string? userId)

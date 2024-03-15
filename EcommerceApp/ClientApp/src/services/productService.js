@@ -31,10 +31,10 @@ export async function loadProductsByGender(gender, userId) {
     return response;
     
 }
-export async function loadProductById(id, categoryName, userId) {
+export async function loadProductById(id, userId) {
     let result = userId === undefined ? "" : userId;
 
-    const request = await fetch(`${baseUrl}/AboutProduct?productid=${id}&categoryName=${categoryName}&&userId=${result}`, { credentials: 'include',  });
+    const request = await fetch(`${baseUrl}/About?productid=${id}&userId=${result}`, { credentials: 'include',  });
 
     if (!request.ok) {
         throw Error(request.Error);

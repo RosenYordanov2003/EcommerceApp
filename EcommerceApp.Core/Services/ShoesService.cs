@@ -14,6 +14,7 @@
     using Models.Pager;
     using Infrastructure.Data.Models;
     using Core.Models.Products;
+    using EcommerceApp.Core.Models.Review;
 
     public class ShoesService : IShoesService
     {
@@ -123,6 +124,52 @@
                     DicountPercentage = s.Promotion == null ? 0 : s.Promotion.PercantageDiscount,
                 })
                 .ToArrayAsync();
+        }
+
+        public async Task<ProductInfo<double>> GetProductByIdAsync(int productId, Guid? userId)
+        {
+            var productInfo = await applicationDbContext.Shoes.Where(shoes => shoes.Id == productId)
+                    .Select(shoes => new ProductInfo<double>()
+                    {
+                        Id = shoes.Id,
+                        Description = shoes.Description,
+                        Name = shoes.Name,
+                        Price = shoes.Price,
+                        StarRating = shoes.StarRating,
+                        Brand = shoes.Brand.Name,
+                        CategoryName = shoes.Category.Name,
+                        Gender = shoes.Gender,
+                        Pictures = shoes.Pictures.Select(p => new PictureModel() { ImgUrl = p.ImgUrl }).ToArray(),
+                        ProductStocks = shoes.ShoesStocks.Select(ps => new ProductStock<double> { Size = ps.Size, Quantity = ps.Quantity, Id = ps.Id }).ToArray(),
+                        Reviews = shoes.Reviews.Select(r => new ReviewModel() { Content = r.Content, StarEvaluation = r.StarЕvaluation }),
+                        IsFavorite = userId.HasValue ? shoes.UserFavoriteShoes.Any(uf => uf.ShoesId == productId && uf.UserId == userId) : false,
+                        IsAvalilable = shoes.ShoesStocks.Any(ps => ps.Quantity > 0),
+                        DicountPercentage = shoes.Promotion == null ? 0 : shoes.Promotion.PercantageDiscount,
+                        TotalMilisecondsDifference = shoes.Promotion == null ? 0 : (long)(shoes.Promotion.ExpireTime - DateTime.UtcNow).TotalMilliseconds
+
+                    })
+                .FirstAsync();
+
+            productInfo.RelatedProducts = await applicationDbContext.Shoes
+              .Where(sh => (sh.Name == productInfo.Name || sh.Brand.Name == productInfo.Brand) &&
+              sh.Gender == productInfo.Gender && sh.Id != productInfo.Id && sh.Category.Name == productInfo.CategoryName)
+              .Select(cl => new ProductModel()
+              {
+                  Description = cl.Description,
+                  CategoryName = cl.Category.Name,
+                  StarRating = cl.StarRating,
+                  Id = cl.Id,
+                  Name = cl.Name,
+                  Price = cl.Price,
+                  Pictures = cl.Pictures.Select(p => new PictureModel() { ImgUrl = p.ImgUrl }).Take(2).ToArray(),
+                  IsFavorite = userId.HasValue ? cl.UserFavoriteShoes.Any(uf => uf.ShoesId == cl.Id && uf.UserId == userId) : false
+
+              })
+              .OrderByDescending(sh => sh.StarRating)
+              .Take(6)
+              .ToArrayAsync();
+
+            return productInfo;
         }
 
         public async Task<ModifyShoesModel> GetShoesToModifyAsync(int shoesId)

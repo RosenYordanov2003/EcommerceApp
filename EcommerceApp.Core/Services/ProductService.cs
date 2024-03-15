@@ -15,6 +15,7 @@
     using Models.Promotion;
     using Models.AdminModels.Pictures;
     using Core.Models.Pager;
+    using Microsoft.EntityFrameworkCore.Infrastructure;
 
     public class ProductService : IProductSevice
     {
@@ -124,96 +125,47 @@
             return productModel;
         }
 
-        public async Task<ProductInfo<T>> GetProductByIdAsync<T>(int productId, string categoryName, Guid? userId)
+        public async Task<ProductInfo<string>> GetProductByIdAsync(int productId, Guid? userId)
         {
-
-            if (categoryName.ToLower() != "shoes")
+            var productInfo = await applicationDbContext.Clothes.Where(cl => cl.Id == productId).Select(cl => new ProductInfo<string>()
             {
-                var productInfo = await applicationDbContext.Clothes.Where(cl => cl.Id == productId).Select(cl => new ProductInfo<T>()
+                Id = cl.Id,
+                Description = cl.Description,
+                Name = cl.Name,
+                Price = cl.Price,
+                Gender = cl.Gender,
+                StarRating = cl.StarRating,
+                Brand = cl.Brand.Name,
+                CategoryName = cl.Category.Name,
+                Pictures = cl.Pictures.Select(p => new PictureModel() { ImgUrl = p.ImgUrl }).ToArray(),
+                ProductStocks = cl.ProductStocks.Select(ps => new ProductStock<string>() { Size = ps.Size, Quantity = ps.Quantity, Id = ps.Id }).ToArray(),
+                Reviews = cl.Reviews.Select(r => new ReviewModel() { Content = r.Content, StarEvaluation = r.StarЕvaluation }),
+                IsFavorite = userId.HasValue ? cl.UserFavoriteProducts.Any(uf => uf.ProductId == productId && uf.UserId == userId) : false,
+                IsAvalilable = cl.ProductStocks.Any(ps => ps.Quantity > 0),
+                DicountPercentage = cl.Promotion == null ? 0 : cl.Promotion.PercantageDiscount,
+                TotalMilisecondsDifference = cl.Promotion == null ? 0 : (long)(cl.Promotion.ExpireTime - DateTime.UtcNow).TotalMilliseconds
+            })
+             .FirstAsync();
+
+            productInfo.RelatedProducts = await applicationDbContext.Clothes
+                .Where(cl => (cl.Name == productInfo.Name || cl.Brand.Name == productInfo.Brand) &&
+                 cl.Gender == productInfo.Gender && cl.Id != productInfo.Id && cl.Category.Name == productInfo.CategoryName)
+                .Select(cl => new ProductModel()
                 {
-                    Id = cl.Id,
                     Description = cl.Description,
+                    CategoryName = cl.Category.Name,
+                    StarRating = cl.StarRating,
+                    Id = cl.Id,
                     Name = cl.Name,
                     Price = cl.Price,
-                    Gender = cl.Gender,
-                    StarRating = cl.StarRating,
-                    Brand = cl.Brand.Name,
-                    CategoryName = cl.Category.Name,
-                    Pictures = cl.Pictures.Select(p => new PictureModel() { ImgUrl = p.ImgUrl }).ToArray(),
-                    ProductStocks = cl.ProductStocks.Select(ps => new ProductStock<T>() { Size = (T)(object)ps.Size, Quantity = ps.Quantity, Id = ps.Id }).ToArray(),
-                    Reviews = cl.Reviews.Select(r => new ReviewModel() { Content = r.Content, StarEvaluation = r.StarЕvaluation }),
-                    IsFavorite = userId.HasValue ? cl.UserFavoriteProducts.Any(uf => uf.ProductId == productId && uf.UserId == userId) : false,
-                    IsAvalilable = cl.ProductStocks.Any(ps => ps.Quantity > 0),
-                    DicountPercentage = cl.Promotion == null ? 0 : cl.Promotion.PercantageDiscount,
-                    TotalMilisecondsDifference = cl.Promotion == null ? 0 : (long)(cl.Promotion.ExpireTime - DateTime.UtcNow).TotalMilliseconds
+                    Pictures = cl.Pictures.Select(p => new PictureModel() { ImgUrl = p.ImgUrl }).Take(2).ToArray(),
+                    IsFavorite = userId.HasValue ? cl.UserFavoriteProducts.Any(uf => uf.ProductId == cl.Id && uf.UserId == userId) : false,
                 })
-                 .FirstAsync();
+                .OrderByDescending(cl => cl.StarRating)
+                .Take(3)
+                .ToArrayAsync();
 
-                productInfo.RelatedProducts = await applicationDbContext.Clothes
-                    .Where(cl => (cl.Name == productInfo.Name || cl.Brand.Name == productInfo.Brand) &&
-                     cl.Gender == productInfo.Gender && cl.Id != productInfo.Id && cl.Category.Name == categoryName)
-                    .Select(cl => new ProductModel()
-                    {
-                        Description = cl.Description,
-                        CategoryName = cl.Category.Name,
-                        StarRating = cl.StarRating,
-                        Id = cl.Id,
-                        Name = cl.Name,
-                        Price = cl.Price,
-                        Pictures = cl.Pictures.Select(p => new PictureModel() { ImgUrl = p.ImgUrl }).Take(2).ToArray(),
-                        IsFavorite = userId.HasValue ? cl.UserFavoriteProducts.Any(uf => uf.ProductId == cl.Id && uf.UserId == userId) : false,
-                    })
-                    .OrderByDescending(cl => cl.StarRating)
-                    .Take(3)
-                    .ToArrayAsync();
-
-                return productInfo;
-            }
-            else
-            {
-                var productInfo = await applicationDbContext.Shoes.Where(shoes => shoes.Id == productId)
-                    .Select(shoes => new ProductInfo<T>()
-                    {
-                        Id = shoes.Id,
-                        Description = shoes.Description,
-                        Name = shoes.Name,
-                        Price = shoes.Price,
-                        StarRating = shoes.StarRating,
-                        Brand = shoes.Brand.Name,
-                        CategoryName = shoes.Category.Name,
-                        Gender = shoes.Gender,
-                        Pictures = shoes.Pictures.Select(p => new PictureModel() { ImgUrl = p.ImgUrl }).ToArray(),
-                        ProductStocks = shoes.ShoesStocks.Select(ps => new ProductStock<T> { Size = (T)(object)ps.Size, Quantity = ps.Quantity, Id = ps.Id }).ToArray(),
-                        Reviews = shoes.Reviews.Select(r => new ReviewModel() { Content = r.Content, StarEvaluation = r.StarЕvaluation }),
-                        IsFavorite = userId.HasValue ? shoes.UserFavoriteShoes.Any(uf => uf.ShoesId == productId && uf.UserId == userId) : false,
-                        IsAvalilable = shoes.ShoesStocks.Any(ps => ps.Quantity > 0),
-                        DicountPercentage = shoes.Promotion == null ? 0 : shoes.Promotion.PercantageDiscount,
-                        TotalMilisecondsDifference = shoes.Promotion == null ? 0 : (long)(shoes.Promotion.ExpireTime - DateTime.UtcNow).TotalMilliseconds
-
-                    })
-                .FirstAsync();
-
-                productInfo.RelatedProducts = await applicationDbContext.Shoes
-                  .Where(sh => (sh.Name == productInfo.Name || sh.Brand.Name == productInfo.Brand) &&
-                  sh.Gender == productInfo.Gender && sh.Id != productInfo.Id && sh.Category.Name == categoryName)
-                  .Select(cl => new ProductModel()
-                  {
-                      Description = cl.Description,
-                      CategoryName = cl.Category.Name,
-                      StarRating = cl.StarRating,
-                      Id = cl.Id,
-                      Name = cl.Name,
-                      Price = cl.Price,
-                      Pictures = cl.Pictures.Select(p => new PictureModel() { ImgUrl = p.ImgUrl }).Take(2).ToArray(),
-                      IsFavorite = userId.HasValue ? cl.UserFavoriteShoes.Any(uf => uf.ShoesId == cl.Id && uf.UserId == userId) : false
-
-                  })
-                  .OrderByDescending(sh => sh.StarRating)
-                  .Take(6)
-                  .ToArrayAsync();
-
-                return productInfo;
-            }
+            return productInfo;
         }
 
         public async Task<ICollection<GetUserFavoriteProductModel>> GetUserFavoriteProductsAsync(Guid userId)

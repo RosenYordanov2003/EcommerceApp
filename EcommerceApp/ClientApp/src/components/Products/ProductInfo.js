@@ -1,5 +1,6 @@
 ﻿import { useEffect, useState, useContext } from "react";
 import { loadProductById, addProductToUserFavoriteProductsList, removeProductFromUserFavoriteList, createProductObject, filterUserFavoriteProducts } from "../../services/productService";
+import {addShoesToUserFavoriteProducts, removeShoesFromUserFavorite, loadShoesById} from "../../services/shoesService";
 import "../Products/ProductInfoStyle.css";
 import "../Products/ProductInfoResponsiveStyle.css";
 import SizeItem from "../SizeMenu/SizeMenu";
@@ -27,7 +28,9 @@ export default function ProductInfo() {
 
 
     useEffect(() => {
-        loadProductById(id, categoryName, user?.id)
+        const functionToInvoke = categoryName.toLocaleLowerCase() === "shoes" ? loadShoesById : loadProductById;
+
+        functionToInvoke(id, user?.id)
             .then((res) => {
                 setProduct(res);
                 setIsFavorite(res.isFavorite);
@@ -100,7 +103,8 @@ export default function ProductInfo() {
         const favoriteResult = !isFavorite;
 
         if (favoriteResult) {
-            addProductToUserFavoriteProductsList(user.id, id, categoryName, count)
+            const functionToInvoke = categoryName.toLocaleLowerCase() === "shoes" ? addShoesToUserFavoriteProducts : addProductToUserFavoriteProductsList;
+            functionToInvoke(user.id, id)
                 .then(() => {
                     const productObject = createProductObject(product.name, id, product.pictures[0].imgUrl, categoryName);
 
@@ -109,7 +113,8 @@ export default function ProductInfo() {
                 .catch((error) => console.error(error));
         }
         else {
-            removeProductFromUserFavoriteList(user.id, id, categoryName)
+            const functionToInvoke = categoryName.toLocaleLowerCase() === "shoes" ? removeShoesFromUserFavorite : removeProductFromUserFavoriteList;
+            functionToInvoke(user.id, id, categoryName)
                 .then(() => {
                     const products = filterUserFavoriteProducts(user.userFavoriteProducts, id, categoryName)
                     setUser({ ...user, userFavoriteProducts: products })

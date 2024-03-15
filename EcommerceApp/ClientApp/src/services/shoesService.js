@@ -49,3 +49,15 @@ export async function removeShoesFromUserFavorite(userId, shoesId) {
 
     return response;
 }
+export async function loadShoesById(id, userId) {
+    let result = userId === undefined ? "" : userId;
+
+    const request = await fetch(`${baseUrl}/About?productid=${id}&userId=${result}`, { credentials: 'include', });
+
+    if (!request.ok) {
+        throw Error(request.Error);
+    }
+    const response = await request.json();
+
+    return response;
+}

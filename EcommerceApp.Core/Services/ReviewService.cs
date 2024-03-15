@@ -8,8 +8,7 @@
     using Models.Pager;
     using Contracts;
     using Data;
-    using System.Collections;
-    using EcommerceApp.Core.Models.Utilities;
+    using Core.Models.Utilities;
 
     public class ReviewService : IReviewService
     {

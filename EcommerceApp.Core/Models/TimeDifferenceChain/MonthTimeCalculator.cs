@@ -12,7 +12,7 @@
             if (seconds / SecondsInMonth >= 1)
             {
                 string timeResultUnit = seconds / SecondsInMonth > 1 ? "months ago" : "month ago";
-                return $"{seconds / SecondsInMonth} {timeResultUnit}";
+                return $"{(int)(seconds / SecondsInMonth)} {timeResultUnit}";
             }
             return nextDateTimeCalculator.CalculateTimeDifeerence(date);
         }

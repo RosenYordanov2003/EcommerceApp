@@ -5,7 +5,7 @@
     using Contracts;
     using Infrastructure.Data.Models;
     using Models.PromotionCodes;
-    using EcommerceApp.Core.Models.Discount;
+    using Core.Models.Discount;
 
     public class PromotionCodeService : IPromotionCodeService
     {

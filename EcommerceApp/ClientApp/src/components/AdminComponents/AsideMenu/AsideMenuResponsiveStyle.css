@@ -1,4 +1,4 @@
-﻿@media screen and (max-width: 701px){
+﻿@media screen and (max-width: 801px){
     .icon-container:last-child {
         position: relative;
         bottom: unset;
@@ -36,8 +36,11 @@
         grid-template-columns: unset;
     }
 }
-@media screen and (min-width: 701px) and (max-width: 1000px){
+@media screen and (min-width: 802px) and (max-width: 1000px){
     #root:has(.asside-wrapper) {
-        grid-template-columns: 12rem auto;
+        grid-template-columns: 10rem auto;
+    }
+    #root:has(.admin-aside) .menu-icon {
+        display: none;
     }
 }

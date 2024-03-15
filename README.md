@@ -4,12 +4,16 @@
 The application represents ecommerce app where users can buy products (clothes, shoes). Every user has own user-cart and list of his favorite products.
 ## The application has 2 roles:
 ### User Role
-- User can buy products, can filter products by given criteria and also to write reviews about products. Every user can read all reviews about particular product and to modify his reviews.
+- Authenticated users can write reviews about particular product and can edit their own reviews.
+- Authenticated users can buy products and can add them in their user-cart. Аfter each successfully placed order, the user receives an email with information about the order
+- Users can recieve a promotion code by their email when they reach particular orders-count
+- Users can filter products by brand or category and can search about products in search bar, can read reviews about particular product, can send messages to admins
 ### Admin Role
 - Admin user can modify all products and also can add product stock for particular product, also can archive product or add promotion to that product.
 - Admin user can creates products and also upload imgs about every product.
 - Admin user can see all statistics about the app for example total income of the application for particular month, for particular day and total income for all time.
 - Admin user can see all orders and can see order-details for particular order.
+- Admin user can answers to user-messages and send his respond by email to user
 
 ## Database diagram
 ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/b929e603-3b87-481c-9d55-e6c026cc815e)
@@ -19,8 +23,11 @@ The application represents ecommerce app where users can buy products (clothes, 
 ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/a76e5055-9e74-476a-9384-a25a6271c903)
 
 ## Functionality
-- Authenticated users can write and read reviews about particular product, can edit reviews, can buy products, can filter products
-- The anonymous ones can read reviews about particular product, can filter products. 
+- Authenticated users can write reviews about particular product and can edit their own reviews.
+- Authenticated users can buy products and can add them in their user-cart. Аfter each successfully placed order, the user receives an email with information about the order
+- Users can recieve a promotion code by their email when they reach particular orders-count
+- Users can filter products by brand or category and can search about products in search bar, can read reviews about particular product, can send messages to admins
+- When user reads reviews about particular product he can select how many reviews to has per one page
 ## Login Page
 ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/8a890a9c-78ba-4749-b35c-155c1c77de65)
 ## Register Page
@@ -64,10 +71,14 @@ Home page represents a page with all featured products
 - If there is no available size which is selected for this product there is no option to be added to user cart
 - If quantity is not enough notification message will popup
 - If quantity for the selected size is enough the product goes to user cart and this quantity for this product with the selected size is reserved
+- If the product has a promotion, promotion section will be displayed with 3D Timer 
 
 ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/ac3604b6-249a-4bc0-ab98-0ac8a306ed5f)
 
 ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/e416466f-f99f-40fe-941f-842862bf02e4)
+
+![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/af413403-906a-46a4-a04f-acae99f29e41)
+
 
 ## Products review section
 - Here authenticated users can write reviews about particular product
@@ -142,6 +153,42 @@ Home page represents a page with all featured products
 ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/380d6b46-d97c-4751-b6a2-40f8dbc1ebd2)
 
 ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/5a6c1a7c-f447-4d4e-b0e4-67a4bd167fbf)
+
+# User-messages page in admin pannel
+- On this page admin can read and reply to messages
+- The messages are loaded dynamically by using SignalR. Every time user sends a message, the message will be displayed immediately, also message count will be updated
+- Мessages with green border have been answered
+![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/515de6e5-4e37-4d81-83cd-6b4bce5fb7fb)
+![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/59b4986b-1771-4d08-8056-e69335617ed1)
+![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/8630a491-a4fb-48a8-a3c0-fb8d3bfce817)
+![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/de49fc22-d967-401a-8b36-48cbc668cddb)
+![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/678f24d1-401c-47a1-a276-c1b90ccb5733)
+
+#Sceenshots on admin pannel responsive layout
+
+![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/9e547d35-1062-4ae5-ad98-00e959a76624)
+![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/3f7948c6-358d-4c6a-95d0-03416d5f5b14)
+![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/88244f17-3f18-4cea-9ba3-317c1b7100e5)
+![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/face1df6-4176-4e0a-b3c5-21c717b366d3)
+![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/1d2362e4-fe74-4d1e-9832-ac01e1bbfb70)
+![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/295476e1-a0a8-4632-8d77-7cda9ef7a4c9)
+![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/940b69a3-4310-44d0-b140-8f6c75ec1b19)
+![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/b8a55283-9817-4f22-b97e-84e47f7f3a51)
+![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/630c8f8c-e8c1-482e-b41f-6465fa8580fa)
+![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/dce83870-4096-43ec-8a45-4ee1d87a0f79)
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## The project is not finished yet!
 

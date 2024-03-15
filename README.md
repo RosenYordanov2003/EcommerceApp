@@ -19,7 +19,11 @@ The application represents ecommerce app where users can buy products (clothes, 
 ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/a76e5055-9e74-476a-9384-a25a6271c903)
 
 ## Functionality
-- Authenticated users can write and read reviews about particular product, can edit reviews, can buy products, can filter products
+- Authenticated users can write reviews about particular product and can edit their own reviews.
+- Authenticated users can buy products and can add them in their user-cart. Аfter each successfully placed order, the user receives an email with information about the order
+- Users can recieve a promotion code by their email when they reach particular orders-count
+- Users can filter products by brand or category and can search about products in search bar
+- Authenticated users can write and read reviews about particular product, can edit their own reviews, can buy products
 - The anonymous ones can read reviews about particular product, can filter products. 
 ## Login Page
 ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/8a890a9c-78ba-4749-b35c-155c1c77de65)

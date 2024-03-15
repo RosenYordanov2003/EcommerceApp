@@ -4,12 +4,16 @@
 The application represents ecommerce app where users can buy products (clothes, shoes). Every user has own user-cart and list of his favorite products.
 ## The application has 2 roles:
 ### User Role
-- User can buy products, can filter products by given criteria and also to write reviews about products. Every user can read all reviews about particular product and to modify his reviews.
+- Authenticated users can write reviews about particular product and can edit their own reviews.
+- Authenticated users can buy products and can add them in their user-cart. Аfter each successfully placed order, the user receives an email with information about the order
+- Users can recieve a promotion code by their email when they reach particular orders-count
+- Users can filter products by brand or category and can search about products in search bar, can read reviews about particular product, can send messages to admins
 ### Admin Role
 - Admin user can modify all products and also can add product stock for particular product, also can archive product or add promotion to that product.
 - Admin user can creates products and also upload imgs about every product.
 - Admin user can see all statistics about the app for example total income of the application for particular month, for particular day and total income for all time.
 - Admin user can see all orders and can see order-details for particular order.
+- Admin user can answers to user-messages and send his respond by email to user
 
 ## Database diagram
 ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/b929e603-3b87-481c-9d55-e6c026cc815e)
@@ -22,9 +26,8 @@ The application represents ecommerce app where users can buy products (clothes, 
 - Authenticated users can write reviews about particular product and can edit their own reviews.
 - Authenticated users can buy products and can add them in their user-cart. Аfter each successfully placed order, the user receives an email with information about the order
 - Users can recieve a promotion code by their email when they reach particular orders-count
-- Users can filter products by brand or category and can search about products in search bar
-- Authenticated users can write and read reviews about particular product, can edit their own reviews, can buy products
-- The anonymous ones can read reviews about particular product, can filter products. 
+- Users can filter products by brand or category and can search about products in search bar, can read reviews about particular product, can send messages to admins
+- When user reads reviews about particular product he can select how many reviews to has per one page
 ## Login Page
 ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/8a890a9c-78ba-4749-b35c-155c1c77de65)
 ## Register Page

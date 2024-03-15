@@ -164,6 +164,27 @@ Home page represents a page with all featured products
 ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/de49fc22-d967-401a-8b36-48cbc668cddb)
 ![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/678f24d1-401c-47a1-a276-c1b90ccb5733)
 
+#Sceenshots on admin pannel responsive layout
+
+![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/9e547d35-1062-4ae5-ad98-00e959a76624)
+![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/3f7948c6-358d-4c6a-95d0-03416d5f5b14)
+![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/88244f17-3f18-4cea-9ba3-317c1b7100e5)
+![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/face1df6-4176-4e0a-b3c5-21c717b366d3)
+![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/1d2362e4-fe74-4d1e-9832-ac01e1bbfb70)
+![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/295476e1-a0a8-4632-8d77-7cda9ef7a4c9)
+![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/940b69a3-4310-44d0-b140-8f6c75ec1b19)
+![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/b8a55283-9817-4f22-b97e-84e47f7f3a51)
+![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/630c8f8c-e8c1-482e-b41f-6465fa8580fa)
+![image](https://github.com/RosenYordanov2003/EcommerceApp/assets/107473016/dce83870-4096-43ec-8a45-4ee1d87a0f79)
+
+
+
+
+
+
+
+
+
 
 
 

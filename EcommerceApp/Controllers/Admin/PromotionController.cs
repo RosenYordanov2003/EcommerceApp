@@ -50,5 +50,13 @@
             await hubContext.Clients.All.SendAsync("ProductUpdated");
             return Ok();
         }
+        [HttpPost]
+        [Route("Clear")]
+        [AllowAnonymous]
+        public async Task<IActionResult> ClearExpiredPromotionsc()
+        {
+            await promotionService.ClearExpiredPrmotionsAsync();
+            return Ok();
+        }
     }
 }

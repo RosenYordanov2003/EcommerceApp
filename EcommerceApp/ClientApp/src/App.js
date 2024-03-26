@@ -25,6 +25,8 @@ import Shoes from "../src/components/AdminComponents/Shoes/Shoes";
 import CreateProduct from "../src/components/AdminComponents/Product/CreateProduct/CreateProduct";
 import AllUserMessages from "../src/components/AdminComponents/AllUserMessages/AllUserMessages";
 import OrderDetails from "../src/components/Order/OrderDetails/OrderDetails";
+import ClearExpiredPromotions from "../src/components/ClearExpiredPromotions/ClearExpiredPromotions";
+import { clearExpiredPromotions } from "../src/services/promotionService";
 
 
 export default function App() {
@@ -49,6 +51,8 @@ export default function App() {
                 .catch(() => {
                     navigate("/Login");
                 })
+
+            clearExpiredPromotions();
         }
     }, [])
 
@@ -99,6 +103,7 @@ export default function App() {
             <UserContext.Provider value={{ user, setUser }}>
 
                 <RefreshToken />
+                <ClearExpiredPromotions/>
                 {result}
             </UserContext.Provider>
 

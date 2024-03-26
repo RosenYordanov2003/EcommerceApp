@@ -61,7 +61,7 @@
                 }
             }
             await dbContext.SaveChangesAsync();
-             
+
         }
 
         public async Task<bool> CheckIfPromotionExistsByIdAsync(Guid id)
@@ -91,6 +91,35 @@
             }
 
 
+            await dbContext.SaveChangesAsync();
+        }
+
+        public async Task ClearExpiredPrmotionsAsync()
+        {
+            List<Promotion> expiredPromotions = await dbContext.Promotions.Where(p => p.ExpireTime < DateTime.UtcNow).ToListAsync();
+
+            if (expiredPromotions.Count == 0)
+            {
+                return;
+            }
+            foreach (var promotion in expiredPromotions)
+            {
+                if (promotion.ShoesId.HasValue)
+                {
+                    Shoes shoes = await dbContext.Shoes.Include(s => s.Promotion).FirstAsync(sh => sh.Id == promotion.ShoesId);
+                    shoes.Promotion = null;
+                    shoes.PromotionId = null;
+                    continue;
+                }
+                if (promotion.ProductId.HasValue)
+                {
+                    Product product = await dbContext.Clothes.Include(p => p.Promotion).FirstAsync(sh => sh.Id == promotion.ProductId);
+                    product.Promotion = null;
+                    product.PromotionId = null;
+                }
+            }
+            await dbContext.SaveChangesAsync();
+            dbContext.Promotions.RemoveRange(expiredPromotions);
             await dbContext.SaveChangesAsync();
         }
     }

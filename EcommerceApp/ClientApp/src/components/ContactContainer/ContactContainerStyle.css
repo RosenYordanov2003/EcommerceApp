@@ -51,3 +51,14 @@
 .title{
     margin-bottom: 0.7rem;
 }
+.contact-container .input-container{
+    width: 100%;
+}
+.contact-container .input-container input {
+    width: 100%;
+    min-width: unset;
+    padding-block: 0.8rem;
+}
+.contact-form{
+    width: 55%;
+}

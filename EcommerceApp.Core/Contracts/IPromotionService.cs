@@ -6,5 +6,6 @@
         Task RemovePromotionAsync(Guid id);
         Task<bool> CheckIfPromotionExistsByIdAsync(Guid id);
         Task ApplyPromotionAsync(AddPromotionModel addPromotionModel);
+        Task ClearExpiredPrmotionsAsync();
     }
 }

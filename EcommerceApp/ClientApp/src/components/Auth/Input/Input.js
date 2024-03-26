@@ -7,9 +7,6 @@ import "../Input/InputStyle.css";
 
 export default function Input({ label, type, id, placeHolder, validation, name, multiline, rows, cols, inputValue, classNameValue="input-container"}) {
 
-    //is used to register an input field with the library,
-    //allowing it to handle validation.This function will be passed to the input element.
-
     const { register, formState: { errors }} = useFormContext();
 
     const inputError = findInputError(errors, name)

@@ -105,7 +105,7 @@ export async function createProduct(formObject) {
     const request = await fetch(`${baseUrl}/Create`, {
         credentials: 'include',
         method: 'POST',
-        body: formObject,
+        body: formObject
     })
 
     if (!request.ok) {

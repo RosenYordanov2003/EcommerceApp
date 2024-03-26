@@ -11,7 +11,7 @@
         {
             Brands = new List<BrandModel>();
             Categories = new List<CategoryModel>();
-            ImgFiles = new List<IFormFile>();
+            Files = new List<IFormFile>();
         }
 
         [MaxLength(DescriptionMaxLength)]
@@ -31,7 +31,7 @@
         [MaxLength(GenderMaxLength)]
         [Required]
         public string Gender { get; set; } = null!;
-        public IEnumerable<IFormFile> ImgFiles { get; set; } = null!;
+        public IEnumerable<IFormFile> Files { get; set; } = null!;
         public IEnumerable<BrandModel> Brands { get; set; }
         public IEnumerable<CategoryModel> Categories { get; set; }
     }

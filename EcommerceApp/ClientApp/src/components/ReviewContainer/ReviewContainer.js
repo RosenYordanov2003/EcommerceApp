@@ -29,6 +29,9 @@ export default function ReviewContainer({ id, category, product, updateProduct }
     })
 
     const handleOnSubmit = methods.handleSubmit(data => {
+        if (notification) {
+            setNotification(undefined);
+        }
         const reviewObject = {
             ...data,
             username: user?.username,
@@ -43,6 +46,7 @@ export default function ReviewContainer({ id, category, product, updateProduct }
                 setInputObject({ name: undefined, summary: undefined, review: undefined });
                 updateProduct(res.updatedProduct);
                 setStarIndex(-1);
+                methods.reset();
                 setNotification(<Notification closeNotification={closeNotification} message="You have successfully post a review" typeOfMessage="Success" />);
                 element.scrollIntoView({ behavior: 'smooth' });
             })
@@ -54,7 +58,6 @@ export default function ReviewContainer({ id, category, product, updateProduct }
         function closeNotification() {
             setNotification(undefined);
         }
-
     })
 
     return (

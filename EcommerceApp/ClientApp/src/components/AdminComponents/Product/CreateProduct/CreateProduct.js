@@ -1,9 +1,10 @@
 ﻿import { useState, useEffect } from "react";
 import { getCreateProductModel } from "../../../../adminServices/clothesService";
-import { createProduct } from "../../../../adminServices/clothesService";
+import { createProduct, uploadImgs } from "../../../../adminServices/clothesService";
 import Input from "../../../Auth/Input/Input";
 import { FormProvider, useForm } from 'react-hook-form';
-import {productNameInput, productPriceInput, productDescriptionInput} from "../../../../utilities/inputValidations";
+import { productNameInput, productPriceInput, productDescriptionInput } from "../../../../utilities/inputValidations";
+//import CircleSpinner from "../../../CircleSpinner/CircleSpinner";
 
 import "../CreateProduct/Style.css";
 
@@ -44,17 +45,20 @@ export default function CreateProduct() {
     const handleOnFormSubmit = methods.handleSubmit(data => {
 
         const formData = new FormData();
+
+        files.forEach((file) => {
+            formData.append(`files`, file);
+        });
         formData.append("categoryId", inputObject.categoryId);
-        formData.append("imgFiles", files);
         formData.append("starRating", inputObject.starRating);
         formData.append("brandId", inputObject.brandId);
+        formData.append("gender", inputObject.gender);
         for (const key in data) {
             formData.append(key, data[key]);
-            console.log(`${key} - ${data[key]}`);
-            createProduct(formData)
-            .then(() => console.log('created'))
-            .catch((error) => console.error(error));
         }
+        createProduct(formData)
+            .then(() => console.log(true))
+            .catch((error) => console.error(error));
     })
 
     const stars = Array.from({ length: 6 }, (_, index) => <option value={index}>{index}</option>);
@@ -66,7 +70,7 @@ export default function CreateProduct() {
                         <div className="add-img-container">
                         <input accept=".jpg, .jpeg, .png, .webp"
                                 multiple
-                                onChange={(e) => setFiles(e.target.files)} type="file"></input>
+                                onChange={(e) => setFiles([...e.target.files])} type="file"></input>
                             <button>Upload Imgs</button>
                         </div>
                     </section>
@@ -87,6 +91,7 @@ export default function CreateProduct() {
                             <select onChange={(event) => setInputObject({ ...inputObject, gender: event.target.options[event.target.selectedIndex].value })} value={inputObject.gender}>
                                 <option value="Men">Men</option>
                                 <option value="Women">Women</option>
+                                <option value="Unisex">Unisex</option>
                             </select>
                         </div>
                         <div className="product-input-container">
@@ -106,7 +111,6 @@ export default function CreateProduct() {
                         <button onClick={handleOnFormSubmit} className="edit-product-button" type="submit">Cretae</button>
                     </form>
                 </FormProvider>
-              
             </div>
         </div>
     )

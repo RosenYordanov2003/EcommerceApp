@@ -10,6 +10,7 @@
     using Core.Models.AdminModels.ProductStock;
     using static Common.GeneralApplicationConstants;
     using EcommerceApp.Core.Models.Pager;
+    using Microsoft.Extensions.FileProviders;
 
     [ApiController]
     [Authorize(Roles = AdminRoleName)]
@@ -155,8 +156,8 @@
             {
                 return BadRequest();
             }
-            int productId = await productSevice.CreateProductAsync(createProductModel); 
-            foreach (var file in createProductModel.ImgFiles)
+            int productId = await productSevice.CreateProductAsync(createProductModel);
+            foreach (var file in createProductModel.Files)
             {
                 try
                 {

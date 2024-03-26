@@ -22,7 +22,7 @@ export default function FeaturedProduct({ product }) {
 
     const [isFavorite, setIsFavorite] = useState(product.isFavorite);
 
-    const [imgUrl, setImgUrl] = useState(product.pictures[0].imgUrl);
+    const [imgUrl, setImgUrl] = useState(product.pictures[0]?.imgUrl);
 
     function activateProductCard(event) {
         setTimeout(() => {

@@ -29,7 +29,7 @@
                 }
                 else
                 {
-                    userCart.ProductCartEntities.Add(new ProductCartEntity() 
+                    userCart.ProductCartEntities.Add(new ProductCartEntity()
                     { ProductId = addProductToCartModel.ProductId, CartId = userCart.Id, Quantity = addProductToCartModel.Quantity, Size = addProductToCartModel.Size });
                 }
 
@@ -45,7 +45,7 @@
                 else
                 {
                     Shoes shoesToAdd = await dbContext.Shoes.FirstAsync(sh => sh.Id == addProductToCartModel.ProductId);
-                    userCart.ShoesCartEntities.Add(new ShoesCartEntity() 
+                    userCart.ShoesCartEntities.Add(new ShoesCartEntity()
                     { ShoesId = addProductToCartModel.ProductId, CartId = userCart.Id, Quantity = addProductToCartModel.Quantity, Size = int.Parse(addProductToCartModel.Size) });
                 }
             }
@@ -158,7 +158,7 @@
                            CategoryName = p.Product.Category.Name,
                            ImgUrl = p.Product.Pictures.First().ImgUrl,
                            Name = p.Product.Name,
-                           Price = p.Product.Price,
+                           Price = p.Product.Promotion != null && p.Product.Promotion.ExpireTime >= DateTime.UtcNow ? p.Product.Price - (p.Product.Price * p.Product.Promotion.PercantageDiscount) / 100 : p.Product.Price,
                            Quantity = p.Quantity,
                            Size = p.Size,
                        })
@@ -174,7 +174,6 @@
                            Size = sh.Size.ToString()
                        })
                        .ToArray()
-
                    })
                    .FirstAsync();
 

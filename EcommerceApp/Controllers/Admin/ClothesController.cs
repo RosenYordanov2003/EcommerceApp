@@ -178,6 +178,7 @@
                     return StatusCode(StatusCodes.Status500InternalServerError);
                 }
             }
+            await productStockService.AddDefaultQuantity(productId, createProductModel.CategoryId == 9 ? "shoes" : "clothes");
             return Ok();
         }
         [HttpPost]

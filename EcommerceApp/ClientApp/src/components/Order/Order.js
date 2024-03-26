@@ -76,12 +76,12 @@ export default function Order() {
                 <h1 className="order-title">Order Details</h1>
                 <FormProvider {...methods}>
                     <form onSubmit={(event) => event.preventDefault()}>
-                        <Input {...emailOrderInput} className="order-input-container"/>
-                        <Input {...firstNameInput} className="order-input-container"/>
-                        <Input {...lastNameInput} className="order-input-container"/>
-                        <Input {...streetAdressInput} className="order-input-container"/>
-                        <Input {...cityOrderInput} className="order-input-container" inputValue={inputObject.city}/>
-                        <Input {...postalCodeInput} className="order-input-container" inputValue={inputObject.postalCode}/>
+                        <Input {...emailOrderInput} classNameValue="order-input-container"/>
+                        <Input {...firstNameInput} classNameValue="order-input-container"/>
+                        <Input {...lastNameInput} classNameValue="order-input-container"/>
+                        <Input {...streetAdressInput} classNameValue="order-input-container"/>
+                        <Input {...cityOrderInput} classNameValue="order-input-container" inputValue={inputObject.city}/>
+                        <Input {...postalCodeInput} classNameValue="order-input-container" inputValue={inputObject.postalCode}/>
                         
                         <div className="order-input-container">
                             <label htmlFor="country">Country</label>
@@ -92,7 +92,7 @@ export default function Order() {
                                 <option value="United Kingdom">United Kingdom</option>
                             </select>
                         </div>
-                        <Input {...phoneNumberInput} className="order-input-container" />
+                        <Input {...phoneNumberInput} classNameValue="order-input-container" />
                         <button onClick={handleOnOrderSubmit} className="place-order-button">Place Order</button>
                     </form>
                 </FormProvider>

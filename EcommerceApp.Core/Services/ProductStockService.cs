@@ -5,7 +5,8 @@
     using Contracts;
     using Data;
     using Infrastructure.Data.Models;
-    using EcommerceApp.Core.Models.AdminModels.ProductStock;
+    using Models.AdminModels.ProductStock;
+    using static EcommerceApp.Common.GeneralApplicationConstants;
 
     public class ProductStockService : IProductStockService
     {
@@ -31,7 +32,7 @@
         {
             if (categoryName.ToLower() == "shoes")
             {
-                ShoesStock shoesCartEntity = await dbContext.ShoesStock.FirstAsync(sh => sh.ShoesId == productId 
+                ShoesStock shoesCartEntity = await dbContext.ShoesStock.FirstAsync(sh => sh.ShoesId == productId
                 && sh.Size == int.Parse(size));
 
                 shoesCartEntity.Quantity -= quantity;
@@ -79,6 +80,30 @@
                 stock.Quantity += productStockModel.Quantity;
             }
 
+            await dbContext.SaveChangesAsync();
+        }
+
+        public async Task AddDefaultQuantity(int productId, string category)
+        {
+            if (category.ToLower() == "shoes")
+            {
+                List<ShoesStock> shoesStocks = new List<ShoesStock>();
+
+                foreach (double size in ShoesSizes)
+                {
+                    shoesStocks.Add(new ShoesStock() { ShoesId = productId, Quantity = DefaultProductQuantityToAdd, Size = size });
+                }
+                await dbContext.ShoesStock.AddRangeAsync(shoesStocks);
+            }
+            else
+            {
+                List<ProductStock> productStocks = new List<ProductStock>();
+                foreach (string size in ProductSizes)
+                {
+                    productStocks.Add(new ProductStock() { ProductId = productId, Quantity = DefaultProductQuantityToAdd, Size = size });
+                }
+                await dbContext.ProductStocks.AddRangeAsync(productStocks);
+            }
             await dbContext.SaveChangesAsync();
         }
     }

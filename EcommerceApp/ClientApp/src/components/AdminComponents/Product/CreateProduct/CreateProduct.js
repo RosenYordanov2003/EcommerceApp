@@ -4,7 +4,7 @@ import { createProduct, uploadImgs } from "../../../../adminServices/clothesServ
 import Input from "../../../Auth/Input/Input";
 import { FormProvider, useForm } from 'react-hook-form';
 import { productNameInput, productPriceInput, productDescriptionInput } from "../../../../utilities/inputValidations";
-//import CircleSpinner from "../../../CircleSpinner/CircleSpinner";
+import CircleSpinner from "../../../CircleSpinner/CircleSpinner";
 
 import "../CreateProduct/Style.css";
 
@@ -29,6 +29,7 @@ export default function CreateProduct() {
     }, [])
 
     const [files, setFiles] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
     const methods = useForm();
 
     const categories = inputObject.categories.map((category) => <option value={category.id}>{category.name}</option>);
@@ -46,6 +47,8 @@ export default function CreateProduct() {
 
         const formData = new FormData();
 
+        setIsLoading(true);
+
         files.forEach((file) => {
             formData.append(`files`, file);
         });
@@ -57,7 +60,9 @@ export default function CreateProduct() {
             formData.append(key, data[key]);
         }
         createProduct(formData)
-            .then(() => console.log(true))
+            .then(() => {
+                setIsLoading(false);
+            })
             .catch((error) => console.error(error));
     })
 
@@ -65,6 +70,7 @@ export default function CreateProduct() {
 
     return (
         <div className="product-modifying-container">
+            {isLoading && <CircleSpinner/>}
                 <div className="create-product-buttons-container">
                     <section className="add-img-container-section">
                         <div className="add-img-container">

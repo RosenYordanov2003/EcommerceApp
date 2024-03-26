@@ -35,12 +35,13 @@
         public async Task<decimal> CheckWheterUserReachesDiscount(Guid userId)
         {
             int userOrdersCount = await GetUserOrdersCount(userId);
+            NewClientDiscountHandler newClientDiscountHandler = new NewClientDiscountHandler();
+            TwentyPercentageDiscountHandler twentyPercentDiscountHandler = new TwentyPercentageDiscountHandler();
+            newClientDiscountHandler.SetNextDiscountHandler(twentyPercentDiscountHandler);
+            twentyPercentDiscountHandler.SetNextDiscountHandler(new TenPercentageDiscountHandler());
 
-            TwentyPercentageDiscountHandler discountHandler = new TwentyPercentageDiscountHandler();
 
-            discountHandler.SetNextDiscountHandler(new TenPercentageDiscountHandler());
-
-            decimal promotion = discountHandler.GetDiscount(userOrdersCount);
+            decimal promotion = newClientDiscountHandler.GetDiscount(userOrdersCount);
 
             return promotion;
         }

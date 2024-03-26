@@ -59,9 +59,6 @@ export default function Order() {
 
                     navigate("/CompletedOrder");
                 }
-                else {
-                    console.log(false);
-                }
             })
             .catch((error) => console.error(error));
 

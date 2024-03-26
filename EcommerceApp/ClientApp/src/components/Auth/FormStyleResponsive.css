@@ -1,0 +1,26 @@
+﻿@media screen and (max-width: 700px){
+    .auth-form{
+        width: 90%;
+    }
+    .auth-form .input-container{
+        width: 100%;
+    }
+    .auth-form label{
+        font-size: 1rem;
+    }
+    .auth-form .submit-btn{
+        width: 90%;
+        font-size: 1rem;
+    }
+}
+@media screen and (min-width: 701px) and (max-width: 1000px){
+    .auth-form {
+        width: 90%;
+    }
+    .auth-form .input-container{
+        width: 90%;
+    }
+    .auth-form .submit-btn {
+        width: 60%;
+    }
+}

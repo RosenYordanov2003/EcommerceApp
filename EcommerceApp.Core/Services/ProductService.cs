@@ -60,7 +60,7 @@
                     StarRating = c.StarRating,
                     Pictures = c.Pictures.Select(p => new PictureModel() { ImgUrl = p.ImgUrl }).Take(2),
                     CategoryName = c.Category.Name,
-                    DicountPercentage = c.Promotion == null ? 0 : c.Promotion.PercantageDiscount,
+                    DicountPercentage = c.Promotion != null && c.Promotion.ExpireTime >= DateTime.UtcNow ? c.Promotion.PercantageDiscount : 0,
                     IsFavorite = userId.HasValue ? applicationDbContext.UserFavoriteProducts.
                     Any(us => us.UserId == userId && us.ProductId == c.Id) : false,
                 })
@@ -84,7 +84,7 @@
                       StarRating = cl.StarRating,
                       CategoryName = cl.Category.Name,
                       Brand = cl.Brand.Name,
-                      DicountPercentage = cl.Promotion == null ? 0 : cl.Promotion.PercantageDiscount,
+                      DicountPercentage = cl.Promotion != null && cl.Promotion.ExpireTime >= DateTime.UtcNow ? cl.Promotion.PercantageDiscount : 0,
                       IsFavorite = userId.HasValue ? cl.UserFavoriteProducts.Any(ufcl => ufcl.UserId == userId && ufcl.ProductId == cl.Id) : false,
                   })
                   .ToListAsync();
@@ -141,7 +141,7 @@
                 Reviews = cl.Reviews.Select(r => new ReviewModel() { Content = r.Content, StarEvaluation = r.StarЕvaluation }),
                 IsFavorite = userId.HasValue ? cl.UserFavoriteProducts.Any(uf => uf.ProductId == productId && uf.UserId == userId) : false,
                 IsAvalilable = cl.ProductStocks.Any(ps => ps.Quantity > 0),
-                DicountPercentage = cl.Promotion == null ? 0 : cl.Promotion.PercantageDiscount,
+                DicountPercentage = cl.Promotion != null && cl.Promotion.ExpireTime >= DateTime.UtcNow ? cl.Promotion.PercantageDiscount : 0,
                 TotalMilisecondsDifference = cl.Promotion == null ? 0 : (long)(cl.Promotion.ExpireTime - DateTime.UtcNow).TotalMilliseconds
             })
              .FirstAsync();

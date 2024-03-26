@@ -90,13 +90,14 @@ body:has(.auth-form) .main-nav ul li a {
 
 .auth-form .submit-btn {
     border: none;
-    width: 200px;
-    padding: 0.6rem 1rem;
-    border-radius: 14px;
+    width: 60%;
+    padding: 0.8rem 1rem;
+    border-radius: 20px;
     background-color: #018aa7;
     color: white;
     transition: 0.3s ease-in all;
     font-weight: bolder;
+    font-size: 1.2rem;
 }
 
 .auth-form-title {

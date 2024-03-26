@@ -121,7 +121,7 @@
                     CategoryName = s.Category.Name,
                     IsFavorite = userId.HasValue ? applicationDbContext.UserFavoriteShoes.
                     Any(us => us.UserId == userId && us.ShoesId == s.Id) : false,
-                    DicountPercentage = s.Promotion == null ? 0 : s.Promotion.PercantageDiscount,
+                    DicountPercentage = s.Promotion != null && s.Promotion.ExpireTime >= DateTime.UtcNow ? s.Promotion.PercantageDiscount : 0,
                 })
                 .ToArrayAsync();
         }
@@ -144,7 +144,7 @@
                         Reviews = shoes.Reviews.Select(r => new ReviewModel() { Content = r.Content, StarEvaluation = r.StarЕvaluation }),
                         IsFavorite = userId.HasValue ? shoes.UserFavoriteShoes.Any(uf => uf.ShoesId == productId && uf.UserId == userId) : false,
                         IsAvalilable = shoes.ShoesStocks.Any(ps => ps.Quantity > 0),
-                        DicountPercentage = shoes.Promotion == null ? 0 : shoes.Promotion.PercantageDiscount,
+                        DicountPercentage = shoes.Promotion != null && shoes.Promotion.ExpireTime >= DateTime.UtcNow ? shoes.Promotion.PercantageDiscount : 0,
                         TotalMilisecondsDifference = shoes.Promotion == null ? 0 : (long)(shoes.Promotion.ExpireTime - DateTime.UtcNow).TotalMilliseconds
 
                     })

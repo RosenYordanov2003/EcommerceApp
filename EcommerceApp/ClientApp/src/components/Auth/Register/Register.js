@@ -1,4 +1,5 @@
 ﻿import "../../Auth/FormStyle.css"
+import "../../Auth/FormStyleResponsive.css"
 import { register } from "../../../services/authService";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";

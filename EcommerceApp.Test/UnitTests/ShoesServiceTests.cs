@@ -144,12 +144,36 @@
             Assert.That(shoes1.BrandId, Is.EqualTo(expectedBrandId));
             Assert.That(shoes1.Name, Is.EqualTo(expectedName));
         }
+        [Test]
+        public async Task TestGetCountMethodShouldReturnTheCorrectShoesCount()
+        {
+            int expectedResult = 3;
+            int actualResult = await shoesService.GetAllShoesCountAsync();
+            Assert.That(actualResult, Is.EqualTo(expectedResult));
+        }
+        [Test]
+        public async Task TestGetFeaturedhoesMethodShouldReturnTheCorrectCount()
+        {
+            var result = await shoesService.GetFeaturedShoesAsync(UserId);
+            int expectedResult = 2;
+            int actualResult = result.Count();
+
+            Assert.That(expectedResult, Is.EqualTo(actualResult));
+        }
+        [Test]
+        public async Task TestGetFeaturedhoesMethodShouldReturnTheCorrectIds()
+        {
+            var actualResult = await shoesService.GetFeaturedShoesAsync(UserId);
+            IEnumerable<int> expectedResult = new int[] {1, 2};
+
+            CollectionAssert.AreEqual(expectedResult, actualResult.Select(x => x.Id));
+        }
 
         [TearDown]
         public void TearDown()
         {
-           dbContext.Database.EnsureDeleted();
-           dbContext.Dispose();
+            dbContext.Database.EnsureDeleted();
+            dbContext.Dispose();
         }
     }
 }

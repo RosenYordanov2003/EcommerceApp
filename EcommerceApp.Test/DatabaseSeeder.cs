@@ -29,6 +29,24 @@
         public static ShoesStock shoesStock2;
         public static ShoesStock shoesStock3;
 
+        public static Cart Cart;
+        public static User User;
+
+        public static Guid UserId = Guid.Parse("AFDEAF68-5DEA-4107-AD18-858071D354D7");
+
+
+        public static void SeedDatabase(ApplicationDbContext dbContext)
+        {
+            dbContext.Brands.AddRange(SeedBrands());
+            dbContext.Categories.AddRange(SeedCategories());
+            dbContext.Shoes.AddRange(SeedShoes());
+            dbContext.Clothes.AddRange(SeedProducts());
+            dbContext.Users.Add(SeedUser());
+            dbContext.Carts.Add(SeedCart());
+            dbContext.UserFavoriteShoes.AddRange(SeedUserFavoriteShoes());
+            dbContext.SaveChanges();
+        }
+
         private static IEnumerable<Shoes> SeedShoes()
         {
             shoes1 = new Shoes()
@@ -63,20 +81,12 @@
                 CategoryId = 2,
                 Price = 250,
                 Gender = "Men",
+                IsArchived = false,
                 BrandId = 1,
                 Description = "Instantly tilt the pitch in the bold design of the Superfly 9 Elite SG-Pro. We added a Zoom Air unit, made specifically for football, and grippy texture up top for exceptional touch, so you can dominate in the waning minutes of a match—when it matters most. Feel the explosive speed as you race around the pitch, making the critical plays with velocity and pace. Fast is in the Air. This version has Anti-Clog Traction on the soleplate, which helps prevent mud from sticking."
             };
 
             return new List<Shoes>() { shoes1, shoes2, shoes3 };
-        }
-        public static void SeedDatabase(ApplicationDbContext dbContext)
-        {
-            dbContext.Brands.AddRange(SeedBrands());
-            dbContext.Categories.AddRange(SeedCategories());
-            dbContext.Shoes.AddRange(SeedShoes());
-            dbContext.Clothes.AddRange(SeedProducts());
-
-            dbContext.SaveChanges();
         }
 
         private static IEnumerable<Product> SeedProducts()
@@ -154,6 +164,44 @@
             };
 
             return new List<Category> { category1, category2, category3 };
+        }
+        private static User SeedUser()
+        {
+            return new User()
+            {
+                Id = UserId,
+                CartId = Guid.Parse("742C4C45-5A51-4053-8F5E-7062135175A3"),
+                UserName = "Test123",
+                NormalizedUserName = "TEST123",
+                Email = "test123@gmail.com",
+                NormalizedEmail = "TEST123@GMAIL.COM",
+                SecurityStamp = Guid.NewGuid().ToString(),
+            };
+        }
+        private static Cart SeedCart()
+        {
+            return new Cart()
+            {
+                Id = Guid.Parse("742C4C45-5A51-4053-8F5E-7062135175A3"),
+            };
+        }
+        private static IEnumerable<UserFavoriteShoes> SeedUserFavoriteShoes()
+        {
+            var result = new List<UserFavoriteShoes>()
+            {
+                new UserFavoriteShoes()
+                {
+                    UserId = UserId,
+                    ShoesId = 1
+                },
+                new UserFavoriteShoes()
+                {
+                    UserId = UserId,
+                    ShoesId = 2
+                }
+            };
+
+            return result;
         }
 
     }

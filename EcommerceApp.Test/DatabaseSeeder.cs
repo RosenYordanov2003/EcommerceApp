@@ -21,6 +21,9 @@
         public static Product product2;
         public static Product product3;
 
+        public static Promotion promotion1;
+        public static Promotion promotion2;
+
         public static ProductStock productStock1;
         public static ProductStock productStock2;
         public static ProductStock productStock3;
@@ -44,6 +47,7 @@
             dbContext.Users.Add(SeedUser());
             dbContext.Carts.Add(SeedCart());
             dbContext.UserFavoriteShoes.AddRange(SeedUserFavoriteShoes());
+            dbContext.Promotions.AddRange(SeedPromotions());
             dbContext.SaveChanges();
         }
 
@@ -58,6 +62,7 @@
                 BrandId = 1,
                 Price = 130,
                 IsFeatured = true,
+                PromotionId = Guid.Parse("EA99BAEFC49D4A19BC82DFF62231AFE9"),
                 Gender = "Men",
                 Description = "The radiance lives on in the Nike Air Force 1 '07 LV8. Crossing hardwood comfort with off-court flair, these kicks put a fresh spin on a hoops classic. Soft suede overlays pair with era-echoing '80s construction and reflective-design Swoosh logos to bring you nothing-but-net style while hidden full-length Air units add the legendary comfort you know and love."
             };
@@ -200,6 +205,20 @@
                     ShoesId = 2
                 }
             };
+
+            return result;
+        }
+        private static IEnumerable<Promotion> SeedPromotions()
+        {
+            promotion1 = new Promotion()
+            {
+                ShoesId = 1,
+                Id = Guid.Parse("EA99BAEFC49D4A19BC82DFF62231AFE9"),
+                ExpireTime = DateTime.UtcNow.AddDays(1),
+                PercantageDiscount = 25.50m
+            };
+            var result = new List<Promotion>();
+            result.Add(promotion1);
 
             return result;
         }

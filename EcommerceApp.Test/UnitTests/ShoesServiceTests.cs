@@ -168,6 +168,45 @@
 
             CollectionAssert.AreEqual(expectedResult, actualResult.Select(x => x.Id));
         }
+        [Test]
+        public async Task TestGetFeaturedhoesMethodShouldReturnThatShoesAreFavoriteForParticularUser()
+        {
+            var actualResult = await shoesService.GetFeaturedShoesAsync(UserId);
+            var collectionResult = actualResult.ToArray();
+
+            Assert.IsTrue(collectionResult[0].IsFavorite);
+            Assert.IsTrue(collectionResult[1].IsFavorite);
+        }
+        [Test]
+        public async Task TestGetShoesByIdShouldReturnTheCorrectShoesId()
+        {
+            int expectedShoesId = 1;
+            var result = await shoesService.GetProductByIdAsync(shoes1.Id, UserId);
+
+            Assert.That(result.Id, Is.EqualTo(expectedShoesId));
+        }
+        [Test]
+        public async Task TestGetShoesByIdShouldReturnCorrectFavoriteValue()
+        {
+            var result = await shoesService.GetProductByIdAsync(shoes1.Id, UserId);
+            Assert.IsTrue(result.IsFavorite);
+        }
+        [Test]
+        public async Task TestSGetShoesByIdForCorrectPickedRelatedShoes()
+        {
+            var result = await shoesService.GetProductByIdAsync(shoes1.Id, UserId);
+            int[] expectedRelatedShoesIds = new int[] { 2, 3 };
+
+            CollectionAssert.AreEqual(result.RelatedProducts.Select(x => x.Id), expectedRelatedShoesIds);
+        }
+        [Test]
+        public async Task TestGetShoesByIdPromotion()
+        {
+            var result = await shoesService.GetProductByIdAsync(shoes1.Id, UserId);
+            decimal expectedPromotionPercentages = 25.50m;
+          
+            Assert.That(expectedPromotionPercentages, Is.EqualTo(result.DicountPercentage));
+        }
 
         [TearDown]
         public void TearDown()

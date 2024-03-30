@@ -214,7 +214,7 @@
             {
                 ShoesId = 1,
                 Id = Guid.Parse("EA99BAEFC49D4A19BC82DFF62231AFE9"),
-                ExpireTime = DateTime.UtcNow.AddDays(1),
+                ExpireTime = new DateTime(2024, 8, 4),
                 PercantageDiscount = 25.50m
             };
             var result = new List<Promotion>();

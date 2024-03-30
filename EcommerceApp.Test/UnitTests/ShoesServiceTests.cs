@@ -4,8 +4,18 @@
     using Core.Contracts;
     using Core.Services;
     using Data;
+    using Core.Models.AdminModels.Clothes;
+    using Core.Models.Pager;
     using static Tests.DatabaseSeeder;
-    using EcommerceApp.Core.Models.AdminModels.Clothes;
+    using static EcommerceApp.Common.GeneralApplicationConstants;
+    using EcommerceApp.Infrastructure.Data.Models;
+    using EcommerceApp.Core.Models.Products;
+    using EcommerceApp.Core.Models.AdminModels.Shoes;
+    using EcommerceApp.Core.Models.AdminModels.Pictures;
+    using EcommerceApp.Core.Models.Categories;
+    using EcommerceApp.Core.Models.Promotion;
+    using EcommerceApp.Core.Models.Brands;
+    using EcommerceApp.Core.Models.ProductStocks;
 
     [TestFixture]
     public class ShoesServiceTests
@@ -164,7 +174,7 @@
         public async Task TestGetFeaturedhoesMethodShouldReturnTheCorrectIds()
         {
             var actualResult = await shoesService.GetFeaturedShoesAsync(UserId);
-            IEnumerable<int> expectedResult = new int[] {1, 2};
+            IEnumerable<int> expectedResult = new int[] { 1, 2 };
 
             CollectionAssert.AreEqual(expectedResult, actualResult.Select(x => x.Id));
         }
@@ -204,8 +214,85 @@
         {
             var result = await shoesService.GetProductByIdAsync(shoes1.Id, UserId);
             decimal expectedPromotionPercentages = 25.50m;
-          
+
             Assert.That(expectedPromotionPercentages, Is.EqualTo(result.DicountPercentage));
+        }
+        [Test]
+        public async Task TestGetAllShoesAsyncMethod()
+        {
+            int[] expectedIds = new int[3] { 1, 2, 3 };
+            Pager pager = new Pager(3, 1, DefaultPageSize);
+            var actualResult = await shoesService.GetAllShoesAsync(pager);
+
+            CollectionAssert.AreEqual(expectedIds, actualResult.Select(x => x.Id));
+        }
+        [Test]
+        public async Task TestRemoveShoesFromUserFavoriteAsyncMethod()
+        {
+            UserFavoriteProduct userFavoriteProductModel = new UserFavoriteProduct() { ProductId = 1, UserId = UserId };
+            await shoesService.RemoveShoesToUserFavoriteProductsAsync(userFavoriteProductModel);
+            var shoes = await shoesService.GetProductByIdAsync(1, UserId);
+            Assert.IsFalse(shoes.IsFavorite);
+        }
+        [Test]
+        public async Task TestAddShoesToUserFavoriteAsyncMethod()
+        {
+            UserFavoriteProduct userFavoriteProductModel = new UserFavoriteProduct() { ProductId = 1, UserId = UserId };
+            await shoesService.RemoveShoesToUserFavoriteProductsAsync(userFavoriteProductModel);
+            await shoesService.AddShoesToUserFavoriteProductsAsync(userFavoriteProductModel);
+            var shoes = await shoesService.GetProductByIdAsync(1, UserId);
+            Assert.IsTrue(shoes.IsFavorite);
+        }
+        [Test]
+        public async Task TestGetShoesToModifyMethod()
+        {
+            CategoryModel categoryModelOne = new CategoryModel() { Id = category1.Id, Name = category1.Name };
+            CategoryModel categoryModelTwo = new CategoryModel() { Id = category2.Id, Name = category2.Name };
+            CategoryModel categoryModelThree = new CategoryModel() { Id = category3.Id, Name = category3.Name };
+            BrandModel brandModelOne = new BrandModel() { Id = brand1.Id, Name = brand1.Name };
+            BrandModel brandModelTwo = new BrandModel() { Id = brand2.Id, Name = brand2.Name };
+            PromotionModel promotionModel = new PromotionModel()
+            {
+                Id = Guid.Parse("EA99BAEFC49D4A19BC82DFF62231AFE9"),
+                PercentageDiscount = 25.50m,
+                ExpireTime = new DateTime(2024, 8, 4)
+            };
+
+            var expectedResult = new ModifyShoesModel()
+            {
+                SelectedBrandId = 1,
+                SelectedCategoryId = 2,
+                Description = "The radiance lives on in the Nike Air Force 1 '07 LV8. Crossing hardwood comfort with off-court flair, these kicks put a fresh spin on a hoops classic. Soft suede overlays pair with era-echoing '80s construction and reflective-design Swoosh logos to bring you nothing-but-net style while hidden full-length Air units add the legendary comfort you know and love.",
+                IsArchived = false,
+                IsFeatured = true,
+                ImgUrls = new List<AdminPictureModel>(),
+                Categories = new List<CategoryModel>() { categoryModelOne, categoryModelTwo, categoryModelThree },
+                Gender = "Men",
+                Name = "Nike Air Force 1 '07 LV8",
+                Price = 130,
+                StarRating = 5,
+                Id = 1,
+                PromotionModel = promotionModel,
+                Brands = new List<BrandModel>() { brandModelOne, brandModelTwo },
+                ProductStocks = Enumerable.Empty<ProductStock<double>>()
+            };
+
+            var actualResult = await shoesService.GetShoesToModifyAsync(1);
+
+            Assert.That(actualResult.Description, Is.EqualTo(expectedResult.Description));
+            Assert.That(actualResult.ImgUrls.Count(), Is.EqualTo(expectedResult.ImgUrls.Count()));
+            Assert.That(actualResult.SelectedCategoryId, Is.EqualTo(expectedResult.SelectedCategoryId));
+            Assert.That(actualResult.Gender, Is.EqualTo(expectedResult.Gender));
+            Assert.That(actualResult.Name, Is.EqualTo(expectedResult.Name));
+            Assert.That(actualResult.Id, Is.EqualTo(expectedResult.Id));
+            Assert.That(actualResult.PromotionModel.Id, Is.EqualTo(expectedResult.PromotionModel.Id));
+            Assert.That(actualResult.PromotionModel.PercentageDiscount, Is.EqualTo(expectedResult.PromotionModel.PercentageDiscount));
+            Assert.That(actualResult.PromotionModel.ExpireTime, Is.EqualTo(expectedResult.PromotionModel.ExpireTime));
+            Assert.That(actualResult.StarRating, Is.EqualTo(expectedResult.StarRating));
+            CollectionAssert.AreEqual(actualResult.Categories.Select(c => c.Id), new int[3] { 1, 2, 3 });
+            CollectionAssert.AreEqual(actualResult.Brands.Select(b => b.Id), new int[2] { 1, 2 });
+            Assert.That(expectedResult.ProductStocks.Count(), Is.EqualTo(actualResult.ProductStocks.Count()));
+
         }
 
         [TearDown]

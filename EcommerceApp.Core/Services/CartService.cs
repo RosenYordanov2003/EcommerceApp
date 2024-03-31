@@ -17,7 +17,8 @@
 
         public async Task AddProductToUserCartAsync(AddProductToCartModel addProductToCartModel)
         {
-            Cart userCart = await dbContext.Carts.Include(c => c.ProductCartEntities).Include(c => c.ShoesCartEntities).Where(c => c.UserId == addProductToCartModel.UserId).FirstAsync();
+            Cart userCart = await dbContext.Carts.Include(c => c.ProductCartEntities).Include(c => c.ShoesCartEntities)
+                .Where(c => c.UserId == addProductToCartModel.UserId).FirstAsync();
             if (addProductToCartModel.CategoryName.ToLower() != "shoes")
             {
                 Product productToAdd = await dbContext.Clothes.FirstAsync(p => p.Id == addProductToCartModel.ProductId);

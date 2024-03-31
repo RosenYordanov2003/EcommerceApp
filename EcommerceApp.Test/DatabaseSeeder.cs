@@ -188,6 +188,7 @@
             return new Cart()
             {
                 Id = Guid.Parse("742C4C45-5A51-4053-8F5E-7062135175A3"),
+                UserId = UserId
             };
         }
         private static IEnumerable<UserFavoriteShoes> SeedUserFavoriteShoes()

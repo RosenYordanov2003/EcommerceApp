@@ -1,6 +1,6 @@
 ﻿namespace EcommerceApp.Tests
 {
-    using EcommerceApp.Data;
+    using Data;
     using Infrastructure.Data.Models;
 
 
@@ -48,6 +48,8 @@
             dbContext.Carts.Add(SeedCart());
             dbContext.UserFavoriteShoes.AddRange(SeedUserFavoriteShoes());
             dbContext.Promotions.AddRange(SeedPromotions());
+            dbContext.ShoesStock.AddRange(SeedShoesStocks());
+            dbContext.ProductStocks.AddRange(SeedProductStocks());
             dbContext.SaveChanges();
         }
 
@@ -222,6 +224,58 @@
             result.Add(promotion1);
 
             return result;
+        }
+        private static IEnumerable<ShoesStock> SeedShoesStocks()
+        {
+            shoesStock1 = new ShoesStock()
+            {
+                Id = 1,
+                ShoesId = 2,
+                Size = 45,
+                Quantity = 5,
+            };
+            shoesStock2 = new ShoesStock()
+            {
+                Id = 2,
+                ShoesId = 2,
+                Size = 43,
+                Quantity = 4,
+            };
+            shoesStock3 = new ShoesStock()
+            {
+                Id = 3,
+                ShoesId = 2,
+                Size = 41,
+                Quantity = 7,
+            };
+
+            return new List<ShoesStock>() { shoesStock1, shoesStock2, shoesStock3 };
+        }
+        private static IEnumerable<ProductStock> SeedProductStocks()
+        {
+            productStock1 = new ProductStock()
+            {
+                Id = 1,
+                Size = "S",
+                ProductId = 1,
+                Quantity = 5
+            };
+            productStock2 = new ProductStock()
+            {
+                Id = 2,
+                Size = "L",
+                ProductId = 1,
+                Quantity = 10
+            };
+            productStock3 = new ProductStock()
+            {
+                Id = 3,
+                Size = "M",
+                ProductId = 2,
+                Quantity = 12
+            };
+
+            return new List<ProductStock>() { productStock1, productStock2, productStock3 };
         }
 
     }

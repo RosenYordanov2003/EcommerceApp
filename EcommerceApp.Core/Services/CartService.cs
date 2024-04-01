@@ -15,7 +15,7 @@
             this.dbContext = dbContext;
         }
 
-        public async Task AddProductToUserCartAsync(AddProductToCartModel addProductToCartModel)
+        public async Task AddProductToUserCartAsync(Models.Cart.CartProductModel addProductToCartModel)
         {
             Cart userCart = await dbContext.Carts.Include(c => c.ProductCartEntities).Include(c => c.ShoesCartEntities)
                 .Where(c => c.UserId == addProductToCartModel.UserId).FirstAsync();
@@ -60,7 +60,8 @@
 
             foreach (ProductCartEntity product in userCart.ProductCartEntities)
             {
-                ProductStock productStock = await dbContext.ProductStocks.FirstOrDefaultAsync(p => p.ProductId == product.ProductId && p.Quantity >= product.Quantity);
+                ProductStock productStock = await dbContext.ProductStocks
+                    .FirstOrDefaultAsync(p => p.ProductId == product.ProductId && p.Quantity >= product.Quantity);
 
                 if (productStock == null)
                 {
@@ -71,7 +72,8 @@
 
             foreach (ShoesCartEntity shoes in userCart.ShoesCartEntities)
             {
-                ShoesStock shoesStock = await dbContext.ShoesStock.FirstOrDefaultAsync(sh => sh.ShoesId == shoes.ShoesId && sh.Quantity >= sh.Quantity && sh.Size == shoes.Size);
+                ShoesStock shoesStock = await dbContext.ShoesStock
+                    .FirstOrDefaultAsync(sh => sh.ShoesId == shoes.ShoesId && sh.Quantity >= shoes.Quantity && sh.Size == shoes.Size);
 
                 if (shoesStock == null)
                 {
@@ -129,13 +131,12 @@
             Cart userCart = await dbContext.Carts.Include(c => c.ProductCartEntities).Include(c => c.ShoesCartEntities).Where(c => c.UserId == model.UserId)
                .FirstAsync();
 
-            if (model.ProductCategoryName.ToLower() != "shoes")
+            if (model.CategoryName.ToLower() != "shoes")
             {
                 ProductCartEntity productToModify = await dbContext.ProductCartEntities.FirstAsync(p => p.ProductId == model.ProductId &&
                 p.CartId == userCart.Id && p.Size == model.Size);
 
                 productToModify.Quantity--;
-
             }
             else
             {
@@ -157,7 +158,7 @@
                        {
                            Id = p.ProductId,
                            CategoryName = p.Product.Category.Name,
-                           ImgUrl = p.Product.Pictures.First().ImgUrl,
+                           ImgUrl = p.Product.Pictures.FirstOrDefault().ImgUrl,
                            Name = p.Product.Name,
                            Price = p.Product.Promotion != null && p.Product.Promotion.ExpireTime >= DateTime.UtcNow ? p.Product.Price - (p.Product.Price * p.Product.Promotion.PercantageDiscount) / 100 : p.Product.Price,
                            Quantity = p.Quantity,
@@ -168,9 +169,9 @@
                        {
                            Id = sh.Shoes.Id,
                            CategoryName = sh.Shoes.Category.Name,
-                           ImgUrl = sh.Shoes.Pictures.First().ImgUrl,
+                           ImgUrl = sh.Shoes.Pictures.FirstOrDefault().ImgUrl,
                            Name = sh.Shoes.Name,
-                           Price = sh.Shoes.Price,
+                           Price = sh.Shoes.Promotion != null && sh.Shoes.Promotion.ExpireTime >= DateTime.UtcNow ? sh.Shoes.Price - (sh.Shoes.Price * sh.Shoes.Promotion.PercantageDiscount) / 100 : sh.Shoes.Price,
                            Quantity = sh.Quantity,
                            Size = sh.Size.ToString()
                        })
@@ -188,7 +189,7 @@
             Cart userCart = await dbContext.Carts.Include(c => c.ProductCartEntities).Include(c => c.ShoesCartEntities).Where(c => c.UserId == model.UserId)
                 .FirstAsync();
 
-            if (model.ProductCategoryName.ToLower() != "shoes")
+            if (model.CategoryName.ToLower() != "shoes")
             {
                 ProductCartEntity productToModify = await dbContext.ProductCartEntities.FirstAsync(p => p.CartId == userCart.Id && p.ProductId == model.ProductId);
                 productToModify.Quantity++;
@@ -201,7 +202,7 @@
             await dbContext.SaveChangesAsync();
         }
 
-        public async Task RemoveProductFromUserCartAsync(RemoveCartProductModel removeCartProductModel)
+        public async Task RemoveProductFromUserCartAsync(CartProductModel removeCartProductModel)
         {
             Cart userCart = await dbContext.Carts.Include(c => c.ShoesCartEntities).Include(c => c.ProductCartEntities).Where(c => c.UserId == removeCartProductModel.UserId).FirstAsync();
 

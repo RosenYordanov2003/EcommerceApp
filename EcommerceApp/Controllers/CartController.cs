@@ -39,7 +39,7 @@
 
         [HttpPost]
         [Route("AddProduct")]
-        public async Task<IActionResult> AddProduct([FromBody] AddProductToCartModel model)
+        public async Task<IActionResult> AddProduct([FromBody] CartProductModel model)
         {
             if (!await productStockService.CheckForProductQuantityAsync(model.CategoryName, model.ProductId, model.Size, model.Quantity))
             {
@@ -54,7 +54,7 @@
         }
         [HttpPost]
         [Route("RemoveProduct")]
-        public async Task<IActionResult> RemoveProductFromUserCart([FromBody] RemoveCartProductModel model)
+        public async Task<IActionResult> RemoveProductFromUserCart([FromBody] CartProductModel model)
         {
             await cartService.RemoveProductFromUserCartAsync(model);
             await productStockService.IncreaseProductStockQuantity(model.CategoryName, model.ProductId, model.Size, model.Quantity);
@@ -65,19 +65,20 @@
         [Route("ModifyProducCarttQuantity")]
         public async Task<IActionResult> IncreaseProductQuantity([FromBody] ModifyProductCartQuantityModel model)
         {
+            const int quantity = 1;
             if (model.Operation == "increase")
             {
-                if (!await productStockService.CheckForProductQuantityAsync(model.ProductCategoryName, model.ProductId, model.Size, 1))
+                if (!await productStockService.CheckForProductQuantityAsync(model.CategoryName, model.ProductId, model.Size, quantity))
                 {
                     return Ok(new { Success = false, Error = "There is no available product quantity" });
                 }
                 await cartService.IncreaseProductCartQuantityAsync(model);
-                await productStockService.DecreaseProductStockQuantity(model.ProductCategoryName, model.ProductId, model.Size, 1);
+                await productStockService.DecreaseProductStockQuantity(model.CategoryName, model.ProductId, model.Size, quantity);
 
                 return Ok(new { Success = true });
             }
             await cartService.DecreaseProductCartQuantityAsync(model);
-            await productStockService.IncreaseProductStockQuantity(model.ProductCategoryName, model.ProductId, model.Size, 1);
+            await productStockService.IncreaseProductStockQuantity(model.CategoryName, model.ProductId, model.Size, quantity);
 
             return Ok(new { Success = true });
         }

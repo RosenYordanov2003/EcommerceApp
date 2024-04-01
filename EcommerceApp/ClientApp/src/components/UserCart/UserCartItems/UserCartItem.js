@@ -15,7 +15,7 @@ export default function UserCartItem({ item, handleIncreaseItemPrice, handleDecr
         }
         const object = {
             userId: user.id,
-            productCategoryName: item.categoryName,
+            categoryName: item.categoryName,
             productId: item.id,
             operation: 'decrease',
             quantity: item.quantity,
@@ -33,7 +33,7 @@ export default function UserCartItem({ item, handleIncreaseItemPrice, handleDecr
 
             const object = {
                 userId: user.id,
-                productCategoryName: item.categoryName,
+                categoryName: item.categoryName,
                 productId: item.id,
                 operation: 'increase',
                 quantity: item.quantity,
@@ -62,7 +62,6 @@ export default function UserCartItem({ item, handleIncreaseItemPrice, handleDecr
             categoryName: item.categoryName,
             productId: item.id,
             size: item.size.toString(),
-            quantity: item.quantity
         }
 
         if (item.categoryName === "Shoes") {

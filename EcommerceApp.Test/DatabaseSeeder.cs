@@ -105,9 +105,10 @@
                 Name = "Chicago Bulls Essential",
                 Description = "Men's Jordan NBA Long-Sleeve T-Shirt",
                 CategoryId = 1,
-                Gender = "M",
+                Gender = "Men",
                 Price = 40,
-                StarRating = 4
+                StarRating = 4,
+                IsFeatured = true
             };
             product2 = new Product()
             {
@@ -116,9 +117,10 @@
                 Name = "Chicago Bulls Essential",
                 Description = "Men's Jordan NBA Long-Sleeve T-Shirt",
                 CategoryId = 1,
-                Gender = "M",
+                Gender = "Men",
                 Price = 40,
-                StarRating = 4
+                StarRating = 4,
+                IsFeatured = false,
             };
             product3 = new Product()
             {
@@ -128,7 +130,8 @@
                 Price = 38,
                 StarRating = 5,
                 CategoryId = 1,
-                Gender = "M",
+                IsFeatured = true,
+                Gender = "Men",
                 Description = "From the pitch to the streets, you can celebrate Marcus Rashford's passion for sport in comfort with this sweat-wicking tee. Soft fabric and a relaxed fit help keep you dry and comfortable, while retro branding and an \"MR\" logo add the perfect finishing touches."
             };
             return new List<Product>() { product1, product2, product3 };
@@ -155,19 +158,19 @@
             {
                 Id = 1,
                 Name = "T-Shirts",
-                Gender = "W M"
+                Gender = "Unisex"
             };
             category2 = new Category()
             {
                 Id = 2,
                 Name = "Shoes",
-                Gender = "W M"
+                Gender = "Unisex"
             };
             category3 = new Category()
             {
                 Id = 3,
                 Name = "Trousers",
-                Gender = "W M"
+                Gender = "Unisex"
             };
 
             return new List<Category> { category1, category2, category3 };

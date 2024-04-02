@@ -18,7 +18,7 @@
     using EcommerceApp.Core.Models.ProductStocks;
 
     [TestFixture]
-    public class ShoesServiceTests
+    internal class ShoesServiceTests
     {
         private IShoesService shoesService;
         private ApplicationDbContext dbContext;

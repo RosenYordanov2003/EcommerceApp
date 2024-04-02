@@ -7,7 +7,7 @@
     using static Tests.DatabaseSeeder;
 
     [TestFixture]
-    public class CategoryServiceTests
+    internal class CategoryServiceTests
     {
         private ICategoryService categoryService;
         private ApplicationDbContext dbContext;

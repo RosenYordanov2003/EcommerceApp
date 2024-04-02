@@ -8,7 +8,7 @@ namespace EcommerceApp.Tests.UnitTests
     using System.Linq;
 
     [TestFixture]
-    public class BrandServiceTests
+    internal class BrandServiceTests
     {
         private ApplicationDbContext applicationDbContext;
         private IBrandService brandService;

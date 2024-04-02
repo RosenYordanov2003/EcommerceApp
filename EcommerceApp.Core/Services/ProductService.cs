@@ -15,7 +15,6 @@
     using Models.Promotion;
     using Models.AdminModels.Pictures;
     using Core.Models.Pager;
-    using Microsoft.EntityFrameworkCore.Infrastructure;
 
     public class ProductService : IProductSevice
     {

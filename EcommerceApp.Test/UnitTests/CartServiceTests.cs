@@ -6,12 +6,11 @@
     using Data;
     using Core.Services;
     using Core.Models.Cart;
-    using EcommerceApp.Core.Models.Products;
-    using EcommerceApp.Tests.UnitTests.Comparators;
-    using EcommerceApp.Infrastructure.Data.Models;
+    using Tests.UnitTests.Comparators;
+    using Infrastructure.Data.Models;
 
     [TestFixture]
-    public class CartServiceTests
+    internal class CartServiceTests
     {
         private ApplicationDbContext applicationDbContext;
         private ICartService cartService;
@@ -30,7 +29,7 @@
         [Test]
         public async Task TestAddProductToUserCartWithShoesShouldAddShoecCartEntity()
         {
-            Core.Models.Cart.CartProductModel addProductToCartModel = new Core.Models.Cart.CartProductModel()
+            CartProductModel addProductToCartModel = new CartProductModel()
             {
                 UserId = UserId,
                 CategoryName = "Shoes",
@@ -68,7 +67,7 @@
         [Test]
         public async Task TestAddProductToUserCartWithShoesShouldIncreaseProductCartQuantity()
         {
-            Core.Models.Cart.CartProductModel addProductToCartModel = new Core.Models.Cart.CartProductModel()
+            CartProductModel addProductToCartModel = new CartProductModel()
             {
                 UserId = UserId,
                 CategoryName = "T-Shirts",
@@ -96,7 +95,7 @@
         [Test]
         public async Task TestAddProductToUserCartWithShoesShouldIncreaseQuantity()
         {
-            Core.Models.Cart.CartProductModel addProductToCartModel = new Core.Models.Cart.CartProductModel()
+            CartProductModel addProductToCartModel = new CartProductModel()
             {
                 UserId = UserId,
                 CategoryName = "Shoes",
@@ -104,7 +103,7 @@
                 Quantity = 2,
                 Size = "45"
             };
-            Core.Models.Cart.CartProductModel addProductToCartModelTwo = new Core.Models.Cart.CartProductModel()
+            CartProductModel addProductToCartModelTwo = new CartProductModel()
             {
                 UserId = UserId,
                 CategoryName = "Shoes",
@@ -124,7 +123,7 @@
         [Test]
         public async Task TestCheckICartProductsQuantityIsAvailableAsyncShouldReturnTrue()
         {
-            Core.Models.Cart.CartProductModel addProductToCartModel = new Core.Models.Cart.CartProductModel()
+            CartProductModel addProductToCartModel = new CartProductModel()
             {
                 UserId = UserId,
                 CategoryName = "Shoes",
@@ -132,7 +131,7 @@
                 Quantity = 3,
                 Size = "45"
             };
-            Core.Models.Cart.CartProductModel addProductToCartModel2 = new Core.Models.Cart.CartProductModel()
+            CartProductModel addProductToCartModel2 = new CartProductModel()
             {
                 UserId = UserId,
                 CategoryName = "T-Shirts",
@@ -154,7 +153,7 @@
         [Test]
         public async Task TestCheckICartProductsQuantityIsAvailableAsyncShouldReturnFalse()
         {
-            Core.Models.Cart.CartProductModel addProductToCartModel = new Core.Models.Cart.CartProductModel()
+            CartProductModel addProductToCartModel = new CartProductModel()
             {
                 UserId = UserId,
                 CategoryName = "Shoes",
@@ -162,7 +161,7 @@
                 Quantity = 13,
                 Size = "45"
             };
-            Core.Models.Cart.CartProductModel addProductToCartModel2 = new Core.Models.Cart.CartProductModel()
+            CartProductModel addProductToCartModel2 = new CartProductModel()
             {
                 UserId = UserId,
                 CategoryName = "T-Shirts",
@@ -178,7 +177,7 @@
         [Test]
         public async Task TestClearUserCartAsyncAfterFinishingOrder()
         {
-            Core.Models.Cart.CartProductModel addProductToCartModel = new Core.Models.Cart.CartProductModel()
+            CartProductModel addProductToCartModel = new CartProductModel()
             {
                 UserId = UserId,
                 CategoryName = "Shoes",
@@ -186,7 +185,7 @@
                 Quantity = 13,
                 Size = "45"
             };
-            Core.Models.Cart.CartProductModel addProductToCartModel2 = new Core.Models.Cart.CartProductModel()
+            CartProductModel addProductToCartModel2 = new CartProductModel()
             {
                 UserId = UserId,
                 CategoryName = "T-Shirts",
@@ -218,7 +217,7 @@
                 Size = "45",
                 UserId = UserId
             };
-            Core.Models.Cart.CartProductModel addProductToCartModel = new Core.Models.Cart.CartProductModel()
+            CartProductModel addProductToCartModel = new CartProductModel()
             {
                 UserId = UserId,
                 CategoryName = "Shoes",
@@ -266,7 +265,7 @@
         [Test]
         public async Task TestGetUserCartByUserIdAsync()
         {
-            Core.Models.Cart.CartProductModel addProductToCartModel = new Core.Models.Cart.CartProductModel()
+           CartProductModel addProductToCartModel = new CartProductModel()
             {
                 Size = "45",
                 CategoryName = "Shoes",
@@ -274,7 +273,7 @@
                 UserId = UserId,
                 ProductId = shoes1.Id
             };
-            Core.Models.Cart.CartProductModel addProductToCartModel2 = new Core.Models.Cart.CartProductModel()
+           CartProductModel addProductToCartModel2 = new CartProductModel()
             {
                 Size = "M",
                 CategoryName = "T-Shirts",

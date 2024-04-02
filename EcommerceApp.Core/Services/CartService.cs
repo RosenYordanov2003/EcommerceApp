@@ -15,7 +15,7 @@
             this.dbContext = dbContext;
         }
 
-        public async Task AddProductToUserCartAsync(Models.Cart.CartProductModel addProductToCartModel)
+        public async Task AddProductToUserCartAsync(CartProductModel addProductToCartModel)
         {
             Cart userCart = await dbContext.Carts.Include(c => c.ProductCartEntities).Include(c => c.ShoesCartEntities)
                 .Where(c => c.UserId == addProductToCartModel.UserId).FirstAsync();

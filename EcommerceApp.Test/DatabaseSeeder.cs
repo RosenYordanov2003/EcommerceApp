@@ -108,7 +108,8 @@
                 Gender = "Men",
                 Price = 40,
                 StarRating = 4,
-                IsFeatured = true
+                IsFeatured = true,
+                IsArchived = false,
             };
             product2 = new Product()
             {
@@ -121,6 +122,7 @@
                 Price = 40,
                 StarRating = 4,
                 IsFeatured = false,
+                IsArchived = false,
             };
             product3 = new Product()
             {
@@ -131,6 +133,7 @@
                 StarRating = 5,
                 CategoryId = 1,
                 IsFeatured = true,
+                IsArchived = false,
                 Gender = "Men",
                 Description = "From the pitch to the streets, you can celebrate Marcus Rashford's passion for sport in comfort with this sweat-wicking tee. Soft fabric and a relaxed fit help keep you dry and comfortable, while retro branding and an \"MR\" logo add the perfect finishing touches."
             };

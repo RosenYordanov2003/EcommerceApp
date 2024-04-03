@@ -7,15 +7,14 @@
     using Core.Models.AdminModels.Clothes;
     using Core.Models.Pager;
     using static Tests.DatabaseSeeder;
-    using static EcommerceApp.Common.GeneralApplicationConstants;
-    using EcommerceApp.Infrastructure.Data.Models;
-    using EcommerceApp.Core.Models.Products;
-    using EcommerceApp.Core.Models.AdminModels.Shoes;
-    using EcommerceApp.Core.Models.AdminModels.Pictures;
-    using EcommerceApp.Core.Models.Categories;
-    using EcommerceApp.Core.Models.Promotion;
-    using EcommerceApp.Core.Models.Brands;
-    using EcommerceApp.Core.Models.ProductStocks;
+    using static Common.GeneralApplicationConstants;
+    using Core.Models.Products;
+    using Core.Models.AdminModels.Shoes;
+    using Core.Models.AdminModels.Pictures;
+    using Core.Models.Categories;
+    using Core.Models.Promotion;
+    using Core.Models.Brands;
+    using Core.Models.ProductStocks;
 
     [TestFixture]
     internal class ShoesServiceTests

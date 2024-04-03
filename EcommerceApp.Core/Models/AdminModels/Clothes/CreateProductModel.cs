@@ -5,7 +5,7 @@
     using Models.Categories;
     using System.ComponentModel.DataAnnotations;
     using static GlobalConstants.EntityValidation.ClothesEntity;
-    public class CreateProductModel
+    public class CreateProductModel : EditProductModel
     {
         public CreateProductModel()
         {
@@ -13,20 +13,8 @@
             Categories = new List<CategoryModel>();
             Files = new List<IFormFile>();
         }
-
-        [MaxLength(DescriptionMaxLength)]
-        public string? Description { get; set; }
-
-        [MinLength(NameMinLength)]
-        [MaxLength(NameMaxLength)]
-        [Required]
-        public string Name { get; set; } = null!;
-        public decimal Price { get; set; }
-
         [Range(minimum: StarRatingMinValue, maximum: StarRatingMaxValue)]
         public int StarRating { get; set; }
-        public int CategoryId { get; set; }
-        public int BrandId { get; set; }
         [MinLength(GenderMinLength)]
         [MaxLength(GenderMaxLength)]
         [Required]

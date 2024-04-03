@@ -230,7 +230,8 @@
                      IsFavorite = true,
                      Name = fsh.Shoes.Name,
                      Price = fsh.Shoes.Price,
-                     StarRating = fsh.Shoes.StarRating
+                     StarRating = fsh.Shoes.StarRating,
+                     DicountPercentage = fsh.Shoes.Promotion != null && fsh.Shoes.Promotion.ExpireTime >= DateTime.UtcNow ? fsh.Shoes.Promotion.PercantageDiscount : 0,
 
                  })
                  .ToArrayAsync();
@@ -246,7 +247,8 @@
                IsFavorite = true,
                Name = fp.Product.Name,
                Price = fp.Product.Price,
-               StarRating = fp.Product.StarRating
+               StarRating = fp.Product.StarRating,
+               DicountPercentage = fp.Product.Promotion != null && fp.Product.Promotion.ExpireTime >= DateTime.UtcNow ? fp.Product.Promotion.PercantageDiscount : 0,
 
            })
            .ToArrayAsync();

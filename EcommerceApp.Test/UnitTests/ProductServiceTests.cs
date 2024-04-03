@@ -2,14 +2,20 @@
 {
     using Microsoft.EntityFrameworkCore;
     using static Tests.DatabaseSeeder;
+    using static Common.GeneralApplicationConstants;
     using Core.Contracts;
     using Data;
     using Core.Services;
-    using EcommerceApp.Core.Models.Products;
-    using EcommerceApp.Core.Models.Pictures;
-    using EcommerceApp.Tests.UnitTests.Comparators;
-    using EcommerceApp.Core.Models.Review;
-    using EcommerceApp.Core.Models.ProductStocks;
+    using Core.Models.Products;
+    using Core.Models.Pictures;
+    using Tests.UnitTests.Comparators;
+    using Core.Models.Review;
+    using Core.Models.ProductStocks;
+    using Core.Models.Pager;
+    using Core.Models.AdminModels.Clothes;
+    using Core.Models.AdminModels.Pictures;
+    using EcommerceApp.Infrastructure.Data.Models;
+    using System.Security.Cryptography.X509Certificates;
 
     [TestFixture]
     internal class ProductServiceTests
@@ -125,7 +131,7 @@
                 "Shoes",
                 "Trousers"
             };
-          
+
             int expectedCount = 0;
 
             Assert.That(result.Shoes.Count(), Is.EqualTo(expectedCount));
@@ -291,6 +297,258 @@
             var actualCollection = await productSevice.GetUserFavoriteProductsAsync(UserId);
 
             CollectionAssert.AreEqual(expectedCollection, actualCollection, new UserFavoriteProductModelComparator());
+        }
+        [Test]
+        public async Task TestLoadAllClothesAsyncShouldReturnsTheCorrectIds()
+        {
+            Pager pager = new Pager(3, 1, DefaultPageSize);
+            var result = await productSevice.LoadAllClothesAsync(pager);
+
+            int[] expectedIds = new int[] { 1, 2, 3 };
+
+            CollectionAssert.AreEqual(expectedIds, result.Select(x => x.Id));
+        }
+        [Test]
+        public async Task TestLoadAllClothesAsyncShouldReturnsTheCorrectObjects()
+        {
+            Pager pager = new Pager(3, 1, DefaultPageSize);
+            var result = await productSevice.LoadAllClothesAsync(pager);
+
+            var expectedCollection = new List<ClothesModel>()
+            {
+                new ClothesModel()
+                {
+                    Id = 1,
+                    ImgUrls = new List<AdminPictureModel>(),
+                    IsArchived = false,
+                    Name = "Chicago Bulls Essential",
+                    Price = 40,
+                    StarRating = 4
+                },
+                new ClothesModel()
+                {
+                    Id = 2,
+                    ImgUrls = new List<AdminPictureModel>(),
+                    IsArchived = false,
+                    Name = "Chicago Bulls Essential",
+                    Price = 40,
+                    StarRating = 4
+                },
+                new ClothesModel()
+                {
+                    Id = 3,
+                    ImgUrls = new List<AdminPictureModel>(),
+                    IsArchived = false,
+                    Name = "Nike Air x Marcus Rashford",
+                    Price = 38,
+                    StarRating = 5
+                }
+            };
+
+            var actualCollection = await productSevice.LoadAllClothesAsync(pager);
+
+            CollectionAssert.AreEqual(expectedCollection, actualCollection, new ClothesModelComparator());
+        }
+        [Test]
+        public async Task TestLoadUserFavoriteProductsAsyncShouldReturnsTwoElements()
+        {
+            const int expectedCount = 2;
+
+            var result = await productSevice.LoadUserFavoriteProductsAsync(UserId);
+
+            Assert.That(result.Count, Is.EqualTo(expectedCount));
+        }
+        [Test]
+        public async Task TestLoadUserFavoriteProductsAsyncShouldReturnsTheCorrectElements()
+        {
+           var expectedCollection = new List<ProductFeatureModel>()
+           {
+               new ProductFeatureModel()
+               {
+                   Id = 3,
+                   CategoryName = "T-Shirts",
+                   DicountPercentage = 0,
+                   Name = "Nike Air x Marcus Rashford",
+                   IsFavorite = true,
+                   StarRating = 5,
+                   Pictures = new List<PictureModel>(),
+                   Price = 38
+               },
+               new ProductFeatureModel()
+               {
+                   Id = 1,
+                   CategoryName = "Shoes",
+                   DicountPercentage = 25.50m,
+                   Name = "Nike Air Force 1 '07 LV8",
+                   IsFavorite = true,
+                   StarRating = 5,
+                   Pictures = new List<PictureModel>(),
+                   Price = 130
+               },
+               new ProductFeatureModel()
+               {
+                   Id = 2,
+                   CategoryName = "Shoes",
+                   DicountPercentage = 0,
+                   Name = "Nike Mercurial Vapor 15 Pro",
+                   IsFavorite = true,
+                   StarRating = 5,
+                   Pictures = new List<PictureModel>(),
+                   Price = 160
+               },
+           };
+
+            await productSevice.AddProductToUserFavoritesListAsync(new UserFavoriteProduct() { ProductId = 3, UserId = UserId });
+
+            var actualCollection = await productSevice.LoadUserFavoriteProductsAsync(UserId);
+
+            CollectionAssert.AreEqual(expectedCollection, actualCollection, new ProductFeatureModelComparator());
+        }
+        [Test]
+        public async Task TestGetProductToModifyAsync()
+        {
+            ModifyClothesModel expectedModel = new ModifyClothesModel()
+            {
+                SelectedBrandId = 1,
+                IsArchived = false,
+                IsFeatured = true,
+                Id = 1,
+                SelectedCategoryId = 1,
+                Description = "Men's Jordan NBA Long-Sleeve T-Shirt",
+                Name = "Chicago Bulls Essential",
+                Gender = "Men",
+                StarRating = 5,
+                ImgUrls = new List<AdminPictureModel>(),
+                Price = 40,
+                ProductStocks = new List<ProductStock<string>>()
+                {
+                    new ProductStock<string>()
+                    {
+                        Size = "S",
+                        Quantity = 5
+                    },
+                    new ProductStock<string>()
+                    {
+                        Size = "L",
+                        Quantity = 10
+                    }
+                }
+            };
+
+            var actualModel = await productSevice.GetProductToModifyAsync(1);
+
+            Assert.That(actualModel.SelectedBrandId, Is.EqualTo(expectedModel.SelectedBrandId));
+            Assert.That(actualModel.IsFeatured, Is.EqualTo(expectedModel.IsFeatured));
+            Assert.That(actualModel.IsArchived, Is.EqualTo(expectedModel.IsArchived));
+            Assert.That(actualModel.Name, Is.EqualTo(expectedModel.Name));
+            Assert.That(actualModel.Description, Is.EqualTo(expectedModel.Description));
+            Assert.That(actualModel.Price, Is.EqualTo(expectedModel.Price));
+            Assert.That(actualModel.Gender, Is.EqualTo(expectedModel.Gender));
+            CollectionAssert.AreEqual(expectedModel.ProductStocks, actualModel.ProductStocks, new ProductStockComparator());
+        }
+        [Test]
+        public async Task TestEditProduct()
+        {
+            var model = new EditProductModel()
+            {
+                CategoryId = 2,
+                BrandId = 1,
+                Description = "Men's Jordan NBA Long-Sleeve T-Shirt",
+                Name = "Chicago Bulls Essential",
+                Price = 35,
+                Id = 1,
+            };
+
+            const int expectedCategoryId = 2;
+            const decimal expectedPrice = 35;
+
+            await productSevice.EditProductAsync(model);
+            var result = await applicationDbContext.Clothes.FirstAsync(x => x.Id == 1);
+
+            Assert.That(result.CategoryId, Is.EqualTo(expectedCategoryId));
+            Assert.That(result.Price, Is.EqualTo(expectedPrice));
+        }
+        [Test]
+        public async Task TestArchiveProductAsync()
+        {
+            await productSevice.ArchiveProductAsync(product1.Id);
+            var result = await applicationDbContext.Clothes.FirstAsync(x => x.Id == 1);
+
+            Assert.IsTrue(result.IsArchived);
+        }
+        [Test]
+        public async Task TestRestoreProductAsync()
+        {
+            await productSevice.ArchiveProductAsync(product1.Id);
+            await productSevice.RestoreProductAsync(product1.Id);
+            var result = await applicationDbContext.Clothes.FirstAsync(x => x.Id == 1);
+
+            Assert.IsFalse(result.IsArchived);
+        }
+        [Test]
+        public async Task TestSetFeaturedProductAsync()
+        {
+            await productSevice.SetProductToBeFeaturedByIdAsync(product2.Id);
+            var result = await applicationDbContext.Clothes.FirstAsync(x => x.Id == 2);
+
+            Assert.IsTrue(result.IsFeatured);
+        }
+        [Test]
+        public async Task TestRemoveProductFromBeFeaturedProductsByIdAsync()
+        {
+            await productSevice.SetProductToBeFeaturedByIdAsync(product2.Id);
+            await productSevice.RemoveProductFromBeFeaturedProductsByIdAsync(product2.Id);
+            var result = await applicationDbContext.Clothes.FirstAsync(x => x.Id == 2);
+
+            Assert.IsFalse(result.IsFeatured);
+        }
+        [Test]
+        public async Task TestCreateProductMethodAsync()
+        {
+            CreateProductModel createProductModel = new CreateProductModel()
+            {
+                CategoryId = 1,
+                BrandId = 2,
+                Gender = "Women",
+                Description = "Test Description",
+                Name = "Test Product",
+                Price = 100,
+                StarRating = 5
+            };
+
+            await productSevice.CreateProductAsync(createProductModel);
+
+            var result = await applicationDbContext.Clothes.AnyAsync(x => x.Id == 4);
+
+            Assert.IsTrue(result);
+        }
+        [Test]
+        public async Task TestCreateProductMethodAsync2()
+        {
+            CreateProductModel createProductModel = new CreateProductModel()
+            {
+                CategoryId = 9,
+                BrandId = 2,
+                Gender = "Women",
+                Description = "Test Description",
+                Name = "Test Product",
+                Price = 100,
+                StarRating = 5
+            };
+
+            await productSevice.CreateProductAsync(createProductModel);
+
+            var result = await applicationDbContext.Shoes.AnyAsync(x => x.Id == 4);
+
+            Assert.IsTrue(result);
+        }
+        [Test]
+        public async Task TestGetAllClothesCountAsync()
+        {
+            const int expectedCount = 3;
+            int actualCount = await productSevice.GetAllClothesCountAsync();
+
+            Assert.That(actualCount, Is.EqualTo(expectedCount));
         }
 
         [TearDown]

@@ -31,7 +31,7 @@
         {
             CartProductModel addProductToCartModel = new CartProductModel()
             {
-                UserId = UserId,
+                UserId = userId,
                 CategoryName = "Shoes",
                 ProductId = shoes1.Id,
                 Quantity = 2,
@@ -50,7 +50,7 @@
         {
             Core.Models.Cart.CartProductModel addProductToCartModel = new Core.Models.Cart.CartProductModel()
             {
-                UserId = UserId,
+                UserId = userId,
                 CategoryName = "T-Shirts",
                 ProductId = product1.Id,
                 Quantity = 2,
@@ -69,7 +69,7 @@
         {
             CartProductModel addProductToCartModel = new CartProductModel()
             {
-                UserId = UserId,
+                UserId = userId,
                 CategoryName = "T-Shirts",
                 ProductId = product1.Id,
                 Quantity = 2,
@@ -77,7 +77,7 @@
             };
             Core.Models.Cart.CartProductModel addProductToCartModelSecond = new Core.Models.Cart.CartProductModel()
             {
-                UserId = UserId,
+                UserId = userId,
                 CategoryName = "T-Shirts",
                 ProductId = product1.Id,
                 Quantity = 5,
@@ -97,7 +97,7 @@
         {
             CartProductModel addProductToCartModel = new CartProductModel()
             {
-                UserId = UserId,
+                UserId = userId,
                 CategoryName = "Shoes",
                 ProductId = shoes1.Id,
                 Quantity = 2,
@@ -105,7 +105,7 @@
             };
             CartProductModel addProductToCartModelTwo = new CartProductModel()
             {
-                UserId = UserId,
+                UserId = userId,
                 CategoryName = "Shoes",
                 ProductId = shoes1.Id,
                 Quantity = 2,
@@ -125,7 +125,7 @@
         {
             CartProductModel addProductToCartModel = new CartProductModel()
             {
-                UserId = UserId,
+                UserId = userId,
                 CategoryName = "Shoes",
                 ProductId = shoes2.Id,
                 Quantity = 3,
@@ -133,7 +133,7 @@
             };
             CartProductModel addProductToCartModel2 = new CartProductModel()
             {
-                UserId = UserId,
+                UserId = userId,
                 CategoryName = "T-Shirts",
                 ProductId = product1.Id,
                 Quantity = 10,
@@ -141,7 +141,7 @@
             };
             await cartService.AddProductToUserCartAsync(addProductToCartModel);
             await cartService.AddProductToUserCartAsync(addProductToCartModel2);
-            bool result = await cartService.CheckICartProductsQuantityIsAvailableAsync(UserId);
+            bool result = await cartService.CheckICartProductsQuantityIsAvailableAsync(userId);
             var shoesStock = await applicationDbContext.ShoesStock.FirstAsync(x => x.ShoesId == shoes2.Id && x.Size == 45);
             var productStock = await applicationDbContext.ProductStocks.FirstAsync(x => x.ProductId == product1.Id && x.Size == "L");
             const int expectedQuantity = 2;
@@ -155,7 +155,7 @@
         {
             CartProductModel addProductToCartModel = new CartProductModel()
             {
-                UserId = UserId,
+                UserId = userId,
                 CategoryName = "Shoes",
                 ProductId = shoes2.Id,
                 Quantity = 13,
@@ -163,7 +163,7 @@
             };
             CartProductModel addProductToCartModel2 = new CartProductModel()
             {
-                UserId = UserId,
+                UserId = userId,
                 CategoryName = "T-Shirts",
                 ProductId = shoes2.Id,
                 Quantity = 11,
@@ -171,7 +171,7 @@
             };
             await cartService.AddProductToUserCartAsync(addProductToCartModel);
             await cartService.AddProductToUserCartAsync(addProductToCartModel2);
-            bool result = await cartService.CheckICartProductsQuantityIsAvailableAsync(UserId);
+            bool result = await cartService.CheckICartProductsQuantityIsAvailableAsync(userId);
             Assert.IsFalse(result);
         }
         [Test]
@@ -179,7 +179,7 @@
         {
             CartProductModel addProductToCartModel = new CartProductModel()
             {
-                UserId = UserId,
+                UserId = userId,
                 CategoryName = "Shoes",
                 ProductId = shoes2.Id,
                 Quantity = 13,
@@ -187,7 +187,7 @@
             };
             CartProductModel addProductToCartModel2 = new CartProductModel()
             {
-                UserId = UserId,
+                UserId = userId,
                 CategoryName = "T-Shirts",
                 ProductId = shoes2.Id,
                 Quantity = 11,
@@ -195,7 +195,7 @@
             };
             await cartService.AddProductToUserCartAsync(addProductToCartModel);
             await cartService.AddProductToUserCartAsync(addProductToCartModel2);
-            await cartService.ClearUserCartAsyncAfterFinishingOrder(UserId);
+            await cartService.ClearUserCartAsyncAfterFinishingOrder(userId);
 
             const int expectedShoesCartEntitiesCount = 0;
             const int expectedProductCartEntitiesCount = 0;
@@ -215,11 +215,11 @@
                 CategoryName = "Shoes",
                 ProductId = shoes2.Id,
                 Size = "45",
-                UserId = UserId
+                UserId = userId
             };
             CartProductModel addProductToCartModel = new CartProductModel()
             {
-                UserId = UserId,
+                UserId = userId,
                 CategoryName = "Shoes",
                 ProductId = shoes2.Id,
                 Quantity = 3,
@@ -243,11 +243,11 @@
                 CategoryName = "Shoes",
                 ProductId = shoes2.Id,
                 Size = "45",
-                UserId = UserId
+                UserId = userId
             };
             Core.Models.Cart.CartProductModel addProductToCartModel = new Core.Models.Cart.CartProductModel()
             {
-                UserId = UserId,
+                UserId = userId,
                 CategoryName = "Shoes",
                 ProductId = shoes2.Id,
                 Quantity = 3,
@@ -270,7 +270,7 @@
                 Size = "45",
                 CategoryName = "Shoes",
                 Quantity = 2,
-                UserId = UserId,
+                UserId = userId,
                 ProductId = shoes1.Id
             };
            CartProductModel addProductToCartModel2 = new CartProductModel()
@@ -278,7 +278,7 @@
                 Size = "M",
                 CategoryName = "T-Shirts",
                 Quantity = 1,
-                UserId = UserId,
+                UserId = userId,
                 ProductId = product1.Id
             };
 
@@ -318,7 +318,7 @@
 
 
 
-            var actualCartModel = await cartService.GetUserCartByUserIdAsync(UserId);
+            var actualCartModel = await cartService.GetUserCartByUserIdAsync(userId);
 
             Assert.That(actualCartModel.CartId, Is.EqualTo(expectedCartModel.CartId));
             CollectionAssert.AreEqual(expectedCartModel.CartShoes, actualCartModel.CartShoes, new ProductCartModelComparator());
@@ -332,7 +332,7 @@
                 Size = "45",
                 CategoryName = "Shoes",
                 Quantity = 2,
-                UserId = UserId,
+                UserId = userId,
                 ProductId = shoes1.Id
             };
             CartProductModel model2 = new CartProductModel()
@@ -340,7 +340,7 @@
                 Size = "M",
                 CategoryName = "T-Shirts",
                 Quantity = 1,
-                UserId = UserId,
+                UserId = userId,
                 ProductId = product1.Id
             };
 
@@ -362,7 +362,7 @@
                 Size = "45",
                 CategoryName = "Shoes",
                 Quantity = 2,
-                UserId = UserId,
+                UserId = userId,
                 ProductId = shoes1.Id
             };
             CartProductModel model2 = new CartProductModel()
@@ -370,7 +370,7 @@
                 Size = "44",
                 CategoryName = "Shoes",
                 Quantity = 2,
-                UserId = UserId,
+                UserId = userId,
                 ProductId = shoes1.Id
             };
 

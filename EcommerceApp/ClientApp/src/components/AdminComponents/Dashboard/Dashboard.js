@@ -49,6 +49,7 @@ export default function Dashboard() {
                 })
                 .catch(console.error);
         }
+
     }, [connection]);
 
     const ordersResult = dashboardObject?.orders.map((order) => <OrderTableRows order={order} key={order.id} />);
@@ -89,7 +90,7 @@ export default function Dashboard() {
             <div className={`statistic-container ${(date !== undefined && date !== "") ? "statistic-tripple-container" : ""}`}>
                 <section className="statistic-section">
                     <div className="content">
-                        <span class="material-symbols-outlined">
+                        <span className="material-symbols-outlined">
                             attach_money
                         </span>
                         <h3 className="statistic-title">Total Sales</h3>

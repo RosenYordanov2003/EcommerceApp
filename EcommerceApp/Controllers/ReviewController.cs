@@ -60,7 +60,7 @@
         [Route("GetReviewToEdit")]
         public async Task<IActionResult> GetReviewToEdit([FromQuery] int reviewId, [FromQuery] Guid userId)
         {
-            if (!await reviewService.CheckIfReviewByReviewIdAndUserIdExistsAsync(reviewId, userId))
+            if (!await reviewService.CheckUserReviewExists(reviewId, userId))
             {
                 return Unauthorized();
             }

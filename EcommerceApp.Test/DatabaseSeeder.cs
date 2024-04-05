@@ -32,10 +32,12 @@
         public static ShoesStock shoesStock2;
         public static ShoesStock shoesStock3;
 
-        public static Cart Cart;
-        public static User User;
+        public static Cart cart;
+        public static User user;
 
-        public static Guid UserId = Guid.Parse("AFDEAF68-5DEA-4107-AD18-858071D354D7");
+        public static Review review1;
+
+        public static Guid userId = Guid.Parse("AFDEAF68-5DEA-4107-AD18-858071D354D7");
 
 
         public static void SeedDatabase(ApplicationDbContext dbContext)
@@ -50,6 +52,7 @@
             dbContext.Promotions.AddRange(SeedPromotions());
             dbContext.ShoesStock.AddRange(SeedShoesStocks());
             dbContext.ProductStocks.AddRange(SeedProductStocks());
+            dbContext.Reviews.AddRange(SeedReviews());
             dbContext.SaveChanges();
         }
 
@@ -182,7 +185,7 @@
         {
             return new User()
             {
-                Id = UserId,
+                Id = userId,
                 CartId = Guid.Parse("742C4C45-5A51-4053-8F5E-7062135175A3"),
                 UserName = "Test123",
                 NormalizedUserName = "TEST123",
@@ -196,7 +199,7 @@
             return new Cart()
             {
                 Id = Guid.Parse("742C4C45-5A51-4053-8F5E-7062135175A3"),
-                UserId = UserId
+                UserId = userId
             };
         }
         private static IEnumerable<UserFavoriteShoes> SeedUserFavoriteShoes()
@@ -205,12 +208,12 @@
             {
                 new UserFavoriteShoes()
                 {
-                    UserId = UserId,
+                    UserId = userId,
                     ShoesId = 1
                 },
                 new UserFavoriteShoes()
                 {
-                    UserId = UserId,
+                    UserId = userId,
                     ShoesId = 2
                 }
             };
@@ -282,6 +285,24 @@
             };
 
             return new List<ProductStock>() { productStock1, productStock2, productStock3 };
+        }
+        private static IEnumerable<Review> SeedReviews()
+        {
+            List<Review> reviews = new List<Review>();
+            review1 = new Review()
+            {
+                Id = 1,
+                UserId = userId,
+                Content = "Test Review",
+                CreatedOn = DateTime.Now,
+                StarЕvaluation = 5,
+                Subject = "About Product",
+                ShoesId = shoes1.Id
+            };
+
+            reviews.Add(review1);
+
+            return reviews;
         }
 
     }

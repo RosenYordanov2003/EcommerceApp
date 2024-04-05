@@ -20,7 +20,7 @@ export default function SvgCircle({ percantage }) {
 
     return (
         <>
-            {!isNaN(percantage) && <> <svg class="round" viewBox="0 0 100 100" width="200" height="200" data-percent={percantage} style={myStyle} >
+            {!isNaN(percantage) && <> <svg className="round" viewBox="0 0 100 100" width="200" height="200" data-percent={percantage} style={myStyle} >
                 <circle cx="50" cy="50" r="40" />
             </svg>
                 <p className="statistic-percentage">{percantage?.toFixed(2)}%</p></> }

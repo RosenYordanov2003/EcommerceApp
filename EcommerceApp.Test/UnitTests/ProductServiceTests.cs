@@ -39,11 +39,11 @@
         {
             UserFavoriteProduct userFavoriteProduct = new UserFavoriteProduct()
             {
-                UserId = UserId,
+                UserId = userId,
                 ProductId = product1.Id
             };
             await productSevice.AddProductToUserFavoritesListAsync(userFavoriteProduct);
-            var result = await productSevice.GetProductByIdAsync(product1.Id, UserId);
+            var result = await productSevice.GetProductByIdAsync(product1.Id, userId);
 
             Assert.IsTrue(result.IsFavorite);
         }
@@ -52,13 +52,13 @@
         {
             UserFavoriteProduct userFavoriteProduct = new UserFavoriteProduct()
             {
-                UserId = UserId,
+                UserId = userId,
                 ProductId = product1.Id
             };
             await productSevice.AddProductToUserFavoritesListAsync(userFavoriteProduct);
             await productSevice.RemoveProductFromUserFavoriteListAsync(userFavoriteProduct);
 
-            var result = await productSevice.GetProductByIdAsync(product1.Id, UserId);
+            var result = await productSevice.GetProductByIdAsync(product1.Id, userId);
 
             Assert.IsFalse(result.IsFavorite);
         }
@@ -78,7 +78,7 @@
         public async Task TaskGetFeaturedClothesAsyncShouldReturnTheCorrectIds()
         {
             int[] expectedIds = new int[2] { 1, 3 };
-            var result = await productSevice.GetFeaturedClothesAsync(UserId);
+            var result = await productSevice.GetFeaturedClothesAsync(userId);
 
             CollectionAssert.AreEqual(expectedIds, result.Select(x => x.Id));
         }
@@ -112,18 +112,18 @@
             };
             UserFavoriteProduct userFavoriteProduct = new UserFavoriteProduct()
             {
-                UserId = UserId,
+                UserId = userId,
                 ProductId = product1.Id
             };
             await productSevice.AddProductToUserFavoritesListAsync(userFavoriteProduct);
-            var result = await productSevice.GetFeaturedClothesAsync(UserId);
+            var result = await productSevice.GetFeaturedClothesAsync(userId);
 
             CollectionAssert.AreEqual(expectedResult, result, new ProductModelComparator());
         }
         [Test]
         public async Task TestGetProductByGenderShouldReturnEmptyCollectionWithCorrectBrands()
         {
-            var result = await productSevice.GetProductByGender("women", UserId);
+            var result = await productSevice.GetProductByGender("women", userId);
 
             var expectedCategories = new List<string>()
             {
@@ -141,7 +141,7 @@
         [Test]
         public async Task TestGetProductByGenderShouldReturnEmptyCollectionWithCorrectBrands2()
         {
-            var result = await productSevice.GetProductByGender("men", UserId);
+            var result = await productSevice.GetProductByGender("men", userId);
 
             var expectedCategories = new List<string>()
             {
@@ -252,8 +252,8 @@
                     },
                 }
             };
-            await productSevice.AddProductToUserFavoritesListAsync(new UserFavoriteProduct() { ProductId = product1.Id, UserId = UserId });
-            var result = await productSevice.GetProductByIdAsync(product1.Id, UserId);
+            await productSevice.AddProductToUserFavoritesListAsync(new UserFavoriteProduct() { ProductId = product1.Id, UserId = userId });
+            var result = await productSevice.GetProductByIdAsync(product1.Id, userId);
 
             CollectionAssert.AreEqual(expectedProductModel.RelatedProducts.OrderByDescending(x => x.StarRating), result.RelatedProducts, new ProductModelComparator());
             CollectionAssert.AreEqual(expectedProductModel.ProductStocks, result.ProductStocks, new ProductStockComparator());
@@ -268,8 +268,8 @@
         [Test]
         public async Task TestGetUserFavoriteProductsAsyncShouldReturnTheCorrectCount()
         {
-            await productSevice.AddProductToUserFavoritesListAsync(new UserFavoriteProduct() { ProductId = product1.Id, UserId = UserId });
-            var result = await productSevice.GetUserFavoriteProductsAsync(UserId);
+            await productSevice.AddProductToUserFavoritesListAsync(new UserFavoriteProduct() { ProductId = product1.Id, UserId = userId });
+            var result = await productSevice.GetUserFavoriteProductsAsync(userId);
 
             int expectedCount = 3;
 
@@ -294,7 +294,7 @@
                 }
             };
 
-            var actualCollection = await productSevice.GetUserFavoriteProductsAsync(UserId);
+            var actualCollection = await productSevice.GetUserFavoriteProductsAsync(userId);
 
             CollectionAssert.AreEqual(expectedCollection, actualCollection, new UserFavoriteProductModelComparator());
         }
@@ -354,7 +354,7 @@
         {
             const int expectedCount = 2;
 
-            var result = await productSevice.LoadUserFavoriteProductsAsync(UserId);
+            var result = await productSevice.LoadUserFavoriteProductsAsync(userId);
 
             Assert.That(result.Count, Is.EqualTo(expectedCount));
         }
@@ -398,9 +398,9 @@
                },
            };
 
-            await productSevice.AddProductToUserFavoritesListAsync(new UserFavoriteProduct() { ProductId = 3, UserId = UserId });
+            await productSevice.AddProductToUserFavoritesListAsync(new UserFavoriteProduct() { ProductId = 3, UserId = userId });
 
-            var actualCollection = await productSevice.LoadUserFavoriteProductsAsync(UserId);
+            var actualCollection = await productSevice.LoadUserFavoriteProductsAsync(userId);
 
             CollectionAssert.AreEqual(expectedCollection, actualCollection, new ProductFeatureModelComparator());
         }

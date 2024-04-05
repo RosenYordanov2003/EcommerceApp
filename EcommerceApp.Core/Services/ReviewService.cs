@@ -19,7 +19,7 @@
             this.dbContext = dbContext;
         }
 
-        public async Task<bool> CheckIfReviewByReviewIdAndUserIdExistsAsync(int reviewId, Guid userId)
+        public async Task<bool> CheckUserReviewExists(int reviewId, Guid userId)
         {
             return await dbContext.Reviews.AnyAsync(r => r.Id == reviewId && r.UserId == userId);
         }

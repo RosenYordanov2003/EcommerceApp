@@ -163,7 +163,7 @@
         [Test]
         public async Task TestGetFeaturedhoesMethodShouldReturnTheCorrectCount()
         {
-            var result = await shoesService.GetFeaturedShoesAsync(UserId);
+            var result = await shoesService.GetFeaturedShoesAsync(userId);
             int expectedResult = 2;
             int actualResult = result.Count();
 
@@ -172,7 +172,7 @@
         [Test]
         public async Task TestGetFeaturedhoesMethodShouldReturnTheCorrectIds()
         {
-            var actualResult = await shoesService.GetFeaturedShoesAsync(UserId);
+            var actualResult = await shoesService.GetFeaturedShoesAsync(userId);
             IEnumerable<int> expectedResult = new int[] { 1, 2 };
 
             CollectionAssert.AreEqual(expectedResult, actualResult.Select(x => x.Id));
@@ -180,7 +180,7 @@
         [Test]
         public async Task TestGetFeaturedhoesMethodShouldReturnThatShoesAreFavoriteForParticularUser()
         {
-            var actualResult = await shoesService.GetFeaturedShoesAsync(UserId);
+            var actualResult = await shoesService.GetFeaturedShoesAsync(userId);
             var collectionResult = actualResult.ToArray();
 
             Assert.IsTrue(collectionResult[0].IsFavorite);
@@ -190,20 +190,20 @@
         public async Task TestGetShoesByIdShouldReturnTheCorrectShoesId()
         {
             int expectedShoesId = 1;
-            var result = await shoesService.GetProductByIdAsync(shoes1.Id, UserId);
+            var result = await shoesService.GetProductByIdAsync(shoes1.Id, userId);
 
             Assert.That(result.Id, Is.EqualTo(expectedShoesId));
         }
         [Test]
         public async Task TestGetShoesByIdShouldReturnCorrectFavoriteValue()
         {
-            var result = await shoesService.GetProductByIdAsync(shoes1.Id, UserId);
+            var result = await shoesService.GetProductByIdAsync(shoes1.Id, userId);
             Assert.IsTrue(result.IsFavorite);
         }
         [Test]
         public async Task TestSGetShoesByIdForCorrectPickedRelatedShoes()
         {
-            var result = await shoesService.GetProductByIdAsync(shoes1.Id, UserId);
+            var result = await shoesService.GetProductByIdAsync(shoes1.Id, userId);
             int[] expectedRelatedShoesIds = new int[] { 2, 3 };
 
             CollectionAssert.AreEqual(result.RelatedProducts.Select(x => x.Id), expectedRelatedShoesIds);
@@ -211,7 +211,7 @@
         [Test]
         public async Task TestGetShoesByIdPromotion()
         {
-            var result = await shoesService.GetProductByIdAsync(shoes1.Id, UserId);
+            var result = await shoesService.GetProductByIdAsync(shoes1.Id, userId);
             decimal expectedPromotionPercentages = 25.50m;
 
             Assert.That(expectedPromotionPercentages, Is.EqualTo(result.DicountPercentage));
@@ -228,18 +228,18 @@
         [Test]
         public async Task TestRemoveShoesFromUserFavoriteAsyncMethod()
         {
-            UserFavoriteProduct userFavoriteProductModel = new UserFavoriteProduct() { ProductId = 1, UserId = UserId };
+            UserFavoriteProduct userFavoriteProductModel = new UserFavoriteProduct() { ProductId = 1, UserId = userId };
             await shoesService.RemoveShoesToUserFavoriteProductsAsync(userFavoriteProductModel);
-            var shoes = await shoesService.GetProductByIdAsync(1, UserId);
+            var shoes = await shoesService.GetProductByIdAsync(1, userId);
             Assert.IsFalse(shoes.IsFavorite);
         }
         [Test]
         public async Task TestAddShoesToUserFavoriteAsyncMethod()
         {
-            UserFavoriteProduct userFavoriteProductModel = new UserFavoriteProduct() { ProductId = 1, UserId = UserId };
+            UserFavoriteProduct userFavoriteProductModel = new UserFavoriteProduct() { ProductId = 1, UserId = userId };
             await shoesService.RemoveShoesToUserFavoriteProductsAsync(userFavoriteProductModel);
             await shoesService.AddShoesToUserFavoriteProductsAsync(userFavoriteProductModel);
-            var shoes = await shoesService.GetProductByIdAsync(1, UserId);
+            var shoes = await shoesService.GetProductByIdAsync(1, userId);
             Assert.IsTrue(shoes.IsFavorite);
         }
         [Test]

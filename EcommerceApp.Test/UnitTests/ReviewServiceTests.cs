@@ -4,8 +4,10 @@
     using Data;
     using Core.Contracts;
     using static Tests.DatabaseSeeder;
+    using static Common.GeneralApplicationConstants;
     using Core.Services;
-    using EcommerceApp.Core.Models.Review;
+    using Core.Models.Review;
+    using Core.Models.Pager;
 
     internal class ReviewServiceTests
     {
@@ -105,6 +107,118 @@
             Assert.That(expectedModel.Content, Is.EqualTo(actualModel.Content));
             Assert.That(expectedModel.StarEvaluation, Is.EqualTo(actualModel.StarEvaluation));
             Assert.That(expectedModel.Subject, Is.EqualTo(actualModel.Subject));
+        }
+        [Test]
+        public async Task TestGetTotalReviewsCountByProductIdAndCategoryNameAsync()
+        {
+            int expectedCount = 1;
+            int actualCount = await reviewService.GetTotalReviewsCountByProductIdAndCategoryNameAsync(1, "Shoes");
+
+            Assert.That(actualCount, Is.EqualTo(expectedCount));
+
+        }
+        [Test]
+        public async Task TestGetTotalReviewsCountByProductIdAndCategoryNameAsyncAfterPostAReview()
+        {
+            int expectedCount = 3;
+
+            CreateReviewModel model = new CreateReviewModel()
+            {
+                ProductId = 1,
+                Content = "Gosho",
+                ProductCategory = "shoes",
+                StarRating = 5,
+                UserName = "Vesko",
+                Subject = "About Product",
+                UserId = userId
+            };
+
+            CreateReviewModel model2 = new CreateReviewModel()
+            {
+                ProductId = 1,
+                Content = "Ceco",
+                ProductCategory = "shoes",
+                StarRating = 5,
+                UserName = "Vesko",
+                Subject = "About Product2",
+                UserId = userId
+            };
+
+            await reviewService.PostPoductReviewAsync(model);
+            await reviewService.PostPoductReviewAsync(model2);
+            int actualCount = await reviewService.GetTotalReviewsCountByProductIdAndCategoryNameAsync(1, "Shoes");
+
+            Assert.That(actualCount, Is.EqualTo(expectedCount));
+        }
+        [Test]
+        public async Task TestPostReviewsMethodShouldAddReviewsCorrectly()
+        {
+            CreateReviewModel model = new CreateReviewModel()
+            {
+                ProductId = 1,
+                Content = "Gosho",
+                ProductCategory = "shoes",
+                StarRating = 5,
+                UserName = "Vesko",
+                Subject = "About Product",
+                UserId = userId
+            };
+
+            CreateReviewModel model2 = new CreateReviewModel()
+            {
+                ProductId = 1,
+                Content = "Ceco",
+                ProductCategory = "shoes",
+                StarRating = 5,
+                UserName = "Vesko",
+                Subject = "About Product2",
+                UserId = userId
+            };
+
+            await reviewService.PostPoductReviewAsync(model);
+            await reviewService.PostPoductReviewAsync(model2);
+
+            bool reviewOne = await reviewService.CheckIfReviewExistsByIdAsync(2);
+            bool reviewTwo = await reviewService.CheckIfReviewExistsByIdAsync(3);
+
+            Assert.IsTrue(reviewOne);
+            Assert.IsTrue(reviewTwo);
+        }
+        [Test]
+        public async Task TestLoadReviewsForParticularProductAsync()
+        {
+            CreateReviewModel model = new CreateReviewModel()
+            {
+                ProductId = 1,
+                Content = "Gosho",
+                ProductCategory = "shoes",
+                StarRating = 5,
+                UserName = "Vesko",
+                Subject = "About Product",
+                UserId = userId
+            };
+
+            CreateReviewModel model2 = new CreateReviewModel()
+            {
+                ProductId = 1,
+                Content = "Ceco",
+                ProductCategory = "shoes",
+                StarRating = 5,
+                UserName = "Vesko",
+                Subject = "About Product2",
+                UserId = userId
+            };
+
+            await reviewService.PostPoductReviewAsync(model);
+            await reviewService.PostPoductReviewAsync(model2);
+
+            Pager pager = new Pager(3, 1, DefaultPageSize);
+
+            var result = await reviewService.LoadReviewsForParticularProductAsync(1, "shoes", pager);
+
+            string[] expectedContentsCollection = new string[3] { "Test Review", "Gosho", "Ceco" };
+
+            CollectionAssert.AreEqual(expectedContentsCollection, result.Select(x => x.Content));
         }
         [TearDown]
         public void TearDown()

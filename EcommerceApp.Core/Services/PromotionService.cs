@@ -9,6 +9,7 @@
     public class PromotionService : IPromotionService
     {
         private readonly ApplicationDbContext dbContext;
+
         public PromotionService(ApplicationDbContext dbContext)
         {
             this.dbContext = dbContext;

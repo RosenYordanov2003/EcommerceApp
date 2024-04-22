@@ -50,7 +50,6 @@ main {
     padding: 0.5rem 0.7rem;
     border-radius: 50%;
     cursor: pointer;
-    margin: auto;
     transition: all 0.3s ease-in;
 }
 

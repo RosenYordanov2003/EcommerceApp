@@ -35,14 +35,14 @@ export default function ModifyingProduct() {
             .then((res) => {
                 setProduct(res);
                 setInputObject({
-                    name: res.name,
                     starRating: res.starRating,
                     brandId: res.selectedBrandId,
                     categoryId: res.selectedCategoryId,
-                    price: res.price,
-                    description: res.description,
                     id: productId
                 });
+                methods.setValue('price', res.price);
+                methods.setValue('description', res.description);
+                methods.setValue('name', res.name);
             })
 
         const newConnection = new HubConnectionBuilder()
@@ -163,8 +163,8 @@ export default function ModifyingProduct() {
                                 {brands}
                             </select>
                         </div>
-                        <Input {...productPriceInput} classNameValue="product-input-container" inputValue={inputObject.price}/>
-                        <Input {...productDescriptionInput} classNameValue="product-input-container" inputValue={inputObject.description}/>
+                        <Input {...productPriceInput} classNameValue="product-input-container"/>
+                        <Input {...productDescriptionInput} classNameValue="product-input-container"/>
                         <button onClick={handleFormSubmit} className="edit-product-button" type="submit">Edit</button>
                     </form>
                 </FormProvider>

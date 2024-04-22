@@ -29,6 +29,8 @@ export default function Order() {
             setInputObject({ ...inputObject, city: checkOutObject.city, country: checkOutObject.country, postalCode: checkOutObject.postalCode });
             setShippingObject(checkOutObject.shippingObject);
             setPriceObject(checkOutObject.priceObject);
+            methods.setValue('city', checkOutObject.city);
+            methods.setValue('postalCode', checkOutObject.postalCode);
         }
     }, [user?.id])
 
@@ -77,8 +79,8 @@ export default function Order() {
                         <Input {...firstNameInput} classNameValue="order-input-container"/>
                         <Input {...lastNameInput} classNameValue="order-input-container"/>
                         <Input {...streetAdressInput} classNameValue="order-input-container"/>
-                        <Input {...cityOrderInput} classNameValue="order-input-container" inputValue={inputObject.city}/>
-                        <Input {...postalCodeInput} classNameValue="order-input-container" inputValue={inputObject.postalCode}/>
+                        <Input {...cityOrderInput} classNameValue="order-input-container"/>
+                        <Input {...postalCodeInput} classNameValue="order-input-container"/>
                         
                         <div className="order-input-container">
                             <label htmlFor="country">Country</label>

@@ -72,7 +72,7 @@
             AllProductsModel productModel = new AllProductsModel();
 
             productModel.Products = await applicationDbContext.Clothes
-                  .Where(cl => (cl.Gender.ToLower() == gender) || (cl.Gender == "Unisex"))
+                  .Where(cl => ((cl.Gender.ToLower() == gender) || (cl.Gender == "Unisex")) && (!cl.IsArchived))
                   .Select(cl => new FilterProductModel()
                   {
                       Id = cl.Id,
@@ -89,7 +89,7 @@
                   .ToListAsync();
 
             productModel.Shoes = await applicationDbContext.Shoes
-                .Where(sh => (sh.Gender.ToLower() == gender) || (sh.Gender == "Unisex"))
+                .Where(sh => ((sh.Gender.ToLower() == gender) || (sh.Gender == "Unisex")) && (!sh.IsArchived))
                 .Select(sh => new ShoesFilterModel()
                 {
                     Id = sh.Id,

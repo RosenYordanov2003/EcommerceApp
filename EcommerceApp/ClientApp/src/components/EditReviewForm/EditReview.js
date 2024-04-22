@@ -25,12 +25,14 @@ export default function EditReview() {
                 .then(res => {
                     setReview(res);
                     setStarEvaluation(res.starEvaluation);
-                    console.log(res);
+                    methods.setValue('subject', res.subject);
+                    methods.setValue('content', res.content);
                 })
                 .catch((error) => console.error(error));
         }
     }, [user?.id])
 
+   
 
     let stars = Array.from({ length: 5 }, (star, index) => {
         if (index + 1 <= starEvaluation) {
@@ -46,7 +48,6 @@ export default function EditReview() {
         setStarEvaluation(0);
     }
     const handleOnSubmit = methods.handleSubmit(data => {
-
         const object = {
             ...data,
             starEvaluation,
@@ -69,8 +70,8 @@ export default function EditReview() {
                     <div>{stars}</div>
                     <button onClick={clearStarResult} className="clear-stars-button">Clear Stars</button>
                 </div>
-                <Input {...reviewSubjectInput} inputValue={review?.subject} />
-                <Input {...reviewContent} inputValue={review?.content}/>
+                <Input {...reviewSubjectInput} />
+                <Input {...reviewContent}/>
                 <button onClick={handleOnSubmit} type="submit" className="edit-review-button">Edit Review</button>
             </form>
         </FormProvider>

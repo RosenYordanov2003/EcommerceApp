@@ -5,12 +5,12 @@ import { findInputError } from "../../../utilities/findInputError";
 import InputError from "./../InputError/InputError";
 import "../Input/InputStyle.css";
 
-export default function Input({ label, type, id, placeHolder, validation, name, multiline, rows, cols, inputValue, classNameValue="input-container"}) {
+export default function Input({ label, type, id, placeHolder, validation, name, multiline, rows, cols, classNameValue="input-container"}) {
 
     const { register, formState: { errors }} = useFormContext();
 
-    const inputError = findInputError(errors, name)
-    const isInvalid = isFormInvalid(inputError)
+    const inputError = findInputError(errors, name);
+    const isInvalid = isFormInvalid(inputError);
 
     function onMouseEnter(event) {
         if (!label) {
@@ -43,7 +43,6 @@ export default function Input({ label, type, id, placeHolder, validation, name, 
                     onMouseEnter={onMouseEnter}
                     onMouseLeave={onMouseLeave}
                     id={id}
-                    defaultValue={inputValue}
                     placeholder={placeHolder} {...register(`${name}`, validation)}
                     rows={rows}
                     cols={cols}
@@ -54,7 +53,6 @@ export default function Input({ label, type, id, placeHolder, validation, name, 
                         onMouseLeave={onMouseLeave}
                         id={id}
                         type={type}
-                        defaultValue={inputValue}
                         placeholder={placeHolder}
                         {...register(name, validation)}
                     />

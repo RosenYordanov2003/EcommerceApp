@@ -24,7 +24,6 @@ export default function AllReviews() {
     function loadReviewsPerPage(page) {
         getReviewsForParticularPage(page, productCategory, productId, reviewsPerPage == 0 ? 5 : reviewsPerPage)
             .then(res => {
-                console.log(res);
                 setReviews(res.reviews);
                 setPageObject({ startPage: res.startPage, endPage: res.endPage });
             })

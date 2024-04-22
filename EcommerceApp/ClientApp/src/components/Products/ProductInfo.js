@@ -163,7 +163,7 @@ export default function ProductInfo() {
                             :
                            <ProductPromotionPriceSection product={product}/>
                     }
-                    <h4>Size</h4>
+                    {product?.productStocks?.length > 0 && <h4>Size</h4>}
                     <ul className="size-ul">
                         {sizeItmes}
                     </ul>
@@ -173,7 +173,8 @@ export default function ProductInfo() {
 
                         <button onClick={handleAddToFavoriteProduct} className="wishlist-button"><i className={!isFavorite ? "fa-regular fa-heart favorite-heart" : "fa - solid fa-heart active-heart"}></i></button>
                         <p>Wishlist</p>
-                    </div>}
+                    </div>
+                    }
                     <hr></hr>
                     <section className="product-details">
                         {productDetails}

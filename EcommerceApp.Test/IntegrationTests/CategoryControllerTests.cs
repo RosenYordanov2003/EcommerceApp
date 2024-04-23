@@ -1,9 +1,10 @@
 ﻿namespace EcommerceApp.Tests.IntegrationTests
 {
-    using NUnit.Framework;
-    using Core.Models.Categories;
     using System.Net;
+    using NUnit.Framework;
     using Newtonsoft.Json;
+    using Moq;
+    using Core.Models.Categories;
 
     public class CategoryControllerTests : IDisposable
     {
@@ -13,6 +14,15 @@
         {
             factory = new CustomWebApplicationFactory();
             httpClient = factory.CreateClient();
+        }
+        [SetUp]
+        public void SetUp()
+        {
+            IEnumerable<CategoryModel> categoryModelCollectionMen = new CategoryModel[2] { new CategoryModel() { Id = 1, Name = "Shoes" }, new CategoryModel() { Id = 2, Name = "Trousers" } };
+            IEnumerable<CategoryModel> categoryModelCollectionWomen = new CategoryModel[2] { new CategoryModel() { Id = 1, Name = "Shoes" }, new CategoryModel() { Id = 2, Name = "Skirts" } };
+
+            factory.CategoryServiceMock.Setup(x => x.GetCategoriesByGender("men")).ReturnsAsync(categoryModelCollectionMen);
+            factory.CategoryServiceMock.Setup(x => x.GetCategoriesByGender("women")).ReturnsAsync(categoryModelCollectionWomen);
         }
         [Test]
         public async Task TestGetCategoriesByGenderWithMen()

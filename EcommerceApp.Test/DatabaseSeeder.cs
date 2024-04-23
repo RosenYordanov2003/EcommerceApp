@@ -36,6 +36,8 @@
         public static User user;
 
         public static Review review1;
+        public static Coupon coupon;
+        public static Coupon expiredCoupon;
 
         public static Guid userId = Guid.Parse("AFDEAF68-5DEA-4107-AD18-858071D354D7");
 
@@ -53,6 +55,7 @@
             dbContext.ShoesStock.AddRange(SeedShoesStocks());
             dbContext.ProductStocks.AddRange(SeedProductStocks());
             dbContext.Reviews.AddRange(SeedReviews());
+            dbContext.Coupons.AddRange(SeedCoupons());
             dbContext.SaveChanges();
         }
 
@@ -303,6 +306,26 @@
             reviews.Add(review1);
 
             return reviews;
+        }
+        private static IEnumerable<Coupon> SeedCoupons()
+        {
+            coupon = new Coupon()
+            {
+                Id = Guid.Parse("A715677F-E39A-4146-A8E8-6E2D6CE687FA"),
+                UserId = userId,
+                ExpirationTime = DateTime.Now.AddYears(1),
+                PromotionPercentages = 10,
+            };
+            expiredCoupon = new Coupon()
+            {
+                Id = Guid.Parse("FDDD9617-8ADB-45F0-AEB8-58F415C6143B"),
+                UserId = userId,
+                PromotionPercentages = 15,
+                ExpirationTime = new DateTime(2023, 12, 14)
+            };
+            List<Coupon> coupons = new List<Coupon>() { coupon, expiredCoupon };
+           
+            return coupons;
         }
 
     }

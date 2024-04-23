@@ -8,6 +8,6 @@
         public decimal TotalPrice { get; set; }
         public Guid UserId { get; set; }
         public decimal Discount { get; set; }
-        public PromotionCodeModel? Cuppon { get; set; }
+        public CouponModel? Cuppon { get; set; }
     }
 }

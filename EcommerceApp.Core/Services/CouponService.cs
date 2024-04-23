@@ -15,21 +15,21 @@
             this.dbContext = dbContext;
         }
 
-        public async Task<bool> CheckIfCupponHasExpiredByIdAsync(Guid id)
+        public async Task<bool> CheckIfCouponHasExpiredByIdAsync(Guid id)
         {
-            PromotionCode promotionCode = await dbContext.PromotionCodes.FirstAsync(pc => pc.Id == id);
+            Coupon coupon = await dbContext.Coupons.FirstAsync(pc => pc.Id == id);
 
-            return promotionCode.ExpirationTime > DateTime.UtcNow;
+            return coupon.ExpirationTime < DateTime.UtcNow;
         }
 
-        public async Task<bool> CheckIfPromotionCodeExistByIdAsync(Guid cupponId)
+        public async Task<bool> CheckIfCouponExistByIdAsync(Guid cupponId)
         {
-            return await dbContext.PromotionCodes.AnyAsync(c => c.Id == cupponId);
+            return await dbContext.Coupons.AnyAsync(c => c.Id == cupponId);
         }
 
-        public async Task<bool> CheckIfPromotionCodeIsRelatedWithParticularUserAsync(Guid cupponId, Guid userId)
+        public async Task<bool> CheckIfCouponIsRelatedWithParticularUserAsync(Guid cupponId, Guid userId)
         {
-            return  await dbContext.PromotionCodes.AnyAsync(c => c.Id == cupponId && c.UserId == userId);
+            return  await dbContext.Coupons.AnyAsync(c => c.Id == cupponId && c.UserId == userId);
         }
 
         public async Task<decimal> CheckWheterUserReachesDiscount(Guid userId)
@@ -46,10 +46,10 @@
             return promotion;
         }
 
-        public async Task<PromotionCodeModel> GeneratePromotionCodeForUserAsync(Guid userId, decimal discount)
+        public async Task<CouponModel> GenerateCouponForUserAsync(Guid userId, decimal discount)
         {
 
-            PromotionCode promotionCode = new PromotionCode()
+            Coupon promotionCode = new Coupon()
             {
                 UserId = userId,
                 ExpirationTime = DateTime.UtcNow.AddMonths(1),
@@ -59,7 +59,7 @@
             await dbContext.AddAsync(promotionCode);
             await dbContext.SaveChangesAsync();
 
-            return new PromotionCodeModel()
+            return new CouponModel()
             {
                 Id = promotionCode.Id,
                 DiscountPercantages = promotionCode.PromotionPercentages,
@@ -67,11 +67,11 @@
             };
         }
 
-        public async Task<PromotionCodeModel> GetPromotionCodeByIdAsync(Guid id)
+        public async Task<CouponModel> GetCouponByIdAsync(Guid id)
         {
-            return await dbContext.PromotionCodes.
+            return await dbContext.Coupons.
                 Where(pc => pc.Id == id)
-                .Select(pc => new PromotionCodeModel()
+                .Select(pc => new CouponModel()
                 {
                     Id = pc.Id,
                     DiscountPercantages = pc.PromotionPercentages,
@@ -80,11 +80,11 @@
                 .FirstAsync();
         }
 
-        public async Task RemoveCupponByIdAsync(Guid id)
+        public async Task RemoveCouponByIdAsync(Guid id)
         {
-            PromotionCode promotionCode =  await dbContext.PromotionCodes.FirstAsync(pc => pc.Id == id);
+            Coupon promotionCode =  await dbContext.Coupons.FirstAsync(pc => pc.Id == id);
 
-            dbContext.PromotionCodes.Remove(promotionCode);
+            dbContext.Coupons.Remove(promotionCode);
 
             await dbContext.SaveChangesAsync();
         }

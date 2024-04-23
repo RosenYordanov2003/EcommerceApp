@@ -1,7 +1,7 @@
 ﻿namespace EcommerceApp.Tests.UnitTests
 {
     using Microsoft.EntityFrameworkCore;
-    using static Tests.DatabaseSeeder;
+    using static DatabaseSeeder;
     using Core.Contracts;
     using Data;
     using Core.Services;

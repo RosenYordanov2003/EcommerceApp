@@ -31,7 +31,7 @@
         public DbSet<ShoesCartEntity> ShoesCartEntities { get; set; }
         public DbSet<ProductCartEntity> ProductCartEntities { get; set; }
         public DbSet<Order> Orders { get; set; }
-        public DbSet<PromotionCode> PromotionCodes { get; set; }
+        public DbSet<Coupon> Coupons { get; set; }
         public DbSet<Promotion> Promotions { get; set; }
         public DbSet<Picture> Pictures { get; set; }
         public DbSet<UserMessage> UserMessages { get; set; }
@@ -62,7 +62,7 @@
              .WithMany(u => u.UserFavoriteProducts)
              .OnDelete(DeleteBehavior.NoAction);
 
-            builder.Entity<PromotionCode>()
+            builder.Entity<Coupon>()
                 .HasOne(pc => pc.User)
                 .WithMany(u => u.PromotionCodes)
                 .OnDelete(DeleteBehavior.NoAction);

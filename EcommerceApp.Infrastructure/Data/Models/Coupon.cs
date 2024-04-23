@@ -3,7 +3,7 @@
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
-    public class PromotionCode
+    public class Coupon
     {
         [Key]
         public Guid Id { get; set; }
@@ -12,6 +12,5 @@
         public User User { get; set; } = null!;
         public DateTime ExpirationTime { get; set; }
         public decimal PromotionPercentages { get; set; }
-
     }
 }

@@ -11,7 +11,7 @@
             UserFavoriteProducts = new HashSet<UserFavoriteProducts>();
             UserFavoriteShoes = new HashSet<UserFavoriteShoes>();
             Orders = new List<Order>();
-            PromotionCodes = new List<PromotionCode>();
+            PromotionCodes = new List<Coupon>();
             Messages = new List<UserMessage>();
         }
         [ForeignKey(nameof(RefreshToken))]
@@ -25,7 +25,7 @@
         public ICollection<UserFavoriteProducts> UserFavoriteProducts { get; set; }
         public ICollection<UserFavoriteShoes> UserFavoriteShoes { get; set; }
         public ICollection<Order> Orders { get; set; }
-        public ICollection<PromotionCode> PromotionCodes { get; set; }
+        public ICollection<Coupon> PromotionCodes { get; set; }
         public ICollection<UserMessage> Messages { get; set; }
     }
 }

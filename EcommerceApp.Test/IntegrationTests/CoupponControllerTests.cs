@@ -7,7 +7,7 @@
     using System.Net;
 
     [TestFixture]
-    public class CupponControllerTests
+    public class CoupponControllerTests
     {
         private CustomWebApplicationFactory webApplicationFactory;
         private HttpClient httpClient;
@@ -15,7 +15,7 @@
         private readonly Guid id = Guid.Parse("AD66A991-468B-4B38-9E43-C57A6BF580A7");
         private readonly PromotionCodeApplyModel model = new PromotionCodeApplyModel();
 
-        public CupponControllerTests()
+        public CoupponControllerTests()
         {
             webApplicationFactory = new CustomWebApplicationFactory();
             httpClient = webApplicationFactory.CreateClient();
@@ -29,7 +29,7 @@
         [Test]
         public async Task TestApplyCupponWithNoExistingCoupon()
         {
-            webApplicationFactory.CouponServiceMock.Setup(x => x.CheckIfPromotionCodeExistByIdAsync(id)).ReturnsAsync(false);
+            webApplicationFactory.CouponServiceMock.Setup(x => x.CheckIfCouponExistByIdAsync(id)).ReturnsAsync(false);
 
             var modelAsJson = JsonConvert.SerializeObject(model);
             var request = await httpClient.PostAsync("api/coupon/Apply", JsonContent.Create(model));
@@ -39,8 +39,8 @@
         [Test]
         public async Task TestApplyCouponWithNoRelatedUser()
         {
-            webApplicationFactory.CouponServiceMock.Setup(x => x.CheckIfPromotionCodeExistByIdAsync(id)).ReturnsAsync(true);
-            webApplicationFactory.CouponServiceMock.Setup(x => x.CheckIfPromotionCodeIsRelatedWithParticularUserAsync(id, userId)).ReturnsAsync(false);
+            webApplicationFactory.CouponServiceMock.Setup(x => x.CheckIfCouponExistByIdAsync(id)).ReturnsAsync(true);
+            webApplicationFactory.CouponServiceMock.Setup(x => x.CheckIfCouponIsRelatedWithParticularUserAsync(id, userId)).ReturnsAsync(false);
 
             var modelAsJson = JsonConvert.SerializeObject(model);
             var request = await httpClient.PostAsync("api/coupon/Apply", JsonContent.Create(model));
@@ -50,8 +50,8 @@
         [Test]
         public async Task TestApplyCouponWithExpiredCoupon()
         {
-            webApplicationFactory.CouponServiceMock.Setup(x => x.CheckIfPromotionCodeExistByIdAsync(id)).ReturnsAsync(true);
-            webApplicationFactory.CouponServiceMock.Setup(x => x.CheckIfPromotionCodeIsRelatedWithParticularUserAsync(id, userId)).ReturnsAsync(true);
+            webApplicationFactory.CouponServiceMock.Setup(x => x.CheckIfCouponExistByIdAsync(id)).ReturnsAsync(true);
+            webApplicationFactory.CouponServiceMock.Setup(x => x.CheckIfCouponIsRelatedWithParticularUserAsync(id, userId)).ReturnsAsync(true);
 
             var modelAsJson = JsonConvert.SerializeObject(model);
             var request = await httpClient.PostAsync("api/coupon/Apply", JsonContent.Create(model));
@@ -62,12 +62,12 @@
         public async Task TestApplyCouponShouldReturnSuccess()
         {
 
-            PromotionCodeModel couponModel = new PromotionCodeModel() { DiscountPercantages = 10, ExpirationTime = DateTime.Now.AddDays(200), Id = id };
+            CouponModel couponModel = new CouponModel() { DiscountPercantages = 10, ExpirationTime = DateTime.Now.AddDays(200), Id = id };
 
-            webApplicationFactory.CouponServiceMock.Setup(x => x.CheckIfPromotionCodeExistByIdAsync(id)).ReturnsAsync(true);
-            webApplicationFactory.CouponServiceMock.Setup(x => x.CheckIfPromotionCodeIsRelatedWithParticularUserAsync(id, userId)).ReturnsAsync(true);
-            webApplicationFactory.CouponServiceMock.Setup(x => x.CheckIfCupponHasExpiredByIdAsync(id)).ReturnsAsync(true);
-            webApplicationFactory.CouponServiceMock.Setup(x => x.GetPromotionCodeByIdAsync(id)).ReturnsAsync(couponModel);
+            webApplicationFactory.CouponServiceMock.Setup(x => x.CheckIfCouponExistByIdAsync(id)).ReturnsAsync(true);
+            webApplicationFactory.CouponServiceMock.Setup(x => x.CheckIfCouponIsRelatedWithParticularUserAsync(id, userId)).ReturnsAsync(true);
+            webApplicationFactory.CouponServiceMock.Setup(x => x.CheckIfCouponHasExpiredByIdAsync(id)).ReturnsAsync(false);
+            webApplicationFactory.CouponServiceMock.Setup(x => x.GetCouponByIdAsync(id)).ReturnsAsync(couponModel);
 
             var modelAsJson = JsonConvert.SerializeObject(model);
             var request = await httpClient.PostAsync("api/coupon/Apply", JsonContent.Create(model));
@@ -89,6 +89,6 @@
     public class Response
     {
         public bool Success { get; set; }
-        public PromotionCodeModel Cuppon { get; set; } = null!;
+        public CouponModel Cuppon { get; set; } = null!;
     }
 }

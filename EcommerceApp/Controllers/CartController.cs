@@ -95,7 +95,7 @@
 
             if (orderModel.Cuppon != null)
             {
-                await promotionCodeService.RemoveCupponByIdAsync(orderModel.Cuppon.Id);
+                await promotionCodeService.RemoveCouponByIdAsync(orderModel.Cuppon.Id);
             }
 
             var userCart = await cartService.GetUserCartByUserIdAsync(orderModel.UserId);
@@ -110,7 +110,7 @@
 
             if (discount > 0)
             {
-                PromotionCodeModel promotionCode = await promotionCodeService.GeneratePromotionCodeForUserAsync(orderModel.UserId, discount);
+                CouponModel promotionCode = await promotionCodeService.GenerateCouponForUserAsync(orderModel.UserId, discount);
 
                 await emailSender.SendEmailAsync(orderModel.UserOrderInfo.Email, "Congratulations You Have Earned A Promotion Code",
                     $" <main style=\"font-family: Arial, Helvetica, sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center;\">\r\n        <h1>You Have Earned A Promotion Code</h1>\r\n        <p>Your Promotion Code:<span style=\"font-weight: bolder; font-size: 1.2rem; display: inline-block; margin-left: 0.3rem;\">{promotionCode.Id}</span> </p>\r\n        <p>Code Discount: <span style=\"font-weight: bolder; font-size: 1.1rem; display: inline-block; margin-left: 0.3rem;\">{promotionCode.DiscountPercantages:F2}%</span> </p>\r\n        <p>The Code Is Valid Till: <span style=\"font-weight: bolder; font-size: 1.1rem; display: inline-block; margin-left: 0.3rem;\">{promotionCode.ExpirationTime.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss")}</p>\r\n    </main>");

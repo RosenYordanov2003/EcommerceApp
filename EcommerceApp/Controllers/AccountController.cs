@@ -219,8 +219,6 @@
             foreach (var userRole in userRoles)
             {
                 claims.Add(new Claim(ClaimTypes.Role, userRole));
-
-                //TODO Add ROLE CLAIMS !!
             }
 
             return claims;

@@ -1,4 +1,4 @@
-﻿const baseUrl = 'https://localhost:7122/api/cuppons';
+﻿const baseUrl = 'https://localhost:7122/api/coupon';
 
 export async function applyCuppon(cupponId, userId) {
     const request = await fetch(`${baseUrl}/Apply`, {

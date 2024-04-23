@@ -22,11 +22,11 @@
         private readonly ICartService cartService;
         private readonly IEmailSender emailSender;
         private readonly IOrderService orderService;
-        private readonly IPromotionCodeService promotionCodeService;
+        private readonly ICouponService promotionCodeService;
         private readonly IProductStockService productStockService;
         private readonly IHubContext<NotificationsHub> hubContext;
         public CartController(ICartService cartService, IEmailSender emailSender,
-          IOrderService orderService, IPromotionCodeService promotionCodeService
+          IOrderService orderService, ICouponService promotionCodeService
             , IProductStockService productStockService, IHubContext<NotificationsHub> hubContext)
         {
             this.cartService = cartService;

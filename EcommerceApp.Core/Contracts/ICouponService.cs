@@ -1,7 +1,7 @@
 ﻿namespace EcommerceApp.Core.Contracts
 {
     using Models.PromotionCodes;
-    public interface IPromotionCodeService
+    public interface ICouponService
     {
         Task<decimal> CheckWheterUserReachesDiscount(Guid userId);
 

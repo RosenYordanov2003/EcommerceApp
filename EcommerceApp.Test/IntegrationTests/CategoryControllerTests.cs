@@ -6,6 +6,7 @@
     using Moq;
     using Core.Models.Categories;
 
+    [TestFixture]
     public class CategoryControllerTests : IDisposable
     {
         private CustomWebApplicationFactory factory;

@@ -2,7 +2,7 @@
 {
     public class PromotionCodeApplyModel
     {
-        public Guid CupponId { get; set; }
+        public Guid CouponId { get; set; }
         public Guid UserId { get; set; }
     }
 }

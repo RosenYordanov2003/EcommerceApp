@@ -53,6 +53,8 @@ public class Program
             ValidateAudience = false,
             ValidateLifetime = true,
             RequireExpirationTime = false,
+            ValidIssuer = builder.Configuration["JwtConfig:ValidIssuer"],
+            ValidAudience = builder.Configuration["JwtConfig:ValidAudience"],
         };
 
         builder.Services.AddAuthentication(options =>
@@ -110,7 +112,7 @@ public class Program
         builder.Services.AddScoped<ICartService, CartService>();
         builder.Services.AddScoped<IEmailSender, EmailSender>();
         builder.Services.AddScoped<IOrderService, OrderService>();
-        builder.Services.AddScoped<IPromotionCodeService, PromotionCodeService>();
+        builder.Services.AddScoped<ICouponService, CouponService>();
         builder.Services.AddScoped<IProductStockService, ProductStockService>();
         builder.Services.AddScoped<IDashboardService, DashboardService>();
         builder.Services.AddScoped<IPromotionService, PromotionService>();

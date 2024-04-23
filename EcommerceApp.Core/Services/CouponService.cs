@@ -7,10 +7,10 @@
     using Models.PromotionCodes;
     using Core.Models.Discount;
 
-    public class PromotionCodeService : IPromotionCodeService
+    public class CouponService : ICouponService
     {
         private readonly ApplicationDbContext dbContext;
-        public PromotionCodeService(ApplicationDbContext dbContext)
+        public CouponService(ApplicationDbContext dbContext)
         {
             this.dbContext = dbContext;
         }

@@ -18,7 +18,7 @@
         {
             gender = gender.ToLower();
             return await applicationDbContext.Categories
-                  .Where(c => c.Gender.ToLower().IndexOf(gender) > -1)
+                  .Where(c => (c.Gender.ToLower() == gender.ToLower()) || c.Gender.ToLower() == "unisex")
                   .Select(c => new CategoryModel()
                   {
                       Id = c.Id,

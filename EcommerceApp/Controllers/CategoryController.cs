@@ -1,9 +1,8 @@
-﻿using EcommerceApp.Core.Contracts;
-using EcommerceApp.Core.Models.Categories;
-using Microsoft.AspNetCore.Mvc;
-
-namespace EcommerceApp.Controllers
+﻿namespace EcommerceApp.Controllers
 {
+    using Microsoft.AspNetCore.Mvc;
+    using Core.Contracts;
+
     [ApiController]
     [Route("api/categories")]
     [Produces("application/json")]
@@ -16,6 +15,7 @@ namespace EcommerceApp.Controllers
         }
 
         [HttpGet]
+        [Route("get")]
         public async Task<IActionResult> GetCategories([FromQuery]string gender)
         {
             var categories = await categoryService.GetCategoriesByGender(gender);

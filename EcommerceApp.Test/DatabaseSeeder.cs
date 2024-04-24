@@ -56,6 +56,7 @@
             dbContext.ProductStocks.AddRange(SeedProductStocks());
             dbContext.Reviews.AddRange(SeedReviews());
             dbContext.Coupons.AddRange(SeedCoupons());
+            dbContext.UserMessages.AddRange(SeedUserMessages());
             dbContext.SaveChanges();
         }
 
@@ -324,9 +325,31 @@
                 ExpirationTime = new DateTime(2023, 12, 14)
             };
             List<Coupon> coupons = new List<Coupon>() { coupon, expiredCoupon };
-           
+
             return coupons;
         }
-
+        private static IEnumerable<UserMessage> SeedUserMessages()
+        {
+            List<UserMessage> userMessages = new List<UserMessage>()
+            {
+                new UserMessage()
+                {
+                    Id = Guid.Parse("6B3033A9-5840-4A58-898A-F75989EE43C5"),
+                    CreatedOn = new DateTime(2023,12, 14),
+                    IsResponded = false,
+                    Message = "Test Message",
+                    UserId = userId
+                },
+                new UserMessage()
+                {
+                    Id = Guid.Parse("D15DE586-781C-45E0-85E1-D8634AAB7DA7"),
+                    CreatedOn = new DateTime(2023,12, 14),
+                    IsResponded = false,
+                    Message = "Test Message 2",
+                    UserId = userId
+                }
+            };
+            return userMessages;
+        }
     }
 }

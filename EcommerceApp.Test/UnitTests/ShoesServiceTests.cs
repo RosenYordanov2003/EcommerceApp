@@ -26,7 +26,6 @@
         [SetUp]
         public void SetUp()
         {
-            shoesService = new ShoesService(dbContext);
             dbContextOptions = new DbContextOptionsBuilder<ApplicationDbContext>()
               .UseInMemoryDatabase("EcommerceAppInMemoryDatabase" + Guid.NewGuid().ToString())
               .Options;
@@ -284,14 +283,13 @@
             Assert.That(actualResult.Gender, Is.EqualTo(expectedResult.Gender));
             Assert.That(actualResult.Name, Is.EqualTo(expectedResult.Name));
             Assert.That(actualResult.Id, Is.EqualTo(expectedResult.Id));
-            Assert.That(actualResult.PromotionModel.Id, Is.EqualTo(expectedResult.PromotionModel.Id));
+            Assert.That(actualResult?.PromotionModel?.Id, Is.EqualTo(expectedResult.PromotionModel.Id));
             Assert.That(actualResult.PromotionModel.PercentageDiscount, Is.EqualTo(expectedResult.PromotionModel.PercentageDiscount));
             Assert.That(actualResult.PromotionModel.ExpireTime, Is.EqualTo(expectedResult.PromotionModel.ExpireTime));
             Assert.That(actualResult.StarRating, Is.EqualTo(expectedResult.StarRating));
             CollectionAssert.AreEqual(actualResult.Categories.Select(c => c.Id), new int[3] { 1, 2, 3 });
             CollectionAssert.AreEqual(actualResult.Brands.Select(b => b.Id), new int[2] { 1, 2 });
             Assert.That(expectedResult.ProductStocks.Count(), Is.EqualTo(actualResult.ProductStocks.Count()));
-
         }
 
         [TearDown]

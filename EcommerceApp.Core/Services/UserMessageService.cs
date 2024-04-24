@@ -8,10 +8,7 @@
     using Models.UserMessage;
     using Models.AdminModels.UserMessages;
     using Models.Pager;
-    using EcommerceApp.Core.Models.TimeDifference;
-    using EcommerceApp.Core.Models.Discount;
-    using EcommerceApp.Core.Models.Utilities;
-    using Duende.IdentityServer.Models;
+    using Core.Models.Utilities;
 
     public class UserMessageService : IUserMessageService
     {

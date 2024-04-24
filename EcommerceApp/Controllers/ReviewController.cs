@@ -36,11 +36,11 @@
             await reviewService.PostPoductReviewAsync(createReviewModel);
             if (createReviewModel.ProductCategory.ToLower() == "shoes")
             {
-                ProductInfo<double> shoesproductInfo = await shoesService.GetProductByIdAsync(createReviewModel.ProductId, createReviewModel.UserId);
+                ProductInfoModel<double> shoesproductInfo = await shoesService.GetProductByIdAsync(createReviewModel.ProductId, createReviewModel.UserId);
                 return Ok(new { Success = true, UpdatedProduct = shoesproductInfo });
             }
 
-            ProductInfo<string> productInfo = await productSevice.GetProductByIdAsync(createReviewModel.ProductId, createReviewModel.UserId);
+            ProductInfoModel<string> productInfo = await productSevice.GetProductByIdAsync(createReviewModel.ProductId, createReviewModel.UserId);
             return Ok(new { Success = true, UpdatedProduct = productInfo });
         }
         [HttpGet]

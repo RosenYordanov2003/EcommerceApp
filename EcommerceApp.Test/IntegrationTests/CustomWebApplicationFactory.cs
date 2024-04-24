@@ -17,9 +17,11 @@
         {
             CategoryServiceMock = new Mock<ICategoryService>();
             CouponServiceMock = new Mock<ICouponService>();
+            ShoesServiceMock = new Mock<IShoesService>(); 
         }
         public Mock<ICategoryService> CategoryServiceMock { get; set; }
         public Mock<ICouponService> CouponServiceMock { get; set; }
+        public Mock<IShoesService> ShoesServiceMock { get; set; }
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
             base.ConfigureWebHost(builder);
@@ -27,6 +29,7 @@
             {
                 services.AddSingleton(CategoryServiceMock.Object);
                 services.AddSingleton(CouponServiceMock.Object);
+                services.AddSingleton(ShoesServiceMock.Object);
             });
         }
         protected override void ConfigureClient(HttpClient client)

@@ -11,9 +11,9 @@
         Task<IEnumerable<ProductModel>> GetFeaturedClothesAsync(Guid? userId);
         Task<AllProductsModel> GetProductByGender(string gedner, Guid? userId);
         Task<bool> CheckIfProductExistsByIdAsync(int productId);
-        Task<ProductInfo<string>> GetProductByIdAsync(int productId, Guid? userId);
-        Task AddProductToUserFavoritesListAsync(UserFavoriteProduct userFavoriteProductmodel);
-        Task RemoveProductFromUserFavoriteListAsync(UserFavoriteProduct userFavoriteProductmodel);
+        Task<ProductInfoModel<string>> GetProductByIdAsync(int productId, Guid? userId);
+        Task AddProductToUserFavoritesListAsync(UserFavoriteProductModel userFavoriteProductmodel);
+        Task RemoveProductFromUserFavoriteListAsync(UserFavoriteProductModel userFavoriteProductmodel);
         Task<ICollection<GetUserFavoriteProductModel>> GetUserFavoriteProductsAsync(Guid userId);
         Task<IEnumerable<ProductFeatureModel>> LoadUserFavoriteProductsAsync(Guid userId);
         Task<IEnumerable<ClothesModel>> LoadAllClothesAsync(Pager pager);

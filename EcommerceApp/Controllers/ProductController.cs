@@ -6,6 +6,7 @@
     using Core.Contracts;
     using Core.Models.Products;
     using Infrastructure.Data.Models;
+    using System.Net;
 
     [ApiController]
     [Produces("application/json")]
@@ -23,6 +24,7 @@
         }
 
         [HttpGet("GetFeaturedClothes")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> GetFeaturedClothes([FromQuery] string? userId)
         {
             Guid? userIdResult = ExtractUserId(userId);
@@ -50,14 +52,14 @@
                 return BadRequest(new { Error = "Product with such an id does not exist" });
             }
 
-            ProductInfo<string> productInfo = await productService.GetProductByIdAsync(productId, userIdResult);
+            ProductInfoModel<string> productInfo = await productService.GetProductByIdAsync(productId, userIdResult);
 
             return Ok(productInfo);
         }
         [HttpPost]
         [Authorize]
         [Route("AddToFavoriteProducts")]
-        public async Task<IActionResult> AddToFavoriteProducts([FromBody] UserFavoriteProduct userFavoriteProductModel)
+        public async Task<IActionResult> AddToFavoriteProducts([FromBody] UserFavoriteProductModel userFavoriteProductModel)
         {
             if (!await productService.CheckIfProductExistsByIdAsync(userFavoriteProductModel.ProductId))
             {
@@ -69,7 +71,7 @@
         }
         [HttpPost]
         [Route("RemoveFromUserFavoriteLists")]
-        public async Task<IActionResult> RemoveFromUserFavoriteLists([FromBody] UserFavoriteProduct userFavoriteProductModel)
+        public async Task<IActionResult> RemoveFromUserFavoriteLists([FromBody] UserFavoriteProductModel userFavoriteProductModel)
         {
             if (!await productService.CheckIfProductExistsByIdAsync(userFavoriteProductModel.ProductId))
             {

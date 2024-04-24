@@ -24,7 +24,7 @@
             this.applicationDbContext = applicationDbContext;
         }
 
-        public async Task AddProductToUserFavoritesListAsync(UserFavoriteProduct userFavoriteProductmodel)
+        public async Task AddProductToUserFavoritesListAsync(UserFavoriteProductModel userFavoriteProductmodel)
         {
             UserFavoriteProducts userFavoriteProducts = new UserFavoriteProducts()
             {
@@ -123,9 +123,9 @@
             return productModel;
         }
 
-        public async Task<ProductInfo<string>> GetProductByIdAsync(int productId, Guid? userId)
+        public async Task<ProductInfoModel<string>> GetProductByIdAsync(int productId, Guid? userId)
         {
-            var productInfo = await applicationDbContext.Clothes.Where(cl => cl.Id == productId).Select(cl => new ProductInfo<string>()
+            var productInfo = await applicationDbContext.Clothes.Where(cl => cl.Id == productId).Select(cl => new ProductInfoModel<string>()
             {
                 Id = cl.Id,
                 Description = cl.Description,
@@ -261,7 +261,7 @@
             return result;
         }
 
-        public async Task RemoveProductFromUserFavoriteListAsync(UserFavoriteProduct userFavoriteProductModel)
+        public async Task RemoveProductFromUserFavoriteListAsync(UserFavoriteProductModel userFavoriteProductModel)
         {
 
             UserFavoriteProducts userFavoriteProductsToDelete = await applicationDbContext

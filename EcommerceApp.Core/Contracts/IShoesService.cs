@@ -8,7 +8,7 @@
     public interface IShoesService
     {
         Task<IEnumerable<ProductFeatureModel>> GetFeaturedShoesAsync(Guid? userId);
-        Task<ProductInfo<double>> GetProductByIdAsync(int productId, Guid? userId);
+        Task<ProductInfoModel<double>> GetProductByIdAsync(int productId, Guid? userId);
         Task<IEnumerable<ClothesModel>> GetAllShoesAsync(Pager pager);
         Task<ModifyShoesModel> GetShoesToModifyAsync(int shoesId);
         Task<bool> CheckIfShoesExistsByIdAsync(int shoesId);
@@ -18,7 +18,7 @@
         Task SetFeatureShoesByIdAsync(int shoesId);
         Task RemoveFeaturedShoesByIdAsync(int shoesId);
         Task<int> GetAllShoesCountAsync();
-        Task AddShoesToUserFavoriteProductsAsync(UserFavoriteProduct userFavoriteProductModel);
-        Task RemoveShoesToUserFavoriteProductsAsync(UserFavoriteProduct userFavoriteProductModel);
+        Task AddShoesToUserFavoriteProductsAsync(UserFavoriteProductModel userFavoriteProductModel);
+        Task RemoveShoesFromUserFavoriteProductsAsync(UserFavoriteProductModel userFavoriteProductModel);
     }
 }

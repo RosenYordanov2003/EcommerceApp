@@ -37,7 +37,7 @@
         [Test]
         public async Task TestAddProductToUserFavoritesListAsync()
         {
-            UserFavoriteProduct userFavoriteProduct = new UserFavoriteProduct()
+            UserFavoriteProductModel userFavoriteProduct = new UserFavoriteProductModel()
             {
                 UserId = userId,
                 ProductId = product1.Id
@@ -50,7 +50,7 @@
         [Test]
         public async Task TestRemoveProductFromUserFavoriteListAsync()
         {
-            UserFavoriteProduct userFavoriteProduct = new UserFavoriteProduct()
+            UserFavoriteProductModel userFavoriteProduct = new UserFavoriteProductModel()
             {
                 UserId = userId,
                 ProductId = product1.Id
@@ -110,7 +110,7 @@
                     StarRating = 5
                 },
             };
-            UserFavoriteProduct userFavoriteProduct = new UserFavoriteProduct()
+            UserFavoriteProductModel userFavoriteProduct = new UserFavoriteProductModel()
             {
                 UserId = userId,
                 ProductId = product1.Id
@@ -199,7 +199,7 @@
         [Test]
         public async Task TestGetProductByIdAsync()
         {
-            var expectedProductModel = new ProductInfo<string>()
+            var expectedProductModel = new ProductInfoModel<string>()
             {
                 CategoryName = "T-Shirts",
                 Brand = "Nike",
@@ -252,7 +252,7 @@
                     },
                 }
             };
-            await productSevice.AddProductToUserFavoritesListAsync(new UserFavoriteProduct() { ProductId = product1.Id, UserId = userId });
+            await productSevice.AddProductToUserFavoritesListAsync(new UserFavoriteProductModel() { ProductId = product1.Id, UserId = userId });
             var result = await productSevice.GetProductByIdAsync(product1.Id, userId);
 
             CollectionAssert.AreEqual(expectedProductModel.RelatedProducts.OrderByDescending(x => x.StarRating), result.RelatedProducts, new ProductModelComparator());
@@ -268,7 +268,7 @@
         [Test]
         public async Task TestGetUserFavoriteProductsAsyncShouldReturnTheCorrectCount()
         {
-            await productSevice.AddProductToUserFavoritesListAsync(new UserFavoriteProduct() { ProductId = product1.Id, UserId = userId });
+            await productSevice.AddProductToUserFavoritesListAsync(new UserFavoriteProductModel() { ProductId = product1.Id, UserId = userId });
             var result = await productSevice.GetUserFavoriteProductsAsync(userId);
 
             int expectedCount = 3;
@@ -398,7 +398,7 @@
                },
            };
 
-            await productSevice.AddProductToUserFavoritesListAsync(new UserFavoriteProduct() { ProductId = 3, UserId = userId });
+            await productSevice.AddProductToUserFavoritesListAsync(new UserFavoriteProductModel() { ProductId = 3, UserId = userId });
 
             var actualCollection = await productSevice.LoadUserFavoriteProductsAsync(userId);
 

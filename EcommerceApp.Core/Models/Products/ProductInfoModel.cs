@@ -2,9 +2,9 @@
 {
     using ProductStocks;
     using Models.Review;
-    public class ProductInfo<T> : ProductModel
+    public class ProductInfoModel<T> : ProductModel
     {
-        public ProductInfo()
+        public ProductInfoModel()
         {
             Reviews = new HashSet<ReviewModel>();
             ProductStocks = new HashSet<ProductStock<T>>();

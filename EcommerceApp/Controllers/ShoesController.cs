@@ -4,7 +4,6 @@
     using Microsoft.AspNetCore.Authorization;
     using Core.Contracts;
     using Core.Models.Products;
-    using EcommerceApp.Core.Services;
 
     [Route("shoes")]
     [ApiController]
@@ -16,7 +15,9 @@
             this.shoesService = shoesService;
         }
 
-        [HttpGet("GetFeatured")]
+        [HttpGet]
+        [Route("GetFeatured")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> GetFeaturedShoes([FromQuery] string? userId)
         {
             Guid? userIdResult = ExtractUserId(userId);
@@ -28,7 +29,9 @@
         [HttpPost]
         [Authorize]
         [Route("AddToFavorite")]
-        public async Task<IActionResult> AddToFavoriteProducts([FromBody] UserFavoriteProduct userFavoriteProductModel)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> AddToFavoriteProducts([FromBody] UserFavoriteProductModel userFavoriteProductModel)
         {
             if (!await shoesService.CheckIfShoesExistsByIdAsync(userFavoriteProductModel.ProductId))
             {
@@ -40,27 +43,31 @@
         }
         [HttpPost]
         [Route("RemoveFromFavorite")]
-        public async Task<IActionResult> RemoveFromUserFavorite([FromBody] UserFavoriteProduct userFavoriteProductModel)
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> RemoveFromUserFavorite([FromBody] UserFavoriteProductModel userFavoriteProductModel)
         {
             if (!await shoesService.CheckIfShoesExistsByIdAsync(userFavoriteProductModel.ProductId))
             {
                 return BadRequest(new { Error = "Shoes with such an id does not exist" });
             }
-            await shoesService.RemoveShoesToUserFavoriteProductsAsync(userFavoriteProductModel);
+            await shoesService.RemoveShoesFromUserFavoriteProductsAsync(userFavoriteProductModel);
 
             return Ok();
         }
         [HttpGet("About")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetProductById([FromQuery] int productId,[FromQuery] string? userId)
         {
             Guid? userIdResult = ExtractUserId(userId);
 
             if (!await shoesService.CheckIfShoesExistsByIdAsync(productId))
             {
-                return BadRequest(new { Error = "Product with such an id does not exist" });
+                return NotFound(new { Error = "Product with such an id does not exist" });
             }
 
-            ProductInfo<double> productInfo = await shoesService.GetProductByIdAsync(productId, userIdResult);
+            ProductInfoModel<double> productInfo = await shoesService.GetProductByIdAsync(productId, userIdResult);
 
             return Ok(productInfo);
         }

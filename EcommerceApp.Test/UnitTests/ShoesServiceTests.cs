@@ -228,16 +228,16 @@
         [Test]
         public async Task TestRemoveShoesFromUserFavoriteAsyncMethod()
         {
-            UserFavoriteProduct userFavoriteProductModel = new UserFavoriteProduct() { ProductId = 1, UserId = userId };
-            await shoesService.RemoveShoesToUserFavoriteProductsAsync(userFavoriteProductModel);
+            UserFavoriteProductModel userFavoriteProductModel = new UserFavoriteProductModel() { ProductId = 1, UserId = userId };
+            await shoesService.RemoveShoesFromUserFavoriteProductsAsync(userFavoriteProductModel);
             var shoes = await shoesService.GetProductByIdAsync(1, userId);
             Assert.IsFalse(shoes.IsFavorite);
         }
         [Test]
         public async Task TestAddShoesToUserFavoriteAsyncMethod()
         {
-            UserFavoriteProduct userFavoriteProductModel = new UserFavoriteProduct() { ProductId = 1, UserId = userId };
-            await shoesService.RemoveShoesToUserFavoriteProductsAsync(userFavoriteProductModel);
+            UserFavoriteProductModel userFavoriteProductModel = new UserFavoriteProductModel() { ProductId = 1, UserId = userId };
+            await shoesService.RemoveShoesFromUserFavoriteProductsAsync(userFavoriteProductModel);
             await shoesService.AddShoesToUserFavoriteProductsAsync(userFavoriteProductModel);
             var shoes = await shoesService.GetProductByIdAsync(1, userId);
             Assert.IsTrue(shoes.IsFavorite);

@@ -16,6 +16,7 @@
 
         [HttpGet]
         [Route("get")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> GetCategories([FromQuery]string gender)
         {
             var categories = await categoryService.GetCategoriesByGender(gender);

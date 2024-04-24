@@ -18,6 +18,9 @@
         }
 
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [Route("Apply")]
         public async Task<IActionResult> ApplyCuppon([FromBody] PromotionCodeApplyModel promotionCodeApplyModel)
         {

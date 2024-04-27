@@ -6,7 +6,7 @@
     using Data;
     using Infrastructure.Data.Models;
     using Models.AdminModels.ProductStock;
-    using static EcommerceApp.Common.GeneralApplicationConstants;
+    using static Common.GeneralApplicationConstants;
 
     public class ProductStockService : IProductStockService
     {

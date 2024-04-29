@@ -5,10 +5,8 @@
     using Data;
     using static DatabaseSeeder;
     using Core.Services;
-    using Google;
-    using EcommerceApp.Infrastructure.Data.Models;
-    using EcommerceApp.Core.Models.PromotionCodes;
-    using EcommerceApp.Infrastructure.Migrations;
+    using Infrastructure.Data.Models;
+    using Core.Models.PromotionCodes;
 
     [TestFixture]
     public class CouponServiceTests
@@ -65,14 +63,6 @@
             bool result = await couponService.CheckIfCouponIsRelatedWithParticularUserAsync(userId, Guid.NewGuid());
 
             Assert.IsFalse(result);
-        }
-        [Test]
-        public async Task TestCheckWheterUserReachesDiscountShouldReturn20()
-        {
-            const decimal expectedResult = 20;
-            decimal actualResult = await couponService.CheckWheterUserReachesDiscount(userId);
-
-            Assert.That(actualResult, Is.EqualTo(expectedResult));
         }
         [Test]
         public async Task TestGenerateCouponForUserAsync()

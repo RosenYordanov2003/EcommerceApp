@@ -1,11 +1,11 @@
 ﻿namespace EcommerceApp.Core.Services
 {
+    using System.Collections.Generic;
+    using Microsoft.EntityFrameworkCore;
     using Contracts;
     using Data;
-    using Microsoft.EntityFrameworkCore;
     using Models.AdminModels.Dashboard;
     using Models.AdminModels.Orders;
-    using System.Collections.Generic;
 
     public class DashboardService : IDashboardService
     {

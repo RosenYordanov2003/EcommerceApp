@@ -39,6 +39,12 @@
         public static Coupon coupon;
         public static Coupon expiredCoupon;
 
+        public static Order order1;
+        public static Order order2;
+        public static Order order3;
+        public static Order order4;
+        public static Order order5;
+
         public static Guid userId = Guid.Parse("AFDEAF68-5DEA-4107-AD18-858071D354D7");
 
 
@@ -57,6 +63,7 @@
             dbContext.Reviews.AddRange(SeedReviews());
             dbContext.Coupons.AddRange(SeedCoupons());
             dbContext.UserMessages.AddRange(SeedUserMessages());
+            dbContext.Orders.AddRange(SeedOrders());
             dbContext.SaveChanges();
         }
 
@@ -350,6 +357,155 @@
                 }
             };
             return userMessages;
+        }
+        private static IEnumerable<Order> SeedOrders()
+        {
+            List<Order> orders = new List<Order>();
+
+            order1 = new Order()
+            {
+                Id = Guid.Parse("62EF4EDD-0FF0-409D-AC89-F5A9334E9164"),
+                Adress = "Test Address",
+                City = "Sofia",
+                Country = "Bulgaria",
+                PostalCode = 1000,
+                Discount = 0,
+                Email = "test123@gmail.com",
+                FirstName = "Test1",
+                LastName = "Testov1",
+                Price = 100,
+                ShippingPrice = 5,
+                ShippingMethod = "Standard",
+                UserId = userId,
+                FinishedOn = new DateTime(2024, 3, 10),
+                ProductCartEntities = new List<ProductOrderEntity>()
+                {
+                    new ProductOrderEntity()
+                    {
+                        Quantity = 2,
+                        Size = "S",
+                        ProductId = product1.Id,
+                        OrderId = Guid.Parse("62EF4EDD-0FF0-409D-AC89-F5A9334E9164"),
+                    }
+                }
+            };
+            order2 = new Order()
+            {
+                Id = Guid.Parse("8D566C2F-AB49-4BB5-83F2-956E4A2FEDF4"),
+                Adress = "Test Address",
+                City = "Burgas",
+                Country = "Bulgaria",
+                PostalCode = 1000,
+                Discount = 0,
+                Email = "test123@gmail.com",
+                FirstName = "Test2",
+                LastName = "Testov2",
+                Price = 120,
+                ShippingPrice = 5,
+                ShippingMethod = "Standard",
+                UserId = userId,
+                FinishedOn = new DateTime(2024, 3, 10),
+                ProductCartEntities = new List<ProductOrderEntity>()
+                {
+                    new ProductOrderEntity()
+                    {
+                        Quantity = 2,
+                        Size = "S",
+                        ProductId = product2.Id,
+                        OrderId = Guid.Parse("8D566C2F-AB49-4BB5-83F2-956E4A2FEDF4"),
+                    }
+                }
+            };
+            order3 = new Order()
+            {
+                Id = Guid.Parse("4F7AE404-BE43-439C-9527-2202982EC0F5"),
+                Adress = "Test Address",
+                City = "Varna",
+                Country = "Bulgaria",
+                PostalCode = 1000,
+                Discount = 10,
+                Email = "test123@gmail.com",
+                FirstName = "Test3",
+                LastName = "Testov3",
+                Price = 200,
+                ShippingPrice = 5,
+                ShippingMethod = "Standard",
+                UserId = userId,
+                FinishedOn = new DateTime(2024, 3, 10),
+                ProductCartEntities = new List<ProductOrderEntity>()
+                {
+                    new ProductOrderEntity()
+                    {
+                        Quantity = 2,
+                        Size = "S",
+                        ProductId = product3.Id,
+                        OrderId = Guid.Parse("4F7AE404-BE43-439C-9527-2202982EC0F5"),
+                    }
+                }
+            };
+            order4 = new Order()
+            {
+                Id = Guid.Parse("4B9F7C4A-525D-44BC-A30F-BEE4AB0390E0"),
+                Adress = "Test Address",
+                City = "Sofia",
+                Country = "Bulgaria",
+                PostalCode = 1000,
+                Discount = 0,
+                Email = "test123@gmail.com",
+                FirstName = "Test4",
+                LastName = "Testov4",
+                Price = 80,
+                ShippingPrice = 5,
+                ShippingMethod = "Standard",
+                UserId = userId,
+                FinishedOn = new DateTime(2024, 3, 10),
+                ProductCartEntities = new List<ProductOrderEntity>()
+                {
+                    new ProductOrderEntity()
+                    {
+                        Quantity = 2,
+                        Size = "S",
+                        ProductId = product1.Id,
+                        OrderId = Guid.Parse("4B9F7C4A-525D-44BC-A30F-BEE4AB0390E0"),
+                    }
+                }
+            };
+            order5 = new Order()
+            {
+                Id = Guid.Parse("370D8A2A-7466-47F9-A5D1-3D8424E28541"),
+                Adress = "Test Address",
+                City = "Plovdiv",
+                Country = "Bulgaria",
+                PostalCode = 1000,
+                Discount = 0,
+                Email = "test123@gmail.com",
+                FirstName = "Test5",
+                LastName = "Testov5",
+                Price = 300,
+                ShippingPrice = 5,
+                ShippingMethod = "Standard",
+                UserId = userId,
+                FinishedOn = new DateTime(2024, 3, 10),
+
+                ProductCartEntities = new List<ProductOrderEntity>()
+                {
+                    new ProductOrderEntity()
+                    {
+                        Quantity = 2,
+                        Size = "S",
+                        ProductId = product1.Id,
+                        OrderId = Guid.Parse("370D8A2A-7466-47F9-A5D1-3D8424E28541"),
+                    }
+                }
+            };
+
+            orders.Add(order1);
+            orders.Add(order2);
+            orders.Add(order3);
+            orders.Add(order4);
+            orders.Add(order5);
+
+            return orders;
         }
     }
 }

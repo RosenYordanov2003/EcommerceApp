@@ -6,9 +6,8 @@
     using Core.Models.Products;
     using System.Net.Http.Json;
     using System.Net;
-    using Microsoft.AspNetCore.Http;
-    using EcommerceApp.Core.Models.Review;
-    using EcommerceApp.Core.Models.ProductStocks;
+    using Core.Models.Review;
+    using Core.Models.ProductStocks;
 
     [TestFixture]
     public class ShoesControllerTests

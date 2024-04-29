@@ -5,8 +5,6 @@
     using Core.Contracts;
     using Core.Models.AdminModels.Dashboard;
     using static Common.GeneralApplicationConstants;
-    using Duende.IdentityServer.Events;
-    using Core.Models.AdminModels.Orders;
 
     [Authorize(Roles = AdminRoleName)]
     [Route("api/dashboard")]
@@ -22,6 +20,8 @@
 
         [HttpGet]
         [Route("Dashboard")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetDashboardInfo([FromQuery]string? particularDay, string?particularMonth)
         {
             DateTime? date = null;
@@ -34,12 +34,21 @@
             {
                 monthDate = DateTime.Parse(particularMonth);
             }
-            DashboardModel dashboard = await dashboardService.GetDashboardInfoAsync(date, monthDate);
+            try
+            {
+                DashboardModel dashboard = await dashboardService.GetDashboardInfoAsync(date, monthDate);
 
-            return Ok(dashboard);
+                return Ok(dashboard);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
         [HttpGet]
         [Route("AllOrders")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetAllOrders()
         {
             var allOrders = await dashboardService.GetAllOrdersAsync();
@@ -48,6 +57,8 @@
         }
         [HttpGet]
         [Route("RecentOrders")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetRecentOrders()
         {
             var allOrders = await dashboardService.GetRecentOrdersAsync();

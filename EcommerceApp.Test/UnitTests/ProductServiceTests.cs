@@ -14,8 +14,6 @@
     using Core.Models.Pager;
     using Core.Models.AdminModels.Clothes;
     using Core.Models.AdminModels.Pictures;
-    using Infrastructure.Data.Models;
-    using System.Security.Cryptography.X509Certificates;
 
     [TestFixture]
     internal class ProductServiceTests

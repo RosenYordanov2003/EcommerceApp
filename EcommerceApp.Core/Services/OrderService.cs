@@ -30,26 +30,25 @@
                 .Select(sh => new ProductCartModel()
                 {
                     CategoryName = sh.Shoes.Category.Name,
-                    ImgUrl = sh.Shoes.Pictures.First().ImgUrl,
+                    ImgUrl = sh.Shoes.Pictures.Count > 0 ? sh.Shoes.Pictures.First().ImgUrl : null,
                     Size = sh.Size.ToString(),
                     Id = sh.Id,
                     Name = sh.Shoes.Name,
                     Price = sh.Shoes.Price * sh.Quantity,
                     Quantity = sh.Quantity
-
                 })
                 .ToArrayAsync();
 
             var products = await dbContext.ProductOrderEntities.Where(p => p.OrderId == id)
-              .Select(sh => new ProductCartModel()
+              .Select(p => new ProductCartModel()
               {
-                  CategoryName = sh.Product.Category.Name,
-                  ImgUrl = sh.Product.Pictures.First().ImgUrl,
-                  Size = sh.Size,
-                  Id = sh.Id,
-                  Name = sh.Product.Name,
-                  Price = sh.Product.Price * sh.Quantity,
-                  Quantity = sh.Quantity
+                  CategoryName = p.Product.Category.Name,
+                  ImgUrl = p.Product.Pictures.Count > 0 ? p.Product.Pictures.First().ImgUrl : null,
+                  Size = p.Size,
+                  Id = p.Id,
+                  Name = p.Product.Name,
+                  Price = p.Product.Price * p.Quantity,
+                  Quantity = p.Quantity
 
               })
               .ToArrayAsync();
@@ -81,7 +80,7 @@
         {
             Order order = new Order()
             {
-                City =  WebUtility.HtmlEncode(orderModel.UserOrderInfo.City),
+                City = WebUtility.HtmlEncode(orderModel.UserOrderInfo.City),
                 Country = WebUtility.HtmlEncode(orderModel.UserOrderInfo.Country),
                 PostalCode = int.Parse(WebUtility.HtmlEncode(orderModel.UserOrderInfo.PostalCode.ToString())),
                 Adress = WebUtility.HtmlEncode(orderModel.UserOrderInfo.StreetAdress),

@@ -1,8 +1,8 @@
 ﻿namespace EcommerceApp.Core.Models.Orders
 {
     using System.ComponentModel.DataAnnotations;
-    using static EcommerceApp.GlobalConstants.EntityValidation.OrderEntity;
-    public class UserOrderInfo
+    using static GlobalConstants.EntityValidation.OrderEntity;
+    public class UserOrderInfoModel
     {
         [EmailAddress]
         [Required]

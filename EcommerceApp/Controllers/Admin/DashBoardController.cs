@@ -51,9 +51,16 @@
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetAllOrders()
         {
-            var allOrders = await dashboardService.GetAllOrdersAsync();
+            try
+            {
+                var allOrders = await dashboardService.GetAllOrdersAsync();
 
-            return Ok(allOrders);
+                return Ok(allOrders);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
         [HttpGet]
         [Route("RecentOrders")]
@@ -61,9 +68,16 @@
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetRecentOrders()
         {
-            var allOrders = await dashboardService.GetRecentOrdersAsync();
+            try
+            {
+                var allOrders = await dashboardService.GetRecentOrdersAsync();
 
-            return Ok(allOrders);
+                return Ok(allOrders);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
     }
 }

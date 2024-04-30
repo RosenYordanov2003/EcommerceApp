@@ -11,7 +11,9 @@
     using Moq;
     using Core.Contracts;
     using static Common.GeneralApplicationConstants;
-
+    using Microsoft.AspNetCore.Identity.UI.Services;
+    using Microsoft.AspNetCore.Identity;
+    using Infrastructure.Data.Models;
 
     public class CustomWebApplicationFactory : WebApplicationFactory<Program>
     {
@@ -21,11 +23,18 @@
             CouponServiceMock = new Mock<ICouponService>();
             ShoesServiceMock = new Mock<IShoesService>();
             DashboardServiceMock = new Mock<IDashboardService>();
+            UserMessageServiceMock = new Mock<IUserMessageService>();
+            EmailSenderMock = new Mock<IEmailSender>();
+            UserManagerMock = new Mock<UserManager<User>>(Mock.Of<IUserStore<User>>(), null, null, null, null, null, null, null, null);
         }
         public Mock<ICategoryService> CategoryServiceMock { get; set; }
         public Mock<ICouponService> CouponServiceMock { get; set; }
         public Mock<IShoesService> ShoesServiceMock { get; set; }
         public Mock<IDashboardService> DashboardServiceMock { get; set; }
+        public Mock<IUserMessageService> UserMessageServiceMock { get; set; }
+        public Mock<IEmailSender> EmailSenderMock { get; set; }
+        public Mock<UserManager<User>> UserManagerMock { get; set; }
+
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
             base.ConfigureWebHost(builder);
@@ -35,6 +44,9 @@
                 services.AddSingleton(CouponServiceMock.Object);
                 services.AddSingleton(ShoesServiceMock.Object);
                 services.AddSingleton(DashboardServiceMock.Object);
+                services.AddSingleton(UserMessageServiceMock.Object);
+                services.AddSingleton(EmailSenderMock.Object);
+                services.AddSingleton(UserManagerMock.Object);
             });
         }
         protected override void ConfigureClient(HttpClient client)

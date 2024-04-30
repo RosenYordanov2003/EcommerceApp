@@ -11,7 +11,8 @@
     using Core.Models.AdminModels.UserMessages;
     using Infrastructure.Data.Models;
     using static Common.GeneralApplicationConstants;
-    using EcommerceApp.Core.Models.Pager;
+    using Core.Models.Pager;
+    using EcommerceApp.Models.Responses;
 
     [Route("api/userMessage")]
     [Authorize]
@@ -34,31 +35,50 @@
 
         [HttpPost]
         [Route("Upload")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> UploadMessage([FromBody] UploadUserMessageModel model)
         {
             if (!ModelState.IsValid)
             {
                 return Ok(new { Success = false });
             }
-            await userMessageService.UploadUserMessageAsync(model);
+            try
+            {
+                await userMessageService.UploadUserMessageAsync(model);
 
-            await hubContext.Clients.All.SendAsync("UserMessagesModification");
-            await hubContext.Clients.All.SendAsync("UserMessageCountChanged");
+                await hubContext.Clients.All.SendAsync("UserMessagesModification");
+                await hubContext.Clients.All.SendAsync("UserMessageCountChanged");
 
-
-            return Ok(new {Success = true});
+                return Ok(new { Success = true });
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
         [HttpGet]
         [Route("GetCount")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [Authorize(Roles = AdminRoleName)]
         public async Task<IActionResult> GetMessageCount()
         {
-            int messageCount = await userMessageService.GetMessageCountAsync();
+            try
+            {
+                int messageCount = await userMessageService.GetMessageCountAsync();
 
-            return Ok(messageCount);
+                return Ok(messageCount);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
         [HttpGet]
         [Route("GetAll")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [Authorize(Roles = AdminRoleName)]
         public async Task<IActionResult> GetAllMessages([FromQuery] int currentPage)
         {
@@ -66,45 +86,72 @@
             {
                 currentPage = 1;
             }
-            int totalUserMessages = await userMessageService.GetMessageCountAsync();
-            Pager pager = new Pager(totalUserMessages, currentPage, DefaultUserMessagesPageSize);
+            try
+            {
+                int totalUserMessages = await userMessageService.GetMessageCountAsync();
 
-            IEnumerable<UserMessageCardModel> messages = await userMessageService.GetUserMessagesAsync(pager);
+                Pager pager = new Pager(totalUserMessages, currentPage, DefaultUserMessagesPageSize);
 
-            return Ok(new {Messages = messages, PagerObject = pager});
+                IEnumerable<UserMessageCardModel> messages = await userMessageService.GetUserMessagesAsync(pager);
+
+                return Ok(new GetAllUserMessagesResponse { Messages = messages, PagerObject = pager });
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
         [HttpPost]
         [Route("Respond")]
         [Authorize(Roles = AdminRoleName)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> RespondToUserMessage([FromBody] RespondUserMessageModel model)
         {
             if (!await userMessageService.CheckIfMessageExistsByIdAsync(model.MessageId))
             {
                 return BadRequest();
             }
+            try
+            {
+                User user = await userManager.FindByIdAsync(model.UserId.ToString());
 
-            User user = await userManager.FindByIdAsync(model.UserId.ToString());
+                string messageRespond = $"<main style=\"font-family: Arial, Helvetica, sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center;\">\r\n        <h1>Hello I'm {user.UserName} and I will respond to your question</h1>\r\n        <section style=\"display: flex; align-items: center; gap: 20px; flex-wrap: wrap;\">\r\n            <p style=\"font-size: 26px; margin-right: 10px;\">Your question was: <b>\"{model.Message}\"</b></p>\r\n            <p style=\"font-size: 26px\">{model.ResponseMessage}</p>\r\n        </section>\r\n        \r\n    </main>";
+                await userMessageService.MarkMessageAsRespondedByIdAsync(model.MessageId);
+                string email = await userMessageService.GetUserEmailByMessageIdAsync(model.MessageId);
+                await emailSender.SendEmailAsync(email, "Response to your question", messageRespond);
 
-            string messageRespond = $"<main style=\"font-family: Arial, Helvetica, sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center;\">\r\n        <h1>Hello I'm {user.UserName} and I will respond to your question</h1>\r\n        <section style=\"display: flex; align-items: center; gap: 20px; flex-wrap: wrap;\">\r\n            <p style=\"font-size: 26px; margin-right: 10px;\">Your question was: <b>\"{model.Message}\"</b></p>\r\n            <p style=\"font-size: 26px\">{model.ResponseMessage}</p>\r\n        </section>\r\n        \r\n    </main>";
-            await userMessageService.MarkMessageAsRespondedByIdAsync(model.MessageId);
-            string email = await userMessageService.GetUserEmailByMessageIdAsync(model.MessageId);
-            await emailSender.SendEmailAsync(email, "Response to your question" , messageRespond);
-
-            return Ok();
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
         [HttpDelete]
         [Route("Delete")]
         [Authorize(Roles = AdminRoleName)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> DeleteUserMessage([FromBody] Guid id)
         {
             if(!await userMessageService.CheckIfMessageExistsByIdAsync(id))
             {
                 return BadRequest();
             }
-            await userMessageService.DeleteMessageAsync(id);
-            await hubContext.Clients.All.SendAsync("UserMessageCountChanged");
+            try
+            {
+                await userMessageService.DeleteMessageAsync(id);
+                await hubContext.Clients.All.SendAsync("UserMessageCountChanged");
 
-            return Ok();
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
     }
 }

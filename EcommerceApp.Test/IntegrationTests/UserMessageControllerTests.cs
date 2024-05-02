@@ -9,7 +9,7 @@
     using Moq;
     using Newtonsoft.Json;
     using Microsoft.AspNetCore.Identity;
-    using EcommerceApp.Infrastructure.Data.Models;
+    using Infrastructure.Data.Models;
     using System.Net.Http;
     using System.Text;
 

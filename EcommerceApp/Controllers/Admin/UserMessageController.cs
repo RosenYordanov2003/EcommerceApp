@@ -12,7 +12,7 @@
     using Infrastructure.Data.Models;
     using static Common.GeneralApplicationConstants;
     using Core.Models.Pager;
-    using EcommerceApp.Models.Responses;
+    using Models.Responses;
 
     [Route("api/userMessage")]
     [Authorize]

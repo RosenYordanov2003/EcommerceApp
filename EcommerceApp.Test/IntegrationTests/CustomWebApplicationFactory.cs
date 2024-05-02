@@ -25,6 +25,7 @@
             DashboardServiceMock = new Mock<IDashboardService>();
             UserMessageServiceMock = new Mock<IUserMessageService>();
             EmailSenderMock = new Mock<IEmailSender>();
+            PromotionServiceMock = new Mock<IPromotionService>();
             UserManagerMock = new Mock<UserManager<User>>(Mock.Of<IUserStore<User>>(), null, null, null, null, null, null, null, null);
         }
         public Mock<ICategoryService> CategoryServiceMock { get; set; }
@@ -34,6 +35,7 @@
         public Mock<IUserMessageService> UserMessageServiceMock { get; set; }
         public Mock<IEmailSender> EmailSenderMock { get; set; }
         public Mock<UserManager<User>> UserManagerMock { get; set; }
+        public Mock<IPromotionService> PromotionServiceMock { get; set; }
 
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
@@ -47,6 +49,7 @@
                 services.AddSingleton(UserMessageServiceMock.Object);
                 services.AddSingleton(EmailSenderMock.Object);
                 services.AddSingleton(UserManagerMock.Object);
+                services.AddSingleton(PromotionServiceMock.Object);
             });
         }
         protected override void ConfigureClient(HttpClient client)

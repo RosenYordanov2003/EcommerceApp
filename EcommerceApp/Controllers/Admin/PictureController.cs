@@ -1,10 +1,8 @@
 ﻿namespace EcommerceApp.Controllers.Admin
 {
-    using SignalR;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.SignalR;
     using Core.Contracts;
     using Core.Models.AdminModels.Clothes;
     using Core.Models.AdminModels.Pictures;
@@ -26,7 +24,9 @@
 
         [HttpPost]
         [Route("UploadImg")]
-        public async Task<IActionResult> ReadGoogleDriveFiles([FromForm] UploadProductImgModel uploadProductImgModel)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> UploadImg([FromForm] UploadProductImgModel uploadProductImgModel)
         {
             try
             {
@@ -43,6 +43,9 @@
         }
         [HttpDelete]
         [Route("DeleteImg")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> DeleteImg([FromBody] DeletePictureModel deletePictureModel)
         {
             if (!await pictureService.CheckIfImgExistsAsync(deletePictureModel.Id))

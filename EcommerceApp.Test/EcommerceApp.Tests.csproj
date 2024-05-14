@@ -26,4 +26,8 @@
     <ProjectReference Include="..\EcommerceApp\EcommerceApp.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="IntegrationTests\TestPhotos\" />
+  </ItemGroup>
+
 </Project>

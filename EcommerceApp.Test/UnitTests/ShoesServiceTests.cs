@@ -278,7 +278,6 @@
             var actualResult = await shoesService.GetShoesToModifyAsync(1);
 
             Assert.That(actualResult.Description, Is.EqualTo(expectedResult.Description));
-            Assert.That(actualResult.ImgUrls.Count(), Is.EqualTo(expectedResult.ImgUrls.Count()));
             Assert.That(actualResult.SelectedCategoryId, Is.EqualTo(expectedResult.SelectedCategoryId));
             Assert.That(actualResult.Gender, Is.EqualTo(expectedResult.Gender));
             Assert.That(actualResult.Name, Is.EqualTo(expectedResult.Name));

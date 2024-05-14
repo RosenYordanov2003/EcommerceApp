@@ -1,12 +1,12 @@
 ﻿namespace EcommerceApp.Controllers.Admin
 {
-    using Core.Contracts;
-    using Core.Models.AdminModels.Clothes;
     using SignalR;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.SignalR;
+    using Core.Contracts;
+    using Core.Models.AdminModels.Clothes;
     using Core.Models.AdminModels.Pictures;
     using static Common.GeneralApplicationConstants;
 
@@ -16,13 +16,11 @@
     public class PictureController : ControllerBase
     {
         private readonly IWebHostEnvironment webHostEnvironment;
-        private readonly IHubContext<NotificationsHub> hubContext;
         private readonly IPictureService pictureService;
         public PictureController(IWebHostEnvironment webHostEnvironment,
-            IHubContext<NotificationsHub> hubContext, IPictureService pictureService)
+           IPictureService pictureService)
         {
             this.webHostEnvironment = webHostEnvironment;
-            this.hubContext = hubContext;
             this.pictureService = pictureService;
         }
 
@@ -41,7 +39,6 @@
             {
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
-            await hubContext.Clients.All.SendAsync("ProductUpdated");
             return Ok();
         }
         [HttpDelete]
@@ -57,7 +54,6 @@
             string path = Path.Combine(webHostEnvironment.WebRootPath, pathPart);
 
             await pictureService.DeleteImgAsync(deletePictureModel, path);
-            await hubContext.Clients.All.SendAsync("ProductUpdated");
 
             return Ok();
         }

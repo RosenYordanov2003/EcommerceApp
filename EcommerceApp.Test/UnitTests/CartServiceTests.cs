@@ -266,21 +266,21 @@
         public async Task TestGetUserCartByUserIdAsync()
         {
            CartProductModel addProductToCartModel = new CartProductModel()
-            {
+           {
                 Size = "45",
                 CategoryName = "Shoes",
                 Quantity = 2,
                 UserId = userId,
                 ProductId = shoes1.Id
-            };
+           };
            CartProductModel addProductToCartModel2 = new CartProductModel()
-            {
+           {
                 Size = "M",
                 CategoryName = "T-Shirts",
                 Quantity = 1,
                 UserId = userId,
                 ProductId = product1.Id
-            };
+           };
 
             await cartService.AddProductToUserCartAsync(addProductToCartModel);
             await cartService.AddProductToUserCartAsync(addProductToCartModel2);

@@ -62,7 +62,7 @@
 
             await dbContext.SaveChangesAsync();
         }
-        public void CheckIfImgsIsOnTheDisk(string path, string fileNameToFind)
+        private void CheckIfImgsIsOnTheDisk(string path, string fileNameToFind)
         {
             string[] files = Directory.GetFiles(path);
 

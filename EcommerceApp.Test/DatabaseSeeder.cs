@@ -2,8 +2,6 @@
 {
     using Data;
     using Infrastructure.Data.Models;
-
-
     public class DatabaseSeeder
     {
         public static Brand brand1;
@@ -45,6 +43,9 @@
         public static Order order4;
         public static Order order5;
 
+        public static Picture picture1;
+        public static Picture picture2;
+
         public static Guid userId = Guid.Parse("AFDEAF68-5DEA-4107-AD18-858071D354D7");
 
 
@@ -64,6 +65,7 @@
             dbContext.Coupons.AddRange(SeedCoupons());
             dbContext.UserMessages.AddRange(SeedUserMessages());
             dbContext.Orders.AddRange(SeedOrders());
+            dbContext.Pictures.AddRange(SeedPictures());
             dbContext.SaveChanges();
         }
 
@@ -506,6 +508,23 @@
             orders.Add(order5);
 
             return orders;
+        }
+        private static IEnumerable<Picture> SeedPictures()
+        {
+            List<Picture> pictures = new List<Picture>();
+            picture1 = new Picture()
+            {
+                ShoesId = 1,
+                ImgUrl = "testurl"
+            };
+            picture2 = new Picture()
+            {
+                ShoesId = 1,
+                ImgUrl = "testurl2"
+            };
+            pictures.Add(picture1);
+            pictures.Add(picture2);
+            return pictures;
         }
     }
 }

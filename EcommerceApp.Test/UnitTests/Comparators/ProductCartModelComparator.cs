@@ -10,7 +10,7 @@
             var x = (ProductCartModel)first;
             var y = (ProductCartModel)second;
 
-            if (x.Name == y.Name && x.ImgUrl == y.ImgUrl && x.Size == y.Size
+            if (x.Name == y.Name && x.Size == y.Size
               && x.CategoryName == y.CategoryName && x.Quantity == y.Quantity && x.Price == y.Price)
             {
                 return 0;

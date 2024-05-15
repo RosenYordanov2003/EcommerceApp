@@ -26,6 +26,9 @@
 
         [HttpPost]
         [Route("PostReview")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> PostReview([FromBody] CreateReviewModel createReviewModel)
         {
             if (!ModelState.IsValid)
@@ -33,83 +36,139 @@
                 var errors = ModelState.Values.SelectMany(ms => ms.Errors);
                 return BadRequest(errors);
             }
-            await reviewService.PostPoductReviewAsync(createReviewModel);
-            if (createReviewModel.ProductCategory.ToLower() == "shoes")
+            try
             {
-                ProductInfoModel<double> shoesproductInfo = await shoesService.GetProductByIdAsync(createReviewModel.ProductId, createReviewModel.UserId);
-                return Ok(new { Success = true, UpdatedProduct = shoesproductInfo });
-            }
+                await reviewService.PostPoductReviewAsync(createReviewModel);
+                if (createReviewModel.ProductCategory.ToLower() == "shoes")
+                {
+                    ProductInfoModel<double> shoesproductInfo = await shoesService.GetProductByIdAsync(createReviewModel.ProductId, createReviewModel.UserId);
+                    return Ok(new { Success = true, UpdatedProduct = shoesproductInfo });
+                }
 
-            ProductInfoModel<string> productInfo = await productSevice.GetProductByIdAsync(createReviewModel.ProductId, createReviewModel.UserId);
-            return Ok(new { Success = true, UpdatedProduct = productInfo });
+                ProductInfoModel<string> productInfo = await productSevice.GetProductByIdAsync(createReviewModel.ProductId, createReviewModel.UserId);
+                return Ok(new { Success = true, UpdatedProduct = productInfo });
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
         [HttpGet]
         [AllowAnonymous]
         [Route("AllReviews")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> AllReviews([FromQuery] int productId, [FromQuery] string productCategory)
         {
-            int totalReviewsCount = await reviewService.GetTotalReviewsCountByProductIdAndCategoryNameAsync(productId, productCategory);
+            try
+            {
+                int totalReviewsCount = await reviewService.GetTotalReviewsCountByProductIdAndCategoryNameAsync(productId, productCategory);
 
-            Pager pager = new Pager(totalReviewsCount, 1, 5);
+                Pager pager = new Pager(totalReviewsCount, 1, 5);
 
-            var reviews = await reviewService.LoadReviewsForParticularProductAsync(productId, productCategory, pager);
+                var reviews = await reviewService.LoadReviewsForParticularProductAsync(productId, productCategory, pager);
 
-            return Ok(new {Reviews = reviews, StartPage = pager.StartPage, EndPage = pager.EndPage});
+                return Ok(new { Reviews = reviews, StartPage = pager.StartPage, EndPage = pager.EndPage });
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
         [HttpGet]
         [Route("GetReviewToEdit")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetReviewToEdit([FromQuery] int reviewId, [FromQuery] Guid userId)
         {
             if (!await reviewService.CheckUserReviewExists(reviewId, userId))
             {
-                return Unauthorized();
+                return NotFound();
             }
-            var review = await reviewService.GetReviewToEditAsync(reviewId);
-            return Ok(review);
+            try
+            {
+                var review = await reviewService.GetReviewToEditAsync(reviewId);
+                return Ok(review);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
         [HttpPost]
         [Route("EditReview")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> EditReview([FromBody] EditReviewModel editReviewModel)
         {
             if (!await reviewService.CheckIfReviewExistsByIdAsync(editReviewModel.Id))
             {
-                return BadRequest();
+                return NotFound();
             }
             if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
-            await reviewService.EditReviewAsync(editReviewModel.Id, editReviewModel);
+            try
+            {
+                await reviewService.EditReviewAsync(editReviewModel.Id, editReviewModel);
 
-            return Ok();
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
         [HttpPost]
         [Route("DeleteReview")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> DeleteReview([FromBody] int reviewId)
         {
-            if (!await reviewService.CheckIfReviewExistsByIdAsync(reviewId))
+            try
             {
-                return BadRequest();
-            }
-            await reviewService.DeleteReviewByIdAsync(reviewId);
+                if (!await reviewService.CheckIfReviewExistsByIdAsync(reviewId))
+                {
+                    return NotFound();
+                }
+                await reviewService.DeleteReviewByIdAsync(reviewId);
 
-            return Ok();
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [Route("GetReviewsPerPage")]
         public async Task<IActionResult> GetReviewsPerPage([FromQuery]int currentPage,[FromQuery] string categoryName, [FromQuery] int productId, [FromQuery] int pageSize)
         {
-            int totalReviewsCount = await reviewService.GetTotalReviewsCountByProductIdAndCategoryNameAsync(productId, categoryName);
-
-            if (currentPage < 1)
+            try
             {
-                currentPage = 1;
+                int totalReviewsCount = await reviewService.GetTotalReviewsCountByProductIdAndCategoryNameAsync(productId, categoryName);
+
+                if (currentPage < 1)
+                {
+                    currentPage = 1;
+                }
+                Pager pager = new Pager(totalReviewsCount, currentPage, pageSize);
+
+                var reviews = await reviewService.LoadReviewsForParticularProductAsync(productId, categoryName, pager);
+
+                return Ok(new { Reviews = reviews, StartPage = pager.StartPage, EndPage = pager.EndPage });
             }
-            Pager pager = new Pager(totalReviewsCount, currentPage, pageSize);
-
-            var reviews = await reviewService.LoadReviewsForParticularProductAsync(productId, categoryName, pager);
-
-            return Ok(new { Reviews = reviews, StartPage = pager.StartPage, EndPage = pager.EndPage });
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
     }
 }

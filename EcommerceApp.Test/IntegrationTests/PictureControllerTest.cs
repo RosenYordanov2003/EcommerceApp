@@ -1,17 +1,12 @@
 ﻿namespace EcommerceApp.Tests.IntegrationTests
 {
-    using Microsoft.AspNetCore.Http;
-    using Core.Models.AdminModels.Clothes;
-    using System.Net.Http.Json;
-    using Moq;
-    using System.Net;
-    using System.Net.Http.Headers;
-    using EcommerceApp.Core.Models.AdminModels.Pictures;
-    using static Google.Apis.Requests.BatchRequest;
-    using System.Text;
-    using Newtonsoft.Json;
-    using Microsoft.AspNetCore.Mvc;
     using System;
+    using System.Net;
+    using System.Text;
+    using Moq;
+    using Newtonsoft.Json;
+    using Core.Models.AdminModels.Pictures;
+    using Core.Models.AdminModels.Clothes;
 
     [TestFixture]
     public class PictureControllerTest : IDisposable

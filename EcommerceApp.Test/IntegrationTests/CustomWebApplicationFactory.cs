@@ -28,6 +28,8 @@
             PromotionServiceMock = new Mock<IPromotionService>();
             UserManagerMock = new Mock<UserManager<User>>(Mock.Of<IUserStore<User>>(), null, null, null, null, null, null, null, null);
             PictureServiceMock = new Mock<IPictureService>();
+            ReviewServiceMock = new Mock<IReviewService>();
+            ProductServiceMock = new Mock<IProductSevice>();
         }
         public Mock<ICategoryService> CategoryServiceMock { get; set; }
         public Mock<ICouponService> CouponServiceMock { get; set; }
@@ -38,6 +40,8 @@
         public Mock<UserManager<User>> UserManagerMock { get; set; }
         public Mock<IPromotionService> PromotionServiceMock { get; set; }
         public Mock<IPictureService> PictureServiceMock { get; set; }
+        public Mock<IReviewService> ReviewServiceMock { get; set; }
+        public Mock<IProductSevice> ProductServiceMock { get; set; }
 
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
@@ -53,6 +57,8 @@
                 services.AddSingleton(UserManagerMock.Object);
                 services.AddSingleton(PromotionServiceMock.Object);
                 services.AddSingleton(PictureServiceMock.Object);
+                services.AddSingleton(ProductServiceMock.Object);
+                services.AddSingleton(ReviewServiceMock.Object);
             });
         }
         protected override void ConfigureClient(HttpClient client)

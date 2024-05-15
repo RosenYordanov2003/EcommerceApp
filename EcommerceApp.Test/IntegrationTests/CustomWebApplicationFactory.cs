@@ -30,6 +30,7 @@
             PictureServiceMock = new Mock<IPictureService>();
             ReviewServiceMock = new Mock<IReviewService>();
             ProductServiceMock = new Mock<IProductSevice>();
+            OrderServiceMock = new Mock<IOrderService>();
         }
         public Mock<ICategoryService> CategoryServiceMock { get; set; }
         public Mock<ICouponService> CouponServiceMock { get; set; }
@@ -42,6 +43,7 @@
         public Mock<IPictureService> PictureServiceMock { get; set; }
         public Mock<IReviewService> ReviewServiceMock { get; set; }
         public Mock<IProductSevice> ProductServiceMock { get; set; }
+        public Mock<IOrderService> OrderServiceMock { get; set; }
 
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
@@ -59,6 +61,7 @@
                 services.AddSingleton(PictureServiceMock.Object);
                 services.AddSingleton(ProductServiceMock.Object);
                 services.AddSingleton(ReviewServiceMock.Object);
+                services.AddSingleton(OrderServiceMock.Object);
             });
         }
         protected override void ConfigureClient(HttpClient client)

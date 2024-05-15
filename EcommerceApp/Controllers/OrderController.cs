@@ -18,16 +18,26 @@
         }
 
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [Route("Details")]
         public async Task<IActionResult> GetOrderDetails([FromQuery] Guid id)
         {
-            if (!await orderService.CheckIfOrderExistsByIdAsync(id))
+            try
             {
-                return BadRequest();
-            }
-            OrderDetailsModel order = await orderService.GetOrderDetailsByIdAsync(id);
+                if (!await orderService.CheckIfOrderExistsByIdAsync(id))
+                {
+                    return NotFound();
+                }
+                OrderDetailsModel order = await orderService.GetOrderDetailsByIdAsync(id);
 
-            return Ok(order);
+                return Ok(order);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
     }
 }

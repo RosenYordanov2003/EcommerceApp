@@ -189,9 +189,6 @@ Home page represents a page with all featured products
 
 
 
-
-## The project is not finished yet!
-
 ## Тechnologies I have used
 - C#
 - ASP.NET Web Api
@@ -203,6 +200,8 @@ Home page represents a page with all featured products
 - CSS
 - Ajax
 - Git
+- MOQ
+- Nunit
       
 
 
